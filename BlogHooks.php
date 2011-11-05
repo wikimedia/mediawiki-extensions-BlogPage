@@ -129,11 +129,12 @@ class BlogHooks {
 					// there's no point in doing that because we have to call
 					// clearCache() in any case
 					if ( !$wgUser->isAnon() && $stats->user_id ) {
-						$ctg = $userBlogCat . ' '. $stats->user_name;
+						$ctg = $userBlogCat . ' ' . $stats->user_name;
 						$parser = new Parser();
 						$ctgTitle = Title::newFromText(
 							$parser->preprocess(
 								trim( $ctg ),
+								$wgOut->getTitle(),
 								$wgOut->parserOptions()
 							)
 						);
