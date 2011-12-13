@@ -23,7 +23,7 @@ $wgExtensionCredits['other'][] = array(
 	'description' => 'Blogging system with commenting and voting features, ' .
 		'[[Special:CreateBlogPost|a special page to create blog posts]] and ' .
 		'[[Special:ArticlesHome|a special page to list blog posts]]',
-	'url' => 'http://www.mediawiki.org/wiki/Extension:BlogPage',
+	'url' => 'https://www.mediawiki.org/wiki/Extension:BlogPage',
 );
 
 // Define the namespace constants
