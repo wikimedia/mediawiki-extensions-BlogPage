@@ -103,7 +103,7 @@ $wgBlogPageDisplay = array(
 // Set up everything
 $dir = dirname( __FILE__ ) . '/';
 $wgExtensionMessagesFiles['Blog'] = $dir . 'Blog.i18n.php';
-$wgExtensionAliasesFiles['Blog'] = $dir . 'Blog.alias.php';
+$wgExtensionMessagesFiles['BlogAlias'] = $dir . 'Blog.alias.php';
 // Namespace translations
 $wgExtensionMessagesFiles['BlogNamespaces'] = $dir . 'Blog.namespaces.php';
 
