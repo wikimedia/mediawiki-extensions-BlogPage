@@ -37,7 +37,7 @@ class BlogPage extends Article {
 	}
 
 	function view() {
-		global $wgOut, $wgUser, $wgTitle, $wgBlogPageDisplay;
+		global $wgOut, $wgUser, $wgBlogPageDisplay;
 
 		wfProfileIn( __METHOD__ );
 
@@ -45,8 +45,8 @@ class BlogPage extends Article {
 
 		wfDebugLog( 'BlogPage', __METHOD__ );
 
-		$wgOut->setHTMLTitle( $wgTitle->getText() );
-		$wgOut->setPageTitle( $wgTitle->getText() );
+		$wgOut->setHTMLTitle( $this->getTitle()->getText() );
+		$wgOut->setPageTitle( $this->getTitle()->getText() );
 
 		// Don't throw a bunch of E_NOTICEs when we're viewing the page of a
 		// nonexistent blog post
@@ -94,7 +94,7 @@ class BlogPage extends Article {
 		if( $wgUseEditButtonFloat == true && method_exists( $sk, 'editMenu' ) ) {
 			$wgOut->addHTML( $sk->editMenu() );
 		}
-		$wgOut->addHTML( "<h1 class=\"page-title\">{$wgTitle->getText()}</h1>\n" );
+		$wgOut->addHTML( "<h1 class=\"page-title\">{$this->getTitle()->getText()}</h1>\n" );
 		$wgOut->addHTML( $this->getByLine() );
 
 		$wgOut->addHTML( "\n<!--start Article::view-->\n" );
@@ -196,70 +196,22 @@ class BlogPage extends Article {
 	}
 
 	/**
-	 * Get the last edit date of the page with the given ID from the revision
-	 * table and cache it in memcached.
-	 * The return value of this function can be passed to the various $wgLang
-	 * methods for i18n-compatible code.
-	 *
-	 * @param $pageId Integer: page ID number
-	 * @return Integer: page creation date
-	 */
-	public static function getLastEditTimestamp( $pageId ) {
-		global $wgMemc;
-
-		// Try memcached first
-		$key = wfMemcKey( 'page', 'last_edit_date', $pageId );
-		$data = $wgMemc->get( $key );
-
-		if( !$data ) {
-			wfDebugLog( 'BlogPage', "Loading last_edit_date for page {$pageId} from database" );
-			$dbr = wfGetDB( DB_SLAVE );
-			$lastEditDate = $dbr->selectField(
-				'revision',
-				'MAX(rev_timestamp)',
-				array( 'rev_page' => $pageId ),
-				__METHOD__,
-				array( 'ORDER BY' => 'rev_timestamp ASC' )
-			);
-			$wgMemc->set( $key, $lastEditDate );
-		} else {
-			wfDebugLog( 'BlogPage', "Loading last_edit_date for page {$pageId} from cache" );
-			$lastEditDate = $data;
-		}
-
-		return $lastEditDate;
-	}
-
-	/**
 	 * Get the "by X, Y and Z" line, which also contains other nifty
 	 * information, such as the date of the last edit and the creation date.
 	 *
 	 * @return String
 	 */
 	function getByLine() {
-		global $wgTitle, $wgLang;
+		global $wgLang;
 
 		$count = 0;
 
 		// Get date of last edit
-		/*
-		$year = substr( $wgTitle->getTouched(), 0, 4 );
-		$month = substr( $wgTitle->getTouched(), 4, 2 );
-		$day = substr( $wgTitle->getTouched(), 6, 2 );
-		$edit_date = date( 'F d, Y', mktime( 0, 0, 0, $month, $day, $year ) );
-		*/
-		//$edit_date = $wgLang->timeanddate( $wgTitle->getTouched(), true );
-		// Title::getTouched() sucks, because apparently voting for a page
-		// invalidates page cache, too... --ashley, 7 August 2011
-		$edit_date = $wgLang->timeanddate(
-			self::getLastEditTimestamp( $wgTitle->getArticleID() ),
-			true
-		);
+		$edit_date = $wgLang->timeanddate( $this->getTimestamp(), true );
 
 		// Get date of when article was created
-		#$create_date = date( 'F d, Y', $this->getCreateDate( $wgTitle->getArticleID() ) );
 		$create_date = $wgLang->timeanddate(
-			self::getCreateDate( $wgTitle->getArticleID() ),
+			self::getCreateDate( $this->getId() ),
 			true
 		);
 
@@ -381,7 +333,7 @@ class BlogPage extends Article {
 	}
 
 	function getAuthorArticles( $author_index ) {
-		global $wgTitle, $wgOut, $wgBlogPageDisplay, $wgMemc;
+		global $wgOut, $wgBlogPageDisplay, $wgMemc;
 
 		if ( $wgBlogPageDisplay['author_articles'] == false ) {
 			return '';
@@ -431,7 +383,7 @@ class BlogPage extends Article {
 			$array_count = 0;
 
 			foreach( $res as $row ) {
-				if ( $row->page_id != $wgTitle->getArticleID() && $array_count < 3 ) {
+				if ( $row->page_id != $this->getId() && $array_count < 3 ) {
 					$articles[] = array(
 						'page_title' => $row->page_title,
 						'page_id' => $row->page_id
@@ -502,9 +454,9 @@ class BlogPage extends Article {
 	 * @return Array: array containing each editors' user ID and user name
 	 */
 	function getEditorsList() {
-		global $wgMemc, $wgTitle;
+		global $wgMemc;
 
-		$pageTitleId = $wgTitle->getArticleID();
+		$pageTitleId = $this->getId();
 
 		$key = wfMemcKey( 'recenteditors', 'list', $pageTitleId );
 		$data = $wgMemc->get( $key );
@@ -594,10 +546,10 @@ class BlogPage extends Article {
 	 * @return Array: array containing each voters' user ID and user name
 	 */
 	function getVotersList() {
-		global $wgMemc, $wgTitle;
+		global $wgMemc;
 
 		// Gets the page ID for the query
-		$pageTitleId = $wgTitle->getArticleID();
+		$pageTitleId = $this->getId();
 
 		$key = wfMemcKey( 'recentvoters', 'list', $pageTitleId );
 		$data = $wgMemc->get( $key );
@@ -684,7 +636,7 @@ class BlogPage extends Article {
 	 * @return String: HTML or nothing
 	 */
 	function embedWidget() {
-		global $wgTitle, $wgBlogPageDisplay, $wgServer, $wgScriptPath;
+		global $wgBlogPageDisplay, $wgServer, $wgScriptPath;
 
 		// Not enabled? ContentWidget not available?
 		if (
@@ -695,7 +647,7 @@ class BlogPage extends Article {
 			return '';
 		}
 
-		$title = Title::makeTitle( $wgTitle->getNamespace(), $wgTitle->getText() );
+		$title = $this->getTitle();
 
 		$output = '';
 		$output .= '<div class="recent-container bottom-fix"><h2>' .
@@ -1102,7 +1054,7 @@ class BlogPage extends Article {
 	 * @return String: first $maxChars characters from the page
 	 */
 	public static function getBlurb( $pageTitle, $namespace, $maxChars, $fontSize = 'small' ) {
-		global $wgTitle, $wgOut, $wgContLang;
+		global $wgOut, $wgContLang;
 
 		// Get raw text
 		$title = Title::makeTitle( $namespace, $pageTitle );
@@ -1139,9 +1091,8 @@ class BlogPage extends Article {
 		$text = '__NOTOC__ ' . $text;
 
 		// Run text through parser
-		$blurbParser = new Parser();
-		$blurbText = $blurbParser->parse( $text, $wgTitle, $wgOut->parserOptions(), true );
-		$blurbText = strip_tags( $blurbText->getText() );
+		$blurbText = $wgOut->parse( $text );
+		$blurbText = strip_tags( $blurbText );
 
 		$blurbText = preg_replace( '/&lt;comments&gt;&lt;\/comments&gt;/i', '', $blurbText );
 		$blurbText = preg_replace( '/&lt;vote&gt;&lt;\/vote&gt;/i', '', $blurbText );

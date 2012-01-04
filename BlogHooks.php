@@ -16,7 +16,7 @@ class BlogHooks {
 	 * @return Boolean: true
 	 */
 	public static function blogFromTitle( &$title, &$article ) {
-		global $wgRequest, $wgOut, $wgParser, $wgHooks, $wgScriptPath;
+		global $wgRequest, $wgOut, $wgHooks, $wgScriptPath;
 		global $wgSupressPageTitle, $wgSupressSubTitle, $wgSupressPageCategories;
 
 		if ( $title->getNamespace() == NS_BLOG ) {
@@ -34,7 +34,6 @@ class BlogHooks {
 			};
 
 			$wgOut->enableClientCache( false );
-			$wgParser->disableCache();
 
 			// Add CSS
 			if ( defined( 'MW_SUPPORTS_RESOURCE_MODULES' ) ) {
