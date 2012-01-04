@@ -30,11 +30,7 @@ class ArticlesHome extends SpecialPage {
 		$wgSupressPageTitle = true;
 
 		// Add CSS
-		if ( defined( 'MW_SUPPORTS_RESOURCE_MODULES' ) ) {
-			$wgOut->addModules( 'ext.blogPage.articlesHome' );
-		} else {
-			$wgOut->addExtensionStyle( $wgScriptPath . '/extensions/BlogPage/ArticlesHome.css' );
-		}
+		$wgOut->addModules( 'ext.blogPage.articlesHome' );
 
 		if( !$type ) {
 			$type = 'popular';

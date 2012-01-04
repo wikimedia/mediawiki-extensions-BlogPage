@@ -36,11 +36,7 @@ class BlogHooks {
 			$wgOut->enableClientCache( false );
 
 			// Add CSS
-			if ( defined( 'MW_SUPPORTS_RESOURCE_MODULES' ) ) {
-				$wgOut->addModules( 'ext.blogPage' );
-			} else {
-				$wgOut->addExtensionStyle( $wgScriptPath . '/extensions/BlogPage/BlogPage.css' );
-			}
+			$wgOut->addModules( 'ext.blogPage' );
 
 			// This originally used $wgTitle but I saw no point in that, so I
 			// changed that as per Chad et al.
@@ -59,6 +55,7 @@ class BlogHooks {
 	 */
 	public static function allowShowEditBlogPage( $editPage ) {
 		global $wgOut, $wgUser;
+
 		if( $editPage->mTitle->getNamespace() == NS_BLOG ) {
 			if( $wgUser->isAnon() ) { // anons can't edit blog pages
 				if( !$editPage->mTitle->exists() ) {
@@ -74,6 +71,7 @@ class BlogHooks {
 				return false;
 			}
 		}
+
 		return true;
 	}
 

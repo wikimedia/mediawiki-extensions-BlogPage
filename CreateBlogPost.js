@@ -27,12 +27,12 @@ var CreateBlogPost = {
 		// name
 		var title = document.getElementById( 'title' ).value;
 		if ( !title || title == '' ) {
-			alert( _BLOG_NEEDS_TITLE );
+			alert( mw.msg( 'blog-js-create-error-need-title' ) );
 			return '';
 		}
 		var pageBody = document.getElementById( 'pageBody' ).value;
 		if ( !pageBody || pageBody == '' ) {
-			alert( _BLOG_NEEDS_CONTENT );
+			alert( mw.msg( 'blog-js-create-error-need-content' ) );
 			return '';
 		}
 
@@ -41,8 +41,26 @@ var CreateBlogPost = {
 			if( r.responseText.indexOf( 'OK' ) >= 0 ) {
 				document.editform.submit();
 			} else {
-				alert( _BLOG_PAGE_EXISTS );
+				alert( mw.msg( 'blog-js-create-error-page-exists' ) );
 			}
 		});
 	}
 };
+
+jQuery( document ).ready( function() {
+	// Tag cloud
+	jQuery( 'a.tag-cloud-entry' ).each( function( index ) {
+		var that = jQuery( this );
+		that.click( function() {
+			CreateBlogPost.insertTag(
+				that.data( 'blog-slashed-tag' ),
+				that.data( 'blog-tag-number' )
+			);
+		} );
+	} );
+
+	// Save button
+	jQuery( 'input[name="wpSave"]' ).click( function() {
+		CreateBlogPost.performChecks();
+	} );
+} );

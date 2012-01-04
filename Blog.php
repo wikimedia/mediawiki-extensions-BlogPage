@@ -5,7 +5,7 @@
  *
  * @file
  * @ingroup Extensions
- * @version 2.0
+ * @version 2.1
  * @author David Pean <david.pean@gmail.com>
  * @author Jack Phoenix <jack@countervandalism.net>
  * @license http://www.gnu.org/copyleft/gpl.html GNU General Public License 2.0 or later
@@ -18,7 +18,7 @@ if ( !defined( 'MEDIAWIKI' ) ) {
 // Extension credits that will show up on Special:Version
 $wgExtensionCredits['other'][] = array(
 	'name' => 'BlogPage',
-	'version' => '2.0',
+	'version' => '2.1',
 	'author' => array( 'David Pean', 'Jack Phoenix' ),
 	'description' => 'Blogging system with commenting and voting features, ' .
 		'[[Special:CreateBlogPost|a special page to create blog posts]] and ' .
@@ -50,11 +50,11 @@ $wgResourceModules['ext.blogPage.articlesHome'] = $blogResourceTemplate + array(
 $wgResourceModules['ext.blogPage.create'] = $blogResourceTemplate + array(
 	'styles' => 'CreateBlogPost.css',
 	'scripts' => 'CreateBlogPost.js',
+	//'dependencies' => 'mediawiki.action.edit',
 	'messages' => array(
 		'blog-js-create-error-need-content', 'blog-js-create-error-need-title',
 		'blog-js-create-error-page-exists'
-	),
-	'position' => 'top' // available since r85616
+	)
 );
 
 // Default setup for displaying sections

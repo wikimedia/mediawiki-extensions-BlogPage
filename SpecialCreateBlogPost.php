@@ -5,7 +5,7 @@
  *
  * @file
  * @ingroup Extensions
- * @date 16 July 2011
+ * @date 4 January 2012
  */
 class SpecialCreateBlogPost extends SpecialPage {
 
@@ -24,7 +24,7 @@ class SpecialCreateBlogPost extends SpecialPage {
 	 * @param $par Mixed: parameter passed to the special page or null
 	 */
 	public function execute( $par ) {
-		global $wgOut, $wgUser, $wgRequest, $wgContLang, $wgScriptPath, $wgHooks;
+		global $wgOut, $wgUser, $wgRequest, $wgContLang;
 
 		// If the user can't create blog posts, display an error
 		if( !$wgUser->isAllowed( 'createblogpost' ) ) {
@@ -47,19 +47,8 @@ class SpecialCreateBlogPost extends SpecialPage {
 		// Set page title, robot policies, etc.
 		$this->setHeaders();
 
-		// i18n for JS
-		$wgHooks['MakeGlobalVariablesScript'][] = 'SpecialCreateBlogPost::addJSGlobals';
-
 		// Add CSS & JS
-		if ( defined( 'MW_SUPPORTS_RESOURCE_MODULES' ) ) {
-			$wgOut->addModules( array(
-				'mediawiki.legacy.edit', 'ext.blogPage.create'
-			) );
-		} else {
-			$wgOut->addExtensionStyle( $wgScriptPath . '/extensions/BlogPage/CreateBlogPost.css' );
-			$wgOut->addScriptFile( $wgScriptPath . '/extensions/BlogPage/CreateBlogPost.js' );
-			$wgOut->addScriptFile( 'edit.js' ); // for the edit toolbar
-		}
+		$wgOut->addModules( 'ext.blogPage.create' );
 
 		// If the request was POSTed, we haven't submitted a request yet AND
 		// we have a title, create the page...otherwise just display the
@@ -225,7 +214,11 @@ class SpecialCreateBlogPost extends SpecialPage {
 			'</span><br />';
 		// The EditPage toolbar wasn't originally present here but I figured
 		// that adding it might be more helpful than anything else.
-		$output .= EditPage::getEditToolbar();
+		// Guess what...turns out that resources/mediawiki.action/mediawiki.action.edit.js
+		// assumes way too many things and no longer is suitable for different
+		// editing interfaces, such as this special page.
+		// I miss the old edit.js...
+		//$output .= EditPage::getEditToolbar();
 		$output .= '<textarea class="createbox" tabindex="' .
 			$this->tabCounter . '" accesskey="," name="pageBody" id="pageBody" rows="10" cols="80"></textarea><br /><br />';
 		$this->tabCounter++;
@@ -253,7 +246,7 @@ class SpecialCreateBlogPost extends SpecialPage {
 					$slashedTag = str_replace( "'", "\'", $tag );
 				}
 				$tagcloud .= " <span id=\"tag-{$tagnumber}\" style=\"font-size:{$cloud->tags[$tag]['size']}{$cloud->tags_size_type}\">
-					<a class=\"tag-cloud-entry\" onclick=\"javascript:CreateBlogPost.insertTag('" . $slashedTag . "',{$tagnumber});\">{$tag}</a>
+					<a class=\"tag-cloud-entry\" data-blog-slashed-tag=\"" . $slashedTag . "\" data-blog-tag-number=\"{$tagnumber}\">{$tag}</a>
 				</span>";
 				$tagnumber++;
 			}
@@ -313,8 +306,8 @@ class SpecialCreateBlogPost extends SpecialPage {
 
 		$output .= "\n" . $this->displayFormPageCategories() . "\n";
 		$output .= "\n" . $this->displayCopyrightWarning() . "\n";
-		$output .= '<input type="button" onclick="CreateBlogPost.performChecks()" value="' .
-			wfMsg( 'blog-create-button' ) . '" name="wpSave" class="createsubmit site-button" accesskey="s" title="' .
+		$output .= '<input type="button" value="' . wfMsg( 'blog-create-button' ) .
+			'" name="wpSave" class="createsubmit site-button" accesskey="s" title="' .
 			wfMsg( 'tooltip-save' ) . ' [alt-s]" />
 			<input type="hidden" value="" name="wpSection" />
 			<input type="hidden" value="" name="wpEdittime" />
@@ -351,18 +344,5 @@ class SpecialCreateBlogPost extends SpecialPage {
 		} else {
 			return 'OK';
 		}
-	}
-
-	/**
-	 * Add i18n messages for the JS file.
-	 *
-	 * @param $vars Array: array of pre-existing JavaScript globals
-	 * @return Boolean: true
-	 */
-	public static function addJSGlobals( $vars ) {
-		$vars['_BLOG_NEEDS_CONTENT'] = wfMsg( 'blog-js-create-error-need-content' );
-		$vars['_BLOG_NEEDS_TITLE'] = wfMsg( 'blog-js-create-error-need-title' );
-		$vars['_BLOG_PAGE_EXISTS'] = wfMsg( 'blog-js-create-error-page-exists' );
-		return true;
 	}
 }
