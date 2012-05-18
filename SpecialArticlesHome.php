@@ -210,7 +210,7 @@ class ArticlesHome extends SpecialPage {
 					$img = wfFindFile( $pageImage );
 					$imgTag = '';
 					if ( is_object( $img ) ) {
-						$thumb = $img->getThumbnail( 65, 0, true );
+						$thumb = $img->transform( array( 'width' => 65, 'height' => 0 ) );
 						$imgTag = $thumb->toHtml();
 					}
 
@@ -578,7 +578,7 @@ class ArticlesHome extends SpecialPage {
 					$img = wfFindFile( $pageImage );
 					$imgTag = '';
 					if ( is_object( $img ) ) {
-						$thumb = $img->getThumbnail( 65, 0, true );
+						$thumb = $img->transform( array( 'width' => 65, 'height' => 0 ) );
 						$imgTag = $thumb->toHtml();
 					}
 
