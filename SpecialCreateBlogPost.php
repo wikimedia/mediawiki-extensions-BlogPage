@@ -77,7 +77,7 @@ class SpecialCreateBlogPost extends SpecialPage {
 			if ( !$userSuppliedTitle ) {
 				$wgOut->setPageTitle( wfMsg( 'errorpagetitle' ) );
 				$wgOut->addWikiMsg( 'blog-create-error-need-title' );
-				$wgOut->addReturnTo( $this->getTitle() );
+				$wgOut->addReturnTo( $this->getPageTitle() );
 				return;
 			}
 
@@ -85,7 +85,7 @@ class SpecialCreateBlogPost extends SpecialPage {
 			if ( !$wgRequest->getVal( 'pageBody' ) ) {
 				$wgOut->setPageTitle( wfMsg( 'errorpagetitle' ) );
 				$wgOut->addWikiMsg( 'blog-create-error-need-content' );
-				$wgOut->addReturnTo( $this->getTitle() );
+				$wgOut->addReturnTo( $this->getPageTitle() );
 				return;
 			}
 
@@ -98,7 +98,7 @@ class SpecialCreateBlogPost extends SpecialPage {
 			if ( $article->exists() ) {
 				$wgOut->setPageTitle( wfMsg( 'errorpagetitle' ) );
 				$wgOut->addWikiMsg( 'blog-create-error-page-exists' );
-				$wgOut->addReturnTo( $this->getTitle() );
+				$wgOut->addReturnTo( $this->getPageTitle() );
 				return;
 			} else {
 				// The blog post will be by default categorized into two
@@ -300,7 +300,7 @@ class SpecialCreateBlogPost extends SpecialPage {
 		global $wgUser;
 
 		$output = '<form id="editform" name="editform" method="post" action="' .
-			$this->getTitle()->escapeFullURL() . '" enctype="multipart/form-data">';
+			$this->getPageTitle()->escapeFullURL() . '" enctype="multipart/form-data">';
 		$output .= "\n" . $this->displayFormPageTitle() . "\n";
 		$output .= "\n" . $this->displayFormPageText() . "\n";
 
