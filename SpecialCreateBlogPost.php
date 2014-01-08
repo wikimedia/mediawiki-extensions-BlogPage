@@ -312,7 +312,7 @@ class SpecialCreateBlogPost extends SpecialPage {
 			<input type="hidden" value="" name="wpSection" />
 			<input type="hidden" value="" name="wpEdittime" />
 			<input type="hidden" value="" name="wpTextbox1" id="wpTextbox1" />
-			<input type="hidden" value="' . htmlspecialchars( $wgUser->editToken() ) .
+			<input type="hidden" value="' . htmlspecialchars( $wgUser->getEditToken() ) .
 				'" name="wpEditToken" />';
 		$output .= "\n" . '</form>' . "\n";
 
