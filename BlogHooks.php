@@ -38,8 +38,6 @@ class BlogHooks {
 			// Add CSS
 			$wgOut->addModules( 'ext.blogPage' );
 
-			// This originally used $wgTitle but I saw no point in that, so I
-			// changed that as per Chad et al.
 			$article = new BlogPage( $title );
 		}
 
@@ -102,8 +100,6 @@ class BlogHooks {
 		$res = $dbr->select(
 			'categorylinks',
 			'cl_to',
-			// Chad was right, $wgTitle is pure satan; this used to use that
-			// and as a result this was completely busted
 			array( 'cl_from' => $aid ),
 			__METHOD__
 		);
@@ -352,46 +348,4 @@ class BlogHooks {
 		$list[NS_BLOG_TALK] = 'Blog_talk';
 		return true;
 	}
-
-	/* optimization :)
-	public static function updateFacebookProfile() {
-		global $wgUser, $IP, $wgTitle, $wgServer, $wgSitename;
-
-		// Check if the current user has the app installed
-		$dbr = wfGetDB( DB_SLAVE );
-		$s = $dbr->selectRow(
-			'fb_link_view_opinions',
-			array( 'fb_user_id', 'fb_user_session_key' ),
-			array( 'fb_user_id_wikia' => $wgUser->getID() ),
-			__METHOD__
-		);
-
-		if ( $s !== false ) {
-			require_once "$IP/extensions/Facebook/appinclude.php";
-			$facebook = new Facebook( $appapikey, $appsecret );
-			//$facebook->api_client->auth_getSession( 'QR1YVV' );
-			//$facebook->api_client->session_key = 'QR1YVV';
-
-			// Update Facebook profile
-			try {
-				$facebook->api_client->session_key = $infinite_session_key;
-				$facebook->api_client->fbml_refreshRefUrl(
-					"http://sports.box8.tpa.wikia-inc.com/index.php?title=Special:FacebookGetOpinions&id={$s->fb_user_id}"
-				);
-			} catch( exception $ex ) {
-			}
-
-			$feedTitle = '<fb:userlink uid="' . $s->fb_user_id .
-				'" /> wrote a new article on <a href="' . $wgServer . '">' .
-				$wgSitename . '</a>';
-			$feedBody = "<a href=\"{$wgTitle->getFullURL()}\">{$wgTitle->getText()}</a>";
-			try{
-				$facebook->api_client->feed_publishActionOfUser( $feedTitle, $feedBody );
-			} catch( exception $ex ) {
-			}
-		}
-
-		return true;
-	}
-	*/
 }
