@@ -1,3 +1,4 @@
+( function ( mw ) {
 var CreateBlogPost = {
 	/**
 	 * Insert a tag (category) from the category cloud into the inputbox below
@@ -22,16 +23,17 @@ var CreateBlogPost = {
 	 * if there's already a blog post with the same name as their blog post.
 	 */
 	performChecks: function() {
+		/*global sajax_request_type:true, sajax_do_call, alert */
 		// In PHP, we need to use $wgRequest->getVal( 'title2' ); 'title'
 		// contains the current special page's name instead of the blog post
 		// name
 		var title = document.getElementById( 'title' ).value;
-		if ( !title || title == '' ) {
+		if ( !title || title === '' ) {
 			alert( mw.msg( 'blog-js-create-error-need-title' ) );
 			return '';
 		}
 		var pageBody = document.getElementById( 'pageBody' ).value;
-		if ( !pageBody || pageBody == '' ) {
+		if ( !pageBody || pageBody === '' ) {
 			alert( mw.msg( 'blog-js-create-error-need-content' ) );
 			return '';
 		}
@@ -49,7 +51,7 @@ var CreateBlogPost = {
 
 jQuery( document ).ready( function() {
 	// Tag cloud
-	jQuery( 'a.tag-cloud-entry' ).each( function( index ) {
+	jQuery( 'a.tag-cloud-entry' ).each( function () {
 		var that = jQuery( this );
 		that.click( function() {
 			CreateBlogPost.insertTag(
@@ -64,3 +66,4 @@ jQuery( document ).ready( function() {
 		CreateBlogPost.performChecks();
 	} );
 } );
+}( mediaWiki ) );
