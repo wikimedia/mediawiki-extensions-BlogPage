@@ -270,7 +270,7 @@ class BlogHooks {
 				<div class="user-section-actions">
 					<div class="action-right">';
 			if( $articleCount > 5 ) {
-				$output .= '<a href="' . $articleLink->escapeFullURL() .
+				$output .= '<a href="' . htmlspecialchars( $articleLink->getFullURL() ) .
 					'" rel="nofollow">' . wfMsg( 'user-view-all' ) . '</a>';
 			}
 			$output .= '</div>
@@ -313,7 +313,7 @@ class BlogHooks {
 						'</div>
 					</div>
 					<div class="article-title">
-						<a href="' . $articleTitle->escapeFullURL() .
+						<a href="' . htmlspecialchars( $articleTitle->getFullURL() ) .
 							"\">{$articleTitle->getText()}</a>
 						<span class=\"item-small\">" .
 							wfMsgExt(

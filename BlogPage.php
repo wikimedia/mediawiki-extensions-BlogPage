@@ -228,7 +228,7 @@ class BlogPage extends Article {
 				$authors .= wfMsg( 'word-separator' ) . wfMsg( 'blog-and' ) .
 					wfMsg( 'word-separator' );
 			}
-			$authors .= "<a href=\"{$userTitle->escapeFullURL()}\">{$author['user_name']}</a>";
+			$authors .= "<a href=\"{htmlspecialchars( $userTitle->getFullURL() )}\">{$author['user_name']}</a>";
 		}
 
 		$output .= $authors;
@@ -259,7 +259,7 @@ class BlogPage extends Article {
 				$authors .= wfMsg( 'word-separator' ) . wfMsg( 'blog-and' ) .
 					wfMsg( 'word-separator' );
 			}
-			$authors .= "<a href=\"{$userTitle->escapeFullURL()}\">{$author['user_name']}</a>";
+			$authors .= "<a href=\"{htmlspecialchars( $userTitle->getFullURL() )}\">{$author['user_name']}</a>";
 		}
 
 		$output = '<div class="multiple-authors-message">' .
@@ -310,11 +310,11 @@ class BlogPage extends Article {
 		}
 		$output = "\t\t\t\t\t<div class=\"author-container$cssFix\">
 						<div class=\"author-info\">
-							<a href=\"" . $authorTitle->escapeFullURL() . "\" rel=\"nofollow\">
+							<a href=\"" . htmlspecialchars( $authorTitle->getFullURL() ) . "\" rel=\"nofollow\">
 								{$avatar->getAvatarURL()}
 							</a>
 							<div class=\"author-title\">
-								<a href=\"" . $authorTitle->escapeFullURL() .
+								<a href=\"" . htmlspecialchars( $authorTitle->getFullURL() ) .
 									'" rel="nofollow">' .
 									wordwrap( $author_user_name, 12, "<br />\n", true ) .
 								'</a>
@@ -418,7 +418,7 @@ class BlogPage extends Article {
 				$articleTitle = Title::makeTitle( NS_BLOG, $article['page_title'] );
 
 				$output .= '<div class="author-article-item">
-					<a href="' . $articleTitle->escapeFullURL() . "\">{$articleTitle->getText()}</a>
+					<a href="' . htmlspecialchars( $articleTitle->getFullURL() ) . "\">{$articleTitle->getText()}</a>
 					<div class=\"author-item-small\">" .
 						wfMsgExt(
 							'blog-author-votes',
@@ -437,7 +437,7 @@ class BlogPage extends Article {
 			}
 
 			$output .= '<div class="author-archive-link">
-				<a href="' . $archiveLink->escapeFullURL() . '">' .
+				<a href="' . htmlspecialchars( $archiveLink->getFullURL() ) . '">' .
 					wfMsg( 'blog-view-archive-link' ) .
 				'</a>
 			</div>
@@ -528,7 +528,7 @@ class BlogPage extends Article {
 				$avatar = new wAvatar( $editor['user_id'], 'm' );
 				$userTitle = Title::makeTitle( NS_USER, $editor['user_name'] );
 
-				$output .= '<a href="' . $userTitle->escapeFullURL() .
+				$output .= '<a href="' . htmlspecialchars( $userTitle->getFullURL() ) .
 					"\"><img src=\"{$wgUploadPath}/avatars/{$avatar->getAvatarImage()}\" alt=\"" .
 						$userTitle->getText() . '" border="0" /></a>';
 			}
@@ -620,7 +620,7 @@ class BlogPage extends Article {
 				$userTitle = Title::makeTitle( NS_USER, $voter['user_name'] );
 				$avatar = new wAvatar( $voter['user_id'], 'm' );
 
-				$output .= '<a href="' . $userTitle->escapeFullURL() .
+				$output .= '<a href="' . htmlspecialchars( $userTitle->getFullURL() ) .
 					"\">{$avatar->getAvatarURL()}</a>";
 			}
 
@@ -783,7 +783,7 @@ class BlogPage extends Article {
 		foreach( $popularBlogPosts as $popularBlogPost ) {
 			$titleObj = Title::makeTitle( NS_BLOG, $popularBlogPost['title'] );
 			$html .= '<div class="listpages-item">
-					<a href="' . $titleObj->escapeFullURL() . '">' .
+					<a href="' . htmlspecialchars( $titleObj->getFullURL() ) . '">' .
 						$titleObj->getText() .
 					'</a>
 				</div>
@@ -850,7 +850,7 @@ class BlogPage extends Article {
 		foreach( $newBlogPosts as $newBlogPost ) {
 			$titleObj = Title::makeTitle( NS_BLOG, $newBlogPost['title'] );
 			$html .= '<div class="listpages-item">
-					<a href="' . $titleObj->escapeFullURL() . '">' .
+					<a href="' . htmlspecialchars( $titleObj->getFullURL() ) . '">' .
 						$titleObj->getText() .
 					'</a>
 				</div>
@@ -964,7 +964,7 @@ class BlogPage extends Article {
 
 			$output .= '<div class="cod-item">';
 			$output .= "<span class=\"cod-score\">{$comment['plus_count']}</span> ";
-			$output .= " <span class=\"cod-comment\"><a href=\"{$page_title->escapeFullURL()}#comment-{$comment['comment_id']}\" title=\"{$page_title->getText()}\" >{$comment_text}</a></span>";
+			$output .= " <span class=\"cod-comment\"><a href=\"{htmlspecialchars( $page_title->getFullURL() )}#comment-{$comment['comment_id']}\" title=\"{$page_title->getText()}\" >{$comment_text}</a></span>";
 			$output .= '</div>';
 		}
 
@@ -1126,7 +1126,7 @@ class BlogPage extends Article {
 		$blurbText = preg_replace( '/[\n\r\t]/', ' ', $blurbText ); // replace any non-space whitespace with a space
 
 		return $blurbFont . $blurbText. '. . . <a href="' .
-			$title->escapeFullURL() . '">' . wfMsg( 'blog-more' ) .
+			htmlspecialchars( $title->getFullURL() ) . '">' . wfMsg( 'blog-more' ) .
 			'</a></span>';
 	}
 

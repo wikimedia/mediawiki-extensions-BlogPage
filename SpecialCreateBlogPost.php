@@ -300,7 +300,7 @@ class SpecialCreateBlogPost extends SpecialPage {
 		global $wgUser;
 
 		$output = '<form id="editform" name="editform" method="post" action="' .
-			$this->getPageTitle()->escapeFullURL() . '" enctype="multipart/form-data">';
+			htmlspecialchars( $this->getPageTitle()->getFullURL() ) . '" enctype="multipart/form-data">';
 		$output .= "\n" . $this->displayFormPageTitle() . "\n";
 		$output .= "\n" . $this->displayFormPageText() . "\n";
 

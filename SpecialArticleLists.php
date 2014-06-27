@@ -98,7 +98,7 @@ class ArticleLists extends IncludableSpecialPage {
 
 					$output .= "<div class=\"listpages-image\">{$imgTag}</div>\n";
 				}
-				$output .= '<a href="' . $titleObj->escapeFullURL() . '">' .
+				$output .= '<a href="' . htmlspecialchars( $titleObj->getFullURL() ) . '">' .
 						$titleObj->getText() .
 						"</a>
 						<div class=\"listpages-blurb\">\n" .
