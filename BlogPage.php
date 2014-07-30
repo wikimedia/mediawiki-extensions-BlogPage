@@ -9,13 +9,13 @@ class BlogPage extends Article {
 	public $title = null;
 	public $authors = array();
 
-	function __construct( Title $title ) {
+	public function __construct( Title $title ) {
 		parent::__construct( $title );
 		$this->setContent();
 		$this->getAuthors();
 	}
 
-	function setContent() {
+	public function setContent() {
 		// Get the page content for later use
 		$this->pageContent = $this->getContent();
 
@@ -36,17 +36,20 @@ class BlogPage extends Article {
 		}
 	}
 
-	function view() {
-		global $wgOut, $wgUser, $wgBlogPageDisplay;
+	public function view() {
+		global $wgBlogPageDisplay;
 
 		wfProfileIn( __METHOD__ );
+		$context = $this->getContext();
+		$user = $context->getUser();
+		$output = $context->getOutput();
 
-		$sk = $wgUser->getSkin();
+		$sk = $user->getSkin();
 
 		wfDebugLog( 'BlogPage', __METHOD__ );
 
-		$wgOut->setHTMLTitle( $this->getTitle()->getText() );
-		$wgOut->setPageTitle( $this->getTitle()->getText() );
+		$output->setHTMLTitle( $this->getTitle()->getText() );
+		$output->setPageTitle( $this->getTitle()->getText() );
 
 		// Don't throw a bunch of E_NOTICEs when we're viewing the page of a
 		// nonexistent blog post
@@ -55,14 +58,14 @@ class BlogPage extends Article {
 			return '';
 		}
 
-		$wgOut->addHTML( "\t\t" . '<div id="blog-page-container">' . "\n" );
+		$output->addHTML( "\t\t" . '<div id="blog-page-container">' . "\n" );
 
 		if ( $wgBlogPageDisplay['leftcolumn'] == true ) {
-			$wgOut->addHTML( "\t\t\t" . '<div id="blog-page-left">' . "\n" );
+			$output->addHTML( "\t\t\t" . '<div id="blog-page-left">' . "\n" );
 
-			$wgOut->addHTML( "\t\t\t\t" . '<div class="blog-left-units">' . "\n" );
+			$output->addHTML( "\t\t\t\t" . '<div class="blog-left-units">' . "\n" );
 
-			$wgOut->addHTML(
+			$output->addHTML(
 				"\t\t\t\t\t" . '<h2>' .
 				wfMessage( 'blog-author-title' )
 					->numParams( count( $this->authors ) )
@@ -70,60 +73,60 @@ class BlogPage extends Article {
 			);
 			// Why was this commented out? --ashley, 11 July 2011
 			if( count( $this->authors ) > 1 ) {
-				$wgOut->addHTML( $this->displayMultipleAuthorsMessage() );
+				$output->addHTML( $this->displayMultipleAuthorsMessage() );
 			}
 
 			// Output each author's box in the order that they appear in [[Category:Opinions by X]]
 			for( $x = 0; $x <= count( $this->authors ); $x++ ) {
-				$wgOut->addHTML( $this->displayAuthorBox( $x ) );
+				$output->addHTML( $this->displayAuthorBox( $x ) );
 			}
 
-			$wgOut->addHTML( $this->recentEditors() );
-			$wgOut->addHTML( $this->recentVoters() );
-			$wgOut->addHTML( $this->embedWidget() );
+			$output->addHTML( $this->recentEditors() );
+			$output->addHTML( $this->recentVoters() );
+			$output->addHTML( $this->embedWidget() );
 
-			$wgOut->addHTML( '</div>' . "\n" );
+			$output->addHTML( '</div>' . "\n" );
 
-			$wgOut->addHTML( $this->leftAdUnit() );
+			$output->addHTML( $this->leftAdUnit() );
 		}
 
-		$wgOut->addHTML( "\t\t\t" . '</div><!-- #blog-page-left -->' . "\n" );
+		$output->addHTML( "\t\t\t" . '</div><!-- #blog-page-left -->' . "\n" );
 
-		$wgOut->addHTML( '<div id="blog-page-middle">' . "\n" );
+		$output->addHTML( '<div id="blog-page-middle">' . "\n" );
 		global $wgUseEditButtonFloat;
 		if( $wgUseEditButtonFloat == true && method_exists( $sk, 'editMenu' ) ) {
-			$wgOut->addHTML( $sk->editMenu() );
+			$output->addHTML( $sk->editMenu() );
 		}
-		$wgOut->addHTML( "<h1 class=\"page-title\">{$this->getTitle()->getText()}</h1>\n" );
-		$wgOut->addHTML( $this->getByLine() );
+		$output->addHTML( "<h1 class=\"page-title\">{$this->getTitle()->getText()}</h1>\n" );
+		$output->addHTML( $this->getByLine() );
 
-		$wgOut->addHTML( "\n<!--start Article::view-->\n" );
+		$output->addHTML( "\n<!--start Article::view-->\n" );
 		parent::view();
 
 		// Get categories
 		$cat = $sk->getCategoryLinks();
 		if( $cat ) {
-			$wgOut->addHTML( "\n<div id=\"catlinks\" class=\"catlinks\">{$cat}</div>\n" );
+			$output->addHTML( "\n<div id=\"catlinks\" class=\"catlinks\">{$cat}</div>\n" );
 		}
 
-		$wgOut->addHTML( "\n<!--end Article::view-->\n" );
+		$output->addHTML( "\n<!--end Article::view-->\n" );
 
-		$wgOut->addHTML( '</div>' . "\n" );
+		$output->addHTML( '</div>' . "\n" );
 
 		if ( $wgBlogPageDisplay['rightcolumn'] == true ) {
-			$wgOut->addHTML( '<div id="blog-page-right">' . "\n" );
+			$output->addHTML( '<div id="blog-page-right">' . "\n" );
 
-			$wgOut->addHTML( $this->getPopularArticles() );
-			$wgOut->addHTML( $this->getInTheNews() );
-			$wgOut->addHTML( $this->getCommentsOfTheDay() );
-			$wgOut->addHTML( $this->getRandomCasualGame() );
-			$wgOut->addHTML( $this->getNewArticles() );
+			$output->addHTML( $this->getPopularArticles() );
+			$output->addHTML( $this->getInTheNews() );
+			$output->addHTML( $this->getCommentsOfTheDay() );
+			$output->addHTML( $this->getRandomCasualGame() );
+			$output->addHTML( $this->getNewArticles() );
 
-			$wgOut->addHTML( '</div>' . "\n" );
+			$output->addHTML( '</div>' . "\n" );
 		}
 
-		$wgOut->addHTML( '<div class="cleared"></div>' . "\n" );
-		$wgOut->addHTML( '</div><!-- #blog-page-container -->' . "\n" );
+		$output->addHTML( '<div class="cleared"></div>' . "\n" );
+		$output->addHTML( '</div><!-- #blog-page-container -->' . "\n" );
 
 		wfProfileOut( __METHOD__ );
 	}
@@ -132,7 +135,7 @@ class BlogPage extends Article {
 	 * Get the authors of this blog post and store them in the authors member
 	 * variable.
 	 */
-	function getAuthors() {
+	public function getAuthors() {
 		global $wgContLang;
 
 		$articleText = $this->pageContent;
@@ -200,22 +203,22 @@ class BlogPage extends Article {
 	 *
 	 * @return String
 	 */
-	function getByLine() {
-		global $wgLang;
+	public function getByLine() {
+		$lang = $this->getContext()->getLanguage();
 
 		$count = 0;
 
 		// Get date of last edit
 		$timestamp = $this->getTimestamp();
-		$edit_time['date'] = $wgLang->date( $timestamp, true );
-		$edit_time['time'] = $wgLang->time( $timestamp, true );
-		$edit_time['datetime'] = $wgLang->timeanddate( $timestamp, true );
+		$edit_time['date'] = $lang->date( $timestamp, true );
+		$edit_time['time'] = $lang->time( $timestamp, true );
+		$edit_time['datetime'] = $lang->timeanddate( $timestamp, true );
 
 		// Get date of when article was created
 		$timestamp = self::getCreateDate( $this->getId() );
-		$create_time['date'] = $wgLang->date( $timestamp, true );
-		$create_time['time'] = $wgLang->time( $timestamp, true );
-		$create_time['datetime'] = $wgLang->timeanddate( $timestamp, true );
+		$create_time['date'] = $lang->date( $timestamp, true );
+		$create_time['time'] = $lang->time( $timestamp, true );
+		$create_time['datetime'] = $lang->timeanddate( $timestamp, true );
 
 		$output = '<div class="blog-byline">' . wfMessage( 'blog-by' )->escaped() . ' ';
 
@@ -259,7 +262,7 @@ class BlogPage extends Article {
 		return $output;
 	}
 
-	function displayMultipleAuthorsMessage() {
+	public function displayMultipleAuthorsMessage() {
 		$count = 0;
 
 		$authors = '';
@@ -284,9 +287,10 @@ class BlogPage extends Article {
 		return $output;
 	}
 
-	function displayAuthorBox( $author_index ) {
-		global $wgOut, $wgBlogPageDisplay;
+	public function displayAuthorBox( $author_index ) {
+		global $wgBlogPageDisplay;
 
+		$out = $this->getContext()->getOutput();
 		if ( $wgBlogPageDisplay['author'] == false ) {
 			return '';
 		}
@@ -337,7 +341,7 @@ class BlogPage extends Article {
 		// If the user has supplied some information about themselves on their
 		// social profile, show that data here.
 		if( $profileData['about'] ) {
-			$output .= $wgOut->parse( $profileData['about'], false );
+			$output .= $out->parse( $profileData['about'], false );
 		}
 		$output .= "\n\t\t\t\t\t\t</div><!-- .author-info -->
 						<div class=\"cleared\"></div>
@@ -347,8 +351,8 @@ class BlogPage extends Article {
 		return $output;
 	}
 
-	function getAuthorArticles( $author_index ) {
-		global $wgOut, $wgBlogPageDisplay, $wgMemc;
+	public function getAuthorArticles( $author_index ) {
+		global $wgBlogPageDisplay, $wgMemc;
 
 		if ( $wgBlogPageDisplay['author_articles'] == false ) {
 			return '';
@@ -466,7 +470,7 @@ class BlogPage extends Article {
 	 *
 	 * @return Array: array containing each editors' user ID and user name
 	 */
-	function getEditorsList() {
+	public function getEditorsList() {
 		global $wgMemc;
 
 		$pageTitleId = $this->getId();
@@ -521,7 +525,7 @@ class BlogPage extends Article {
 	 *
 	 * @return String: HTML or nothing
 	 */
-	function recentEditors() {
+	public function recentEditors() {
 		global $wgUploadPath, $wgBlogPageDisplay;
 
 		if ( $wgBlogPageDisplay['recent_editors'] == false ) {
@@ -558,7 +562,7 @@ class BlogPage extends Article {
 	 *
 	 * @return Array: array containing each voters' user ID and user name
 	 */
-	function getVotersList() {
+	public function getVotersList() {
 		global $wgMemc;
 
 		// Gets the page ID for the query
@@ -613,7 +617,7 @@ class BlogPage extends Article {
 	 *
 	 * @return String: HTML or nothing
 	 */
-	function recentVoters() {
+	public function recentVoters() {
 		global $wgBlogPageDisplay;
 
 		if ( $wgBlogPageDisplay['recent_voters'] == false ) {
@@ -648,7 +652,7 @@ class BlogPage extends Article {
 	 *
 	 * @return String: HTML or nothing
 	 */
-	function embedWidget() {
+	public function embedWidget() {
 		global $wgBlogPageDisplay, $wgServer, $wgScriptPath;
 
 		// Not enabled? ContentWidget not available?
@@ -681,7 +685,7 @@ class BlogPage extends Article {
 	 *
 	 * @return String: HTML or nothing
 	 */
-	function leftAdUnit() {
+	public function leftAdUnit() {
 		global $wgBlogPageDisplay;
 
 		if ( $wgBlogPageDisplay['left_ad'] == false ) {
@@ -701,8 +705,8 @@ class BlogPage extends Article {
 	 *
 	 * @return String: HTML or nothing
 	 */
-	function getInTheNews() {
-		global $wgBlogPageDisplay, $wgMemc, $wgOut;
+	public function getInTheNews() {
+		global $wgBlogPageDisplay, $wgMemc;
 
 		if ( $wgBlogPageDisplay['in_the_news'] == false ) {
 			return '';
@@ -715,7 +719,7 @@ class BlogPage extends Article {
 			$newsItem = $newsArray[array_rand( $newsArray )];
 			$output = '<div class="blog-container">
 			<h2>' . wfMessage( 'blog-in-the-news' )->escaped() . '</h2>
-			<div>' . $wgOut->parse( $newsItem, false ) . '</div>
+			<div>' . $this->getContext()->getOutput()->parse( $newsItem, false ) . '</div>
 		</div>';
 		}
 
@@ -728,7 +732,7 @@ class BlogPage extends Article {
 	 *
 	 * @return String: HTML or nothing
 	 */
-	function getPopularArticles() {
+	public function getPopularArticles() {
 		global $wgMemc, $wgBlogPageDisplay;
 
 		if ( $wgBlogPageDisplay['popular_articles'] == false ) {
@@ -816,8 +820,8 @@ class BlogPage extends Article {
 	 *
 	 * @return String: HTML or nothing
 	 */
-	function getNewArticles() {
-		global $wgOut, $wgMemc, $wgBlogPageDisplay;
+	public function getNewArticles() {
+		global $wgMemc, $wgBlogPageDisplay;
 
 		if ( $wgBlogPageDisplay['new_articles'] == false ) {
 			return '';
@@ -882,7 +886,7 @@ class BlogPage extends Article {
 	 *
 	 * @return String: HTML or nothing
 	 */
-	function getRandomCasualGame() {
+	public function getRandomCasualGame() {
 		global $wgBlogPageDisplay;
 
 		if (
@@ -902,8 +906,8 @@ class BlogPage extends Article {
 	 *
 	 * @return String: HTML or nothing
 	 */
-	function getCommentsOfTheDay() {
-		global $wgBlogPageDisplay, $wgMemc, $wgLang;
+	public function getCommentsOfTheDay() {
+		global $wgBlogPageDisplay, $wgMemc;
 
 		if ( $wgBlogPageDisplay['comments_of_day'] == false ) {
 			return '';
@@ -967,7 +971,7 @@ class BlogPage extends Article {
 			}
 
 			$comment['comment_text'] = strip_tags( $comment['comment_text'] );
-			$comment_text = $wgLang->truncate(
+			$comment_text = $this->getContext()->getLanguage()->truncate(
 				$comment['comment_text'],
 				( 70 - strlen( $commentPosterDisplay ) )
 			);
@@ -1064,7 +1068,7 @@ class BlogPage extends Article {
 	 * @return String: first $maxChars characters from the page
 	 */
 	public static function getBlurb( $pageTitle, $namespace, $maxChars, $fontSize = 'small' ) {
-		global $wgOut, $wgContLang;
+		global $wgContLang;
 
 		// Get raw text
 		$title = Title::makeTitle( $namespace, $pageTitle );
@@ -1101,7 +1105,7 @@ class BlogPage extends Article {
 		$text = '__NOTOC__ ' . $text;
 
 		// Run text through parser
-		$blurbText = $wgOut->parse( $text );
+		$blurbText = $article->getContext()->getOutput()->parse( $text );
 		$blurbText = strip_tags( $blurbText );
 
 		$blurbText = preg_replace( '/&lt;comments&gt;&lt;\/comments&gt;/i', '', $blurbText );
@@ -1175,7 +1179,7 @@ class BlogPage extends Article {
 	 * You probably have seen these in UserBoard, Comments...god knows where.
 	 * Seriously, this stuff is all over the place.
 	 */
-	static function dateDiff( $date1, $date2 ) {
+	public static function dateDiff( $date1, $date2 ) {
 		$dtDiff = $date1 - $date2;
 
 		$totalDays = intval( $dtDiff / ( 24 * 60 * 60 ) );
@@ -1189,7 +1193,7 @@ class BlogPage extends Article {
 		return $dif;
 	}
 
-	static function getTimeOffset( $time, $timeabrv, $timename ) {
+	public static function getTimeOffset( $time, $timeabrv, $timename ) {
 		$timeStr = '';
 		if( $time[$timeabrv] > 0 ) {
 			$timeStr = wfMessage( "blog-time-$timename", $time[$timeabrv] )->text();
@@ -1200,7 +1204,7 @@ class BlogPage extends Article {
 		return $timeStr;
 	}
 
-	static function getTimeAgo( $time ) {
+	public static function getTimeAgo( $time ) {
 		$timeArray = self::dateDiff( time(), $time );
 		$timeStr = '';
 		$timeStrD = self::getTimeOffset( $timeArray, 'd', 'days' );

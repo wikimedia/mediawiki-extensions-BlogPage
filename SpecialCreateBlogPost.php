@@ -24,23 +24,26 @@ class SpecialCreateBlogPost extends SpecialPage {
 	 * @param $par Mixed: parameter passed to the special page or null
 	 */
 	public function execute( $par ) {
-		global $wgOut, $wgUser, $wgRequest, $wgContLang;
+		global $wgContLang;
 
+		$out = $this->getOutput();
+		$user = $this->getUser();
+		$request = $this->getRequest();
 		// If the user can't create blog posts, display an error
-		if( !$wgUser->isAllowed( 'createblogpost' ) ) {
-			$wgOut->permissionRequired( 'createblogpost' );
+		if( !$user->isAllowed( 'createblogpost' ) ) {
+			$out->permissionRequired( 'createblogpost' );
 			return;
 		}
 
 		// Show a message if the database is in read-only mode
 		if ( wfReadOnly() ) {
-			$wgOut->readOnlyPage();
+			$out->readOnlyPage();
 			return;
 		}
 
 		// If user is blocked, s/he doesn't need to access this page
-		if( $wgUser->isBlocked() ) {
-			$wgOut->blockedPage( false );
+		if( $user->isBlocked() ) {
+			$out->blockedPage( false );
 			return false;
 		}
 
@@ -48,26 +51,26 @@ class SpecialCreateBlogPost extends SpecialPage {
 		$this->setHeaders();
 
 		// Add CSS & JS
-		$wgOut->addModules( 'ext.blogPage.create' );
+		$out->addModules( 'ext.blogPage.create' );
 
 		// If the request was POSTed, we haven't submitted a request yet AND
 		// we have a title, create the page...otherwise just display the
 		// creation form
 		if(
-			$wgRequest->wasPosted() &&
+			$request->wasPosted() &&
 			$_SESSION['alreadysubmitted'] == false
 		)
 		{
 			$_SESSION['alreadysubmitted'] = true;
 
 			// Protect against cross-site request forgery (CSRF)
-			if ( !$wgUser->matchEditToken( $wgRequest->getVal( 'wpEditToken' ) ) ) {
-				$wgOut->addWikiMsg( 'sessionfailure' );
+			if ( !$user->matchEditToken( $request->getVal( 'wpEditToken' ) ) ) {
+				$out->addWikiMsg( 'sessionfailure' );
 				return;
 			}
 
 			// Create a Title object, or try to, anyway
-			$userSuppliedTitle = $wgRequest->getVal( 'title2' );
+			$userSuppliedTitle = $request->getVal( 'title2' );
 			$title = Title::makeTitleSafe( NS_BLOG, $userSuppliedTitle );
 
 			// @todo CHECKME: are these still needed? The JS performs these
@@ -75,17 +78,17 @@ class SpecialCreateBlogPost extends SpecialPage {
 
 			// The user didn't supply a title? Ask them to supply one.
 			if ( !$userSuppliedTitle ) {
-				$wgOut->setPageTitle( $this->msg( 'errorpagetitle' ) );
-				$wgOut->addWikiMsg( 'blog-create-error-need-title' );
-				$wgOut->addReturnTo( $this->getPageTitle() );
+				$out->setPageTitle( $this->msg( 'errorpagetitle' ) );
+				$out->addWikiMsg( 'blog-create-error-need-title' );
+				$out->addReturnTo( $this->getPageTitle() );
 				return;
 			}
 
 			// The user didn't supply the blog post text? Ask them to supply it.
-			if ( !$wgRequest->getVal( 'pageBody' ) ) {
-				$wgOut->setPageTitle( $this->msg( 'errorpagetitle' ) );
-				$wgOut->addWikiMsg( 'blog-create-error-need-content' );
-				$wgOut->addReturnTo( $this->getPageTitle() );
+			if ( !$request->getVal( 'pageBody' ) ) {
+				$out->setPageTitle( $this->msg( 'errorpagetitle' ) );
+				$out->addWikiMsg( 'blog-create-error-need-content' );
+				$out->addReturnTo( $this->getPageTitle() );
 				return;
 			}
 
@@ -96,9 +99,9 @@ class SpecialCreateBlogPost extends SpecialPage {
 			// Create the blog page if it doesn't already exist
 			$article = new Article( $title, 0 );
 			if ( $article->exists() ) {
-				$wgOut->setPageTitle( $this->msg( 'errorpagetitle' ) );
-				$wgOut->addWikiMsg( 'blog-create-error-page-exists' );
-				$wgOut->addReturnTo( $this->getPageTitle() );
+				$out->setPageTitle( $this->msg( 'errorpagetitle' ) );
+				$out->addWikiMsg( 'blog-create-error-page-exists' );
+				$out->addReturnTo( $this->getPageTitle() );
 				return;
 			} else {
 				// The blog post will be by default categorized into two
@@ -115,7 +118,7 @@ class SpecialCreateBlogPost extends SpecialPage {
 					"[[{$localizedCatNS}:{$today}]]"
 				);
 
-				$userSuppliedCategories = $wgRequest->getVal( 'pageCtg' );
+				$userSuppliedCategories = $request->getVal( 'pageCtg' );
 				if ( !empty( $userSuppliedCategories ) ) {
 					// Explode along commas so that we will have an array that
 					// we can loop over
@@ -137,7 +140,7 @@ class SpecialCreateBlogPost extends SpecialPage {
 					// here and Template:Blog Bottom at the bottom, where we
 					// have the comments tag right now
 					'<vote />' . "\n" . '<!--start text-->' . "\n" .
-						$wgRequest->getVal( 'pageBody' ) . "\n\n" .
+						$request->getVal( 'pageBody' ) . "\n\n" .
 						'<comments />' . "\n\n" . $wikitextCategories .
 						"\n__NOEDITSECTION__",
 					$this->msg( 'blog-create-summary' )->inContentLanguage()->text()
@@ -156,21 +159,12 @@ class SpecialCreateBlogPost extends SpecialPage {
 				$vote = new Vote( $articleId );
 				$vote->insert( 1 );
 
-				$stats = new UserStatsTrack( $wgUser->getID(), $wgUser->getName() );
+				$stats = new UserStatsTrack( $user->getID(), $user->getName() );
 				$stats->updateWeeklyPoints( $stats->point_values['opinions_created'] );
 				$stats->updateMonthlyPoints( $stats->point_values['opinions_created'] );
-				//if( $wgEnableFacebook ) {
-				//	BlogHooks::updateFacebookProfile();
-				//}
-				//if( $wgSendNewArticleToFriends ) {
-				//	$invite = SpecialPage::getTitleFor( 'EmailNewArticle' );
-				//	$wgOut->redirect(
-				//		$invite->getFullURL( 'page=' . $title->getPrefixedText() )
-				//	);
-				//}
 
 				// Redirect the user to the new blog post they just created
-				$wgOut->redirect( $title->getFullURL() );
+				$out->redirect( $title->getFullURL() );
 			}
 		} else {
 			$_SESSION['alreadysubmitted'] = false;
@@ -188,7 +182,7 @@ class SpecialCreateBlogPost extends SpecialPage {
 			$output .= $this->displayForm();
 
 			// Show everything to the user
-			$wgOut->addHTML( $output );
+			$out->addHTML( $output );
 		}
 	}
 
@@ -196,7 +190,7 @@ class SpecialCreateBlogPost extends SpecialPage {
 	 * Show the input field where the user can enter the blog post title.
 	 * @return String: HTML
 	 */
-	function displayFormPageTitle() {
+	public function displayFormPageTitle() {
 		$output = '<span class="create-title">' . $this->msg( 'blog-create-title' )->escaped() .
 			'</span><br /><input class="createbox" type="text" tabindex="' .
 				$this->tabCounter . '" name="title2" id="title" style="width: 500px;"><br /><br />';
@@ -208,7 +202,7 @@ class SpecialCreateBlogPost extends SpecialPage {
 	 * Show the input field where the user can enter the blog post body.
 	 * @return String: HTML
 	 */
-	function displayFormPageText() {
+	public function displayFormPageText() {
 		$output = '<span class="create-title">' . $this->msg( 'blog-create-text' )->escaped() .
 			'</span><br />';
 		// The EditPage toolbar wasn't originally present here but I figured
@@ -228,7 +222,7 @@ class SpecialCreateBlogPost extends SpecialPage {
 	 * Show the category cloud.
 	 * @return String: HTML
 	 */
-	function displayFormPageCategories() {
+	public function displayFormPageCategories() {
 		$cloud = new BlogTagCloud( 20 );
 
 		$tagcloud = '<div id="create-tagcloud">';
@@ -271,7 +265,7 @@ class SpecialCreateBlogPost extends SpecialPage {
 	 *
 	 * @return String: HTML
 	 */
-	function displayCopyrightWarning() {
+	public function displayCopyrightWarning() {
 		global $wgRightsText;
 		if ( $wgRightsText ) {
 			$copywarnMsg = 'copyrightwarning';
@@ -294,9 +288,8 @@ class SpecialCreateBlogPost extends SpecialPage {
 	 * Show the form for creating new blog posts.
 	 * @return String: HTML
 	 */
-	function displayForm() {
-		global $wgUser;
-
+	public function displayForm() {
+		$user = $this->getUser();
 		$output = '<form id="editform" name="editform" method="post" action="' .
 			htmlspecialchars( $this->getTitle()->getFullURL() ) . '" enctype="multipart/form-data">';
 		$output .= "\n" . $this->displayFormPageTitle() . "\n";
@@ -310,7 +303,7 @@ class SpecialCreateBlogPost extends SpecialPage {
 			<input type="hidden" value="" name="wpSection" />
 			<input type="hidden" value="" name="wpEdittime" />
 			<input type="hidden" value="" name="wpTextbox1" id="wpTextbox1" />
-			<input type="hidden" value="' . htmlspecialchars( $wgUser->getEditToken() ) .
+			<input type="hidden" value="' . htmlspecialchars( $user->getEditToken() ) .
 				'" name="wpEditToken" />';
 		$output .= "\n" . '</form>' . "\n";
 

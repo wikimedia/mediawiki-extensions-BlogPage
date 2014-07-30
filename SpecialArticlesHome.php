@@ -25,12 +25,13 @@ class ArticlesHome extends SpecialPage {
 	 * @param $type String: what kind of articles to show? Default is 'popular'
 	 */
 	public function execute( $type ) {
-		global $wgContLang, $wgOut, $wgScriptPath, $wgSupressPageTitle;
+		global $wgContLang, $wgScriptPath, $wgSupressPageTitle;
 
 		$wgSupressPageTitle = true;
 
+		$out = $this->getOutput();
 		// Add CSS
-		$wgOut->addModules( 'ext.blogPage.articlesHome' );
+		$out->addModules( 'ext.blogPage.articlesHome' );
 
 		if( !$type ) {
 			$type = 'popular';
@@ -55,7 +56,7 @@ class ArticlesHome extends SpecialPage {
 			$name_right = $this->msg( 'ah-popular-articles' )->escaped();
 		}
 
-		$wgOut->setPageTitle( $name );
+		$out->setPageTitle( $name );
 
 		$today = $wgContLang->date( wfTimestampNow() );
 
@@ -112,7 +113,7 @@ class ArticlesHome extends SpecialPage {
 		$output .= '</div>';
 		$output .= '<div class="cleared"></div>';
 
-		$wgOut->addHTML( $output );
+		$out->addHTML( $output );
 	}
 
 	/**
@@ -120,7 +121,7 @@ class ArticlesHome extends SpecialPage {
 	 * @return Array: array containing today and the past $numberOfDays days in
 	 *                the wiki's content language
 	 */
-	function getDatesFromElapsedDays( $numberOfDays ) {
+	public function getDatesFromElapsedDays( $numberOfDays ) {
 		global $wgContLang;
 		$today = $wgContLang->date( wfTimestampNow() ); // originally date( 'F j, Y', time() )
 		$dates[$today] = 1; // Gets today's date string
@@ -266,7 +267,7 @@ class ArticlesHome extends SpecialPage {
 	 *                                by commas
 	 * @return String: HTML
 	 */
-	function displayMostVotedPages( $dateCategories ) {
+	public function displayMostVotedPages( $dateCategories ) {
 		global $wgMemc;
 
 		// Try cache first
@@ -357,7 +358,7 @@ class ArticlesHome extends SpecialPage {
 	 *                                by commas
 	 * @return String: HTML
 	 */
-	function displayMostCommentedPages( $dateCategories ) {
+	public function displayMostCommentedPages( $dateCategories ) {
 		global $wgMemc;
 
 		// Try cache first
@@ -443,7 +444,7 @@ class ArticlesHome extends SpecialPage {
 	 *
 	 * @return String: HTML
 	 */
-	function displayNewestPages() {
+	public function displayNewestPages() {
 		global $wgMemc;
 
 		// Try cache first

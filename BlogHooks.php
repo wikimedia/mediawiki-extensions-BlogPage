@@ -16,8 +16,7 @@ class BlogHooks {
 	 * @return Boolean: true
 	 */
 	public static function blogFromTitle( &$title, &$article ) {
-		global $wgRequest, $wgOut, $wgHooks, $wgScriptPath;
-		global $wgSupressPageTitle, $wgSupressSubTitle, $wgSupressPageCategories;
+		global $wgHooks, $wgOut, $wgRequest, $wgSupressPageTitle, $wgSupressSubTitle, $wgSupressPageCategories;
 
 		if ( $title->getNamespace() == NS_BLOG ) {
 			if( !$wgRequest->getVal( 'action' ) ) {
@@ -52,20 +51,22 @@ class BlogHooks {
 	 * @return Boolean: true if the user should be allowed to continue, else false
 	 */
 	public static function allowShowEditBlogPage( $editPage ) {
-		global $wgOut, $wgUser;
+		$context = $editPage->getArticle()->getContext();
+		$output = $context->getOutput();
+		$user = $context->getUser();
 
 		if( $editPage->mTitle->getNamespace() == NS_BLOG ) {
-			if( $wgUser->isAnon() ) { // anons can't edit blog pages
+			if( $user->isAnon() ) { // anons can't edit blog pages
 				if( !$editPage->mTitle->exists() ) {
-					$wgOut->addWikiMsg( 'blog-login' );
+					$output->addWikiMsg( 'blog-login' );
 				} else {
-					$wgOut->addWikiMsg( 'blog-login-edit' );
+					$output->addWikiMsg( 'blog-login-edit' );
 				}
 				return false;
 			}
 
-			if ( !$wgUser->isAllowed( 'edit' ) || $wgUser->isBlocked() ) {
-				$wgOut->addWikiMsg( 'blog-permission-required' );
+			if ( !$user->isAllowed( 'edit' ) || $user->isBlocked() ) {
+				$output->addWikiMsg( 'blog-permission-required' );
 				return false;
 			}
 		}
@@ -87,8 +88,7 @@ class BlogHooks {
 	 *                         (being) saved
 	 * @return Boolean: true
 	 */
-	public static function updateCreatedOpinionsCount( &$article ) {
-		global $wgOut, $wgUser;
+	public static function updateCreatedOpinionsCount( &$article, &$user ) {
 
 		$aid = $article->getTitle()->getArticleID();
 		// Shortcut, in order not to perform stupid queries (cl_from = 0...)
@@ -122,14 +122,14 @@ class BlogHooks {
 					// instead of $stats->user_id and $stats->user_name but
 					// there's no point in doing that because we have to call
 					// clearCache() in any case
-					if ( !$wgUser->isAnon() && $stats->user_id ) {
+					if ( !$user->isAnon() && $stats->user_id ) {
 						$ctg = $userBlogCat . ' ' . $stats->user_name;
 						$parser = new Parser();
 						$ctgTitle = Title::newFromText(
 							$parser->preprocess(
 								trim( $ctg ),
-								$wgOut->getTitle(),
-								$wgOut->parserOptions()
+								$article->getContext()->getTitle(),
+								$article->getContext()->getOutput()->parserOptions()
 							)
 						);
 						$ctgTitle = $ctgTitle->getDBkey();
