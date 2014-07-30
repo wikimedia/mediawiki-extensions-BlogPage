@@ -48,11 +48,11 @@ class ArticlesHome extends SpecialPage {
 
 		// Determine the page title and set it
 		if ( $type == 'popular' ) {
-			$name = wfMsg( 'ah-popular-articles' );
-			$name_right = wfMsg( 'ah-new-articles' );
+			$name = $this->msg( 'ah-popular-articles' );
+			$name_right = $this->msg( 'ah-new-articles' )->escaped();
 		} else {
-			$name = wfMsg( 'ah-new-articles' );
-			$name_right = wfMsg( 'ah-popular-articles' );
+			$name = $this->msg( 'ah-new-articles' );
+			$name_right = $this->msg( 'ah-popular-articles' )->escaped();
 		}
 
 		$wgOut->setPageTitle( $name );
@@ -62,17 +62,16 @@ class ArticlesHome extends SpecialPage {
 		// Start building the HTML output
 		$output = '<div class="main-page-left">';
 		$output .= '<div class="logged-in-articles">';
-		$output .= '<h2>' . $name . '</h2>';
-		//$output .= '<h2>' . $name . ' <span class="rss-feed"><a href="http://feeds.feedburner.com/Armchairgm"><img src="http://www.armchairgm.com/images/a/a7/Rss-icon.gif" border="0" alt="RSS" /></a> ' . wfMsg( 'ah-feed-rss' ) . '</span></h2>';
+		$output .= '<h2>' . $name->escaped() . '</h2>';
 		$output .= '<p class="main-page-sub-links"><a href="' .
 			htmlspecialchars( SpecialPage::getTitleFor( 'CreateBlogPost' )->getFullURL() ) . '">' .
-			wfMsg( 'ah-write-article' ) . '</a> - <a href="' .
+			$this->msg( 'ah-write-article' )->escaped() . '</a> - <a href="' .
 				// original used date( 'F j, Y' ) which returned something like
 				// December 5, 2008
 				htmlspecialchars( Title::makeTitle( NS_CATEGORY, $today )->getFullURL() ) . '">' .
-				wfMsg( 'ah-todays-articles' ) . '</a> - <a href="' .
+				$this->msg( 'ah-todays-articles' )->escaped() . '</a> - <a href="' .
 				htmlspecialchars( Title::newMainPage()->getFullURL() ) . '">' .
-					wfMsg( 'mainpage' ) . '</a></p>' . "\n\n";
+					$this->msg( 'mainpage' )->escaped() . '</a></p>' . "\n\n";
 
 		if ( $type == 'popular' ) {
 			$output .= $this->getPopularPosts();
@@ -100,13 +99,13 @@ class ArticlesHome extends SpecialPage {
 
 		// Most Votes
 		$output .= '<div class="side-articles">';
-		$output .= '<h2>' . wfMsg( 'ah-most-votes' ) . '</h2>';
+		$output .= '<h2>' . $this->msg( 'ah-most-votes' )->escaped() . '</h2>';
 		$output .= $this->displayMostVotedPages( $date_categories );
 		$output .= '</div>';
 
 		// Most Comments
 		$output .= '<div class="side-articles">';
-		$output .= '<h2>' . wfMsg( 'ah-what-talking-about' ) . '</h2>';
+		$output .= '<h2>' . $this->msg( 'ah-what-talking-about' )->escaped() . '</h2>';
 		$output .= $this->displayMostCommentedPages( $date_categories );
 		$output .= '</div>';
 
@@ -199,7 +198,7 @@ class ArticlesHome extends SpecialPage {
 
 		$output = '<div class="listpages-container">';
 		if ( empty( $popularBlogPosts ) ) {
-			$output .= wfMsg( 'ah-no-results' );
+			$output .= $this->msg( 'ah-no-results' )->escaped();
 		} else {
 			foreach( $popularBlogPosts as $popularBlogPost ) {
 				$titleObj = Title::makeTitle( NS_BLOG, $popularBlogPost['title'] );
@@ -220,14 +219,17 @@ class ArticlesHome extends SpecialPage {
 						$titleObj->getText() .
 						'</a>
 						<div class="listpages-date">';
-				$output .= '(' . wfMsg( 'blog-created-ago',
-					BlogPage::getTimeAgo(
-						// need to strtotime() it because getCreateDate() now
-						// returns the raw timestamp from the database; in the past
-						// it converted it to UNIX timestamp via the SQL function
-						// UNIX_TIMESTAMP but that was no good for our purposes
-						strtotime( BlogPage::getCreateDate( $popularBlogPost['id'] ) )
-					) ) . ')';
+				$output .= '(' .
+					$this->msg(
+						'blog-created-ago',
+						BlogPage::getTimeAgo(
+							// need to strtotime() it because getCreateDate() now
+							// returns the raw timestamp from the database; in the past
+							// it converted it to UNIX timestamp via the SQL function
+							// UNIX_TIMESTAMP but that was no good for our purposes
+							strtotime( BlogPage::getCreateDate( $popularBlogPost['id'] ) )
+						)
+					)->escaped() . ')';
 				$output .= "</div>
 				<div class=\"listpages-blurb\">\n" .
 						BlogPage::getBlurb(
@@ -238,17 +240,15 @@ class ArticlesHome extends SpecialPage {
 					'</div><!-- .listpages-blurb -->
 				<div class="listpages-stats">' . "\n";
 				$output .= "<img src=\"{$imgPath}voteIcon.gif\" alt=\"\" border=\"0\" /> " .
-					wfMsgExt(
+					$this->msg(
 						'blog-author-votes',
-						'parsemag',
 						BlogPage::getVotesForPage( $popularBlogPost['id'] )
-					);
+					)->escaaped();
 				$output .= " <img src=\"{$imgPath}comment.gif\" alt=\"\" border=\"0\" /> " .
-					wfMsgExt(
+					$this->msg(
 						'blog-author-comments',
-						'parsemag',
 						BlogPage::getCommentsForPage( $popularBlogPost['id'] )
-					) . '</div><!-- . listpages-stats -->
+					)->escaped() . '</div><!-- . listpages-stats -->
 				</div><!-- .listpages-item -->
 				<div class="cleared"></div>' . "\n";
 			}
@@ -324,7 +324,7 @@ class ArticlesHome extends SpecialPage {
 		$output = '<div class="listpages-container">' . "\n";
 
 		if ( empty( $votedBlogPosts ) ) {
-			$output .= wfMsg( 'ah-no-results' );
+			$output .= $this->msg( 'ah-no-results' )->escaped();
 		} else {
 			foreach ( $votedBlogPosts as $votedBlogPost ) {
 				$titleObj = Title::makeTitle( NS_BLOG, $votedBlogPost['title'] );
@@ -334,11 +334,9 @@ class ArticlesHome extends SpecialPage {
 				$output .= '<div class="listpages-votebox-number">' .
 					$votes . "</div>\n";
 				$output .= '<div class="listpages-votebox-text">' .
-					wfMsgExt(
-						'blog-author-votes',
-						'parsemag',
-						$votes
-					) . "</div>\n"; // .listpages-votebox-text
+					$this->msg( 'blog-author-votes' )
+					->numParams( $votes )
+					->escaped() . "</div>\n"; // .listpages-votebox-text
 				$output .= '</div>' . "\n"; // .listpages-votebox
 				$output .= '</div>' . "\n"; // .listpages-item
 				$output .= '<a href="' . htmlspecialchars( $titleObj->getFullURL() ) . '">' .
@@ -416,7 +414,7 @@ class ArticlesHome extends SpecialPage {
 		$output = '<div class="listpages-container">';
 
 		if ( empty( $commentedBlogPosts ) ) {
-			$output .= wfMsg( 'ah-no-results' );
+			$output .= $this->msg( 'ah-no-results' )->escaped();
 		} else {
 			foreach( $commentedBlogPosts as $commentedBlogPost ) {
 				$titleObj = Title::makeTitle( NS_BLOG, $commentedBlogPost['title'] );
@@ -485,7 +483,7 @@ class ArticlesHome extends SpecialPage {
 
 		$output = '<div class="listpages-container">' . "\n";
 		if ( empty( $newBlogPosts ) ) {
-			$output .= wfMsg( 'ah-no-results' );
+			$output .= $this->msg( 'ah-no-results' )->escaped();
 		} else {
 			foreach( $newBlogPosts as $newBlogPost ) {
 				$titleObj = Title::makeTitle( NS_BLOG, $newBlogPost['title'] );
@@ -496,11 +494,9 @@ class ArticlesHome extends SpecialPage {
 					$votes .
 					"</div>\n"; // .listpages-votebox-number
 				$output .= '<div class="listpages-votebox-text">' .
-					wfMsgExt(
-						'blog-author-votes',
-						'parsemag',
-						$votes
-					) . "</div>\n"; // .listpages-votebox-text
+					$this->msg( 'blog-author-votes' )
+					->numParams( $votes )
+					->escaped() . "</div>\n"; // .listpages-votebox-text
 				$output .= "</div>\n"; // .listpages-votebox
 				$output .= '<a href="' . htmlspecialchars( $titleObj->getFullURL() ) . '">' .
 						$titleObj->getText() .
@@ -567,7 +563,7 @@ class ArticlesHome extends SpecialPage {
 
 		$output = '<div class="listpages-container">';
 		if ( empty( $newestBlogPosts ) ) {
-			$output .= wfMsg( 'ah-no-results' );
+			$output .= $this->msg( 'ah-no-results' )->escaped();
 		} else {
 			foreach( $newestBlogPosts as $newestBlogPost ) {
 				$titleObj = Title::makeTitle( NS_BLOG, $newestBlogPost['title'] );
@@ -588,14 +584,16 @@ class ArticlesHome extends SpecialPage {
 						$titleObj->getText() .
 						'</a>
 						<div class="listpages-date">';
-				$output .= '(' . wfMsg( 'blog-created-ago',
-					BlogPage::getTimeAgo(
-						// need to strtotime() it because getCreateDate() now
-						// returns the raw timestamp from the database; in the past
-						// it converted it to UNIX timestamp via the SQL function
-						// UNIX_TIMESTAMP but that was no good for our purposes
-						strtotime( BlogPage::getCreateDate( $newestBlogPost['id'] ) )
-					) ) . ')';
+				$output .= '(' .
+					$this->msg( 'blog-created-ago',
+						BlogPage::getTimeAgo(
+							// need to strtotime() it because getCreateDate() now
+							// returns the raw timestamp from the database; in the past
+							// it converted it to UNIX timestamp via the SQL function
+							// UNIX_TIMESTAMP but that was no good for our purposes
+							strtotime( BlogPage::getCreateDate( $newestBlogPost['id'] ) )
+						)
+					)->escaped() . ')';
 				$output .= "</div>
 				<div class=\"listpages-blurb\">\n" .
 						BlogPage::getBlurb(
@@ -606,17 +604,13 @@ class ArticlesHome extends SpecialPage {
 					'</div><!-- .listpages-blurb -->
 				<div class="listpages-stats">' . "\n";
 				$output .= "<img src=\"{$imgPath}voteIcon.gif\" alt=\"\" border=\"0\" /> " .
-					wfMsgExt(
-						'blog-author-votes',
-						'parsemag',
-						BlogPage::getVotesForPage( $newestBlogPost['id'] )
-					);
+					$this->msg( 'blog-author-votes' )
+					->numParams( BlogPage::getVotesForPage( $newestBlogPost['id'] ) )
+					->escaped();
 				$output .= " <img src=\"{$imgPath}comment.gif\" alt=\"\" border=\"0\" /> " .
-					wfMsgExt(
-						'blog-author-comments',
-						'parsemag',
-						BlogPage::getCommentsForPage( $newestBlogPost['id'] )
-					) . '</div><!-- . listpages-stats -->
+					$this->msg( 'blog-author-comments' )
+					->numParams( BlogPage::getCommentsForPage( $newestBlogPost['id'] ) )
+					->escaped() . '</div><!-- . listpages-stats -->
 				</div><!-- .listpages-item -->
 				<div class="cleared"></div>' . "\n";
 			}
@@ -696,7 +690,7 @@ class ArticlesHome extends SpecialPage {
 
 		$output = '<div class="listpages-container">';
 		if ( empty( $popularBlogPosts ) ) {
-			$output .= wfMsg( 'ah-no-results' );
+			$output .= $this->msg( 'ah-no-results' )->escaped();
 		} else {
 			foreach( $popularBlogPosts as $popularBlogPost ) {
 				$titleObj = Title::makeTitle( NS_BLOG, $popularBlogPost['title'] );
@@ -706,11 +700,9 @@ class ArticlesHome extends SpecialPage {
 				$output .= '<div class="listpages-votebox-number">' .
 					$votes . "</div>\n";
 				$output .= '<div class="listpages-votebox-text">' .
-					wfMsgExt(
-						'blog-author-votes',
-						'parsemag',
-						$votes
-					) . "</div>\n"; // .listpages-votebox-text
+					$this->msg( 'blog-author-votes' )
+					->numParams( $votes )
+					->escaped() . "</div>\n"; // .listpages-votebox-text
 				$output .= '</div>' . "\n"; // .listpages-votebox
 				$output .= '<a href="' . htmlspecialchars( $titleObj->getFullURL() ) . '">' .
 							$titleObj->getText() .

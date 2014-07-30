@@ -63,10 +63,10 @@ class BlogPage extends Article {
 			$wgOut->addHTML( "\t\t\t\t" . '<div class="blog-left-units">' . "\n" );
 
 			$wgOut->addHTML(
-				"\t\t\t\t\t" . '<h2>' . wfMsgExt(
-					'blog-author-title',
-					'parsemag',
-					count( $this->authors ) ) . '</h2>' . "\n"
+				"\t\t\t\t\t" . '<h2>' .
+				wfMessage( 'blog-author-title' )
+					->numParams( count( $this->authors ) )
+					->escaped() . '</h2>' . "\n"
 			);
 			// Why was this commented out? --ashley, 11 July 2011
 			if( count( $this->authors ) > 1 ) {
@@ -137,14 +137,13 @@ class BlogPage extends Article {
 
 		$articleText = $this->pageContent;
 		$categoryName = $wgContLang->getNsText( NS_CATEGORY );
-		$blogCat = wfMsgForContent( 'blog-category' );
 
 		// This unbelievably weak and hacky regex is used to find out the
 		// author's name from the category. See also getBlurb(), which uses a
 		// similar regex.
 		preg_match_all(
 			"/\[\[(?:(?:c|C)ategory|{$categoryName}):\s?" .
-				wfMsgForContent( 'blog-by-user-category', $blogCat ) .
+				wfMessage( 'blog-by-user-category' )->inContentLanguage()->escaped() .
 			" (.*)\]\]/",
 			$articleText,
 			$matches
@@ -207,15 +206,18 @@ class BlogPage extends Article {
 		$count = 0;
 
 		// Get date of last edit
-		$edit_date = $wgLang->timeanddate( $this->getTimestamp(), true );
+		$timestamp = $this->getTimestamp();
+		$edit_time['date'] = $wgLang->date( $timestamp, true );
+		$edit_time['time'] = $wgLang->time( $timestamp, true );
+		$edit_time['datetime'] = $wgLang->timeanddate( $timestamp, true );
 
 		// Get date of when article was created
-		$create_date = $wgLang->timeanddate(
-			self::getCreateDate( $this->getId() ),
-			true
-		);
+		$timestamp = self::getCreateDate( $this->getId() );
+		$create_time['date'] = $wgLang->date( $timestamp, true );
+		$create_time['time'] = $wgLang->time( $timestamp, true );
+		$create_time['datetime'] = $wgLang->timeanddate( $timestamp, true );
 
-		$output = '<div class="blog-byline">' . wfMsg( 'blog-by' ) . ' ';
+		$output = '<div class="blog-byline">' . wfMessage( 'blog-by' )->escaped() . ' ';
 
 		$authors = '';
 		foreach( $this->authors as $author ) {
@@ -225,8 +227,9 @@ class BlogPage extends Article {
 				$authors .= ', ';
 			}
 			if ( $count == count( $this->authors ) && $count != 1 ) {
-				$authors .= wfMsg( 'word-separator' ) . wfMsg( 'blog-and' ) .
-					wfMsg( 'word-separator' );
+				$authors .= wfMessage( 'word-separator' )->escaped() .
+					wfMessage( 'blog-and' )-escaped() .
+					wfMessage( 'word-separator' )->escaped();
 			}
 			$authors .= "<a href=\"{htmlspecialchars( $userTitle->getFullURL() )}\">{$author['user_name']}</a>";
 		}
@@ -236,12 +239,23 @@ class BlogPage extends Article {
 		$output .= '</div>';
 
 		$edit_text = '';
-		if( $create_date != $edit_date ) {
-			$edit_text = ', ' . wfMsg( 'blog-last-edited', $edit_date );
+		if( $create_time['datetime'] != $edit_time['datetime'] ) {
+			$edit_text = ', ' .
+				wfMessage(
+					'blog-last-edited',
+					$edit_time['datetime'],
+					$edit_time['date'],
+					$edit_time['time']
+				)->escaped();
 		}
 		$output .= "\n" . '<div class="blog-byline-last-edited">' .
-			wfMsg( 'blog-created', $create_date ) . " {$edit_text}</div>";
-
+			wfMessage(
+				'blog-created',
+				$create_time['datetime'],
+				$create_time['date'],
+				$create_time['time']
+			)->escaped() .
+			" {$edit_text}</div>";
 		return $output;
 	}
 
@@ -256,14 +270,15 @@ class BlogPage extends Article {
 				$authors .= ', ';
 			}
 			if ( $count == count( $this->authors ) ) {
-				$authors .= wfMsg( 'word-separator' ) . wfMsg( 'blog-and' ) .
-					wfMsg( 'word-separator' );
+				$authors .= wfMessage( 'word-separator' )->escaped() .
+					wfMessage( 'blog-and' )->escaped() .
+					wfMessage( 'word-separator' )->escaped();
 			}
 			$authors .= "<a href=\"{htmlspecialchars( $userTitle->getFullURL() )}\">{$author['user_name']}</a>";
 		}
 
 		$output = '<div class="multiple-authors-message">' .
-			wfMsg( 'blog-multiple-authors', $authors ) .
+			wfMessage( 'blog-multiple-authors', $authors )->escaped() .
 			'</div>';
 
 		return $output;
@@ -341,11 +356,10 @@ class BlogPage extends Article {
 
 		$user_name = $this->authors[$author_index]['user_name'];
 		$user_id = $this->authors[$author_index]['user_id'];
-		$blogCat = wfMsgForContent( 'blog-category' );
 
 		$archiveLink = Title::makeTitle(
 			NS_CATEGORY,
-			wfMsg( 'blog-by-user-category', $blogCat ) . " {$user_name}"
+			wfMessage( 'blog-by-user-category', $user_name )->text()
 		);
 
 		$articles = array();
@@ -361,7 +375,7 @@ class BlogPage extends Article {
 			wfDebugLog( 'BlogPage', "Got blog author articles for user {$user_name} from DB" );
 			$dbr = wfGetDB( DB_SLAVE );
 			$categoryTitle = Title::newFromText(
-				wfMsg( 'blog-by-user-category', $blogCat ) . " {$user_name}"
+				 wfMessage( 'blog-by-user-category', $user_name )->text()
 			);
 			$res = $dbr->select(
 				array( 'page', 'categorylinks'),
@@ -410,7 +424,7 @@ class BlogPage extends Article {
 			}
 
 			$output .= "<div class=\"more-container{$css_fix}\">
-			<h3>" . wfMsg( 'blog-author-more-by', $user_name ) . '</h3>';
+			<h3>" . wfMessage( 'blog-author-more-by', $user_name )->escaped() . '</h3>';
 
 			$x = 1;
 
@@ -420,16 +434,15 @@ class BlogPage extends Article {
 				$output .= '<div class="author-article-item">
 					<a href="' . htmlspecialchars( $articleTitle->getFullURL() ) . "\">{$articleTitle->getText()}</a>
 					<div class=\"author-item-small\">" .
-						wfMsgExt(
+						wfMessage(
 							'blog-author-votes',
-							'parsemag',
 							BlogPage::getVotesForPage( $article['page_id'] )
-						) . ', ' .
-							wfMsgExt(
-								'blog-author-comments',
-								'parsemag',
-								BlogPage::getCommentsForPage( $article['page_id'] )
-							) .
+						)->escaped() .
+						', ' .
+						wfMessage(
+							'blog-author-comments',
+							BlogPage::getCommentsForPage( $article['page_id'] )
+						)->escaped() .
 						'</div>
 				</div>';
 
@@ -438,7 +451,7 @@ class BlogPage extends Article {
 
 			$output .= '<div class="author-archive-link">
 				<a href="' . htmlspecialchars( $archiveLink->getFullURL() ) . '">' .
-					wfMsg( 'blog-view-archive-link' ) .
+					wfMessage( 'blog-view-archive-link' )->escaped() .
 				'</a>
 			</div>
 		</div>';
@@ -521,8 +534,8 @@ class BlogPage extends Article {
 
 		if ( count( $editors ) > 0 ) {
 			$output .= '<div class="recent-container">
-			<h2>' . wfMsg( 'blog-recent-editors' ) . '</h2>
-			<div>' . wfMsg( 'blog-recent-editors-message' ) . '</div>';
+			<h2>' . wfMessage( 'blog-recent-editors' )->escaped() . '</h2>
+			<div>' . wfMessage( 'blog-recent-editors-message' )->escaped() . '</div>';
 
 			foreach( $editors as $editor ) {
 				$avatar = new wAvatar( $editor['user_id'], 'm' );
@@ -613,8 +626,8 @@ class BlogPage extends Article {
 
 		if( count( $voters ) > 0 ) {
 			$output .= '<div class="recent-container bottom-fix">
-				<h2>' . wfMsg( 'blog-recent-voters' ) . '</h2>
-				<div>' . wfMsg( 'blog-recent-voters-message' ) . '</div>';
+				<h2>' . wfMessage( 'blog-recent-voters' )->escaped() . '</h2>
+				<div>' . wfMessage( 'blog-recent-voters-message' )->escaped() . '</div>';
 
 			foreach( $voters as $voter ) {
 				$userTitle = Title::makeTitle( NS_USER, $voter['user_name'] );
@@ -651,7 +664,7 @@ class BlogPage extends Article {
 
 		$output = '';
 		$output .= '<div class="recent-container bottom-fix"><h2>' .
-			wfMsg( 'blog-embed-title' ) . '</h2>';
+			wfMessage( 'blog-embed-title' )->escaped() . '</h2>';
 		$output .= '<div class="blog-widget-embed">';
 		$output .= "<p><input type='text' size='20' onclick='this.select();' value='" .
 			'<object width="300" height="450" id="content_widget" align="middle"> <param name="movie" value="content_widget.swf" /><embed src="' .
@@ -696,12 +709,12 @@ class BlogPage extends Article {
 		}
 
 		$output = '';
-		$message = wfMsgForContent( 'inthenews' );
-		if ( !wfEmptyMsg( 'inthenews', $message ) ) {
-			$newsArray = explode( "\n\n", $message );
+		$message = wfMessage( 'inthenews' )->inContentLanguage();
+		if ( !$message->isDisabled() ) {
+			$newsArray = explode( "\n\n", $message->plain() );
 			$newsItem = $newsArray[array_rand( $newsArray )];
 			$output = '<div class="blog-container">
-			<h2>' . wfMsg( 'blog-in-the-news' ) . '</h2>
+			<h2>' . wfMessage( 'blog-in-the-news' )->escaped() . '</h2>
 			<div>' . $wgOut->parse( $newsItem, false ) . '</div>
 		</div>';
 		}
@@ -731,7 +744,6 @@ class BlogPage extends Article {
 			$popularBlogPosts = $data;
 		} else {
 			wfDebugLog( 'BlogPage', 'Got popular articles from DB' );
-			$blogCat = wfMsgForContent( 'blog-category' );
 			$dbr = wfGetDB( DB_SLAVE );
 			// Code sporked from Rob Church's NewestPages extension
 			// @todo FIXME: adding categorylinks table and that one where
@@ -750,7 +762,6 @@ class BlogPage extends Article {
 					'page_is_redirect' => 0,
 					'page_id = Comment_Page_ID',
 					'page_id = vote_page_id',
-					#'cl_to ' . $dbr->buildLike( /*$dbr->anyString(), */$blogCat, $dbr->anyString() ),
 					// If you can figure out how to do this without a subquery,
 					// please let me know. Until that...
 					"((SELECT COUNT(*) FROM $voteTable WHERE vote_page_id = page_id) >= 5 OR
@@ -792,7 +803,7 @@ class BlogPage extends Article {
 		$html .= '</div>'; // .listpages-container
 
 		$output = '<div class="blog-container">
-			<h2>' . wfMsg( 'blog-popular-articles' ) . '</h2>
+			<h2>' . wfMessage( 'blog-popular-articles' )->escaped() . '</h2>
 			<div>' . $html . '</div>
 		</div>';
 
@@ -824,7 +835,6 @@ class BlogPage extends Article {
 			// We could do complicated LIKE stuff with the categorylinks table,
 			// but I think we can safely assume that stuff in the NS_BLOG NS
 			// is blog-related :)
-			//$blogCat = wfMsgForContent( 'blog-category' );
 			$dbr = wfGetDB( DB_SLAVE );
 			// Code sporked from Rob Church's NewestPages extension
 			$res = $dbr->select(
@@ -859,7 +869,7 @@ class BlogPage extends Article {
 		$html .= '</div>'; // .listpages-container
 
 		$output = '<div class="blog-container bottom-fix">
-			<h2>' . wfMsg( 'blog-new-articles' ) . '</h2>
+			<h2>' . wfMessage( 'blog-new-articles' )->escaped() . '</h2>
 			<div>' . $html . '</div>
 		</div>';
 
@@ -953,7 +963,7 @@ class BlogPage extends Article {
 			if( $comment['user_id'] != 0 ) {
 				$commentPosterDisplay = $comment['user_name'];
 			} else {
-				$commentPosterDisplay = wfMsg( 'blog-anonymous-name' );
+				$commentPosterDisplay = wfMessage( 'blog-anonymous-name' )->escaped();
 			}
 
 			$comment['comment_text'] = strip_tags( $comment['comment_text'] );
@@ -970,7 +980,7 @@ class BlogPage extends Article {
 
 		if ( count( $comments ) > 0 ) {
 			$output = '<div class="blog-container">
-				<h2>' . wfMsg( 'blog-comments-of-day' ) . '</h2>' .
+				<h2>' . wfMessage( 'blog-comments-of-day' )->escaped() . '</h2>' .
 				$output .
 			'</div>';
 		}
@@ -1126,7 +1136,7 @@ class BlogPage extends Article {
 		$blurbText = preg_replace( '/[\n\r\t]/', ' ', $blurbText ); // replace any non-space whitespace with a space
 
 		return $blurbFont . $blurbText. '. . . <a href="' .
-			htmlspecialchars( $title->getFullURL() ) . '">' . wfMsg( 'blog-more' ) .
+			htmlspecialchars( $title->getFullURL() ) . '">' . wfMessage( 'blog-more' )->escaped() .
 			'</a></span>';
 	}
 
@@ -1182,7 +1192,7 @@ class BlogPage extends Article {
 	static function getTimeOffset( $time, $timeabrv, $timename ) {
 		$timeStr = '';
 		if( $time[$timeabrv] > 0 ) {
-			$timeStr = wfMsgExt( "blog-time-{$timename}", 'parsemag', $time[$timeabrv] );
+			$timeStr = wfMessage( "blog-time-$timename", $time[$timeabrv] )->text();
 		}
 		if( $timeStr ) {
 			$timeStr .= ' ';
@@ -1206,7 +1216,7 @@ class BlogPage extends Article {
 			}
 		}
 		if( !$timeStr ) {
-			$timeStr = wfMsgExt( 'blog-time-seconds', 'parsemag', 1 );
+			$timeStr = wfMessage( 'blog-time-seconds' )->umParams( 1 )->text();
 		}
 		return $timeStr;
 	}

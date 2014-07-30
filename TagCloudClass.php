@@ -9,6 +9,7 @@ class BlogTagCloud {
 	public $tags_max_pts = 32;
 	public $tags_highest_count = 0;
 	public $tags_size_type = 'pt';
+	public $tags = array();
 
 	public function __construct( $limit = 10 ) {
 		$this->limit = $limit;
@@ -29,11 +30,11 @@ class BlogTagCloud {
 			)
 		);
 
-		$message = trim( wfMsgForContent( 'blog-tagcloud-blacklist' ) );
+		$message = wfMessage( 'blog-tagcloud-blacklist' );
 		$catsExcluded = array();
 		// Yes, the strlen() is needed, I dunno why wfEmptyMsg() won't work
-		if( !wfEmptyMsg( 'blog-tagcloud-blacklist', $message ) && strlen( $message ) > 0 ) {
-			$catsExcluded = explode( "\n* ", wfMsgForContent( 'blog-tagcloud-blacklist' ) );
+		if( !$message->isDisabled() ) {
+			$catsExcluded = explode( "\n* ", $message->inContentLanguage()->text() );
 		}
 
 		wfSuppressWarnings(); // prevent PHP from bitching about strtotime()

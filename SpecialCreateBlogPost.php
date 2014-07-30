@@ -62,7 +62,7 @@ class SpecialCreateBlogPost extends SpecialPage {
 
 			// Protect against cross-site request forgery (CSRF)
 			if ( !$wgUser->matchEditToken( $wgRequest->getVal( 'wpEditToken' ) ) ) {
-				$wgOut->addHTML( wfMsg( 'sessionfailure' ) );
+				$wgOut->addWikiMsg( 'sessionfailure' );
 				return;
 			}
 
@@ -75,7 +75,7 @@ class SpecialCreateBlogPost extends SpecialPage {
 
 			// The user didn't supply a title? Ask them to supply one.
 			if ( !$userSuppliedTitle ) {
-				$wgOut->setPageTitle( wfMsg( 'errorpagetitle' ) );
+				$wgOut->setPageTitle( $this->msg( 'errorpagetitle' ) );
 				$wgOut->addWikiMsg( 'blog-create-error-need-title' );
 				$wgOut->addReturnTo( $this->getPageTitle() );
 				return;
@@ -83,7 +83,7 @@ class SpecialCreateBlogPost extends SpecialPage {
 
 			// The user didn't supply the blog post text? Ask them to supply it.
 			if ( !$wgRequest->getVal( 'pageBody' ) ) {
-				$wgOut->setPageTitle( wfMsg( 'errorpagetitle' ) );
+				$wgOut->setPageTitle( $this->msg( 'errorpagetitle' ) );
 				$wgOut->addWikiMsg( 'blog-create-error-need-content' );
 				$wgOut->addReturnTo( $this->getPageTitle() );
 				return;
@@ -96,7 +96,7 @@ class SpecialCreateBlogPost extends SpecialPage {
 			// Create the blog page if it doesn't already exist
 			$article = new Article( $title, 0 );
 			if ( $article->exists() ) {
-				$wgOut->setPageTitle( wfMsg( 'errorpagetitle' ) );
+				$wgOut->setPageTitle( $this->msg( 'errorpagetitle' ) );
 				$wgOut->addWikiMsg( 'blog-create-error-page-exists' );
 				$wgOut->addReturnTo( $this->getPageTitle() );
 				return;
@@ -107,11 +107,11 @@ class SpecialCreateBlogPost extends SpecialPage {
 				// we need to take those into account, too.
 				$categories = array(
 					'[[' . $localizedCatNS . ':' .
-						wfMsgForContent(
+						$this->msg(
 							'blog-by-user-category',
-							wfMsgForContent( 'blog-category' )
-						) . wfMsgForContent( 'word-separator' ) .
-						$wgUser->getName() . ']]',
+							$this->getUser()->getName()
+						)->inContentLanguage()->text() .
+					']]' .
 					"[[{$localizedCatNS}:{$today}]]"
 				);
 
@@ -140,7 +140,7 @@ class SpecialCreateBlogPost extends SpecialPage {
 						$wgRequest->getVal( 'pageBody' ) . "\n\n" .
 						'<comments />' . "\n\n" . $wikitextCategories .
 						"\n__NOEDITSECTION__",
-					wfMsgForContent( 'blog-create-summary' )
+					$this->msg( 'blog-create-summary' )->inContentLanguage()->text()
 				);
 
 				$articleId = $article->getID();
@@ -179,10 +179,9 @@ class SpecialCreateBlogPost extends SpecialPage {
 			$output = '';
 
 			// Show the blog rules, if the message containing them ain't empty
-			$message = trim( wfMsgExt( 'blog-create-rules', array( 'parse', 'content' ) ) );
-			// Yes, the strlen() is needed, I dunno why wfEmptyMsg() won't work
-			if( !wfEmptyMsg( 'blog-create-rules', $message ) && strlen( $message ) > 0 ) {
-				$output .= $message . '<br />';
+			$message = $this->msg( 'blog-create-rules' );
+			if( !$message->isDisabled() ) {
+				$output .= $message->escaped() . '<br />';
 			}
 
 			// Main form
@@ -198,7 +197,7 @@ class SpecialCreateBlogPost extends SpecialPage {
 	 * @return String: HTML
 	 */
 	function displayFormPageTitle() {
-		$output = '<span class="create-title">' . wfMsg( 'blog-create-title' ) .
+		$output = '<span class="create-title">' . $this->msg( 'blog-create-title' )->escaped() .
 			'</span><br /><input class="createbox" type="text" tabindex="' .
 				$this->tabCounter . '" name="title2" id="title" style="width: 500px;"><br /><br />';
 		$this->tabCounter++;
@@ -210,7 +209,7 @@ class SpecialCreateBlogPost extends SpecialPage {
 	 * @return String: HTML
 	 */
 	function displayFormPageText() {
-		$output = '<span class="create-title">' . wfMsg( 'blog-create-text' ) .
+		$output = '<span class="create-title">' . $this->msg( 'blog-create-text' )->escaped() .
 			'</span><br />';
 		// The EditPage toolbar wasn't originally present here but I figured
 		// that adding it might be more helpful than anything else.
@@ -236,8 +235,7 @@ class SpecialCreateBlogPost extends SpecialPage {
 		$tagnumber = 0;
 		foreach ( $cloud->tags as $tag => $att ) {
 			$tag = trim( $tag );
-			$blogUserCat = wfMsgForContent( 'blog-by-user-category',
-				wfMsgForContent( 'blog-category' ) );
+			$blogUserCat = $this->msg( 'blog-by-user-category' )->inContentLanguage()->text();
 			// Ignore "Articles by User X" categories
 			if ( !preg_match( '/' . $blogUserCat . '/', $tag ) ) {
 				$slashedTag = $tag; // define variable
@@ -254,10 +252,10 @@ class SpecialCreateBlogPost extends SpecialPage {
 		$tagcloud .= '</div>';
 
 		$output = '<div class="create-title">' .
-			wfMsg( 'blog-create-categories' ) .
+			$this->msg( 'blog-create-categories' )->escaped() .
 			'</div>
 			<div class="categorytext">' .
-				wfMsg( 'blog-create-category-help' ) .
+				$this->msg( 'blog-create-category-help' )->escaped() .
 			'</div>' . "\n";
 		$output .= $tagcloud . "\n";
 		$output .= '<textarea class="createbox" tabindex="' . $this->tabCounter .
@@ -278,17 +276,17 @@ class SpecialCreateBlogPost extends SpecialPage {
 		if ( $wgRightsText ) {
 			$copywarnMsg = 'copyrightwarning';
 			$copywarnMsgParams = array(
-				'[[' . wfMsgForContent( 'copyrightpage' ) . ']]',
+				'[[' . $this->msg( 'copyrightpage' )->inContentLanguage()->text() . ']]',
 				$wgRightsText
 			);
 		} else {
 			$copywarnMsg = 'copyrightwarning2';
 			$copywarnMsgParams = array(
-				'[[' . wfMsgForContent( 'copyrightpage' ) . ']]'
+				'[[' . $this->msg( 'copyrightpage' )->inContentLanguage()->text() . ']]'
 			);
 		}
 		return '<div class="copyright-warning">' .
-			wfMsgExt( $copywarnMsg, 'parse', $copywarnMsgParams ) .
+			$this->msg( $copywarnMsg, $copywarnMsgParams )->parseAsBlock() .
 			'</div>';
 	}
 
@@ -300,15 +298,15 @@ class SpecialCreateBlogPost extends SpecialPage {
 		global $wgUser;
 
 		$output = '<form id="editform" name="editform" method="post" action="' .
-			htmlspecialchars( $this->getPageTitle()->getFullURL() ) . '" enctype="multipart/form-data">';
+			htmlspecialchars( $this->getTitle()->getFullURL() ) . '" enctype="multipart/form-data">';
 		$output .= "\n" . $this->displayFormPageTitle() . "\n";
 		$output .= "\n" . $this->displayFormPageText() . "\n";
 
 		$output .= "\n" . $this->displayFormPageCategories() . "\n";
 		$output .= "\n" . $this->displayCopyrightWarning() . "\n";
-		$output .= '<input type="button" value="' . wfMsg( 'blog-create-button' ) .
+		$output .= '<input type="button" value="' . $this->msg( 'blog-create-button' )->escaped() .
 			'" name="wpSave" class="createsubmit site-button" accesskey="s" title="' .
-			wfMsg( 'tooltip-save' ) . ' [alt-s]" />
+			$this->msg( 'tooltip-save' )->escaped() . ' [alt-s]" />
 			<input type="hidden" value="" name="wpSection" />
 			<input type="hidden" value="" name="wpEdittime" />
 			<input type="hidden" value="" name="wpTextbox1" id="wpTextbox1" />

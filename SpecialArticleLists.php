@@ -22,7 +22,7 @@ class ArticleLists extends IncludableSpecialPage {
 	public function execute( $limit ) {
 		global $wgMemc, $wgOut, $wgScriptPath;
 
-		$wgOut->setPageTitle( wfMsg( 'ah-new-articles' ) );
+		$wgOut->setPageTitle( $this->msg( 'ah-new-articles' ) );
 
 		if ( empty( $limit ) ) {
 			$limit = 25;
@@ -40,7 +40,7 @@ class ArticleLists extends IncludableSpecialPage {
 
 		$output = '<div class="left-articles">';
 		if ( !$this->including() ) {
-			$output .= '<h2>' . wfMsg( 'ah-new-articles' ) . '</h2>';
+			$output .= '<h2>' . $this->msg( 'ah-new-articles' )->escaped() . '</h2>';
 		}
 
 		// Try cache first
@@ -81,7 +81,7 @@ class ArticleLists extends IncludableSpecialPage {
 
 		$output .= '<div class="listpages-container">' . "\n";
 		if ( empty( $newBlogPosts ) ) {
-			$output .= wfMsg( 'ah-no-results' );
+			$output .= $this->msg( 'ah-no-results' )->escaped();
 		} else {
 			foreach( $newBlogPosts as $newBlogPost ) {
 				$titleObj = Title::makeTitle( NS_BLOG, $newBlogPost['title'] );
@@ -110,17 +110,15 @@ class ArticleLists extends IncludableSpecialPage {
 					'</div><!-- .listpages-blurb -->
 				<div class="listpages-stats">' . "\n";
 				$output .= "<img src=\"{$imgPath}voteIcon.gif\" alt=\"\" border=\"0\" /> " .
-					wfMsgExt(
+					$this->msg(
 						'blog-author-votes',
-						'parsemag',
 						BlogPage::getVotesForPage( $newBlogPost['id'] )
-					);
+					)->escaped();
 				$output .= " <img src=\"{$imgPath}comment.gif\" alt=\"\" border=\"0\" /> " .
-					wfMsgExt(
+					$this->msg(
 						'blog-author-comments',
-						'parsemag',
 						BlogPage::getCommentsForPage( $newBlogPost['id'] )
-					) . '</div><!-- . listpages-stats -->
+					)->escaped() . '</div><!-- . listpages-stats -->
 				</div><!-- .listpages-item -->
 				<div class="cleared"></div>' . "\n";
 			}

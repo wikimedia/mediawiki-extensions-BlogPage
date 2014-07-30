@@ -65,7 +65,7 @@ class BlogHooks {
 			}
 
 			if ( !$wgUser->isAllowed( 'edit' ) || $wgUser->isBlocked() ) {
-				$wgOut->addHTML( wfMsg( 'blog-permission-required' ) );
+				$wgOut->addWikiMsg( 'blog-permission-required' );
 				return false;
 			}
 		}
@@ -107,8 +107,7 @@ class BlogHooks {
 		foreach ( $res as $row ) {
 			$ctg = Title::makeTitle( NS_CATEGORY, $row->cl_to );
 			$ctgname = $ctg->getText();
-			$blogCat = wfMsgForContent( 'blog-category' );
-			$userBlogCat = wfMsgForContent( 'blog-by-user-category', $blogCat );
+			$userBlogCat = wfMessage( 'blog-by-user-category' )->inContentLanguage()->text();
 
 			if( strpos( $ctgname, $userBlogCat ) !== false ) {
 				$user_name = trim( str_replace( $userBlogCat, '', $ctgname ) );
@@ -116,6 +115,8 @@ class BlogHooks {
 
 				if( $u ) {
 					$stats = new UserStatsTrack( $u, $user_name );
+					$userBlogCat = wfMessage( 'blog-by-user-category', $stats->user_name )
+						->inContentLanguage()->text();
 					// Copied from UserStatsTrack::updateCreatedOpinionsCount()
 					// Throughout this code, we could use $u and $user_name
 					// instead of $stats->user_id and $stats->user_name but
@@ -211,10 +212,10 @@ class BlogHooks {
 				"Got UserProfile articles for user {$user_name} from DB\n"
 			);
 			$categoryTitle = Title::newFromText(
-				wfMsgForContent(
+				wfMessage(
 					'blog-by-user-category',
-					wfMsgForContent( 'blog-category' )
-				) . " {$user_name}"
+					$user_name
+				)->inContentLanguage()->text()
 			);
 
 			$dbr = wfGetDB( DB_SLAVE );
@@ -256,30 +257,28 @@ class BlogHooks {
 
 		$articleLink = Title::makeTitle(
 			NS_CATEGORY,
-			wfMsgForContent(
+			wfMessage(
 				'blog-by-user-category',
-				wfMsgForContent( 'blog-category' )
-			) . " {$user_name}"
+				$user_name
+			)->inContentLanguage()->text()
 		);
 
 		if ( count( $articles ) > 0 ) {
 			$output .= '<div class="user-section-heading">
 				<div class="user-section-title">' .
-					wfMsg( 'blog-user-articles-title' ) .
+					wfMessae( 'blog-user-articles-title' )->escaped() .
 				'</div>
 				<div class="user-section-actions">
 					<div class="action-right">';
 			if( $articleCount > 5 ) {
 				$output .= '<a href="' . htmlspecialchars( $articleLink->getFullURL() ) .
-					'" rel="nofollow">' . wfMsg( 'user-view-all' ) . '</a>';
+					'" rel="nofollow">' . wfMessage( 'user-view-all' )->escaped(). '</a>';
 			}
 			$output .= '</div>
-					<div class="action-left">' . wfMsgExt(
-						'user-count-separator',
-						'parsemag',
-						count( $articles ),
-						$articleCount
-					) . '</div>
+					<div class="action-left">' .
+					wfMessage( 'user-count-separator')
+						->numParams( $articleCount, count( $articles ) )
+						->escaped() . '</div>
 					<div class="cleared"></div>
 				</div>
 			</div>
@@ -305,22 +304,18 @@ class BlogHooks {
 					<div class=\"number-of-votes\">
 						<div class=\"vote-number\">{$voteCount}</div>
 						<div class=\"vote-text\">" .
-							wfMsgExt(
-								'blog-user-articles-votes',
-								'parsemag',
-								$voteCount
-							) .
+							wfMessage( 'blog-user-articles-votes' )
+								->numParams( $voteCount )
+								->escaped() .
 						'</div>
 					</div>
 					<div class="article-title">
 						<a href="' . htmlspecialchars( $articleTitle->getFullURL() ) .
 							"\">{$articleTitle->getText()}</a>
 						<span class=\"item-small\">" .
-							wfMsgExt(
-								'blog-user-article-comment',
-								'parsemag',
-								$commentCount
-							) . '</span>
+							wfMsgExt( 'blog-user-article-comment' )
+								->num-Params( $commentCount )
+								->escaped() . '</span>
 					</div>
 					<div class="cleared"></div>
 				</div>';
