@@ -290,6 +290,7 @@ class SpecialCreateBlogPost extends SpecialPage {
 	 */
 	public function displayForm() {
 		$user = $this->getUser();
+		$accessKey = Linker::accessKey( 'save' );
 		$output = '<form id="editform" name="editform" method="post" action="' .
 			htmlspecialchars( $this->getTitle()->getFullURL() ) . '" enctype="multipart/form-data">';
 		$output .= "\n" . $this->displayFormPageTitle() . "\n";
@@ -298,8 +299,8 @@ class SpecialCreateBlogPost extends SpecialPage {
 		$output .= "\n" . $this->displayFormPageCategories() . "\n";
 		$output .= "\n" . $this->displayCopyrightWarning() . "\n";
 		$output .= '<input type="button" value="' . $this->msg( 'blog-create-button' )->escaped() .
-			'" name="wpSave" class="createsubmit site-button" accesskey="s" title="' .
-			$this->msg( 'tooltip-save' )->escaped() . ' [alt-s]" />
+			'" name="wpSave" class="createsubmit site-button" accesskey="' . $accessKey . '" title="' .
+			$this->msg( 'tooltip-save' )->escaped() . '" />
 			<input type="hidden" value="" name="wpSection" />
 			<input type="hidden" value="" name="wpEdittime" />
 			<input type="hidden" value="" name="wpTextbox1" id="wpTextbox1" />
