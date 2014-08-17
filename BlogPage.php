@@ -6,8 +6,8 @@
  */
 class BlogPage extends Article {
 
-	var $title = null;
-	var $authors = array();
+	public $title = null;
+	public $authors = array();
 
 	function __construct( Title $title ) {
 		parent::__construct( $title );

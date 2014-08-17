@@ -5,10 +5,10 @@
  * @license http://www.gnu.org/copyleft/gpl.html GNU General Public License 2.0 or later
  */
 class BlogTagCloud {
-	var $tags_min_pts = 8;
-	var $tags_max_pts = 32;
-	var $tags_highest_count = 0;
-	var $tags_size_type = 'pt';
+	public $tags_min_pts = 8;
+	public $tags_max_pts = 32;
+	public $tags_highest_count = 0;
+	public $tags_size_type = 'pt';
 
 	public function __construct( $limit = 10 ) {
 		$this->limit = $limit;
