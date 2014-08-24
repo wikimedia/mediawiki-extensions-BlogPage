@@ -5,7 +5,7 @@
  *
  * @file
  * @ingroup Extensions
- * @version 2.1
+ * @version 2.2
  * @author David Pean <david.pean@gmail.com>
  * @author Jack Phoenix <jack@countervandalism.net>
  * @license http://www.gnu.org/copyleft/gpl.html GNU General Public License 2.0 or later
@@ -18,7 +18,7 @@ if ( !defined( 'MEDIAWIKI' ) ) {
 // Extension credits that will show up on Special:Version
 $wgExtensionCredits['other'][] = array(
 	'name' => 'BlogPage',
-	'version' => '2.1',
+	'version' => '2.2',
 	'author' => array( 'David Pean', 'Jack Phoenix' ),
 	'description' => 'Blogging system with commenting and voting features, ' .
 		'[[Special:CreateBlogPost|a special page to create blog posts]] and ' .
@@ -32,18 +32,20 @@ define( 'NS_BLOG_TALK', 501 );
 
 // ResourceLoader support for MediaWiki 1.17+
 $blogResourceTemplate = array(
-	'localBasePath' => dirname( __FILE__ ),
+	'localBasePath' => __DIR__,
 	'remoteExtPath' => 'BlogPage'
 );
 
 // Main module, used on *all* blog pages (see the hooks file)
 $wgResourceModules['ext.blogPage'] = $blogResourceTemplate + array(
-	'styles' => 'BlogPage.css'
+	'styles' => 'BlogPage.css',
+	'position' => 'top'
 );
 
 // Used on Special:ArticlesHome & Special:ArticleLists
 $wgResourceModules['ext.blogPage.articlesHome'] = $blogResourceTemplate + array(
-	'styles' => 'ArticlesHome.css'
+	'styles' => 'ArticlesHome.css',
+	'position' => 'top'
 );
 
 // Used on Special:CreateBlogPost
@@ -101,25 +103,24 @@ $wgBlogPageDisplay = array(
 );
 
 // Set up everything
-$dir = dirname( __FILE__ ) . '/';
 $wgMessagesDirs['Blog'] = __DIR__ . '/i18n';
-$wgExtensionMessagesFiles['Blog'] = $dir . 'Blog.i18n.php';
-$wgExtensionMessagesFiles['BlogAlias'] = $dir . 'Blog.alias.php';
+$wgExtensionMessagesFiles['Blog'] = __DIR__ . '/Blog.i18n.php';
+$wgExtensionMessagesFiles['BlogAlias'] = __DIR__ . '/Blog.alias.php';
 // Namespace translations
-$wgExtensionMessagesFiles['BlogNamespaces'] = $dir . 'Blog.namespaces.php';
+$wgExtensionMessagesFiles['BlogNamespaces'] = __DIR__ . '/Blog.namespaces.php';
 
 // Autoload the class which is used when rendering pages in the NS_BLOG NS
-$wgAutoloadClasses['BlogPage'] = $dir . 'BlogPage.php';
+$wgAutoloadClasses['BlogPage'] = __DIR__ . '/BlogPage.php';
 
 // Special pages
-$wgAutoloadClasses['ArticlesHome'] = $dir . 'SpecialArticlesHome.php';
-$wgAutoloadClasses['ArticleLists'] = $dir . 'SpecialArticleLists.php';
+$wgAutoloadClasses['ArticlesHome'] = __DIR__ . '/SpecialArticlesHome.php';
+$wgAutoloadClasses['ArticleLists'] = __DIR__ . '/SpecialArticleLists.php';
 $wgSpecialPages['ArticlesHome'] = 'ArticlesHome';
 $wgSpecialPages['ArticleLists'] = 'ArticleLists';
 
 // Special page for creating new blog posts + yet another copy of TagCloud class
-$wgAutoloadClasses['BlogTagCloud'] = $dir . 'TagCloudClass.php';
-$wgAutoloadClasses['SpecialCreateBlogPost'] = $dir . 'SpecialCreateBlogPost.php';
+$wgAutoloadClasses['BlogTagCloud'] = __DIR__ . '/TagCloudClass.php';
+$wgAutoloadClasses['SpecialCreateBlogPost'] = __DIR__ . '/SpecialCreateBlogPost.php';
 $wgSpecialPages['CreateBlogPost'] = 'SpecialCreateBlogPost';
 
 $wgAjaxExportList[] = 'SpecialCreateBlogPost::checkTitleExistence';
@@ -130,7 +131,7 @@ $wgGroupPermissions['*']['createblogpost'] = false;
 $wgGroupPermissions['user']['createblogpost'] = true;
 
 // Hooked functions
-$wgAutoloadClasses['BlogHooks'] = $dir . 'BlogHooks.php';
+$wgAutoloadClasses['BlogHooks'] = __DIR__ . '/BlogHooks.php';
 
 $wgHooks['ArticleFromTitle'][] = 'BlogHooks::blogFromTitle';
 $wgHooks['ArticleSaveComplete'][] = 'BlogHooks::updateCreatedOpinionsCount';
