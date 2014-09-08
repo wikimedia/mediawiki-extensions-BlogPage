@@ -234,7 +234,7 @@ class BlogPage extends Article {
 					wfMessage( 'blog-and' )-escaped() .
 					wfMessage( 'word-separator' )->escaped();
 			}
-			$authors .= "<a href=\"{htmlspecialchars( $userTitle->getFullURL() )}\">{$author['user_name']}</a>";
+			$authors .= Linker::link( $userTitle, $author['user_name'] );
 		}
 
 		$output .= $authors;
@@ -277,7 +277,7 @@ class BlogPage extends Article {
 					wfMessage( 'blog-and' )->escaped() .
 					wfMessage( 'word-separator' )->escaped();
 			}
-			$authors .= "<a href=\"{htmlspecialchars( $userTitle->getFullURL() )}\">{$author['user_name']}</a>";
+			$authors .= Linker::link( $userTitle, $author['user_name'] );
 		}
 
 		$output = '<div class="multiple-authors-message">' .
@@ -978,7 +978,9 @@ class BlogPage extends Article {
 
 			$output .= '<div class="cod-item">';
 			$output .= "<span class=\"cod-score\">{$comment['plus_count']}</span> ";
-			$output .= " <span class=\"cod-comment\"><a href=\"{htmlspecialchars( $page_title->getFullURL() )}#comment-{$comment['comment_id']}\" title=\"{$page_title->getText()}\" >{$comment_text}</a></span>";
+			$output .= ' <span class="cod-comment"><a href="' .
+				htmlspecialchars( $page_title->getFullURL() ) .
+				"#comment-{$comment['comment_id']}\" title=\"{$page_title->getText()}\">{$comment_text}</a></span>";
 			$output .= '</div>';
 		}
 
