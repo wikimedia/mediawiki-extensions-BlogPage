@@ -266,7 +266,7 @@ class BlogHooks {
 		if ( count( $articles ) > 0 ) {
 			$output .= '<div class="user-section-heading">
 				<div class="user-section-title">' .
-					wfMessae( 'blog-user-articles-title' )->escaped() .
+					wfMessage( 'blog-user-articles-title' )->escaped() .
 				'</div>
 				<div class="user-section-actions">
 					<div class="action-right">';
