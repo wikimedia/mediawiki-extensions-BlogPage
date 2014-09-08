@@ -313,8 +313,8 @@ class BlogHooks {
 						<a href="' . htmlspecialchars( $articleTitle->getFullURL() ) .
 							"\">{$articleTitle->getText()}</a>
 						<span class=\"item-small\">" .
-							wfMsgExt( 'blog-user-article-comment' )
-								->num-Params( $commentCount )
+							wfMessage( 'blog-user-article-comment' )
+								->numParams( $commentCount )
 								->escaped() . '</span>
 					</div>
 					<div class="cleared"></div>
