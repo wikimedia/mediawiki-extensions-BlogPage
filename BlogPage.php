@@ -146,7 +146,11 @@ class BlogPage extends Article {
 		// similar regex.
 		preg_match_all(
 			"/\[\[(?:(?:c|C)ategory|{$categoryName}):\s?" .
-				wfMessage( 'blog-by-user-category' )->inContentLanguage()->escaped() .
+				// This is an absolutely unholy, horribly hacky and otherwise
+				// less-than-ideal solution that likely works for English only
+				// Someone needs to come up with a better solution one of these
+				// days than this regex soup...
+				str_replace( ' $1', '', wfMessage( 'blog-by-user-category' )->inContentLanguage()->escaped() ) .
 			" (.*)\]\]/",
 			$articleText,
 			$matches
