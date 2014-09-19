@@ -38,20 +38,20 @@ $blogResourceTemplate = array(
 
 // Main module, used on *all* blog pages (see the hooks file)
 $wgResourceModules['ext.blogPage'] = $blogResourceTemplate + array(
-	'styles' => 'BlogPage.css',
+	'styles' => 'resources/css/BlogPage.css',
 	'position' => 'top'
 );
 
 // Used on Special:ArticlesHome & Special:ArticleLists
 $wgResourceModules['ext.blogPage.articlesHome'] = $blogResourceTemplate + array(
-	'styles' => 'ArticlesHome.css',
+	'styles' => 'resources/css/ArticlesHome.css',
 	'position' => 'top'
 );
 
 // Used on Special:CreateBlogPost
 $wgResourceModules['ext.blogPage.create'] = $blogResourceTemplate + array(
-	'styles' => 'CreateBlogPost.css',
-	'scripts' => 'CreateBlogPost.js',
+	'styles' => 'resources/css/CreateBlogPost.css',
+	'scripts' => 'resources/js/CreateBlogPost.js',
 	//'dependencies' => 'mediawiki.action.edit',
 	'messages' => array(
 		'blog-js-create-error-need-content', 'blog-js-create-error-need-title',
