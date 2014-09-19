@@ -9,7 +9,7 @@
  * @author David Pean <david.pean@gmail.com>
  * @author Jack Phoenix <jack@countervandalism.net>
  * @license http://www.gnu.org/copyleft/gpl.html GNU General Public License 2.0 or later
- * @link http://www.mediawiki.org/wiki/Extension:BlogPage Documentation
+ * @link https://www.mediawiki.org/wiki/Extension:BlogPage Documentation
  */
 if ( !defined( 'MEDIAWIKI' ) ) {
 	die();
@@ -104,7 +104,6 @@ $wgBlogPageDisplay = array(
 
 // Set up everything
 $wgMessagesDirs['Blog'] = __DIR__ . '/i18n';
-$wgExtensionMessagesFiles['Blog'] = __DIR__ . '/Blog.i18n.php';
 $wgExtensionMessagesFiles['BlogAlias'] = __DIR__ . '/Blog.alias.php';
 // Namespace translations
 $wgExtensionMessagesFiles['BlogNamespaces'] = __DIR__ . '/Blog.namespaces.php';
