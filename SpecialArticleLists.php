@@ -17,7 +17,7 @@ class ArticleLists extends IncludableSpecialPage {
 	/**
 	 * Show the new special page
 	 *
-	 * @param $limit Integer: show this many entries (LIMIT for SQL)
+	 * @param int $limit Show this many entries (LIMIT for SQL)
 	 */
 	public function execute( $limit ) {
 		global $wgMemc, $wgExtensionAssetsPath;
@@ -48,7 +48,7 @@ class ArticleLists extends IncludableSpecialPage {
 		$key = wfMemcKey( 'blog', 'new', 'twentyfive' );
 		$data = $wgMemc->get( $key );
 
-		if( $data != '' ) {
+		if ( $data != '' ) {
 			wfDebugLog( 'BlogPage', 'Got new articles in ArticleLists from cache' );
 			$newBlogPosts = $data;
 		} else {
@@ -84,11 +84,11 @@ class ArticleLists extends IncludableSpecialPage {
 		if ( empty( $newBlogPosts ) ) {
 			$output .= $this->msg( 'ah-no-results' )->escaped();
 		} else {
-			foreach( $newBlogPosts as $newBlogPost ) {
+			foreach ( $newBlogPosts as $newBlogPost ) {
 				$titleObj = Title::makeTitle( NS_BLOG, $newBlogPost['title'] );
 				$output .= "\t\t\t\t" . '<div class="listpages-item">';
 				$pageImage = BlogPage::getPageImage( $newBlogPost['id'] );
-				if( $pageImage ) {
+				if ( $pageImage ) {
 					// Load MediaWiki image object to get thumbnail tag
 					$img = wfFindFile( $pageImage );
 					$imgTag = '';

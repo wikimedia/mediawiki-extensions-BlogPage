@@ -11,15 +11,15 @@ class BlogHooks {
 	 * Calls BlogPage instead of standard Article for pages in the NS_BLOG
 	 * namespace.
 	 *
-	 * @param $title Object: instance of Title
-	 * @param $article Object: instance of Article that we convert into a BlogPage
-	 * @return Boolean: true
+	 * @param Title $title
+	 * @param Article|BlogPage $article Instance of Article that we convert into a BlogPage
+	 * @return bool
 	 */
 	public static function blogFromTitle( &$title, &$article ) {
 		global $wgHooks, $wgOut, $wgRequest, $wgSupressPageTitle, $wgSupressSubTitle, $wgSupressPageCategories;
 
 		if ( $title->getNamespace() == NS_BLOG ) {
-			if( !$wgRequest->getVal( 'action' ) ) {
+			if ( !$wgRequest->getVal( 'action' ) ) {
 				$wgSupressPageTitle = true;
 			}
 
@@ -30,7 +30,7 @@ class BlogHooks {
 			$wgHooks['SkinTemplateOutputPageBeforeExec'][] = function( $sk, $tpl ) {
 				$tpl->set( 'catlinks', '' );
 				return true;
-			};
+			} ;
 
 			$wgOut->enableClientCache( false );
 
@@ -47,17 +47,17 @@ class BlogHooks {
 	 * Checks that the user is logged is, is not blocked via Special:Block and has
 	 * the 'edit' user right when they're trying to edit a page in the NS_BLOG NS.
 	 *
-	 * @param $editPage Object: instance of EditPage
-	 * @return Boolean: true if the user should be allowed to continue, else false
+	 * @param EditPage $editPage
+	 * @return bool True if the user should be allowed to continue, else false
 	 */
 	public static function allowShowEditBlogPage( $editPage ) {
 		$context = $editPage->getArticle()->getContext();
 		$output = $context->getOutput();
 		$user = $context->getUser();
 
-		if( $editPage->mTitle->getNamespace() == NS_BLOG ) {
-			if( $user->isAnon() ) { // anons can't edit blog pages
-				if( !$editPage->mTitle->exists() ) {
+		if ( $editPage->mTitle->getNamespace() == NS_BLOG ) {
+			if ( $user->isAnon() ) { // anons can't edit blog pages
+				if ( !$editPage->mTitle->exists() ) {
 					$output->addWikiMsg( 'blog-login' );
 				} else {
 					$output->addWikiMsg( 'blog-login-edit' );
@@ -84,12 +84,11 @@ class BlogHooks {
 	 * and ArticleSaveComplete. Their arguments are mostly the same and both
 	 * have $article as the first argument.
 	 *
-	 * @param $article Object: Article object representing the page that was/is
+	 * @param Article $article Article object representing the page that was/is
 	 *                         (being) saved
-	 * @return Boolean: true
+	 * @return bool
 	 */
 	public static function updateCreatedOpinionsCount( &$article, &$user ) {
-
 		$aid = $article->getTitle()->getArticleID();
 		// Shortcut, in order not to perform stupid queries (cl_from = 0...)
 		if ( $aid == 0 ) {
@@ -109,11 +108,11 @@ class BlogHooks {
 			$ctgname = $ctg->getText();
 			$userBlogCat = wfMessage( 'blog-by-user-category' )->inContentLanguage()->text();
 
-			if( strpos( $ctgname, $userBlogCat ) !== false ) {
+			if ( strpos( $ctgname, $userBlogCat ) !== false ) {
 				$user_name = trim( str_replace( $userBlogCat, '', $ctgname ) );
 				$u = User::idFromName( $user_name );
 
-				if( $u ) {
+				if ( $u ) {
 					$stats = new UserStatsTrack( $u, $user_name );
 					$userBlogCat = wfMessage( 'blog-by-user-category', $stats->user_name )
 						->inContentLanguage()->text();
@@ -182,8 +181,8 @@ class BlogHooks {
 	/**
 	 * Show a list of this user's blog articles in their user profile page.
 	 *
-	 * @param $userProfile Object: instance of UserProfilePage
-	 * @return Boolean: true
+	 * @param UserProfilePage $userProfile
+	 * @return bool
 	 */
 	public static function getArticles( $userProfile ) {
 		global $wgUserProfileDisplay, $wgMemc, $wgOut;
@@ -200,7 +199,7 @@ class BlogHooks {
 		$data = $wgMemc->get( $key );
 		$articles = array();
 
-		if( $data != '' ) {
+		if ( $data != '' ) {
 			wfDebugLog(
 				'BlogPage',
 				"Got UserProfile articles for user {$user_name} from cache\n"
@@ -270,13 +269,13 @@ class BlogHooks {
 				'</div>
 				<div class="user-section-actions">
 					<div class="action-right">';
-			if( $articleCount > 5 ) {
+			if ( $articleCount > 5 ) {
 				$output .= '<a href="' . htmlspecialchars( $articleLink->getFullURL() ) .
-					'" rel="nofollow">' . wfMessage( 'user-view-all' )->escaped(). '</a>';
+					'" rel="nofollow">' . wfMessage( 'user-view-all' )->escaped() . '</a>';
 			}
 			$output .= '</div>
 					<div class="action-left">' .
-					wfMessage( 'user-count-separator')
+					wfMessage( 'user-count-separator' )
 						->numParams( $articleCount, count( $articles ) )
 						->escaped() . '</div>
 					<div class="cleared"></div>
@@ -287,7 +286,7 @@ class BlogHooks {
 
 			$x = 1;
 
-			foreach( $articles as $article ) {
+			foreach ( $articles as $article ) {
 				$articleTitle = Title::makeTitle(
 					$article['page_namespace'],
 					$article['page_title']
@@ -334,9 +333,9 @@ class BlogHooks {
 	/**
 	 * Register the canonical names for our namespace and its talkspace.
 	 *
-	 * @param $list Array: array of namespace numbers with corresponding
+	 * @param array $list Array of namespace numbers with corresponding
 	 *                     canonical names
-	 * @return Boolean: true
+	 * @return bool
 	 */
 	public static function onCanonicalNamespaces( &$list ) {
 		$list[NS_BLOG] = 'Blog';

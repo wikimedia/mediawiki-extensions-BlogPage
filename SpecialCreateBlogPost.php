@@ -21,7 +21,7 @@ class SpecialCreateBlogPost extends SpecialPage {
 	/**
 	 * Show the special page
 	 *
-	 * @param $par Mixed: parameter passed to the special page or null
+	 * @param mixed|null $par Parameter passed to the special page or null
 	 */
 	public function execute( $par ) {
 		global $wgContLang;
@@ -30,7 +30,7 @@ class SpecialCreateBlogPost extends SpecialPage {
 		$user = $this->getUser();
 		$request = $this->getRequest();
 		// If the user can't create blog posts, display an error
-		if( !$user->isAllowed( 'createblogpost' ) ) {
+		if ( !$user->isAllowed( 'createblogpost' ) ) {
 			$out->permissionRequired( 'createblogpost' );
 			return;
 		}
@@ -42,7 +42,7 @@ class SpecialCreateBlogPost extends SpecialPage {
 		}
 
 		// If user is blocked, s/he doesn't need to access this page
-		if( $user->isBlocked() ) {
+		if ( $user->isBlocked() ) {
 			$out->blockedPage( false );
 			return false;
 		}
@@ -56,7 +56,7 @@ class SpecialCreateBlogPost extends SpecialPage {
 		// If the request was POSTed, we haven't submitted a request yet AND
 		// we have a title, create the page...otherwise just display the
 		// creation form
-		if(
+		if (
 			$request->wasPosted() &&
 			$_SESSION['alreadysubmitted'] == false
 		)
@@ -123,7 +123,7 @@ class SpecialCreateBlogPost extends SpecialPage {
 					// Explode along commas so that we will have an array that
 					// we can loop over
 					$userSuppliedCategories = explode( ',', $userSuppliedCategories );
-					foreach( $userSuppliedCategories as $cat ) {
+					foreach ( $userSuppliedCategories as $cat ) {
 						$cat = trim( $cat ); // GTFO@excess whitespace
 						if ( !empty( $cat ) ) {
 							$categories[] = "[[{$localizedCatNS}:{$cat}]]";
@@ -174,7 +174,7 @@ class SpecialCreateBlogPost extends SpecialPage {
 
 			// Show the blog rules, if the message containing them ain't empty
 			$message = $this->msg( 'blog-create-rules' );
-			if( !$message->isDisabled() ) {
+			if ( !$message->isDisabled() ) {
 				$output .= $message->escaped() . '<br />';
 			}
 
@@ -188,7 +188,7 @@ class SpecialCreateBlogPost extends SpecialPage {
 
 	/**
 	 * Show the input field where the user can enter the blog post title.
-	 * @return String: HTML
+	 * @return string HTML
 	 */
 	public function displayFormPageTitle() {
 		$output = '<span class="create-title">' . $this->msg( 'blog-create-title' )->escaped() .
@@ -200,7 +200,7 @@ class SpecialCreateBlogPost extends SpecialPage {
 
 	/**
 	 * Show the input field where the user can enter the blog post body.
-	 * @return String: HTML
+	 * @return string HTML
 	 */
 	public function displayFormPageText() {
 		$output = '<span class="create-title">' . $this->msg( 'blog-create-text' )->escaped() .
@@ -211,7 +211,7 @@ class SpecialCreateBlogPost extends SpecialPage {
 		// assumes way too many things and no longer is suitable for different
 		// editing interfaces, such as this special page.
 		// I miss the old edit.js...
-		//$output .= EditPage::getEditToolbar();
+		// $output .= EditPage::getEditToolbar();
 		$output .= '<textarea class="createbox" tabindex="' .
 			$this->tabCounter . '" accesskey="," name="pageBody" id="pageBody" rows="10" cols="80"></textarea><br /><br />';
 		$this->tabCounter++;
@@ -220,7 +220,7 @@ class SpecialCreateBlogPost extends SpecialPage {
 
 	/**
 	 * Show the category cloud.
-	 * @return String: HTML
+	 * @return string HTML
 	 */
 	public function displayFormPageCategories() {
 		$cloud = new BlogTagCloud( 20 );
@@ -263,7 +263,7 @@ class SpecialCreateBlogPost extends SpecialPage {
 	 * Display the standard copyright notice that is shown on normal edit page,
 	 * on the upload form etc.
 	 *
-	 * @return String: HTML
+	 * @return string HTML
 	 */
 	public function displayCopyrightWarning() {
 		global $wgRightsText;
@@ -286,7 +286,7 @@ class SpecialCreateBlogPost extends SpecialPage {
 
 	/**
 	 * Show the form for creating new blog posts.
-	 * @return String: HTML
+	 * @return string HTML
 	 */
 	public function displayForm() {
 		$user = $this->getUser();
@@ -314,8 +314,8 @@ class SpecialCreateBlogPost extends SpecialPage {
 	/**
 	 * Check if there is already a blog post with the given title.
 	 *
-	 * @param $pageName String: page title to check
-	 * @return String: 'OK' when there isn't such a page, else 'Page exists'
+	 * @param string $pageName Page title to check
+	 * @return string 'OK' when there isn't such a page, else 'Page exists'
 	 */
 	public static function checkTitleExistence( $pageName ) {
 		// Construct page title object to convert to database key

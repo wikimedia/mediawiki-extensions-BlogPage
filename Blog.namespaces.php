@@ -8,11 +8,11 @@
 $namespaceNames = array();
 
 // For wikis where the BlogPage extension is not installed.
-if( !defined( 'NS_BLOG' ) ) {
+if ( !defined( 'NS_BLOG' ) ) {
 	define( 'NS_BLOG', 500 );
 }
 
-if( !defined( 'NS_BLOG_TALK' ) ) {
+if ( !defined( 'NS_BLOG_TALK' ) ) {
 	define( 'NS_BLOG_TALK', 501 );
 }
 

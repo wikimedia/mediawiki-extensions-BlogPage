@@ -22,7 +22,7 @@ class ArticlesHome extends SpecialPage {
 	/**
 	 * Show the new special page
 	 *
-	 * @param $type String: what kind of articles to show? Default is 'popular'
+	 * @param string $type What kind of articles to show? Default is 'popular'
 	 */
 	public function execute( $type ) {
 		global $wgContLang, $wgSupressPageTitle;
@@ -33,7 +33,7 @@ class ArticlesHome extends SpecialPage {
 		// Add CSS
 		$out->addModules( 'ext.blogPage.articlesHome' );
 
-		if( !$type ) {
+		if ( !$type ) {
 			$type = 'popular';
 		}
 
@@ -41,7 +41,7 @@ class ArticlesHome extends SpecialPage {
 		$dates_array = $this->getDatesFromElapsedDays( 2 );
 		$date_categories = '';
 		foreach ( $dates_array as $key => $value ) {
-			if( $date_categories ) {
+			if ( $date_categories ) {
 				$date_categories .= ',';
 			}
 			$date_categories .= $key;
@@ -117,15 +117,15 @@ class ArticlesHome extends SpecialPage {
 	}
 
 	/**
-	 * @param $numberOfDays Integer: get this many days in addition to today
-	 * @return Array: array containing today and the past $numberOfDays days in
+	 * @param int $numberOfDays Get this many days in addition to today
+	 * @return array Array containing today and the past $numberOfDays days in
 	 *                the wiki's content language
 	 */
 	public function getDatesFromElapsedDays( $numberOfDays ) {
 		global $wgContLang;
 		$today = $wgContLang->date( wfTimestampNow() ); // originally date( 'F j, Y', time() )
 		$dates[$today] = 1; // Gets today's date string
-		for( $x = 1; $x <= $numberOfDays; $x++ ) {
+		for ( $x = 1; $x <= $numberOfDays; $x++ ) {
 			$timeAgo = time() - ( 60 * 60 * 24 * $x );
 			// originally date( 'F j, Y', $timeAgo );
 			$dateString = $wgContLang->date( wfTimestamp( TS_MW, $timeAgo ) );
@@ -139,7 +139,7 @@ class ArticlesHome extends SpecialPage {
 	 * in memcached for 15 minutes.
 	 * The definition of 'popular' is very arbitrary at the moment.
 	 *
-	 * @return String: HTML
+	 * @return string HTML
 	 */
 	public function getPopularPosts() {
 		global $wgMemc, $wgExtensionAssetsPath;
@@ -148,7 +148,7 @@ class ArticlesHome extends SpecialPage {
 		$key = wfMemcKey( 'blog', 'popular', 'twentyfive' );
 		$data = $wgMemc->get( $key );
 
-		if( $data != '' ) {
+		if ( $data != '' ) {
 			wfDebugLog( 'BlogPage', 'Got popular posts in ArticlesHome from cache' );
 			$popularBlogPosts = $data;
 		} else {
@@ -201,11 +201,11 @@ class ArticlesHome extends SpecialPage {
 		if ( empty( $popularBlogPosts ) ) {
 			$output .= $this->msg( 'ah-no-results' )->escaped();
 		} else {
-			foreach( $popularBlogPosts as $popularBlogPost ) {
+			foreach ( $popularBlogPosts as $popularBlogPost ) {
 				$titleObj = Title::makeTitle( NS_BLOG, $popularBlogPost['title'] );
 				$output .= '<div class="listpages-item">';
 				$pageImage = BlogPage::getPageImage( $popularBlogPost['id'] );
-				if( $pageImage ) {
+				if ( $pageImage ) {
 					// Load MediaWiki image object to get thumbnail tag
 					$img = wfFindFile( $pageImage );
 					$imgTag = '';
@@ -263,9 +263,9 @@ class ArticlesHome extends SpecialPage {
 	/**
 	 * Get the list of the most voted pages within the last 72 hours.
 	 *
-	 * @param $dateCategories String: last three days (localized), separated
+	 * @param string $dateCategories Last three days (localized), separated
 	 *                                by commas
-	 * @return String: HTML
+	 * @return string HTML
 	 */
 	public function displayMostVotedPages( $dateCategories ) {
 		global $wgMemc;
@@ -274,7 +274,7 @@ class ArticlesHome extends SpecialPage {
 		$key = wfMemcKey( 'blog', 'mostvoted', 'ten' );
 		$data = $wgMemc->get( $key );
 
-		if( $data != '' ) {
+		if ( $data != '' ) {
 			wfDebugLog( 'BlogPage', 'Got most voted posts in ArticlesHome from cache' );
 			$votedBlogPosts = $data;
 		} else {
@@ -354,9 +354,9 @@ class ArticlesHome extends SpecialPage {
 	/**
 	 * Get the list of the most commented pages within the last 72 hours.
 	 *
-	 * @param $dateCategories String: last three days (localized), separated
+	 * @param string $dateCategories Last three days (localized), separated
 	 *                                by commas
-	 * @return String: HTML
+	 * @return string HTML
 	 */
 	public function displayMostCommentedPages( $dateCategories ) {
 		global $wgMemc;
@@ -365,7 +365,7 @@ class ArticlesHome extends SpecialPage {
 		$key = wfMemcKey( 'blog', 'mostcommented', 'ten' );
 		$data = $wgMemc->get( $key );
 
-		if( $data != '' ) {
+		if ( $data != '' ) {
 			wfDebugLog( 'BlogPage', 'Got most commented posts in ArticlesHome from cache' );
 			$commentedBlogPosts = $data;
 		} else {
@@ -417,7 +417,7 @@ class ArticlesHome extends SpecialPage {
 		if ( empty( $commentedBlogPosts ) ) {
 			$output .= $this->msg( 'ah-no-results' )->escaped();
 		} else {
-			foreach( $commentedBlogPosts as $commentedBlogPost ) {
+			foreach ( $commentedBlogPosts as $commentedBlogPost ) {
 				$titleObj = Title::makeTitle( NS_BLOG, $commentedBlogPost['title'] );
 				$output .= '<div class="listpages-item">
 					<div class="listpages-votebox">
@@ -442,7 +442,7 @@ class ArticlesHome extends SpecialPage {
 	 * Get the list of the ten newest pages in the NS_BLOG namespace.
 	 * This is used in the right side of the special page.
 	 *
-	 * @return String: HTML
+	 * @return string HTML
 	 */
 	public function displayNewestPages() {
 		global $wgMemc;
@@ -451,7 +451,7 @@ class ArticlesHome extends SpecialPage {
 		$key = wfMemcKey( 'blog', 'newest', 'ten' );
 		$data = $wgMemc->get( $key );
 
-		if( $data != '' ) {
+		if ( $data != '' ) {
 			wfDebugLog( 'BlogPage', 'Got new articles in ArticlesHome from cache' );
 			$newBlogPosts = $data;
 		} else {
@@ -486,7 +486,7 @@ class ArticlesHome extends SpecialPage {
 		if ( empty( $newBlogPosts ) ) {
 			$output .= $this->msg( 'ah-no-results' )->escaped();
 		} else {
-			foreach( $newBlogPosts as $newBlogPost ) {
+			foreach ( $newBlogPosts as $newBlogPost ) {
 				$titleObj = Title::makeTitle( NS_BLOG, $newBlogPost['title'] );
 				$votes = BlogPage::getVotesForPage( $newBlogPost['id'] );
 				$output .= "\t\t\t\t" . '<div class="listpages-item">';
@@ -514,7 +514,7 @@ class ArticlesHome extends SpecialPage {
 	 * Get the 25 newest blog posts from the database and then cache them in
 	 * memcached for 15 minutes.
 	 *
-	 * @return String: HTML
+	 * @return string HTML
 	 */
 	public function getNewestPosts() {
 		global $wgMemc, $wgExtensionAssetsPath;
@@ -523,7 +523,7 @@ class ArticlesHome extends SpecialPage {
 		$key = wfMemcKey( 'blog', 'newest', 'twentyfive' );
 		$data = $wgMemc->get( $key );
 
-		if( $data != '' ) {
+		if ( $data != '' ) {
 			wfDebugLog( 'BlogPage', 'Got newest posts in ArticlesHome from cache' );
 			$newestBlogPosts = $data;
 		} else {
@@ -566,11 +566,11 @@ class ArticlesHome extends SpecialPage {
 		if ( empty( $newestBlogPosts ) ) {
 			$output .= $this->msg( 'ah-no-results' )->escaped();
 		} else {
-			foreach( $newestBlogPosts as $newestBlogPost ) {
+			foreach ( $newestBlogPosts as $newestBlogPost ) {
 				$titleObj = Title::makeTitle( NS_BLOG, $newestBlogPost['title'] );
 				$output .= '<div class="listpages-item">';
 				$pageImage = BlogPage::getPageImage( $newestBlogPost['id'] );
-				if( $pageImage ) {
+				if ( $pageImage ) {
 					// Load MediaWiki image object to get thumbnail tag
 					$img = wfFindFile( $pageImage );
 					$imgTag = '';
@@ -631,7 +631,7 @@ class ArticlesHome extends SpecialPage {
 	 * here is the HTML output which was toned down and count changed from 25
 	 * to 10.
 	 *
-	 * @return String: HTML
+	 * @return string HTML
 	 */
 	public function getPopularPostsForRightSide() {
 		global $wgMemc;
@@ -640,7 +640,7 @@ class ArticlesHome extends SpecialPage {
 		$key = wfMemcKey( 'blog', 'popular', 'ten' );
 		$data = $wgMemc->get( $key );
 
-		if( $data != '' ) {
+		if ( $data != '' ) {
 			wfDebugLog( 'BlogPage', 'Got popular posts in ArticlesHome from cache' );
 			$popularBlogPosts = $data;
 		} else {
@@ -693,7 +693,7 @@ class ArticlesHome extends SpecialPage {
 		if ( empty( $popularBlogPosts ) ) {
 			$output .= $this->msg( 'ah-no-results' )->escaped();
 		} else {
-			foreach( $popularBlogPosts as $popularBlogPost ) {
+			foreach ( $popularBlogPosts as $popularBlogPost ) {
 				$titleObj = Title::makeTitle( NS_BLOG, $popularBlogPost['title'] );
 				$votes = BlogPage::getVotesForPage( $popularBlogPost['id'] );
 				$output .= '<div class="listpages-item">';

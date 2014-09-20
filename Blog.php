@@ -52,7 +52,7 @@ $wgResourceModules['ext.blogPage.articlesHome'] = $blogResourceTemplate + array(
 $wgResourceModules['ext.blogPage.create'] = $blogResourceTemplate + array(
 	'styles' => 'resources/css/CreateBlogPost.css',
 	'scripts' => 'resources/js/CreateBlogPost.js',
-	//'dependencies' => 'mediawiki.action.edit',
+	// 'dependencies' => 'mediawiki.action.edit',
 	'messages' => array(
 		'blog-js-create-error-need-content', 'blog-js-create-error-need-title',
 		'blog-js-create-error-page-exists'

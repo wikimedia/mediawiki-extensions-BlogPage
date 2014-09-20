@@ -23,7 +23,7 @@ class BlogPage extends Article {
 		// we have to load the text for the real page
 		// Note: If $this->getContent() is called anywhere before parent::view,
 		// the real article text won't get loaded on the page
-		if( $this->isRedirect( $this->pageContent ) ) {
+		if ( $this->isRedirect( $this->pageContent ) ) {
 			wfDebugLog( 'BlogPage', __METHOD__ );
 
 			$target = $this->followRedirect();
@@ -72,12 +72,12 @@ class BlogPage extends Article {
 					->escaped() . '</h2>' . "\n"
 			);
 			// Why was this commented out? --ashley, 11 July 2011
-			if( count( $this->authors ) > 1 ) {
+			if ( count( $this->authors ) > 1 ) {
 				$output->addHTML( $this->displayMultipleAuthorsMessage() );
 			}
 
 			// Output each author's box in the order that they appear in [[Category:Opinions by X]]
-			for( $x = 0; $x <= count( $this->authors ); $x++ ) {
+			for ( $x = 0; $x <= count( $this->authors ); $x++ ) {
 				$output->addHTML( $this->displayAuthorBox( $x ) );
 			}
 
@@ -94,7 +94,7 @@ class BlogPage extends Article {
 
 		$output->addHTML( '<div id="blog-page-middle">' . "\n" );
 		global $wgUseEditButtonFloat;
-		if( $wgUseEditButtonFloat == true && method_exists( $sk, 'editMenu' ) ) {
+		if ( $wgUseEditButtonFloat == true && method_exists( $sk, 'editMenu' ) ) {
 			$output->addHTML( $sk->editMenu() );
 		}
 		$output->addHTML( "<h1 class=\"page-title\">{$this->getTitle()->getText()}</h1>\n" );
@@ -105,7 +105,7 @@ class BlogPage extends Article {
 
 		// Get categories
 		$cat = $sk->getCategoryLinks();
-		if( $cat ) {
+		if ( $cat ) {
 			$output->addHTML( "\n<div id=\"catlinks\" class=\"catlinks\">{$cat}</div>\n" );
 		}
 
@@ -157,7 +157,7 @@ class BlogPage extends Article {
 		);
 		$authors = $matches[1];
 
-		foreach( $authors as $author ) {
+		foreach ( $authors as $author ) {
 			$authorUserId = User::idFromName( $author );
 			$this->authors[] = array(
 				'user_name' => trim( $author ),
@@ -172,8 +172,8 @@ class BlogPage extends Article {
 	 * The return value of this function can be passed to the various $wgLang
 	 * methods for i18n-compatible code.
 	 *
-	 * @param $pageId Integer: page ID number
-	 * @return Integer: page creation date
+	 * @param int $pageId Page ID number
+	 * @return int Page creation date
 	 */
 	public static function getCreateDate( $pageId ) {
 		global $wgMemc;
@@ -182,12 +182,12 @@ class BlogPage extends Article {
 		$key = wfMemcKey( 'page', 'create_date', $pageId );
 		$data = $wgMemc->get( $key );
 
-		if( !$data ) {
+		if ( !$data ) {
 			wfDebugLog( 'BlogPage', "Loading create_date for page {$pageId} from database" );
 			$dbr = wfGetDB( DB_SLAVE );
 			$createDate = $dbr->selectField(
 				'revision',
-				'rev_timestamp',//'UNIX_TIMESTAMP(rev_timestamp) AS create_date',
+				'rev_timestamp',// 'UNIX_TIMESTAMP(rev_timestamp) AS create_date',
 				array( 'rev_page' => $pageId ),
 				__METHOD__,
 				array( 'ORDER BY' => 'rev_timestamp ASC' )
@@ -205,7 +205,7 @@ class BlogPage extends Article {
 	 * Get the "by X, Y and Z" line, which also contains other nifty
 	 * information, such as the date of the last edit and the creation date.
 	 *
-	 * @return String
+	 * @return string
 	 */
 	public function getByLine() {
 		$lang = $this->getContext()->getLanguage();
@@ -227,7 +227,7 @@ class BlogPage extends Article {
 		$output = '<div class="blog-byline">' . wfMessage( 'blog-by' )->escaped() . ' ';
 
 		$authors = '';
-		foreach( $this->authors as $author ) {
+		foreach ( $this->authors as $author ) {
 			$count++;
 			$userTitle = Title::makeTitle( NS_USER, $author['user_name'] );
 			if ( $authors && count( $this->authors ) > 2 ) {
@@ -235,7 +235,7 @@ class BlogPage extends Article {
 			}
 			if ( $count == count( $this->authors ) && $count != 1 ) {
 				$authors .= wfMessage( 'word-separator' )->escaped() .
-					wfMessage( 'blog-and' )-escaped() .
+					wfMessage( 'blog-and' ) -escaped() .
 					wfMessage( 'word-separator' )->escaped();
 			}
 			$authors .= Linker::link( $userTitle, $author['user_name'] );
@@ -246,7 +246,7 @@ class BlogPage extends Article {
 		$output .= '</div>';
 
 		$edit_text = '';
-		if( $create_time['datetime'] != $edit_time['datetime'] ) {
+		if ( $create_time['datetime'] != $edit_time['datetime'] ) {
 			$edit_text = ', ' .
 				wfMessage(
 					'blog-last-edited',
@@ -270,7 +270,7 @@ class BlogPage extends Article {
 		$count = 0;
 
 		$authors = '';
-		foreach( $this->authors as $author ) {
+		foreach ( $this->authors as $author ) {
 			$count++;
 			$userTitle = Title::makeTitle( NS_USER, $author['user_name'] );
 			if ( $authors && count( $this->authors ) > 2 ) {
@@ -315,7 +315,7 @@ class BlogPage extends Article {
 			$author_user_id = $this->authors[$author_index]['user_id'];
 		}
 
-		if( empty( $author_user_id ) ) {
+		if ( empty( $author_user_id ) ) {
 			return '';
 		}
 
@@ -328,7 +328,7 @@ class BlogPage extends Article {
 
 		$articles = $this->getAuthorArticles( $author_index );
 		$cssFix = '';
-		if( !$articles ) {
+		if ( !$articles ) {
 			$cssFix = ' author-container-fix';
 		}
 		$output = "\t\t\t\t\t<div class=\"author-container$cssFix\">
@@ -344,7 +344,7 @@ class BlogPage extends Article {
 							</div>';
 		// If the user has supplied some information about themselves on their
 		// social profile, show that data here.
-		if( $profileData['about'] ) {
+		if ( $profileData['about'] ) {
 			$output .= $out->parse( $profileData['about'], false );
 		}
 		$output .= "\n\t\t\t\t\t\t</div><!-- .author-info -->
@@ -386,7 +386,7 @@ class BlogPage extends Article {
 				 wfMessage( 'blog-by-user-category', $user_name )->text()
 			);
 			$res = $dbr->select(
-				array( 'page', 'categorylinks'),
+				array( 'page', 'categorylinks' ),
 				array( 'DISTINCT(page_id) AS page_id', 'page_title' ),
 				/* WHERE */array(
 					'cl_to' => array( $categoryTitle->getDBkey() ),
@@ -404,7 +404,7 @@ class BlogPage extends Article {
 
 			$array_count = 0;
 
-			foreach( $res as $row ) {
+			foreach ( $res as $row ) {
 				if ( $row->page_id != $this->getId() && $array_count < 3 ) {
 					$articles[] = array(
 						'page_title' => $row->page_title,
@@ -423,7 +423,7 @@ class BlogPage extends Article {
 		if ( count( $articles ) > 0 ) {
 			$css_fix = '';
 
-			if(
+			if (
 				count( $this->getVotersList() ) == 0 &&
 				count( $this->getEditorsList() ) == 0
 			)
@@ -472,7 +472,7 @@ class BlogPage extends Article {
 	 * Get the eight newest editors for the current blog post from the revision
 	 * table.
 	 *
-	 * @return Array: array containing each editors' user ID and user name
+	 * @return array Array containing each editors' user ID and user name
 	 */
 	public function getEditorsList() {
 		global $wgMemc;
@@ -483,7 +483,7 @@ class BlogPage extends Article {
 		$data = $wgMemc->get( $key );
 		$editors = array();
 
-		if( !$data ) {
+		if ( !$data ) {
 			wfDebugLog( 'BlogPage', "Loading recent editors for page {$pageTitleId} from DB" );
 			$dbr = wfGetDB( DB_SLAVE );
 
@@ -494,7 +494,7 @@ class BlogPage extends Article {
 			);
 
 			// Get authors and exclude them
-			foreach( $this->authors as $author ) {
+			foreach ( $this->authors as $author ) {
 				$where[] = 'rev_user_text <> \'' . $author['user_name'] . '\'';
 			}
 
@@ -506,7 +506,7 @@ class BlogPage extends Article {
 				array( 'ORDER BY' => 'rev_user_text ASC', 'LIMIT' => 8 )
 			);
 
-			foreach( $res as $row ) {
+			foreach ( $res as $row ) {
 				$editors[] = array(
 					'user_id' => $row->rev_user,
 					'user_name' => $row->rev_user_text
@@ -527,7 +527,7 @@ class BlogPage extends Article {
 	 * Get the avatars of the people who recently edited this blog post, if
 	 * this feature is enabled in BlogPage config.
 	 *
-	 * @return String: HTML or nothing
+	 * @return string HTML or nothing
 	 */
 	public function recentEditors() {
 		global $wgUploadPath, $wgBlogPageDisplay;
@@ -545,7 +545,7 @@ class BlogPage extends Article {
 			<h2>' . wfMessage( 'blog-recent-editors' )->escaped() . '</h2>
 			<div>' . wfMessage( 'blog-recent-editors-message' )->escaped() . '</div>';
 
-			foreach( $editors as $editor ) {
+			foreach ( $editors as $editor ) {
 				$avatar = new wAvatar( $editor['user_id'], 'm' );
 				$userTitle = Title::makeTitle( NS_USER, $editor['user_name'] );
 
@@ -564,7 +564,7 @@ class BlogPage extends Article {
 	 * Get the eight newest voters for the current blog post from VoteNY's
 	 * Vote table.
 	 *
-	 * @return Array: array containing each voters' user ID and user name
+	 * @return array Array containing each voters' user ID and user name
 	 */
 	public function getVotersList() {
 		global $wgMemc;
@@ -576,7 +576,7 @@ class BlogPage extends Article {
 		$data = $wgMemc->get( $key );
 
 		$voters = array();
-		if( !$data ) {
+		if ( !$data ) {
 			wfDebugLog( 'BlogPage', "Loading recent voters for page {$pageTitleId} from DB" );
 			$dbr = wfGetDB( DB_SLAVE );
 
@@ -587,7 +587,7 @@ class BlogPage extends Article {
 
 			// Exclude the authors of the blog post from the list of recent
 			// voters
-			foreach( $this->authors as $author ) {
+			foreach ( $this->authors as $author ) {
 				$where[] = 'username <> \'' . $author['user_name'] . '\'';
 			}
 
@@ -619,7 +619,7 @@ class BlogPage extends Article {
 	 * Get the avatars of the people who recently voted for this blog post, if
 	 * this feature is enabled in BlogPage config.
 	 *
-	 * @return String: HTML or nothing
+	 * @return string HTML or nothing
 	 */
 	public function recentVoters() {
 		global $wgBlogPageDisplay;
@@ -632,12 +632,12 @@ class BlogPage extends Article {
 
 		$output = '';
 
-		if( count( $voters ) > 0 ) {
+		if ( count( $voters ) > 0 ) {
 			$output .= '<div class="recent-container bottom-fix">
 				<h2>' . wfMessage( 'blog-recent-voters' )->escaped() . '</h2>
 				<div>' . wfMessage( 'blog-recent-voters-message' )->escaped() . '</div>';
 
-			foreach( $voters as $voter ) {
+			foreach ( $voters as $voter ) {
 				$userTitle = Title::makeTitle( NS_USER, $voter['user_name'] );
 				$avatar = new wAvatar( $voter['user_id'], 'm' );
 
@@ -654,7 +654,7 @@ class BlogPage extends Article {
 	/**
 	 * Get the embed widget, if this feature is enabled in BlogPage config.
 	 *
-	 * @return String: HTML or nothing
+	 * @return string HTML or nothing
 	 */
 	public function embedWidget() {
 		global $wgBlogPageDisplay, $wgServer, $wgScriptPath;
@@ -687,7 +687,7 @@ class BlogPage extends Article {
 	 * Get an ad unit for the left side, if this feature is enabled in BlogPage
 	 * config.
 	 *
-	 * @return String: HTML or nothing
+	 * @return string HTML or nothing
 	 */
 	public function leftAdUnit() {
 		global $wgBlogPageDisplay;
@@ -707,7 +707,7 @@ class BlogPage extends Article {
 	 * Get some random news items from MediaWiki:Inthenews, if this feature is
 	 * enabled in BlogPage config and that interface message has some content.
 	 *
-	 * @return String: HTML or nothing
+	 * @return string HTML or nothing
 	 */
 	public function getInTheNews() {
 		global $wgBlogPageDisplay, $wgMemc;
@@ -734,7 +734,7 @@ class BlogPage extends Article {
 	 * Get the five most popular blog articles, if this feature is enabled in
 	 * BlogPage config.
 	 *
-	 * @return String: HTML or nothing
+	 * @return string HTML or nothing
 	 */
 	public function getPopularArticles() {
 		global $wgMemc, $wgBlogPageDisplay;
@@ -747,7 +747,7 @@ class BlogPage extends Article {
 		$key = wfMemcKey( 'blog', 'popular', 'five' );
 		$data = $wgMemc->get( $key );
 
-		if( $data != '' ) {
+		if ( $data != '' ) {
 			wfDebugLog( 'BlogPage', 'Got popular articles from cache' );
 			$popularBlogPosts = $data;
 		} else {
@@ -799,7 +799,7 @@ class BlogPage extends Article {
 		}
 
 		$html = '<div class="listpages-container">';
-		foreach( $popularBlogPosts as $popularBlogPost ) {
+		foreach ( $popularBlogPosts as $popularBlogPost ) {
 			$titleObj = Title::makeTitle( NS_BLOG, $popularBlogPost['title'] );
 			$html .= '<div class="listpages-item">
 					<a href="' . htmlspecialchars( $titleObj->getFullURL() ) . '">' .
@@ -822,7 +822,7 @@ class BlogPage extends Article {
 	 * Get the newest blog articles, if this feature is enabled in BlogPage
 	 * config.
 	 *
-	 * @return String: HTML or nothing
+	 * @return string HTML or nothing
 	 */
 	public function getNewArticles() {
 		global $wgMemc, $wgBlogPageDisplay;
@@ -835,7 +835,7 @@ class BlogPage extends Article {
 		$key = wfMemcKey( 'blog', 'new', 'five' );
 		$data = $wgMemc->get( $key );
 
-		if( $data != '' ) {
+		if ( $data != '' ) {
 			wfDebugLog( 'BlogPage', 'Got new articles from cache' );
 			$newBlogPosts = $data;
 		} else {
@@ -865,7 +865,7 @@ class BlogPage extends Article {
 		}
 
 		$html = '<div class="listpages-container">';
-		foreach( $newBlogPosts as $newBlogPost ) {
+		foreach ( $newBlogPosts as $newBlogPost ) {
 			$titleObj = Title::makeTitle( NS_BLOG, $newBlogPost['title'] );
 			$html .= '<div class="listpages-item">
 					<a href="' . htmlspecialchars( $titleObj->getFullURL() ) . '">' .
@@ -888,7 +888,7 @@ class BlogPage extends Article {
 	 * Get a random casual game, if this feature is enabled in BlogPage config
 	 * and the RandomGameUnit extension is installed.
 	 *
-	 * @return String: HTML or nothing
+	 * @return string HTML or nothing
 	 */
 	public function getRandomCasualGame() {
 		global $wgBlogPageDisplay;
@@ -908,7 +908,7 @@ class BlogPage extends Article {
 	 * Get comments of the day, if this feature is enabled in BlogPage config.
 	 * Requires the Comments extension.
 	 *
-	 * @return String: HTML or nothing
+	 * @return string HTML or nothing
 	 */
 	public function getCommentsOfTheDay() {
 		global $wgBlogPageDisplay, $wgMemc;
@@ -923,7 +923,7 @@ class BlogPage extends Article {
 		$key = wfMemcKey( 'comments', 'plus', '24hours' );
 		$data = $wgMemc->get( $key );
 
-		if( $data != '' ) {
+		if ( $data != '' ) {
 			wfDebugLog( 'BlogPage', 'Got comments of the day from cache' );
 			$comments = $data;
 		} else {
@@ -948,7 +948,7 @@ class BlogPage extends Article {
 				array( 'ORDER BY' => 'Comment_Plus_Count DESC', 'LIMIT' => 5 )
 			);
 
-			foreach( $res as $row ) {
+			foreach ( $res as $row ) {
 				$comments[] = array(
 					'user_name' => $row->Comment_Username,
 					'user_id' => $row->Comment_user_id,
@@ -965,10 +965,10 @@ class BlogPage extends Article {
 
 		$output = '';
 
-		foreach( $comments as $comment ) {
+		foreach ( $comments as $comment ) {
 			$page_title = Title::makeTitle( $comment['namespace'], $comment['title'] );
 
-			if( $comment['user_id'] != 0 ) {
+			if ( $comment['user_id'] != 0 ) {
 				$commentPosterDisplay = $comment['user_name'];
 			} else {
 				$commentPosterDisplay = wfMessage( 'blog-anonymous-name' )->escaped();
@@ -1002,8 +1002,8 @@ class BlogPage extends Article {
 	 * Get the amount (COUNT(*)) of comments for the given page, identified via
 	 * its ID and cache this info in memcached for 15 minutes.
 	 *
-	 * @param $id Integer: page ID
-	 * @return Integer: amount of comments
+	 * @param int $id Page ID
+	 * @return int Amount of comments
 	 */
 	public static function getCommentsForPage( $id ) {
 		global $wgMemc;
@@ -1012,7 +1012,7 @@ class BlogPage extends Article {
 		$key = wfMemcKey( 'blog', 'comments', 'count' );
 		$data = $wgMemc->get( $key );
 
-		if( $data != '' ) {
+		if ( $data != '' ) {
 			wfDebugLog( 'BlogPage', "Got comments count for the page with ID {$id} from cache" );
 			$commentCount = $data;
 		} else {
@@ -1035,8 +1035,8 @@ class BlogPage extends Article {
 	 * Get the amount (COUNT(*)) of votes for the given page, identified via
 	 * its ID and cache this info in memcached for 15 minutes.
 	 *
-	 * @param $id Integer: page ID
-	 * @return Integer: amount of votes
+	 * @param int $id Page ID
+	 * @return int Amount of votes
 	 */
 	public static function getVotesForPage( $id ) {
 		global $wgMemc;
@@ -1045,7 +1045,7 @@ class BlogPage extends Article {
 		$key = wfMemcKey( 'blog', 'vote', 'count' );
 		$data = $wgMemc->get( $key );
 
-		if( $data != '' ) {
+		if ( $data != '' ) {
 			wfDebugLog( 'BlogPage', "Got vote count for the page with ID {$id} from cache" );
 			$voteCount = $data;
 		} else {
@@ -1067,11 +1067,11 @@ class BlogPage extends Article {
 	/**
 	 * Get the first $maxChars characters of a page.
 	 *
-	 * @param $pageTitle String: page title
-	 * @param $namespace Integer: namespace where the page is in
-	 * @param $maxChars Integer: get the first this many characters of the page
-	 * @param $fontSize String: small, medium or large
-	 * @return String: first $maxChars characters from the page
+	 * @param string $pageTitle Page title
+	 * @param int $namespace Namespace where the page is in
+	 * @param int $maxChars Get the first this many characters of the page
+	 * @param string $fontSize Font size; small, medium or large
+	 * @return string First $maxChars characters from the page
 	 */
 	public static function getBlurb( $pageTitle, $namespace, $maxChars, $fontSize = 'small' ) {
 		global $wgContLang;
@@ -1100,11 +1100,11 @@ class BlogPage extends Article {
 		}
 		$localizedCategoryNS = $wgContLang->getNsText( NS_CATEGORY );
 		$text = preg_replace( "@\[\[(?:(c|C)ategory|{$localizedCategoryNS}):[^\]]*?].*?\]@si", '', $text ); // categories
-		//$text = preg_replace( "@\[\[{$localizedCategoryNS}:[^\]]*?].*?\]@si", '', $text ); // original version of the above line
+		// $text = preg_replace( "@\[\[{$localizedCategoryNS}:[^\]]*?].*?\]@si", '', $text ); // original version of the above line
 
 		// Start looking at text after content, and force no Table of Contents
 		$pos = strpos( $text, '<!--start text-->' );
-		if( $pos !== false ) {
+		if ( $pos !== false ) {
 			$text = substr( $text, $pos );
 		}
 
@@ -1117,15 +1117,15 @@ class BlogPage extends Article {
 		$blurbText = preg_replace( '/&lt;comments&gt;&lt;\/comments&gt;/i', '', $blurbText );
 		$blurbText = preg_replace( '/&lt;vote&gt;&lt;\/vote&gt;/i', '', $blurbText );
 
-		//$blurbText = $text;
+		// $blurbText = $text;
 		$pos = strpos( $blurbText, '[' );
-		if( $pos !== false ) {
+		if ( $pos !== false ) {
 			$blurbText = substr( $blurbText, 0, $pos );
 		}
 
 		// Take first N characters, and then make sure it ends on last full word
 		$max = 300;
-		if( strlen( $blurbText ) > $max ) {
+		if ( strlen( $blurbText ) > $max ) {
 			$blurbText = strrev( strstr( strrev( substr( $blurbText, 0, $max ) ), ' ' ) );
 		}
 
@@ -1145,7 +1145,7 @@ class BlogPage extends Article {
 		$blurbText = preg_replace( '/\s(?=\s)/', '', $blurbText ); // remove double whitespace
 		$blurbText = preg_replace( '/[\n\r\t]/', ' ', $blurbText ); // replace any non-space whitespace with a space
 
-		return $blurbFont . $blurbText. '. . . <a href="' .
+		return $blurbFont . $blurbText . '. . . <a href="' .
 			htmlspecialchars( $title->getFullURL() ) . '">' . wfMessage( 'blog-more' )->escaped() .
 			'</a></span>';
 	}
@@ -1153,8 +1153,8 @@ class BlogPage extends Article {
 	/**
 	 * Get the image associated with the given page (via the page's ID).
 	 *
-	 * @param $pageId Integer: page ID number
-	 * @return String: file name or nothing
+	 * @param int $pageId Page ID number
+	 * @return string File name or nothing
 	 */
 	public static function getPageImage( $pageId ) {
 		global $wgMemc;
@@ -1162,7 +1162,7 @@ class BlogPage extends Article {
 		$key = wfMemcKey( 'blog', 'page', 'image', $pageId );
 		$data = $wgMemc->get( $key );
 
-		if( !$data ) {
+		if ( !$data ) {
 			$dbr = wfGetDB( DB_SLAVE );
 			$il_to = $dbr->selectField(
 				'imagelinks',
@@ -1201,10 +1201,10 @@ class BlogPage extends Article {
 
 	public static function getTimeOffset( $time, $timeabrv, $timename ) {
 		$timeStr = '';
-		if( $time[$timeabrv] > 0 ) {
+		if ( $time[$timeabrv] > 0 ) {
 			$timeStr = wfMessage( "blog-time-$timename", $time[$timeabrv] )->text();
 		}
-		if( $timeStr ) {
+		if ( $timeStr ) {
 			$timeStr .= ' ';
 		}
 		return $timeStr;
@@ -1218,14 +1218,14 @@ class BlogPage extends Article {
 		$timeStrM = self::getTimeOffset( $timeArray, 'm', 'minutes' );
 		$timeStrS = self::getTimeOffset( $timeArray, 's', 'seconds' );
 		$timeStr = $timeStrD;
-		if( $timeStr < 2 ) {
+		if ( $timeStr < 2 ) {
 			$timeStr .= $timeStrH;
 			$timeStr .= $timeStrM;
-			if( !$timeStr ) {
+			if ( !$timeStr ) {
 				$timeStr .= $timeStrS;
 			}
 		}
-		if( !$timeStr ) {
+		if ( !$timeStr ) {
 			$timeStr = wfMessage( 'blog-time-seconds' )->umParams( 1 )->text();
 		}
 		return $timeStr;
