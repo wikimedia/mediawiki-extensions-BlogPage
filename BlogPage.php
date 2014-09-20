@@ -1226,7 +1226,7 @@ class BlogPage extends Article {
 			}
 		}
 		if ( !$timeStr ) {
-			$timeStr = wfMessage( 'blog-time-seconds' )->umParams( 1 )->text();
+			$timeStr = wfMessage( 'blog-time-seconds' )->numParams( 1 )->text();
 		}
 		return $timeStr;
 	}
