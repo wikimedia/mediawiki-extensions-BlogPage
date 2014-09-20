@@ -30,12 +30,12 @@ class BlogHooks {
 			$wgHooks['SkinTemplateOutputPageBeforeExec'][] = function( $sk, $tpl ) {
 				$tpl->set( 'catlinks', '' );
 				return true;
-			} ;
+			};
 
 			$wgOut->enableClientCache( false );
 
 			// Add CSS
-			$wgOut->addModules( 'ext.blogPage' );
+			$wgOut->addModuleStyles( 'ext.blogPage' );
 
 			$article = new BlogPage( $title );
 		}

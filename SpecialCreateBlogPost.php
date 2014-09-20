@@ -51,7 +51,8 @@ class SpecialCreateBlogPost extends SpecialPage {
 		$this->setHeaders();
 
 		// Add CSS & JS
-		$out->addModules( 'ext.blogPage.create' );
+		$out->addModuleStyles( 'ext.blogPage.create.css' );
+		$out->addModules( 'ext.blogPage.create.js' );
 
 		// If the request was POSTed, we haven't submitted a request yet AND
 		// we have a title, create the page...otherwise just display the

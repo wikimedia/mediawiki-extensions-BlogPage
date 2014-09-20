@@ -35,7 +35,7 @@ class ArticleLists extends IncludableSpecialPage {
 		// @todo FIXME: this should be loaded when including the special page,
 		// too, but if ( $this->including() ) does nothing, prolly because of
 		// the parser cache
-		$out->addModules( 'ext.blogPage.articlesHome' );
+		$out->addModuleStyles( 'ext.blogPage.articlesHome' );
 
 		$imgPath = $wgExtensionAssetsPath . '/BlogPage/images/';
 

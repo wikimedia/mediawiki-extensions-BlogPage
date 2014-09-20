@@ -31,7 +31,7 @@ class ArticlesHome extends SpecialPage {
 
 		$out = $this->getOutput();
 		// Add CSS
-		$out->addModules( 'ext.blogPage.articlesHome' );
+		$out->addModuleStyles( 'ext.blogPage.articlesHome' );
 
 		if ( !$type ) {
 			$type = 'popular';

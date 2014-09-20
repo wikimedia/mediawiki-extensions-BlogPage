@@ -49,8 +49,12 @@ $wgResourceModules['ext.blogPage.articlesHome'] = $blogResourceTemplate + array(
 );
 
 // Used on Special:CreateBlogPost
-$wgResourceModules['ext.blogPage.create'] = $blogResourceTemplate + array(
+$wgResourceModules['ext.blogPage.create.css'] = $blogResourceTemplate + array(
 	'styles' => 'resources/css/CreateBlogPost.css',
+	'position' => 'top'
+);
+
+$wgResourceModules['ext.blogPage.create.js'] = $blogResourceTemplate + array(
 	'scripts' => 'resources/js/CreateBlogPost.js',
 	// 'dependencies' => 'mediawiki.action.edit',
 	'messages' => array(
