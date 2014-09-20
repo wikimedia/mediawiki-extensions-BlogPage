@@ -37,7 +37,6 @@ class BlogTagCloud {
 
 		$message = wfMessage( 'blog-tagcloud-blacklist' );
 		$catsExcluded = array();
-		// Yes, the strlen() is needed, I dunno why wfEmptyMsg() won't work
 		if ( !$message->isDisabled() ) {
 			$catsExcluded = explode( "\n* ", $message->inContentLanguage()->text() );
 		}

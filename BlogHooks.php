@@ -108,6 +108,8 @@ class BlogHooks {
 			$ctgname = $ctg->getText();
 			$userBlogCat = wfMessage( 'blog-by-user-category' )->inContentLanguage()->text();
 
+			// @todo CHECKME/FIXME: This probably no longer works as intended
+			// due to the recent (as of 20 September 2014) i18n message change
 			if ( strpos( $ctgname, $userBlogCat ) !== false ) {
 				$user_name = trim( str_replace( $userBlogCat, '', $ctgname ) );
 				$u = User::idFromName( $user_name );
@@ -122,11 +124,10 @@ class BlogHooks {
 					// there's no point in doing that because we have to call
 					// clearCache() in any case
 					if ( !$user->isAnon() && $stats->user_id ) {
-						$ctg = $userBlogCat . ' ' . $stats->user_name;
 						$parser = new Parser();
 						$ctgTitle = Title::newFromText(
 							$parser->preprocess(
-								trim( $ctg ),
+								trim( $userBlogCat ),
 								$article->getContext()->getTitle(),
 								$article->getContext()->getOutput()->parserOptions()
 							)
