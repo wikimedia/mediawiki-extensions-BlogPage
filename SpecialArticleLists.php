@@ -22,8 +22,8 @@ class ArticleLists extends IncludableSpecialPage {
 	public function execute( $limit ) {
 		global $wgMemc, $wgScriptPath;
 
-		$output = $this->getOutput();
-		$output->setPageTitle( $this->msg( 'ah-new-articles' ) );
+		$out = $this->getOutput();
+		$out->setPageTitle( $this->msg( 'ah-new-articles' ) );
 
 		if ( empty( $limit ) ) {
 			$limit = 25;
@@ -35,7 +35,7 @@ class ArticleLists extends IncludableSpecialPage {
 		// @todo FIXME: this should be loaded when including the special page,
 		// too, but if ( $this->including() ) does nothing, prolly because of
 		// the parser cache
-		$output->addModules( 'ext.blogPage.articlesHome' );
+		$out->addModules( 'ext.blogPage.articlesHome' );
 
 		$imgPath = $wgScriptPath . '/extensions/BlogPage/images/';
 
@@ -127,7 +127,7 @@ class ArticleLists extends IncludableSpecialPage {
 		$output .= '</div>' . "\n"; // .listpages-container
 		$output .= '</div>' . "\n"; // .left-articles
 
-		$output->addHTML( $output );
+		$out->addHTML( $output );
 	}
 
 }
