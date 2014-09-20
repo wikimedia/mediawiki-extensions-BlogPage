@@ -20,7 +20,7 @@ class ArticleLists extends IncludableSpecialPage {
 	 * @param $limit Integer: show this many entries (LIMIT for SQL)
 	 */
 	public function execute( $limit ) {
-		global $wgMemc, $wgScriptPath;
+		global $wgMemc, $wgExtensionAssetsPath;
 
 		$out = $this->getOutput();
 		$out->setPageTitle( $this->msg( 'ah-new-articles' ) );
@@ -37,7 +37,7 @@ class ArticleLists extends IncludableSpecialPage {
 		// the parser cache
 		$out->addModules( 'ext.blogPage.articlesHome' );
 
-		$imgPath = $wgScriptPath . '/extensions/BlogPage/images/';
+		$imgPath = $wgExtensionAssetsPath . '/BlogPage/images/';
 
 		$output = '<div class="left-articles">';
 		if ( !$this->including() ) {

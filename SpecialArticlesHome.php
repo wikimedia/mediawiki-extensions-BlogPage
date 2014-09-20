@@ -25,7 +25,7 @@ class ArticlesHome extends SpecialPage {
 	 * @param $type String: what kind of articles to show? Default is 'popular'
 	 */
 	public function execute( $type ) {
-		global $wgContLang, $wgScriptPath, $wgSupressPageTitle;
+		global $wgContLang, $wgSupressPageTitle;
 
 		$wgSupressPageTitle = true;
 
@@ -142,7 +142,7 @@ class ArticlesHome extends SpecialPage {
 	 * @return String: HTML
 	 */
 	public function getPopularPosts() {
-		global $wgMemc, $wgScriptPath;
+		global $wgMemc, $wgExtensionAssetsPath;
 
 		// Try cache first
 		$key = wfMemcKey( 'blog', 'popular', 'twentyfive' );
@@ -195,7 +195,7 @@ class ArticlesHome extends SpecialPage {
 			$wgMemc->set( $key, $popularBlogPosts, 60 * 15 );
 		}
 
-		$imgPath = $wgScriptPath . '/extensions/BlogPage/images/';
+		$imgPath = $wgExtensionAssetsPath . '/BlogPage/images/';
 
 		$output = '<div class="listpages-container">';
 		if ( empty( $popularBlogPosts ) ) {
@@ -517,7 +517,7 @@ class ArticlesHome extends SpecialPage {
 	 * @return String: HTML
 	 */
 	public function getNewestPosts() {
-		global $wgMemc, $wgScriptPath;
+		global $wgMemc, $wgExtensionAssetsPath;
 
 		// Try cache first
 		$key = wfMemcKey( 'blog', 'newest', 'twentyfive' );
@@ -560,7 +560,7 @@ class ArticlesHome extends SpecialPage {
 			$wgMemc->set( $key, $newestBlogPosts, 60 * 15 );
 		}
 
-		$imgPath = $wgScriptPath . '/extensions/BlogPage/images/';
+		$imgPath = $wgExtensionAssetsPath . '/BlogPage/images/';
 
 		$output = '<div class="listpages-container">';
 		if ( empty( $newestBlogPosts ) ) {
