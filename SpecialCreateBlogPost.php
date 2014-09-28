@@ -29,6 +29,7 @@ class SpecialCreateBlogPost extends SpecialPage {
 		$out = $this->getOutput();
 		$user = $this->getUser();
 		$request = $this->getRequest();
+
 		// If the user can't create blog posts, display an error
 		if ( !$user->isAllowed( 'createblogpost' ) ) {
 			$out->permissionRequired( 'createblogpost' );
@@ -230,7 +231,7 @@ class SpecialCreateBlogPost extends SpecialPage {
 		$tagnumber = 0;
 		foreach ( $cloud->tags as $tag => $att ) {
 			$tag = trim( $tag );
-			$blogUserCat = $this->msg( 'blog-by-user-category' )->inContentLanguage()->text();
+			$blogUserCat = str_replace( '$1', '', $this->msg( 'blog-by-user-category' )->inContentLanguage()->text() );
 			// Ignore "Articles by User X" categories
 			if ( !preg_match( '/' . $blogUserCat . '/', $tag ) ) {
 				$slashedTag = $tag; // define variable
