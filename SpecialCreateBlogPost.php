@@ -209,11 +209,7 @@ class SpecialCreateBlogPost extends SpecialPage {
 			'</span><br />';
 		// The EditPage toolbar wasn't originally present here but I figured
 		// that adding it might be more helpful than anything else.
-		// Guess what...turns out that resources/mediawiki.action/mediawiki.action.edit.js
-		// assumes way too many things and no longer is suitable for different
-		// editing interfaces, such as this special page.
-		// I miss the old edit.js...
-		// $output .= EditPage::getEditToolbar();
+		$output .= EditPage::getEditToolbar();
 		$output .= '<textarea class="createbox" tabindex="' .
 			$this->tabCounter . '" accesskey="," name="pageBody" id="pageBody" rows="10" cols="80"></textarea><br /><br />';
 		$this->tabCounter++;
