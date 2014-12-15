@@ -116,7 +116,7 @@ class SpecialCreateBlogPost extends SpecialPage {
 							'blog-by-user-category',
 							$this->getUser()->getName()
 						)->inContentLanguage()->text() .
-					']]' .
+					']]' . "\n" .
 					"[[{$localizedCatNS}:{$today}]]"
 				);
 
