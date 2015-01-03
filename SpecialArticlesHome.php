@@ -244,7 +244,7 @@ class ArticlesHome extends SpecialPage {
 					$this->msg(
 						'blog-author-votes',
 						BlogPage::getVotesForPage( $popularBlogPost['id'] )
-					)->escaaped();
+					)->escaped();
 				$output .= " <img src=\"{$imgPath}comment.gif\" alt=\"\" border=\"0\" /> " .
 					$this->msg(
 						'blog-author-comments',
