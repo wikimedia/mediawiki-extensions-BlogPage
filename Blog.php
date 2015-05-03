@@ -20,9 +20,7 @@ $wgExtensionCredits['other'][] = array(
 	'name' => 'BlogPage',
 	'version' => '2.3',
 	'author' => array( 'David Pean', 'Jack Phoenix' ),
-	'description' => 'Blogging system with commenting and voting features, ' .
-		'[[Special:CreateBlogPost|a special page to create blog posts]] and ' .
-		'[[Special:ArticlesHome|a special page to list blog posts]]',
+	'descriptionmsg' => 'blogpage-desc',
 	'url' => 'https://www.mediawiki.org/wiki/Extension:BlogPage',
 );
 
