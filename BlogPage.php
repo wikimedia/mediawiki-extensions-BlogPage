@@ -27,12 +27,26 @@ class BlogPage extends Article {
 			wfDebugLog( 'BlogPage', __METHOD__ );
 
 			$target = $this->followRedirect();
-			$rarticle = new Article( $target );
-			$this->pageContent = $rarticle->getContent();
+			if ( !$target instanceof Title ) {
+				// Correctly handle interwiki redirects and the like
+				// WikiPage::followRedirect() can return either a Title, boolean
+				// or a string! A string is returned for interwiki redirects,
+				// and the string in question is the target URL with the rdfrom
+				// URL parameter appended to it, which -- since it's an interwiki
+				// URL -- won't resolve to a valid local Title.
+				// Doing the redirection here is somewhat hacky, but ::getAuthors(),
+				// which is called right after this function in the constructor,
+				// attempts to read $this->pageContent... 
+				// @see https://github.com/Brickimedia/brickimedia/issues/370
+				$this->getContext()->getOutput()->redirect( $target );
+			} else {
+				$rarticle = new Article( $target );
+				$this->pageContent = $rarticle->getContent();
 
-			// If we don't clear, the page content will be [[redirect-blah]],
-			// and not the actual page
-			$this->clear();
+				// If we don't clear, the page content will be [[redirect-blah]],
+				// and not the actual page
+				$this->clear();
+			}
 		}
 	}
 
