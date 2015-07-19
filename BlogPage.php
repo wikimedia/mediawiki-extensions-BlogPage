@@ -1103,7 +1103,9 @@ class BlogPage extends Article {
 		$text = preg_replace( '@<youtube[^>]*?>.*?</youtube>@si', '', $text ); // <youtube> tags (provided by YouTube extension)
 		$text = preg_replace( '@<video[^>]*?>.*?</video>@si', '', $text ); // <video> tags (provided by Video extension)
 		$text = preg_replace( '@<comments[^>]*?>.*?</comments>@si', '', $text ); // <comments> tags (provided by Comments extension)
+		$text = preg_replace( '@<comments[^>]*?\/>@si', '', $text ); // more of the above -- this catches the self-closing variant, <comments />
 		$text = preg_replace( '@<vote[^>]*?>.*?</vote>@si', '', $text ); // <vote> tags (provided by Vote extension)
+		$text = preg_replace( '@<vote[^>]*?\/>@si', '', $text ); // more of the above -- this catches the self-closing variant, <vote />, although it's unlikely to ever be present in the body of a blog post
 		if ( class_exists( 'Video' ) ) {
 			$videoNS = $wgContLang->getNsText( NS_VIDEO );
 			if ( $videoNS === false ) {
