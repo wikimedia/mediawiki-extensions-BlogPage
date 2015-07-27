@@ -65,6 +65,7 @@
 	"blog-time-hours": "{{PLURAL:$1|one hour|$1 hours}}",
 	"blog-time-minutes": "{{PLURAL:$1|one minute|$1 minutes}}",
 	"blog-time-seconds": "{{PLURAL:$1|one second|$1 seconds}}",
+	"action-createblogpost": "create new blog posts",
 	"right-createblogpost": "[[Special:CreateBlogPost|Create new blog posts]]",
 	"blog-user-articles-title": "Blogs",
 	"blog-user-articles-votes": "{{PLURAL:$1|one vote|$1 votes}}",

@@ -61,6 +61,7 @@
 	"blog-js-create-error-need-content": "Blogikirjoituksellasi tulee olla myös sisältöä!",
 	"blog-js-create-error-need-title": "Sinun tulee antaa otsikko blogikirjoituksellesi!",
 	"blog-js-create-error-page-exists": "Olemassaolevalla blogikirjoituksella on jo sama otsikko. Annathan erilaisen otsikon blogikirjoituksellesi.",
+	"action-createblogpost": "luoda uusia blogikirjoituksia",
 	"right-createblogpost": "[[Special:CreateBlogPost|Luoda uusia blogikirjoituksia]]",
 	"blog-user-articles-title": "Blogit",
 	"blog-user-articles-votes": "{{PLURAL:$1|yksi ääni|$1 ääntä}}",
