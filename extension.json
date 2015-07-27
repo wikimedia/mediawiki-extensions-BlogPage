@@ -1,0 +1,114 @@
+{
+	"name": "BlogPage",
+	"version": "2.3.2",
+	"author": [
+		"David Pean",
+		"Jack Phoenix"
+	],
+	"url": "https://www.mediawiki.org/wiki/Extension:BlogPage",
+	"descriptionmsg": "blogpage-desc",
+	"type": "other",
+	"config": {
+		"AjaxExportList": [
+			"SpecialCreateBlogPost::checkTitleExistence"
+		],
+		"BlogPageDisplay": {
+			"leftcolumn": true,
+			"rightcolumn": true,
+			"author": true,
+			"author_articles": true,
+			"recent_editors": true,
+			"recent_voters": true,
+			"left_ad": false,
+			"popular_articles": true,
+			"in_the_news": true,
+			"comments_of_day": true,
+			"games": true,
+			"new_articles": true,
+			"embed_widget": false
+		},
+		"UserProfileDisplay": {
+			"articles": true
+		}
+	},
+	"AutoloadClasses": {
+		"BlogPageClass": "BlogPageClass.php",
+		"ArticlesHome": "SpecialArticlesHome.php",
+		"ArticleLists": "SpecialArticleLists.php",
+		"BlogTagCloud": "TagCloudClass.php",
+		"SpecialCreateBlogPost": "SpecialCreateBlogPost.php",
+		"BlogPageHooks": "BlogPageHooks.php"
+	},
+	"AvailableRights": [
+		"createblogpost"
+	],
+	"ExtensionMessagesFiles": {
+		"BlogPageAlias": "BlogPage.alias.php",
+		"BlogPageNamespaces": "BlogPage.namespaces.php"
+	},
+	"GroupPermissions": {
+		"*": {
+			"createblogpost": false
+		},
+		"user": {
+			"createblogpost": true
+		}
+	},
+	"Hooks": {
+		"ArticleFromTitle": [
+			"BlogPageHooks::blogFromTitle"
+		],
+		"ArticleSaveComplete": [
+			"BlogPageHooks::updateCreatedOpinionsCount"
+		],
+		"ArticleSave": [
+			"BlogPageHooks::updateCreatedOpinionsCount"
+		],
+		"AlternateEdit": [
+			"BlogPageHooks::allowShowEditBlogPage"
+		],
+		"CanonicalNamespaces": [
+			"BlogPageHooks::onCanonicalNamespaces"
+		],
+		"UserProfileRightSideAfterActivity": [
+			"BlogPageHooks::getArticles"
+		]
+	},
+	"MessagesDirs": {
+		"BlogPage": [
+			"i18n"
+		]
+	},
+	"ResourceModules": {
+		"ext.blogPage": {
+			"styles": "resources/css/BlogPage.css",
+			"position": "top"
+		},
+		"ext.blogPage.articlesHome": {
+			"styles": "resources/css/ArticlesHome.css",
+			"position": "top"
+		},
+		"ext.blogPage.create.css": {
+			"styles": "resources/css/CreateBlogPost.css",
+			"position": "top"
+		},
+		"ext.blogPage.create.js": {
+			"scripts": "resources/js/CreateBlogPost.js",
+			"messages": [
+				"blog-js-create-error-need-content",
+				"blog-js-create-error-need-title",
+				"blog-js-create-error-page-exists"
+			]
+		}
+	},
+	"ResourceFileModulePaths": {
+		"localBasePath": "",
+		"remoteExtPath": "BlogPage"
+	},
+	"SpecialPages": {
+		"ArticlesHome": "ArticlesHome",
+		"ArticleLists": "ArticleLists",
+		"CreateBlogPost": "SpecialCreateBlogPost"
+	},
+	"manifest_version": 1
+}

@@ -5,7 +5,7 @@
  *
  * @file
  */
-class BlogHooks {
+class BlogPageHooks {
 
 	/**
 	 * Calls BlogPage instead of standard Article for pages in the NS_BLOG
