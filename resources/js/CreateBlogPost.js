@@ -1,4 +1,4 @@
-( function ( mw ) {
+( function ( mw, $ ) {
 var CreateBlogPost = {
 	/**
 	 * Insert a tag (category) from the category cloud into the inputbox below
@@ -23,7 +23,7 @@ var CreateBlogPost = {
 	 * if there's already a blog post with the same name as their blog post.
 	 */
 	performChecks: function() {
-		/*global sajax_request_type:true, sajax_do_call, alert */
+		/*global alert */
 		// In PHP, we need to use $wgRequest->getVal( 'title2' ); 'title'
 		// contains the current special page's name instead of the blog post
 		// name
@@ -38,21 +38,27 @@ var CreateBlogPost = {
 			return '';
 		}
 
-		sajax_request_type = 'POST';
-		sajax_do_call( 'SpecialCreateBlogPost::checkTitleExistence', [ title ], function( r ) {
-			if( r.responseText.indexOf( 'OK' ) >= 0 ) {
-				document.editform.submit();
-			} else {
-				alert( mw.msg( 'blog-js-create-error-page-exists' ) );
+		$.post(
+			mw.util.wikiScript(), {
+				action: 'ajax',
+				rs: 'SpecialCreateBlogPost::checkTitleExistence',
+				rsargs: [ title ]
+			},
+			function ( r ) {
+				if ( r.responseText.indexOf( 'OK' ) >= 0 ) {
+					document.editform.submit();
+				} else {
+					alert( mw.msg( 'blog-js-create-error-page-exists' ) );
+				}
 			}
-		});
+		);
 	}
 };
 
-jQuery( document ).ready( function() {
+$( function() {
 	// Tag cloud
-	jQuery( 'a.tag-cloud-entry' ).each( function () {
-		var that = jQuery( this );
+	$( 'a.tag-cloud-entry' ).each( function () {
+		var that = $( this );
 		that.click( function() {
 			CreateBlogPost.insertTag(
 				that.data( 'blog-slashed-tag' ),
@@ -62,8 +68,8 @@ jQuery( document ).ready( function() {
 	} );
 
 	// Save button
-	jQuery( 'input[name="wpSave"]' ).click( function() {
+	$( 'input[name="wpSave"]' ).click( function() {
 		CreateBlogPost.performChecks();
 	} );
 } );
-}( mediaWiki ) );
+}( mediaWiki, jQuery ) );
