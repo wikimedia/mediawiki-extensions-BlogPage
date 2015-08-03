@@ -45,7 +45,7 @@ var CreateBlogPost = {
 				rsargs: [ title ]
 			},
 			function ( r ) {
-				if ( r.responseText.indexOf( 'OK' ) >= 0 ) {
+				if ( r === 'OK' ) {
 					document.editform.submit();
 				} else {
 					alert( mw.msg( 'blog-js-create-error-page-exists' ) );
