@@ -5,20 +5,17 @@
  *
  * @file
  * @ingroup Extensions
- * @version 2.3
+ * @version 2.3.1
  * @author David Pean <david.pean@gmail.com>
  * @author Jack Phoenix <jack@countervandalism.net>
  * @license http://www.gnu.org/copyleft/gpl.html GNU General Public License 2.0 or later
  * @link https://www.mediawiki.org/wiki/Extension:BlogPage Documentation
  */
-if ( !defined( 'MEDIAWIKI' ) ) {
-	die();
-}
 
 // Extension credits that will show up on Special:Version
 $wgExtensionCredits['other'][] = array(
 	'name' => 'BlogPage',
-	'version' => '2.3',
+	'version' => '2.3.1',
 	'author' => array( 'David Pean', 'Jack Phoenix' ),
 	'descriptionmsg' => 'blogpage-desc',
 	'url' => 'https://www.mediawiki.org/wiki/Extension:BlogPage',
@@ -29,36 +26,40 @@ define( 'NS_BLOG', 500 );
 define( 'NS_BLOG_TALK', 501 );
 
 // ResourceLoader support for MediaWiki 1.17+
-$blogResourceTemplate = array(
-	'localBasePath' => __DIR__,
-	'remoteExtPath' => 'BlogPage'
-);
 
 // Main module, used on *all* blog pages (see the hooks file)
-$wgResourceModules['ext.blogPage'] = $blogResourceTemplate + array(
+$wgResourceModules['ext.blogPage'] = array(
 	'styles' => 'resources/css/BlogPage.css',
+	'localBasePath' => __DIR__,
+	'remoteExtPath' => 'BlogPage',
 	'position' => 'top'
 );
 
 // Used on Special:ArticlesHome & Special:ArticleLists
-$wgResourceModules['ext.blogPage.articlesHome'] = $blogResourceTemplate + array(
+$wgResourceModules['ext.blogPage.articlesHome'] = array(
 	'styles' => 'resources/css/ArticlesHome.css',
+	'localBasePath' => __DIR__,
+	'remoteExtPath' => 'BlogPage',
 	'position' => 'top'
 );
 
 // Used on Special:CreateBlogPost
-$wgResourceModules['ext.blogPage.create.css'] = $blogResourceTemplate + array(
+$wgResourceModules['ext.blogPage.create.css'] = array(
 	'styles' => 'resources/css/CreateBlogPost.css',
+	'localBasePath' => __DIR__,
+	'remoteExtPath' => 'BlogPage',
 	'position' => 'top'
 );
 
-$wgResourceModules['ext.blogPage.create.js'] = $blogResourceTemplate + array(
+$wgResourceModules['ext.blogPage.create.js'] = array(
 	'scripts' => 'resources/js/CreateBlogPost.js',
 	// 'dependencies' => 'mediawiki.action.edit',
 	'messages' => array(
 		'blog-js-create-error-need-content', 'blog-js-create-error-need-title',
 		'blog-js-create-error-page-exists'
-	)
+	),
+	'localBasePath' => __DIR__,
+	'remoteExtPath' => 'BlogPage',
 );
 
 // Default setup for displaying sections

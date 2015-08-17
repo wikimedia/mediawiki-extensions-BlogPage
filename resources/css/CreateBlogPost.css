@@ -7,6 +7,7 @@
 }
 
 .categorytext {
+	max-width: 100%;
 	width: 700px;
 }
 
@@ -16,6 +17,7 @@
 	width: 700px;
 	color: rgb(51, 51, 51);
 	font-size: 11px;
+	max-width: 100%;
 }
 
 #editform .title {
@@ -29,10 +31,23 @@
 #create-tagcloud {
 	line-height: 25pt;
 	padding-bottom: 15px;
+	max-width: 100%;
 	width: 600px;
 }
 
 a.tag-cloud-entry {
 	cursor: pointer;
 	text-decoration: underline;
+}
+
+input#title {
+	width: 500px;
+}
+
+/* Normal low-end smartphones with a low resolution (i.e. Nokia X) */
+@media screen and (max-width: 750px) {
+	input#title {
+		/* Prevent the title input from overflowing */
+		max-width: 100%;
+	}
 }

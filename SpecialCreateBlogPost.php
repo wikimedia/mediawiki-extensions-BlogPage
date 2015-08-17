@@ -195,7 +195,7 @@ class SpecialCreateBlogPost extends SpecialPage {
 	public function displayFormPageTitle() {
 		$output = '<span class="create-title">' . $this->msg( 'blog-create-title' )->escaped() .
 			'</span><br /><input class="createbox" type="text" tabindex="' .
-				$this->tabCounter . '" name="title2" id="title" style="width: 500px;"><br /><br />';
+				$this->tabCounter . '" name="title2" id="title"><br /><br />';
 		$this->tabCounter++;
 		return $output;
 	}
