@@ -36,7 +36,7 @@ class BlogPage extends Article {
 				// URL -- won't resolve to a valid local Title.
 				// Doing the redirection here is somewhat hacky, but ::getAuthors(),
 				// which is called right after this function in the constructor,
-				// attempts to read $this->pageContent... 
+				// attempts to read $this->pageContent...
 				// @see https://github.com/Brickimedia/brickimedia/issues/370
 				$this->getContext()->getOutput()->redirect( $target );
 			} else {
@@ -139,7 +139,7 @@ class BlogPage extends Article {
 			$output->addHTML( '</div>' . "\n" );
 		}
 
-		$output->addHTML( '<div class="cleared"></div>' . "\n" );
+		$output->addHTML( '<div class="visualClear"></div>' . "\n" );
 		$output->addHTML( '</div><!-- #blog-page-container -->' . "\n" );
 
 		wfProfileOut( __METHOD__ );
@@ -362,7 +362,7 @@ class BlogPage extends Article {
 			$output .= $out->parse( $profileData['about'], false );
 		}
 		$output .= "\n\t\t\t\t\t\t</div><!-- .author-info -->
-						<div class=\"cleared\"></div>
+						<div class=\"visualClear\"></div>
 					</div><!-- .author-container -->
 		{$this->getAuthorArticles( $author_index )}";
 
@@ -820,7 +820,7 @@ class BlogPage extends Article {
 						$titleObj->getText() .
 					'</a>
 				</div>
-				<div class="cleared"></div>';
+				<div class="visualClear"></div>';
 		}
 		$html .= '</div>'; // .listpages-container
 
@@ -886,7 +886,7 @@ class BlogPage extends Article {
 						$titleObj->getText() .
 					'</a>
 				</div>
-				<div class="cleared"></div>';
+				<div class="visualClear"></div>';
 		}
 		$html .= '</div>'; // .listpages-container
 

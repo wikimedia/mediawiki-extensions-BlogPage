@@ -279,10 +279,10 @@ class BlogHooks {
 					wfMessage( 'user-count-separator' )
 						->numParams( $articleCount, count( $articles ) )
 						->escaped() . '</div>
-					<div class="cleared"></div>
+					<div class="visualClear"></div>
 				</div>
 			</div>
-			<div class="cleared"></div>
+			<div class="visualClear"></div>
 			<div class="user-articles-container">';
 
 			$x = 1;
@@ -317,7 +317,7 @@ class BlogHooks {
 								->numParams( $commentCount )
 								->escaped() . '</span>
 					</div>
-					<div class="cleared"></div>
+					<div class="visualClear"></div>
 				</div>';
 
 				$x++;

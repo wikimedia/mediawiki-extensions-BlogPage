@@ -121,7 +121,7 @@ class ArticleLists extends IncludableSpecialPage {
 						BlogPage::getCommentsForPage( $newBlogPost['id'] )
 					)->escaped() . '</div><!-- . listpages-stats -->
 				</div><!-- .listpages-item -->
-				<div class="cleared"></div>' . "\n";
+				<div class="visualClear"></div>' . "\n";
 			}
 		}
 		$output .= '</div>' . "\n"; // .listpages-container

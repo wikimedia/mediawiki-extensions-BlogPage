@@ -111,7 +111,7 @@ class ArticlesHome extends SpecialPage {
 		$output .= '</div>';
 
 		$output .= '</div>';
-		$output .= '<div class="cleared"></div>';
+		$output .= '<div class="visualClear"></div>';
 
 		$out->addHTML( $output );
 	}
@@ -251,7 +251,7 @@ class ArticlesHome extends SpecialPage {
 						BlogPage::getCommentsForPage( $popularBlogPost['id'] )
 					)->escaped() . '</div><!-- . listpages-stats -->
 				</div><!-- .listpages-item -->
-				<div class="cleared"></div>' . "\n";
+				<div class="visualClear"></div>' . "\n";
 			}
 		}
 
@@ -342,7 +342,7 @@ class ArticlesHome extends SpecialPage {
 				$output .= '</div>' . "\n"; // .listpages-item
 				$output .= '<a href="' . htmlspecialchars( $titleObj->getFullURL() ) . '">' .
 					$titleObj->getText() . '</a>';
-				$output .= '<div class="cleared"></div>';
+				$output .= '<div class="visualClear"></div>';
 			}
 		}
 
@@ -429,7 +429,7 @@ class ArticlesHome extends SpecialPage {
 					$titleObj->getText() .
 					'</a>
 			</div><!-- .listpages-item -->
-			<div class="cleared"></div>' . "\n";
+			<div class="visualClear"></div>' . "\n";
 			}
 		}
 
@@ -503,7 +503,7 @@ class ArticlesHome extends SpecialPage {
 						$titleObj->getText() .
 					'</a>
 				</div><!-- .listpages-item -->
-				<div class="cleared"></div>' . "\n";
+				<div class="visualClear"></div>' . "\n";
 			}
 		}
 		$output .= '</div>' . "\n"; // .listpages-container
@@ -613,7 +613,7 @@ class ArticlesHome extends SpecialPage {
 					->numParams( BlogPage::getCommentsForPage( $newestBlogPost['id'] ) )
 					->escaped() . '</div><!-- . listpages-stats -->
 				</div><!-- .listpages-item -->
-				<div class="cleared"></div>' . "\n";
+				<div class="visualClear"></div>' . "\n";
 			}
 		}
 
@@ -709,7 +709,7 @@ class ArticlesHome extends SpecialPage {
 							$titleObj->getText() .
 						'</a>
 					</div><!-- .listpages-item -->
-				<div class="cleared"></div>' . "\n";
+				<div class="visualClear"></div>' . "\n";
 			}
 		}
 

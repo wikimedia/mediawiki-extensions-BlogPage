@@ -5,7 +5,7 @@
  *
  * @file
  * @ingroup Extensions
- * @version 2.3.1
+ * @version 2.3.2
  * @author David Pean <david.pean@gmail.com>
  * @author Jack Phoenix <jack@countervandalism.net>
  * @license http://www.gnu.org/copyleft/gpl.html GNU General Public License 2.0 or later
@@ -15,7 +15,7 @@
 // Extension credits that will show up on Special:Version
 $wgExtensionCredits['other'][] = array(
 	'name' => 'BlogPage',
-	'version' => '2.3.1',
+	'version' => '2.3.2',
 	'author' => array( 'David Pean', 'Jack Phoenix' ),
 	'descriptionmsg' => 'blogpage-desc',
 	'url' => 'https://www.mediawiki.org/wiki/Extension:BlogPage',

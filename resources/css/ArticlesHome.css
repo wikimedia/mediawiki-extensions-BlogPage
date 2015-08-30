@@ -1,11 +1,4 @@
 /* Articles Home */
-/* Fix the issue with "X votes" boxes on Special:ArticlesHome --
-NYC skins already include this class definition, as do some social tools, but
-core skins do not */
-.cleared {
-	clear: both;
-}
-
 h1.firstHeading {
 	display: none;
 }
