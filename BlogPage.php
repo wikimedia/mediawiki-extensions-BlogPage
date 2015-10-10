@@ -110,7 +110,7 @@ $wgExtensionMessagesFiles['BlogPageAlias'] = __DIR__ . '/BlogPage.alias.php';
 $wgExtensionMessagesFiles['BlogPageNamespaces'] = __DIR__ . '/BlogPage.namespaces.php';
 
 // Autoload the class which is used when rendering pages in the NS_BLOG NS
-$wgAutoloadClasses['BlogPageClass'] = __DIR__ . '/BlogPageClass.php';
+$wgAutoloadClasses['BlogPage'] = __DIR__ . '/BlogPageClass.php';
 
 // Special pages
 $wgAutoloadClasses['ArticlesHome'] = __DIR__ . '/SpecialArticlesHome.php';

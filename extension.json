@@ -32,7 +32,7 @@
 		}
 	},
 	"AutoloadClasses": {
-		"BlogPageClass": "BlogPageClass.php",
+		"BlogPage": "BlogPageClass.php",
 		"ArticlesHome": "SpecialArticlesHome.php",
 		"ArticleLists": "SpecialArticleLists.php",
 		"BlogTagCloud": "TagCloudClass.php",

@@ -4,7 +4,7 @@
  *
  * @file
  */
-class BlogPageClass extends Article {
+class BlogPage extends Article {
 
 	public $title = null;
 	public $authors = array();
