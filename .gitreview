@@ -1,6 +1,6 @@
 [gerrit]
 host=gerrit.wikimedia.org
 port=29418
-project=mediawiki/extensions/BlogPage
+project=mediawiki/extensions/BlogPage.git
 defaultbranch=master
 defaultrebase=0
