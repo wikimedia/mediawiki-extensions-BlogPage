@@ -15,7 +15,7 @@
 // Extension credits that will show up on Special:Version
 $wgExtensionCredits['other'][] = array(
 	'name' => 'BlogPage',
-	'version' => '2.3.2',
+	'version' => '2.4.0',
 	'author' => array( 'David Pean', 'Jack Phoenix' ),
 	'descriptionmsg' => 'blogpage-desc',
 	'url' => 'https://www.mediawiki.org/wiki/Extension:BlogPage',
