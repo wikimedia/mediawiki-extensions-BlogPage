@@ -58,7 +58,7 @@ class BlogPage extends Article {
 		$user = $context->getUser();
 		$output = $context->getOutput();
 
-		$sk = $user->getSkin();
+		$sk = $context->getSkin();
 
 		wfDebugLog( 'BlogPage', __METHOD__ );
 
