@@ -32,8 +32,7 @@ class SpecialCreateBlogPost extends SpecialPage {
 
 		// If the user can't create blog posts, display an error
 		if ( !$user->isAllowed( 'createblogpost' ) ) {
-			$out->permissionRequired( 'createblogpost' );
-			return;
+			throw new PermissionsError( 'createblogpost' );
 		}
 
 		// Show a message if the database is in read-only mode
