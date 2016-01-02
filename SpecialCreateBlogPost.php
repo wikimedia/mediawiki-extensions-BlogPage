@@ -43,8 +43,7 @@ class SpecialCreateBlogPost extends SpecialPage {
 
 		// If user is blocked, s/he doesn't need to access this page
 		if ( $user->isBlocked() ) {
-			$out->blockedPage( false );
-			return false;
+			throw new UserBlockedError( $user->getBlock() );
 		}
 
 		// Set page title, robot policies, etc.
