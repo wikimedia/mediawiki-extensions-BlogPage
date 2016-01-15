@@ -18,6 +18,10 @@ class SpecialCreateBlogPost extends SpecialPage {
 		parent::__construct( 'CreateBlogPost', 'createblogpost' );
 	}
 
+	public function doesWrites() {
+		return true;
+	}
+
 	/**
 	 * Show the special page
 	 *
