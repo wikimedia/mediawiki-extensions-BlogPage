@@ -19,6 +19,7 @@ $wgExtensionCredits['other'][] = array(
 	'author' => array( 'David Pean', 'Jack Phoenix' ),
 	'descriptionmsg' => 'blogpage-desc',
 	'url' => 'https://www.mediawiki.org/wiki/Extension:BlogPage',
+	'license-name' => 'GPL-2.0+',
 );
 
 // Define the namespace constants
