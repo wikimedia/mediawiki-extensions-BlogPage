@@ -5,6 +5,9 @@
 		]
 	},
 	"blogpage-desc": "Blogging system with commenting and voting features, [[Special:CreateBlogPost|a special page to create blog posts]] and [[Special:ArticlesHome|a special page to list blog posts]]",
+	"apihelp-blogpage-description": "BlogPage API module",
+	"apihelp-blogpage-param-pageName": "Name of the blog page to check",
+	"apihelp-blogpage-example-1": "Check if there is already a blog page with the title <kbd>My Cool New Blog Post</kbd>",
 	"blog-and": "and",
 	"blog-anonymous-name": "Anonymous Fanatic",
 	"blog-author-comments": "$1 {{PLURAL:$1|comment|comments}}",

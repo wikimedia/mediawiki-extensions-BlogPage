@@ -39,13 +39,13 @@ var CreateBlogPost = {
 		}
 
 		$.post(
-			mw.util.wikiScript(), {
-				action: 'ajax',
-				rs: 'SpecialCreateBlogPost::checkTitleExistence',
-				rsargs: [ title ]
+			mw.util.wikiScript( 'api' ), {
+				action: 'blogpage',
+				format: 'json',
+				pageName: title
 			},
-			function ( r ) {
-				if ( r === 'OK' ) {
+			function ( data ) {
+				if ( data.blogpage.result === 'OK' ) {
 					document.editform.submit();
 				} else {
 					alert( mw.msg( 'blog-js-create-error-page-exists' ) );
