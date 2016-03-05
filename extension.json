@@ -8,6 +8,19 @@
 	"url": "https://www.mediawiki.org/wiki/Extension:BlogPage",
 	"descriptionmsg": "blogpage-desc",
 	"type": "other",
+	"namespaces": [
+		{
+			"id": 500,
+			"constant": "NS_BLOG",
+			"name": "Blog",
+			"protection": "edit"
+		},
+		{
+			"id": 501,
+			"constant": "NS_BLOG_TALK",
+			"name": "Blog_talk"
+		}
+	],
 	"config": {
 		"BlogPageDisplay": {
 			"leftcolumn": true,
