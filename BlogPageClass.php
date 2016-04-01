@@ -36,7 +36,7 @@ class BlogPage extends Article {
 				// URL -- won't resolve to a valid local Title.
 				// Doing the redirection here is somewhat hacky, but ::getAuthors(),
 				// which is called right after this function in the constructor,
-				// attempts to read $this->pageContent... 
+				// attempts to read $this->pageContent...
 				// @see https://github.com/Brickimedia/brickimedia/issues/370
 				$this->getContext()->getOutput()->redirect( $target );
 			} else {
@@ -53,7 +53,6 @@ class BlogPage extends Article {
 	public function view() {
 		global $wgBlogPageDisplay;
 
-		wfProfileIn( __METHOD__ );
 		$context = $this->getContext();
 		$user = $context->getUser();
 		$output = $context->getOutput();
@@ -141,8 +140,6 @@ class BlogPage extends Article {
 
 		$output->addHTML( '<div class="cleared"></div>' . "\n" );
 		$output->addHTML( '</div><!-- #blog-page-container -->' . "\n" );
-
-		wfProfileOut( __METHOD__ );
 	}
 
 	/**
