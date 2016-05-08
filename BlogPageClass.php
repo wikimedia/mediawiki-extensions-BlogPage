@@ -1020,7 +1020,7 @@ class BlogPage extends Article {
 		global $wgMemc;
 
 		// Try cache first
-		$key = wfMemcKey( 'blog', 'comments', 'count' );
+		$key = wfMemcKey( 'blog', 'comments', 'count', 'pageid-' . $id );
 		$data = $wgMemc->get( $key );
 
 		if ( $data != '' ) {
@@ -1053,7 +1053,7 @@ class BlogPage extends Article {
 		global $wgMemc;
 
 		// Try cache first
-		$key = wfMemcKey( 'blog', 'vote', 'count' );
+		$key = wfMemcKey( 'blog', 'vote', 'count', 'pageid-' . $id );
 		$data = $wgMemc->get( $key );
 
 		if ( $data != '' ) {
