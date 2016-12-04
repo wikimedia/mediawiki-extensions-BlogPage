@@ -80,8 +80,8 @@ class BlogPageHooks {
 	 * This function here updates the stats_opinions_created column in the
 	 * user_stats table every time the user creates a new blog post.
 	 *
-	 * This is hooked into two separate hooks (todo: find out why), ArticleSave
-	 * and ArticleSaveComplete. Their arguments are mostly the same and both
+	 * This is hooked into two separate hooks (todo: find out why), PageContentSave
+	 * and PageContentSaveComplete. Their arguments are mostly the same and both
 	 * have $article as the first argument.
 	 *
 	 * @param Article $article Article object representing the page that was/is

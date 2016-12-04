@@ -73,10 +73,10 @@
 		"ArticleFromTitle": [
 			"BlogPageHooks::blogFromTitle"
 		],
-		"ArticleSaveComplete": [
+		"PageContentSaveComplete": [
 			"BlogPageHooks::updateCreatedOpinionsCount"
 		],
-		"ArticleSave": [
+		"PageContentSave": [
 			"BlogPageHooks::updateCreatedOpinionsCount"
 		],
 		"AlternateEdit": [
