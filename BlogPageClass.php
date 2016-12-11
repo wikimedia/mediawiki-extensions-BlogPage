@@ -17,7 +17,9 @@ class BlogPage extends Article {
 
 	public function setContent() {
 		// Get the page content for later use
-		$this->pageContent = $this->getContent();
+		$this->pageContent = ContentHandler::getContentText(
+			$this->getContentObject()
+		);
 
 		// If it's a redirect, in order to get the *real* content for later use,
 		// we have to load the text for the real page
@@ -41,7 +43,8 @@ class BlogPage extends Article {
 				$this->getContext()->getOutput()->redirect( $target );
 			} else {
 				$rarticle = new Article( $target );
-				$this->pageContent = $rarticle->getContent();
+				$rcontent = $rarticle->getContentObject();
+				$this->pageContent = ContentHandler::getContentText( $rcontent );
 
 				// If we don't clear, the page content will be [[redirect-blah]],
 				// and not the actual page
@@ -1090,7 +1093,8 @@ class BlogPage extends Article {
 		// Get raw text
 		$title = Title::makeTitle( $namespace, $pageTitle );
 		$article = new Article( $title );
-		$text = $article->getContent();
+		$content = $article->getContentObject();
+		$text = ContentHandler::getContentText( $content );
 
 		// Remove some problematic characters
 		$text = str_replace( '* ', '', $text );
