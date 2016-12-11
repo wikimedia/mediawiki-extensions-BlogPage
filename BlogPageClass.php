@@ -906,13 +906,13 @@ class BlogPage extends Article {
 
 		if (
 			$wgBlogPageDisplay['games'] == false ||
-			!function_exists( 'wfGetRandomGameUnit' )
+			!class_exists( 'RandomGameUnit' )
 		)
 		{
 			return '';
 		}
 
-		return wfGetRandomGameUnit();
+		return RandomGameUnit::getRandomGameUnit();
 	}
 
 	/**
