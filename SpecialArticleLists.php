@@ -42,6 +42,13 @@ class ArticleLists extends IncludableSpecialPage {
 		$output = '<div class="left-articles">';
 		if ( !$this->including() ) {
 			$output .= '<h2>' . $this->msg( 'ah-new-articles' )->escaped() . '</h2>';
+
+			$descMsg = $this->msg( 'ah-new-articles-summary' );
+			if ( !$descMsg->isDisabled() ) {
+				$output .= Xml::tags('div', array(
+					'class' => 'mw-specialpage-summary'
+				), $descMsg->parse() );
+			}
 		}
 
 		// Try cache first
