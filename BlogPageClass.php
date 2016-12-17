@@ -158,6 +158,7 @@ class BlogPage extends Article {
 		// This unbelievably weak and hacky regex is used to find out the
 		// author's name from the category. See also getBlurb(), which uses a
 		// similar regex.
+		$categoryName = preg_quote( $categoryName, '/' );
 		preg_match_all(
 			"/\[\[(?:(?:c|C)ategory|{$categoryName}):\s?" .
 				// This is an absolutely unholy, horribly hacky and otherwise
@@ -509,7 +510,7 @@ class BlogPage extends Article {
 
 			// Get authors and exclude them
 			foreach ( $this->authors as $author ) {
-				$where[] = 'rev_user_text <> \'' . $author['user_name'] . '\'';
+				$where[] = 'rev_user_text <> ' . $dbr->addQuotes( $author['user_name'] );
 			}
 
 			$res = $dbr->select(
@@ -602,7 +603,7 @@ class BlogPage extends Article {
 			// Exclude the authors of the blog post from the list of recent
 			// voters
 			foreach ( $this->authors as $author ) {
-				$where[] = 'username <> \'' . $author['user_name'] . '\'';
+				$where[] = 'username <> ' . $dbr->addQuotes( $author['user_name'] );
 			}
 
 			$res = $dbr->select(
@@ -998,7 +999,8 @@ class BlogPage extends Article {
 			$output .= "<span class=\"cod-score\">{$comment['plus_count']}</span> ";
 			$output .= ' <span class="cod-comment"><a href="' .
 				htmlspecialchars( $page_title->getFullURL() ) .
-				"#comment-{$comment['comment_id']}\" title=\"{$page_title->getText()}\">{$comment_text}</a></span>";
+				"#comment-{$comment['comment_id']}\" title=\"" .
+				htmlspecialchars( $page_title->getText() ) . "\">{$comment_text}</a></span>";
 			$output .= '</div>';
 		}
 

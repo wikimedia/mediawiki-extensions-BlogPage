@@ -8,8 +8,7 @@ var CreateBlogPost = {
 	 * @param tagnumber Integer
 	 */
 	insertTag: function( tagname, tagnumber ) {
-		document.getElementById( 'tag-' + tagnumber ).style.color = '#CCCCCC';
-		document.getElementById( 'tag-' + tagnumber ).innerHTML = tagname;
+		$( '#tag-' + tagnumber ).css( 'color', '#CCCCCC' ).text( tagname );
 		// Funny...if you move this getElementById call into a variable and use
 		// that variable here, this won't work as intended
 		document.getElementById( 'pageCtg' ).value +=

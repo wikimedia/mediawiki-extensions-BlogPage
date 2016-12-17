@@ -231,7 +231,7 @@ class SpecialCreateBlogPost extends SpecialPage {
 			$tag = trim( $tag );
 			$blogUserCat = str_replace( '$1', '', $this->msg( 'blog-by-user-category' )->inContentLanguage()->text() );
 			// Ignore "Articles by User X" categories
-			if ( !preg_match( '/' . $blogUserCat . '/', $tag ) ) {
+			if ( !preg_match( '/' . preg_quote( $blogUserCat, '/' ) . '/', $tag ) ) {
 				$slashedTag = $tag; // define variable
 				// Fix for categories that contain an apostrophe
 				if ( strpos( $tag, "'" ) ) {
