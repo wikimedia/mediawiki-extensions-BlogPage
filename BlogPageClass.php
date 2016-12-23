@@ -4,6 +4,8 @@
  *
  * @file
  */
+use MediaWiki\MediaWikiServices;
+
 class BlogPage extends Article {
 
 	public $title = null;
@@ -250,10 +252,13 @@ class BlogPage extends Article {
 			}
 			if ( $count == count( $this->authors ) && $count != 1 ) {
 				$authors .= wfMessage( 'word-separator' )->escaped() .
-					wfMessage( 'blog-and' ) -escaped() .
+					wfMessage( 'blog-and' )->escaped() .
 					wfMessage( 'word-separator' )->escaped();
 			}
-			$authors .= Linker::link( $userTitle, $author['user_name'] );
+			$authors .= MediaWikiServices::getInstance()->getLinkRenderer()->makeLink(
+				$userTitle,
+				$author['user_name']
+			);
 		}
 
 		$output .= $authors;
@@ -296,7 +301,10 @@ class BlogPage extends Article {
 					wfMessage( 'blog-and' )->escaped() .
 					wfMessage( 'word-separator' )->escaped();
 			}
-			$authors .= Linker::link( $userTitle, $author['user_name'] );
+			$authors .= MediaWikiServices::getInstance()->getLinkRenderer()->makeLink(
+				$userTitle,
+				$author['user_name']
+			);
 		}
 
 		$output = '<div class="multiple-authors-message">' .
