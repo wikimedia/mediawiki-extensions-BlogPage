@@ -101,8 +101,8 @@ class SpecialCreateBlogPost extends SpecialPage {
 			$today = $wgContLang->date( wfTimestampNow() );
 
 			// Create the blog page if it doesn't already exist
-			$article = new Article( $title, 0 );
-			if ( $article->exists() ) {
+			$page = WikiPage::factory( $title );
+			if ( $page->exists() ) {
 				$out->setPageTitle( $this->msg( 'errorpagetitle' ) );
 				$out->addWikiMsg( 'blog-create-error-page-exists' );
 				$out->addReturnTo( $this->getPageTitle() );
@@ -139,7 +139,7 @@ class SpecialCreateBlogPost extends SpecialPage {
 				$wikitextCategories = implode( "\n", $categories );
 
 				// Perform the edit
-				$article->doEdit(
+				$pageContent = ContentHandler::makeContent(
 					// Instead of <vote />, Wikia had Template:Blog Top over
 					// here and Template:Blog Bottom at the bottom, where we
 					// have the comments tag right now
@@ -147,10 +147,14 @@ class SpecialCreateBlogPost extends SpecialPage {
 						$request->getVal( 'pageBody' ) . "\n\n" .
 						'<comments />' . "\n\n" . $wikitextCategories .
 						"\n__NOEDITSECTION__",
+					$page->getTitle()
+				);
+				$page->doEditContent(
+					$pageContent,
 					$this->msg( 'blog-create-summary' )->inContentLanguage()->text()
 				);
 
-				$articleId = $article->getID();
+				$pageID = $page->getID();
 				// Add a vote for the page
 				// This was originally in its own global function,
 				// wfFinishCreateBlog and after that in the BlogHooks class but
@@ -160,7 +164,7 @@ class SpecialCreateBlogPost extends SpecialPage {
 				// Using OutputPageBeforeHTML hook, which, according to its
 				// manual page, runs on *every* page view was such a stupid
 				// idea IMHO.
-				$vote = new Vote( $articleId );
+				$vote = new Vote( $pageID );
 				$vote->insert( 1 );
 
 				$stats = new UserStatsTrack( $user->getID(), $user->getName() );
