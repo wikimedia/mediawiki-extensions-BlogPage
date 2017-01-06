@@ -940,53 +940,21 @@ class BlogPage extends Article {
 			return '';
 		}
 
-		$comments = array();
-
-		// Try cache first
-		$key = wfMemcKey( 'comments', 'plus', '24hours' );
-		$data = $wgMemc->get( $key );
-
-		if ( $data != '' ) {
-			wfDebugLog( 'BlogPage', 'Got comments of the day from cache' );
-			$comments = $data;
-		} else {
-			wfDebugLog( 'BlogPage', 'Got comments of the day from DB' );
-			$dbr = wfGetDB( DB_SLAVE );
-			$res = $dbr->select(
-				array( 'Comments', 'page' ),
-				array(
-					'Comment_Username', 'comment_ip', 'comment_text',
-					'comment_date', 'Comment_user_id', 'CommentID',
-					'IFNULL(Comment_Plus_Count - Comment_Minus_Count,0) AS Comment_Score',
-					'Comment_Plus_Count AS CommentVotePlus',
-					'Comment_Minus_Count AS CommentVoteMinus',
-					'Comment_Parent_ID', 'page_title', 'page_namespace'
-				),
-				array(
-					'comment_page_id = page_id',
-					'UNIX_TIMESTAMP(comment_date) > ' . ( time() - ( 60 * 60 * 24 ) ),
-					'page_namespace' => NS_BLOG
-				),
-				__METHOD__,
-				array( 'ORDER BY' => 'Comment_Plus_Count DESC', 'LIMIT' => 5 )
-			);
-
-			foreach ( $res as $row ) {
-				$comments[] = array(
-					'user_name' => $row->Comment_Username,
-					'user_id' => $row->Comment_user_id,
-					'title' => $row->page_title,
-					'namespace' => $row->page_namespace,
-					'comment_id' => $row->CommentID,
-					'plus_count' => $row->CommentVotePlus,
-					'comment_text' => $row->comment_text
-				);
-			}
-
-			$wgMemc->set( $key, $comments, 60 * 15 );
-		}
+		$comments = CommentsOfTheDay::get(
+			false/* do NOT skip cache! */,
+			60 * 15 /* cache for fifteen minutes */,
+			array(
+				'comment_page_id = page_id',
+				// different time-related code here than the cache time!
+				'UNIX_TIMESTAMP(comment_date) > ' . ( time() - ( 60 * 60 * 24 ) ),
+				'page_namespace' => NS_BLOG
+			)
+		);
 
 		$output = '';
+		if ( count( $comments ) === 0 ) {
+			return $output;
+		}
 
 		foreach ( $comments as $comment ) {
 			$page_title = Title::makeTitle( $comment['namespace'], $comment['title'] );
@@ -1012,12 +980,10 @@ class BlogPage extends Article {
 			$output .= '</div>';
 		}
 
-		if ( count( $comments ) > 0 ) {
-			$output = '<div class="blog-container">
-				<h2>' . wfMessage( 'blog-comments-of-day' )->escaped() . '</h2>' .
-				$output .
-			'</div>';
-		}
+		$output = '<div class="blog-container">
+			<h2>' . wfMessage( 'blog-comments-of-day' )->escaped() . '</h2>' .
+			$output .
+		'</div>';
 
 		return $output;
 	}
