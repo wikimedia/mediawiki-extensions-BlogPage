@@ -111,10 +111,6 @@ class BlogPage extends Article {
 		$output->addHTML( "\t\t\t" . '</div><!-- #blog-page-left -->' . "\n" );
 
 		$output->addHTML( '<div id="blog-page-middle">' . "\n" );
-		global $wgUseEditButtonFloat;
-		if ( $wgUseEditButtonFloat == true && method_exists( $sk, 'editMenu' ) ) {
-			$output->addHTML( $sk->editMenu() );
-		}
 		$output->addHTML( "<h1 class=\"page-title\">{$this->getTitle()->getText()}</h1>\n" );
 		$output->addHTML( $this->getByLine() );
 
