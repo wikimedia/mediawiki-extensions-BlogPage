@@ -244,6 +244,7 @@ class BlogPage extends Article {
 		$output = '<div class="blog-byline">' . wfMessage( 'blog-by' )->escaped() . ' ';
 
 		$authors = '';
+		$linkRenderer = MediaWikiServices::getInstance()->getLinkRenderer();
 		foreach ( $this->authors as $author ) {
 			$count++;
 			$userTitle = Title::makeTitle( NS_USER, $author['user_name'] );
@@ -255,7 +256,7 @@ class BlogPage extends Article {
 					wfMessage( 'blog-and' )->escaped() .
 					wfMessage( 'word-separator' )->escaped();
 			}
-			$authors .= MediaWikiServices::getInstance()->getLinkRenderer()->makeLink(
+			$authors .= $linkRenderer->makeLink(
 				$userTitle,
 				$author['user_name']
 			);
@@ -290,6 +291,7 @@ class BlogPage extends Article {
 		$count = 0;
 
 		$authors = '';
+		$linkRenderer = MediaWikiServices::getInstance()->getLinkRenderer();
 		foreach ( $this->authors as $author ) {
 			$count++;
 			$userTitle = Title::makeTitle( NS_USER, $author['user_name'] );
@@ -301,7 +303,7 @@ class BlogPage extends Article {
 					wfMessage( 'blog-and' )->escaped() .
 					wfMessage( 'word-separator' )->escaped();
 			}
-			$authors .= MediaWikiServices::getInstance()->getLinkRenderer()->makeLink(
+			$authors .= $linkRenderer->makeLink(
 				$userTitle,
 				$author['user_name']
 			);
