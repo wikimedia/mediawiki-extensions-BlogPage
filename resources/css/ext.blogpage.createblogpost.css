@@ -1,9 +1,9 @@
 /* CSS for Special:CreateBlogPost */
 .create-title {
-	margin: 0px 0px 5px;
-	color: rgb(51, 51, 51);
+	color: #333;
 	font-size: 14px;
-	font-weight: bold;
+	font-weight: 700;
+	margin: 0 0 5px;
 }
 
 .categorytext {
@@ -13,26 +13,26 @@
 
 /* Copyright stuff below the form, right above the submit button */
 .copyright-warning {
-	margin: 0px 0px 10px;
-	width: 700px;
-	color: rgb(51, 51, 51);
+	color: #333;
 	font-size: 11px;
+	margin: 0 0 10px;
+	width: 700px;
 	max-width: 100%;
 }
 
 #editform .title {
-	margin: 0px 0px 5px;
-	color: rgb(120, 186, 93);
+	color: #78ba5d;
 	font-size: 1.1em;
-	font-weight: bold;
+	font-weight: 700;
+	margin: 0 0 5px;
 }
 
 /* Category tag cloud */
 #create-tagcloud {
 	line-height: 25pt;
 	padding-bottom: 15px;
-	max-width: 100%;
 	width: 600px;
+	max-width: 100%;
 }
 
 a.tag-cloud-entry {

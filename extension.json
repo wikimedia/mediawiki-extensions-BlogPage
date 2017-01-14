@@ -1,6 +1,6 @@
 {
 	"name": "BlogPage",
-	"version": "2.4.2",
+	"version": "2.4.3",
 	"author": [
 		"David Pean",
 		"Jack Phoenix"
@@ -96,19 +96,19 @@
 	},
 	"ResourceModules": {
 		"ext.blogPage": {
-			"styles": "resources/css/BlogPage.css",
+			"styles": "resources/css/ext.blogpage.blogpage.css",
 			"position": "top"
 		},
 		"ext.blogPage.articlesHome": {
-			"styles": "resources/css/ArticlesHome.css",
+			"styles": "resources/css/ext.blogpage.articleshome.css",
 			"position": "top"
 		},
 		"ext.blogPage.create.css": {
-			"styles": "resources/css/CreateBlogPost.css",
+			"styles": "resources/css/ext.blogpage.createblogpost.css",
 			"position": "top"
 		},
 		"ext.blogPage.create.js": {
-			"scripts": "resources/js/CreateBlogPost.js",
+			"scripts": "resources/js/ext.blogpage.createblogpost.js",
 			"messages": [
 				"blog-js-create-error-need-content",
 				"blog-js-create-error-need-title",
