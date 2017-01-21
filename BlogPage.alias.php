@@ -6,17 +6,17 @@
  * @ingroup Extensions
  */
 
-$aliases = array();
+$specialPageAliases = array();
 
 /** English */
-$aliases['en'] = array(
+$specialPageAliases['en'] = array(
 	'ArticlesHome' => array( 'ArticlesHome' ),
 	'ArticleLists' => array( 'ArticleLists' ),
 	'CreateBlogPost' => array( 'CreateBlogPost' ),
 );
 
 /** Finnish (Suomi) */
-$aliases['fi'] = array(
+$specialPageAliases['fi'] = array(
 	'ArticlesHome' => array( 'Artikkelien kotisivu' ),
 	'ArticleLists' => array( 'Artikkelilistat' ),
 	'CreateBlogPost' => array( 'Luo blogikirjoitus' ),
