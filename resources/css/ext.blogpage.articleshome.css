@@ -4,19 +4,19 @@ h1.firstHeading {
 }
 
 #main {
-	padding: 0px !important;
+	padding: 0 !important;
 }
 
 .main-page-left {
 	float: left;
 	width: 60%;
-	padding: 10px 0px 0px 0px;
+	padding: 10px 0 0 0;
 }
 
 .main-page-right {
 	float: right;
 	width: 35%;
-	padding: 10px 0px 0px 0px;
+	padding: 10px 0 0 0;
 }
 
 .main-page-sub-links a {
@@ -24,19 +24,19 @@ h1.firstHeading {
 }
 
 .side-articles {
-	margin: 0px 0px 25px 0px;
+	margin: 0 0 25px 0;
 }
 
 .side-articles h2 {
 	font-size: 1.5em;
-	padding: 0px 0px 5px 0px;
-	margin: 0px 0px 10px 0px !important;
+	padding: 0 0 5px 0;
+	margin: 0 0 10px 0 !important;
 	border-bottom: 1px solid #dcdcdc !important;
 }
 
 .side-articles .listpageItem {
-	padding: 0px 0px 0px 0px;
-	margin: 0px 0px 0px 0px;
+	padding: 0;
+	margin: 0;
 	font-size: 11px;
 	width: 350px;
 }
@@ -47,23 +47,23 @@ h1.firstHeading {
 
 /* Logged-In Articles */
 .logged-in-articles {
-	margin: 0px 0px 18px 0px;
+	margin: 0 0 18px 0;
 }
 
 .logged-in-articles h2 {
 	font-size: 1.5em;
-	margin: 0px 0px 10px 0px;
-	padding: 0px 0px 3px 0px;
+	margin: 0 0 10px 0;
+	padding: 0 0 3px 0;
 	border-bottom: 1px solid #dcdcdc;
 }
 
 .logged-in-articles p {
-	margin: 10px 0px 10px 0px !important;
+	margin: 10px 0 10px 0 !important;
 }
 
 .logged-in-articles .listpageItem {
-	padding: 0px 0px 10px 0px;
-	margin: 0px 0px 10px 0px;
+	padding: 0 0 10px 0;
+	margin: 0 0 10px 0;
 	width: 600px;
 }
 
@@ -71,12 +71,12 @@ h1.firstHeading {
 	color: #797979;
 	font-size: 10px;
 	vertical-align: middle;
-	margin: -1px 0px 0px 5px;
+	margin: -1px 0 0 5px;
 }
 
 .rss-feed img {
 	vertical-align: middle;
-	margin: 0px 3px 0px 0px;
+	margin: 0 3px 0 0;
 }
 
 .side-articles .listpages-item {
@@ -108,8 +108,8 @@ h1.firstHeading {
 }
 
 .listpages-link {
-	margin: 0px;
-	padding: 0px;
+	margin: 0;
+	padding: 0;
 }
 
 .listpages-item {
@@ -118,7 +118,7 @@ h1.firstHeading {
 
 .listpages-item a {
 	text-decoration: underline;
-	font-weight: bold;
+	font-weight: 700;
 }
 
 .listpages-image {
@@ -127,16 +127,16 @@ h1.firstHeading {
 }
 
 .listpages-categories {
-	color: #78BA5D;
+	color: #78ba5d;
 	font-size: 10px;
-	font-weight: bold;
+	font-weight: 700;
 }
 
 .listpages-categories a {
-	color: #78BA5D;
+	color: #78ba5d;
 	font-size: 10px;
 	text-decoration: none;
-	border-bottom: 1px dotted #78BA5D;
+	border-bottom: 1px dotted #78ba5d;
 }
 
 .listpages-date {
@@ -146,55 +146,55 @@ h1.firstHeading {
 
 .listpages-stats {
 	color: #666;
-	font-weight: bold;
+	font-weight: 700;
 	font-size: 11px;
 }
 
 .listpages-stats img {
 	vertical-align: middle;
-	margin: -2px 1px 0px 2px;
+	margin: -2px 1px 0 2px;
 }
 
 .listpages-votebox {
 	float: left;
-	margin: 0px 10px 3px 0px;
+	margin: 0 10px 3px 0;
 	text-align: center;
 	width: 25px;
 }
 
 .rating-total {
 	color: #666;
-	font-weight: bold;
+	font-weight: 700;
 	font-size: 11px;
 }
 
 .listpages-votebox-number {
-	background-color: #89C46F;
-	color: #FFFFFF;
-	padding: 3px 0px 0px;
-	margin: 0px 0px 2px 0px;
-	font-weight: bold;
+	background-color: #89c46f;
+	color: #fff;
+	padding: 3px 0 0;
+	margin: 0 0 2px 0;
+	font-weight: 700;
 	height: 22px;
 }
 
 .listpages-votebox-text {
-	margin: -1px 0px 0px 0px;
+	margin: -1px 0 0 0;
 	font-size: 9px;
 	color: #777;
 	line-height: 9px;
 }
 
 .listpages-commentbox-number {
-	background-color: orange;
-	color: #FFFFFF;
-	font-weight: bold;
+	background-color: #ffa500;
+	color: #fff;
+	font-weight: 700;
 	height: 22px;
-	margin: 0px 0px 2px;
-	padding: 3px 0px 0px;
+	margin: 0 0 2px;
+	padding: 3px 0 0;
 }
 
 .listpages-blurb {
-	margin: 0px 0px 2px 0px;
+	margin: 0 0 2px 0;
 }
 
 .listpages-blurb a {
@@ -203,7 +203,7 @@ h1.firstHeading {
 }
 
 .listpages-nav-buttons {
-	margin: 10px 0px 0px 0px;
+	margin: 10px 0 0 0;
 }
 
 .listpages-blurb-size-small {
@@ -222,23 +222,23 @@ h1.firstHeading {
 }
 
 .listpage-button {
-	background-color: #FAFAFA;
-	border: 1px solid #DCDCDC;
-	color: #376EA6;
+	background-color: #dcdcdc;
+	border: 1px solid #dcdcdc;
+	color: #376ea6;
 	font-size: 12px;
 	padding: 3px;
-	margin: 0px 3px 0px 0px;
+	margin: 0 3px 0 0;
 }
 
 .listpage-button-off {
-	background-color: #FAFAFA;
-	border: 1px solid #DCDCDC;
+	background-color: #fafafa;
+	border: 1px solid #dcdcdc;
 	color: #797979;
 	font-size: 12px;
 	padding: 3px;
-	margin: 0px 3px 0px 0px;
+	margin: 0 3px 0 0;
 }
 
 .listpages-nav-buttons a {
-	margin: 0px 5px 0px 0px;
+	margin: 0 5px 0 0;
 }
