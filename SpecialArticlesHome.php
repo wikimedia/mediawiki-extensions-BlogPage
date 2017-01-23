@@ -25,9 +25,7 @@ class ArticlesHome extends SpecialPage {
 	 * @param string $type What kind of articles to show? Default is 'popular'
 	 */
 	public function execute( $type ) {
-		global $wgContLang, $wgSupressPageTitle;
-
-		$wgSupressPageTitle = true;
+		global $wgContLang;
 
 		$out = $this->getOutput();
 		// Add CSS
@@ -63,7 +61,6 @@ class ArticlesHome extends SpecialPage {
 		// Start building the HTML output
 		$output = '<div class="main-page-left">';
 		$output .= '<div class="logged-in-articles">';
-		$output .= '<h2>' . $name->escaped() . '</h2>';
 		$output .= '<p class="main-page-sub-links"><a href="' .
 			htmlspecialchars( SpecialPage::getTitleFor( 'CreateBlogPost' )->getFullURL() ) . '">' .
 			$this->msg( 'ah-write-article' )->escaped() . '</a> - <a href="' .

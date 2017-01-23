@@ -66,9 +66,6 @@ class BlogPage extends Article {
 
 		wfDebugLog( 'BlogPage', __METHOD__ );
 
-		$output->setHTMLTitle( $this->getTitle()->getText() );
-		$output->setPageTitle( $this->getTitle()->getText() );
-
 		// Don't throw a bunch of E_NOTICEs when we're viewing the page of a
 		// nonexistent blog post
 		if ( !$this->getID() ) {
@@ -111,11 +108,20 @@ class BlogPage extends Article {
 		$output->addHTML( "\t\t\t" . '</div><!-- #blog-page-left -->' . "\n" );
 
 		$output->addHTML( '<div id="blog-page-middle">' . "\n" );
-		$output->addHTML( "<h1 class=\"page-title\">{$this->getTitle()->getText()}</h1>\n" );
 		$output->addHTML( $this->getByLine() );
 
 		$output->addHTML( "\n<!--start Article::view-->\n" );
 		parent::view();
+
+		/**
+		 * The page title is being set here before the Article::view()
+		 * call above, which overrides whatever we set if we set the title
+		 * above that line.
+		 *
+		 * @see https://phabricator.wikimedia.org/T143145
+		 */
+		$output->setHTMLTitle( $this->getTitle()->getText() );
+		$output->setPageTitle( $this->getTitle()->getText() );
 
 		// Get categories
 		$cat = $sk->getCategoryLinks();

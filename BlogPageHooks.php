@@ -16,16 +16,9 @@ class BlogPageHooks {
 	 * @return bool
 	 */
 	public static function blogFromTitle( &$title, &$article ) {
-		global $wgHooks, $wgOut, $wgRequest, $wgSupressPageTitle, $wgSupressSubTitle, $wgSupressPageCategories;
+		global $wgHooks, $wgOut;
 
 		if ( $title->getNamespace() == NS_BLOG ) {
-			if ( !$wgRequest->getVal( 'action' ) ) {
-				$wgSupressPageTitle = true;
-			}
-
-			$wgSupressSubTitle = true;
-			$wgSupressPageCategories = true;
-
 			// This will suppress category links in SkinTemplate-based skins
 			$wgHooks['SkinTemplateOutputPageBeforeExec'][] = function( $sk, $tpl ) {
 				$tpl->set( 'catlinks', '' );
