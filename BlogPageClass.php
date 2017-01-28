@@ -145,7 +145,7 @@ class BlogPage extends Article {
 			$output->addHTML( '</div>' . "\n" );
 		}
 
-		$output->addHTML( '<div class="cleared"></div>' . "\n" );
+		$output->addHTML( '<div class="visualClear"></div>' . "\n" );
 		$output->addHTML( '</div><!-- #blog-page-container -->' . "\n" );
 	}
 
@@ -375,7 +375,7 @@ class BlogPage extends Article {
 			$output .= $out->parse( $profileData['about'], false );
 		}
 		$output .= "\n\t\t\t\t\t\t</div><!-- .author-info -->
-						<div class=\"cleared\"></div>
+						<div class=\"visualClear\"></div>
 					</div><!-- .author-container -->
 		{$this->getAuthorArticles( $author_index )}";
 
@@ -833,7 +833,7 @@ class BlogPage extends Article {
 						$titleObj->getText() .
 					'</a>
 				</div>
-				<div class="cleared"></div>';
+				<div class="visualClear"></div>';
 		}
 		$html .= '</div>'; // .listpages-container
 
@@ -899,7 +899,7 @@ class BlogPage extends Article {
 						$titleObj->getText() .
 					'</a>
 				</div>
-				<div class="cleared"></div>';
+				<div class="visualClear"></div>';
 		}
 		$html .= '</div>'; // .listpages-container
 
