@@ -98,7 +98,6 @@ class BlogPage extends Article {
 
 			$output->addHTML( $this->recentEditors() );
 			$output->addHTML( $this->recentVoters() );
-			$output->addHTML( $this->embedWidget() );
 
 			$output->addHTML( '</div>' . "\n" );
 
@@ -674,38 +673,6 @@ class BlogPage extends Article {
 
 			$output .= '</div>';
 		}
-
-		return $output;
-	}
-
-	/**
-	 * Get the embed widget, if this feature is enabled in BlogPage config.
-	 *
-	 * @return string HTML or nothing
-	 */
-	public function embedWidget() {
-		global $wgBlogPageDisplay, $wgServer, $wgScriptPath;
-
-		// Not enabled? ContentWidget not available?
-		if (
-			$wgBlogPageDisplay['embed_widget'] == false ||
-			!is_dir( dirname( __FILE__ ) . '/../extensions/ContentWidget' )
-		)
-		{
-			return '';
-		}
-
-		$title = $this->getTitle();
-
-		$output = '';
-		$output .= '<div class="recent-container bottom-fix"><h2>' .
-			wfMessage( 'blog-embed-title' )->escaped() . '</h2>';
-		$output .= '<div class="blog-widget-embed">';
-		$output .= "<p><input type='text' size='20' onclick='this.select();' value='" .
-			'<object width="300" height="450" id="content_widget" align="middle"> <param name="movie" value="content_widget.swf" /><embed src="' .
-			$wgServer . $wgScriptPath . '/extensions/ContentWidget/widget.swf?page=' .
-			urlencode( $title->getFullText() ) . '" quality="high" bgcolor="#ffffff" width="300" height="450" name="content_widget"type="application/x-shockwave-flash" /> </object>' . "' /></p></div>";
-		$output .= '</div>';
 
 		return $output;
 	}

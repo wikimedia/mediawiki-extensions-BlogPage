@@ -1,6 +1,6 @@
 {
 	"name": "BlogPage",
-	"version": "2.4.6",
+	"version": "2.4.7",
 	"author": [
 		"David Pean",
 		"Jack Phoenix"
@@ -35,8 +35,7 @@
 			"in_the_news": true,
 			"comments_of_day": true,
 			"games": true,
-			"new_articles": true,
-			"embed_widget": false
+			"new_articles": true
 		},
 		"UserProfileDisplay": {
 			"articles": true
