@@ -1,6 +1,6 @@
 {
 	"name": "BlogPage",
-	"version": "2.4.8",
+	"version": "2.5.0",
 	"author": [
 		"David Pean",
 		"Jack Phoenix"
@@ -45,20 +45,20 @@
 		"blogpage": "ApiBlogPage"
 	},
 	"AutoloadClasses": {
-		"ApiBlogPage": "ApiBlogPage.php",
-		"BlogPage": "BlogPageClass.php",
-		"ArticlesHome": "SpecialArticlesHome.php",
-		"ArticleLists": "SpecialArticleLists.php",
-		"BlogTagCloud": "TagCloudClass.php",
-		"SpecialCreateBlogPost": "SpecialCreateBlogPost.php",
-		"BlogPageHooks": "BlogPageHooks.php"
+		"ApiBlogPage": "includes/api/ApiBlogPage.php",
+		"BlogPage": "includes/BlogPage.class.php",
+		"ArticlesHome": "includes/specials/SpecialArticlesHome.php",
+		"ArticleLists": "includes/specials/SpecialArticleLists.php",
+		"BlogTagCloud": "includes/BlogTagCloud.class.php",
+		"SpecialCreateBlogPost": "includes/specials/SpecialCreateBlogPost.php",
+		"BlogPageHooks": "includes/BlogPage.hooks.php"
 	},
 	"AvailableRights": [
 		"createblogpost"
 	],
 	"ExtensionMessagesFiles": {
-		"BlogPageAlias": "BlogPage.alias.php",
-		"BlogPageNamespaces": "BlogPage.namespaces.php"
+		"BlogPageAlias": "includes/BlogPage.alias.php",
+		"BlogPageNamespaces": "includes/BlogPage.namespaces.php"
 	},
 	"GroupPermissions": {
 		"*": {

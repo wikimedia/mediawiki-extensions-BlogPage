@@ -37,7 +37,7 @@ class ArticleLists extends IncludableSpecialPage {
 		// the parser cache
 		$out->addModuleStyles( 'ext.blogPage.articlesHome' );
 
-		$imgPath = $wgExtensionAssetsPath . '/BlogPage/images/';
+		$imgPath = $wgExtensionAssetsPath . '/BlogPage/resources/images/';
 
 		$output = '<div class="left-articles">';
 		if ( !$this->including() ) {

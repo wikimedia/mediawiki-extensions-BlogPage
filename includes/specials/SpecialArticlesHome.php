@@ -192,7 +192,7 @@ class ArticlesHome extends SpecialPage {
 			$wgMemc->set( $key, $popularBlogPosts, 60 * 15 );
 		}
 
-		$imgPath = $wgExtensionAssetsPath . '/BlogPage/images/';
+		$imgPath = $wgExtensionAssetsPath . '/BlogPage/resources/images/';
 
 		$output = '<div class="listpages-container">';
 		if ( empty( $popularBlogPosts ) ) {
@@ -557,7 +557,7 @@ class ArticlesHome extends SpecialPage {
 			$wgMemc->set( $key, $newestBlogPosts, 60 * 15 );
 		}
 
-		$imgPath = $wgExtensionAssetsPath . '/BlogPage/images/';
+		$imgPath = $wgExtensionAssetsPath . '/BlogPage/resources/images/';
 
 		$output = '<div class="listpages-container">';
 		if ( empty( $newestBlogPosts ) ) {
