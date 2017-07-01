@@ -895,7 +895,7 @@ class BlogPage extends Article {
 			return '';
 		}
 
-		$this->getContext->getOutput()->addModuleStyles( 'ext.RandomGameUnit.css' );
+		$this->getContext()->getOutput()->addModuleStyles( 'ext.RandomGameUnit.css' );
 
 		return RandomGameUnit::getRandomGameUnit();
 	}
