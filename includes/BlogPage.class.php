@@ -678,26 +678,6 @@ class BlogPage extends Article {
 	}
 
 	/**
-	 * Get an ad unit for the left side, if this feature is enabled in BlogPage
-	 * config.
-	 *
-	 * @return string HTML or nothing
-	 */
-	public function leftAdUnit() {
-		global $wgBlogPageDisplay;
-
-		if ( $wgBlogPageDisplay['left_ad'] == false ) {
-			return '';
-		}
-
-		$output = '<div class="article-ad">
-			<!-- BlogPage ad temporarily disabled -->
-		</div>';
-
-		return $output;
-	}
-
-	/**
 	 * Get some random news items from MediaWiki:Inthenews, if this feature is
 	 * enabled in BlogPage config and that interface message has some content.
 	 *

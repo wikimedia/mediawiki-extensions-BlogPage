@@ -227,16 +227,6 @@
 	vertical-align: middle;
 }
 
-/* Ad Unit */
-.article-ad {
-	margin: 10px;
-	text-align: center;
-}
-
-.article-ad a {
-	text-align: inherit;
-}
-
 /* Casual Game */
 .game-unit-container {
 	padding: 0 0 10px 0;
