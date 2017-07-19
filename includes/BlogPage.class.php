@@ -100,8 +100,6 @@ class BlogPage extends Article {
 			$output->addHTML( $this->recentVoters() );
 
 			$output->addHTML( '</div>' . "\n" );
-
-			$output->addHTML( $this->leftAdUnit() );
 		}
 
 		$output->addHTML( "\t\t\t" . '</div><!-- #blog-page-left -->' . "\n" );
