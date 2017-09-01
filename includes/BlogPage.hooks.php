@@ -88,7 +88,7 @@ class BlogPageHooks {
 			return true;
 		}
 
-		$dbr = wfGetDB( DB_SLAVE );
+		$dbr = wfGetDB( DB_REPLICA );
 		$res = $dbr->select(
 			'categorylinks',
 			'cl_to',
@@ -211,7 +211,7 @@ class BlogPageHooks {
 				)->inContentLanguage()->text()
 			);
 
-			$dbr = wfGetDB( DB_SLAVE );
+			$dbr = wfGetDB( DB_REPLICA );
 			/**
 			 * I changed the original query a bit, since it wasn't returning
 			 * what it should've.

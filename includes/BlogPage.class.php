@@ -202,7 +202,7 @@ class BlogPage extends Article {
 
 		if ( !$data ) {
 			wfDebugLog( 'BlogPage', "Loading create_date for page {$pageId} from database" );
-			$dbr = wfGetDB( DB_SLAVE );
+			$dbr = wfGetDB( DB_REPLICA );
 			$createDate = $dbr->selectField(
 				'revision',
 				'rev_timestamp',// 'UNIX_TIMESTAMP(rev_timestamp) AS create_date',
@@ -407,7 +407,7 @@ class BlogPage extends Article {
 			$articles = $data;
 		} else {
 			wfDebugLog( 'BlogPage', "Got blog author articles for user {$user_name} from DB" );
-			$dbr = wfGetDB( DB_SLAVE );
+			$dbr = wfGetDB( DB_REPLICA );
 			$categoryTitle = Title::newFromText(
 				 wfMessage( 'blog-by-user-category', $user_name )->text()
 			);
@@ -511,7 +511,7 @@ class BlogPage extends Article {
 
 		if ( !$data ) {
 			wfDebugLog( 'BlogPage', "Loading recent editors for page {$pageTitleId} from DB" );
-			$dbr = wfGetDB( DB_SLAVE );
+			$dbr = wfGetDB( DB_REPLICA );
 
 			$where = array(
 				'rev_page' => $pageTitleId,
@@ -604,7 +604,7 @@ class BlogPage extends Article {
 		$voters = array();
 		if ( !$data ) {
 			wfDebugLog( 'BlogPage', "Loading recent voters for page {$pageTitleId} from DB" );
-			$dbr = wfGetDB( DB_SLAVE );
+			$dbr = wfGetDB( DB_REPLICA );
 
 			$where = array(
 				'vote_page_id' => $pageTitleId,
@@ -726,7 +726,7 @@ class BlogPage extends Article {
 			$popularBlogPosts = $data;
 		} else {
 			wfDebugLog( 'BlogPage', 'Got popular articles from DB' );
-			$dbr = wfGetDB( DB_SLAVE );
+			$dbr = wfGetDB( DB_REPLICA );
 			// Code sporked from Rob Church's NewestPages extension
 			// @todo FIXME: adding categorylinks table and that one where
 			// clause causes an error about "unknown column 'page_id' on ON
@@ -817,7 +817,7 @@ class BlogPage extends Article {
 			// We could do complicated LIKE stuff with the categorylinks table,
 			// but I think we can safely assume that stuff in the NS_BLOG NS
 			// is blog-related :)
-			$dbr = wfGetDB( DB_SLAVE );
+			$dbr = wfGetDB( DB_REPLICA );
 			// Code sporked from Rob Church's NewestPages extension
 			$res = $dbr->select(
 				'page',
@@ -960,7 +960,7 @@ class BlogPage extends Article {
 			$commentCount = $data;
 		} else {
 			wfDebugLog( 'BlogPage', "Got comments count for the page with ID {$id} from DB" );
-			$dbr = wfGetDB( DB_SLAVE );
+			$dbr = wfGetDB( DB_REPLICA );
 			$commentCount = (int)$dbr->selectField(
 				'Comments',
 				'COUNT(*) AS count',
@@ -993,7 +993,7 @@ class BlogPage extends Article {
 			$voteCount = $data;
 		} else {
 			wfDebugLog( 'BlogPage', "Got vote count for the page with ID {$id} from DB" );
-			$dbr = wfGetDB( DB_SLAVE );
+			$dbr = wfGetDB( DB_REPLICA );
 			$voteCount = (int)$dbr->selectField(
 				'Vote',
 				'COUNT(*) AS count',
@@ -1109,7 +1109,7 @@ class BlogPage extends Article {
 		$data = $wgMemc->get( $key );
 
 		if ( !$data ) {
-			$dbr = wfGetDB( DB_SLAVE );
+			$dbr = wfGetDB( DB_REPLICA );
 			$il_to = $dbr->selectField(
 				'imagelinks',
 				array( 'il_to' ),

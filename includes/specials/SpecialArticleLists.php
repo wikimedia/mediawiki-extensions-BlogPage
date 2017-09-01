@@ -58,7 +58,7 @@ class ArticleLists extends IncludableSpecialPage {
 			$newBlogPosts = $data;
 		} else {
 			wfDebugLog( 'BlogPage', 'Got new articles in ArticleLists from DB' );
-			$dbr = wfGetDB( DB_SLAVE );
+			$dbr = wfGetDB( DB_REPLICA );
 			// Code sporked from Rob Church's NewestPages extension
 			// You rock, dude!
 			$res = $dbr->select(
