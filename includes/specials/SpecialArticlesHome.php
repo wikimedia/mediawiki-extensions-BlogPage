@@ -150,7 +150,7 @@ class ArticlesHome extends SpecialPage {
 			$popularBlogPosts = $data;
 		} else {
 			wfDebugLog( 'BlogPage', 'Got popular posts in ArticlesHome from DB' );
-			$dbr = wfGetDB( DB_SLAVE );
+			$dbr = wfGetDB( DB_REPLICA );
 			// Code sporked from Rob Church's NewestPages extension
 			$commentsTable = $dbr->tableName( 'Comments' );
 			$voteTable = $dbr->tableName( 'Vote' );
@@ -276,7 +276,7 @@ class ArticlesHome extends SpecialPage {
 			$votedBlogPosts = $data;
 		} else {
 			wfDebugLog( 'BlogPage', 'Got most voted posts in ArticlesHome from DB' );
-			$dbr = wfGetDB( DB_SLAVE );
+			$dbr = wfGetDB( DB_REPLICA );
 			$kaboom = explode( ',', $dateCategories );
 			// Without constructing Titles for all the categories, they won't
 			// have the underscores and thus the query will never match
@@ -367,7 +367,7 @@ class ArticlesHome extends SpecialPage {
 			$commentedBlogPosts = $data;
 		} else {
 			wfDebugLog( 'BlogPage', 'Got most commented posts in ArticlesHome from DB' );
-			$dbr = wfGetDB( DB_SLAVE );
+			$dbr = wfGetDB( DB_REPLICA );
 			$kaboom = explode( ',', $dateCategories );
 			// Without constructing Titles for all the categories, they won't
 			// have the underscores and thus the query will never match
@@ -453,7 +453,7 @@ class ArticlesHome extends SpecialPage {
 			$newBlogPosts = $data;
 		} else {
 			wfDebugLog( 'BlogPage', 'Got new articles in ArticlesHome from DB' );
-			$dbr = wfGetDB( DB_SLAVE );
+			$dbr = wfGetDB( DB_REPLICA );
 			// Code sporked from Rob Church's NewestPages extension
 			$res = $dbr->select(
 				'page',
@@ -525,7 +525,7 @@ class ArticlesHome extends SpecialPage {
 			$newestBlogPosts = $data;
 		} else {
 			wfDebugLog( 'BlogPage', 'Got newest posts in ArticlesHome from DB' );
-			$dbr = wfGetDB( DB_SLAVE );
+			$dbr = wfGetDB( DB_REPLICA );
 			// Code sporked from Rob Church's NewestPages extension
 			$res = $dbr->select(
 				array( 'page' ),
@@ -642,7 +642,7 @@ class ArticlesHome extends SpecialPage {
 			$popularBlogPosts = $data;
 		} else {
 			wfDebugLog( 'BlogPage', 'Got popular posts in ArticlesHome from DB' );
-			$dbr = wfGetDB( DB_SLAVE );
+			$dbr = wfGetDB( DB_REPLICA );
 			$commentsTable = $dbr->tableName( 'Comments' );
 			$voteTable = $dbr->tableName( 'Vote' );
 			// Code sporked from Rob Church's NewestPages extension
