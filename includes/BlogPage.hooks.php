@@ -75,14 +75,15 @@ class BlogPageHooks {
 	 *
 	 * This is hooked into two separate hooks (todo: find out why), PageContentSave
 	 * and PageContentSaveComplete. Their arguments are mostly the same and both
-	 * have $article as the first argument.
+	 * have $wikiPage as the first argument.
 	 *
-	 * @param Article $article Article object representing the page that was/is
+	 * @param WikiPage $wikiPage WikiPage object representing the page that was/is
 	 *                         (being) saved
+	 *
 	 * @return bool
 	 */
-	public static function updateCreatedOpinionsCount( &$article, &$user ) {
-		$aid = $article->getTitle()->getArticleID();
+	public static function updateCreatedOpinionsCount( &$wikiPage, &$user ) {
+		$aid = $wikiPage->getTitle()->getArticleID();
 		// Shortcut, in order not to perform stupid queries (cl_from = 0...)
 		if ( $aid == 0 ) {
 			return true;
@@ -121,8 +122,8 @@ class BlogPageHooks {
 						$ctgTitle = Title::newFromText(
 							$parser->preprocess(
 								trim( $userBlogCat ),
-								$article->getContext()->getTitle(),
-								$article->getContext()->getOutput()->parserOptions()
+								$wikiPage->getContext()->getTitle(),
+								$wikiPage->getContext()->getOutput()->parserOptions()
 							)
 						);
 						$ctgTitle = $ctgTitle->getDBkey();
