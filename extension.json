@@ -5,7 +5,7 @@
 		"David Pean",
 		"Jack Phoenix"
 	],
-	"license-name": "GPL-2.0+",
+	"license-name": "GPL-2.0-or-later",
 	"url": "https://www.mediawiki.org/wiki/Extension:BlogPage",
 	"descriptionmsg": "blogpage-desc",
 	"type": "other",
