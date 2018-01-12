@@ -142,7 +142,7 @@ class ArticlesHome extends SpecialPage {
 		global $wgMemc, $wgExtensionAssetsPath;
 
 		// Try cache first
-		$key = wfMemcKey( 'blog', 'popular', 'twentyfive' );
+		$key = $wgMemc->makeKey( 'blog', 'popular', 'twentyfive' );
 		$data = $wgMemc->get( $key );
 
 		if ( $data != '' ) {
@@ -268,7 +268,7 @@ class ArticlesHome extends SpecialPage {
 		global $wgMemc;
 
 		// Try cache first
-		$key = wfMemcKey( 'blog', 'mostvoted', 'ten' );
+		$key = $wgMemc->makeKey( 'blog', 'mostvoted', 'ten' );
 		$data = $wgMemc->get( $key );
 
 		if ( $data != '' ) {
@@ -359,7 +359,7 @@ class ArticlesHome extends SpecialPage {
 		global $wgMemc;
 
 		// Try cache first
-		$key = wfMemcKey( 'blog', 'mostcommented', 'ten' );
+		$key = $wgMemc->makeKey( 'blog', 'mostcommented', 'ten' );
 		$data = $wgMemc->get( $key );
 
 		if ( $data != '' ) {
@@ -445,7 +445,7 @@ class ArticlesHome extends SpecialPage {
 		global $wgMemc;
 
 		// Try cache first
-		$key = wfMemcKey( 'blog', 'newest', 'ten' );
+		$key = $wgMemc->makeKey( 'blog', 'newest', 'ten' );
 		$data = $wgMemc->get( $key );
 
 		if ( $data != '' ) {
@@ -517,7 +517,7 @@ class ArticlesHome extends SpecialPage {
 		global $wgMemc, $wgExtensionAssetsPath;
 
 		// Try cache first
-		$key = wfMemcKey( 'blog', 'newest', 'twentyfive' );
+		$key = $wgMemc->makeKey( 'blog', 'newest', 'twentyfive' );
 		$data = $wgMemc->get( $key );
 
 		if ( $data != '' ) {
@@ -634,7 +634,7 @@ class ArticlesHome extends SpecialPage {
 		global $wgMemc;
 
 		// Try cache first
-		$key = wfMemcKey( 'blog', 'popular', 'ten' );
+		$key = $wgMemc->makeKey( 'blog', 'popular', 'ten' );
 		$data = $wgMemc->get( $key );
 
 		if ( $data != '' ) {

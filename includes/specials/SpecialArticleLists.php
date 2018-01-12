@@ -50,7 +50,7 @@ class ArticleLists extends IncludableSpecialPage {
 		}
 
 		// Try cache first
-		$key = wfMemcKey( 'blog', 'new', 'twentyfive' );
+		$key = $wgMemc->makeKey( 'blog', 'new', 'twentyfive' );
 		$data = $wgMemc->get( $key );
 
 		if ( $data != '' ) {

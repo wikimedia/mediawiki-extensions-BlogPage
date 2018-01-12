@@ -195,7 +195,7 @@ class BlogPage extends Article {
 		global $wgMemc;
 
 		// Try memcached first
-		$key = wfMemcKey( 'page', 'create_date', $pageId );
+		$key = $wgMemc->makeKey( 'page', 'create_date', $pageId );
 		$data = $wgMemc->get( $key );
 
 		if ( !$data ) {
@@ -397,7 +397,7 @@ class BlogPage extends Article {
 		$articles = array();
 
 		// Try cache first
-		$key = wfMemcKey( 'blog', 'author', 'articles', $user_id );
+		$key = $wgMemc->makeKey( 'blog', 'author', 'articles', $user_id );
 		$data = $wgMemc->get( $key );
 
 		if ( $data != '' ) {
@@ -503,7 +503,7 @@ class BlogPage extends Article {
 
 		$pageTitleId = $this->getId();
 
-		$key = wfMemcKey( 'recenteditors', 'list', $pageTitleId );
+		$key = $wgMemc->makeKey( 'recenteditors', 'list', $pageTitleId );
 		$data = $wgMemc->get( $key );
 		$editors = array();
 
@@ -596,7 +596,7 @@ class BlogPage extends Article {
 		// Gets the page ID for the query
 		$pageTitleId = $this->getId();
 
-		$key = wfMemcKey( 'recentvoters', 'list', $pageTitleId );
+		$key = $wgMemc->makeKey( 'recentvoters', 'list', $pageTitleId );
 		$data = $wgMemc->get( $key );
 
 		$voters = array();
@@ -716,7 +716,7 @@ class BlogPage extends Article {
 		}
 
 		// Try cache first
-		$key = wfMemcKey( 'blog', 'popular', 'five' );
+		$key = $wgMemc->makeKey( 'blog', 'popular', 'five' );
 		$data = $wgMemc->get( $key );
 
 		if ( $data != '' ) {
@@ -804,7 +804,7 @@ class BlogPage extends Article {
 		}
 
 		// Try cache first
-		$key = wfMemcKey( 'blog', 'new', 'five' );
+		$key = $wgMemc->makeKey( 'blog', 'new', 'five' );
 		$data = $wgMemc->get( $key );
 
 		if ( $data != '' ) {
@@ -950,7 +950,7 @@ class BlogPage extends Article {
 		global $wgMemc;
 
 		// Try cache first
-		$key = wfMemcKey( 'blog', 'comments', 'count', 'pageid-' . $id );
+		$key = $wgMemc->makeKey( 'blog', 'comments', 'count', 'pageid-' . $id );
 		$data = $wgMemc->get( $key );
 
 		if ( $data != '' ) {
@@ -983,7 +983,7 @@ class BlogPage extends Article {
 		global $wgMemc;
 
 		// Try cache first
-		$key = wfMemcKey( 'blog', 'vote', 'count', 'pageid-' . $id );
+		$key = $wgMemc->makeKey( 'blog', 'vote', 'count', 'pageid-' . $id );
 		$data = $wgMemc->get( $key );
 
 		if ( $data != '' ) {
@@ -1103,7 +1103,7 @@ class BlogPage extends Article {
 	public static function getPageImage( $pageId ) {
 		global $wgMemc;
 
-		$key = wfMemcKey( 'blog', 'page', 'image', $pageId );
+		$key = $wgMemc->makeKey( 'blog', 'page', 'image', $pageId );
 		$data = $wgMemc->get( $key );
 
 		if ( !$data ) {

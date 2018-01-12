@@ -190,7 +190,7 @@ class BlogPageHooks {
 		$output = '';
 
 		// Try cache first
-		$key = wfMemcKey( 'user', 'profile', 'articles', $userProfile->user_id );
+		$key = $wgMemc->makeKey( 'user', 'profile', 'articles', $userProfile->user_id );
 		$data = $wgMemc->get( $key );
 		$articles = array();
 
