@@ -208,7 +208,7 @@ class BlogPage extends Article {
 				__METHOD__,
 				array( 'ORDER BY' => 'rev_timestamp ASC' )
 			);
-			$wgMemc->set( $key, $createDate );
+			$wgMemc->set( $key, $createDate, 7 * IExpiringStore::TTL_WEEK  );
 		} else {
 			wfDebugLog( 'BlogPage', "Loading create_date for page {$pageId} from cache" );
 			$createDate = $data;
