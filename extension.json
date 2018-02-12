@@ -94,16 +94,13 @@
 	},
 	"ResourceModules": {
 		"ext.blogPage": {
-			"styles": "resources/css/ext.blogpage.blogpage.css",
-			"position": "top"
+			"styles": "resources/css/ext.blogpage.blogpage.css"
 		},
 		"ext.blogPage.articlesHome": {
-			"styles": "resources/css/ext.blogpage.articleshome.css",
-			"position": "top"
+			"styles": "resources/css/ext.blogpage.articleshome.css"
 		},
 		"ext.blogPage.create.css": {
-			"styles": "resources/css/ext.blogpage.createblogpost.css",
-			"position": "top"
+			"styles": "resources/css/ext.blogpage.createblogpost.css"
 		},
 		"ext.blogPage.create.js": {
 			"scripts": "resources/js/ext.blogpage.createblogpost.js",
