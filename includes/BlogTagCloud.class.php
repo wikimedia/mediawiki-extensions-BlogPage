@@ -40,7 +40,7 @@ class BlogTagCloud {
 			$catsExcluded = explode( "\n* ", $message->inContentLanguage()->text() );
 		}
 
-		Wikimedia\suppressWarnings(); // prevent PHP from bitching about strtotime()
+		MediaWiki\suppressWarnings(); // prevent PHP from bitching about strtotime()
 		foreach ( $res as $row ) {
 			$tag_name = Title::makeTitle( NS_CATEGORY, $row->cat_title );
 			$tag_text = $tag_name->getText();
