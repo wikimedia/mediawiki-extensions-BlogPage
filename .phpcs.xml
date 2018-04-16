@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<ruleset>
+	<rule ref="./vendor/mediawiki/mediawiki-codesniffer/MediaWiki">
+		<exclude name="Generic.Arrays.DisallowLongArraySyntax.Found"></exclude>
+		<exclude name="Generic.CodeAnalysis.ForLoopWithTestFunctionCall.NotAllowed"></exclude>
+		<exclude name="Generic.Files.LineLength.TooLong"></exclude>
+		<exclude name="Generic.Functions.FunctionCallArgumentSpacing.NoSpaceAfterComma"></exclude>
+		<exclude name="MediaWiki.Commenting.FunctionComment.MissingDocumentationPublic"></exclude>
+		<exclude name="MediaWiki.Commenting.FunctionComment.MissingParamTag"></exclude>
+		<exclude name="MediaWiki.Commenting.FunctionComment.MissingReturn"></exclude>
+		<exclude name="MediaWiki.Commenting.FunctionComment.ParamNameNoMatch"></exclude>
+		<exclude name="MediaWiki.Commenting.LicenseComment.InvalidLicenseTag"></exclude>
+		<exclude name="MediaWiki.Files.ClassMatchesFilename.NotMatch"></exclude>
+		<exclude name="MediaWiki.VariableAnalysis.UnusedGlobalVariables.UnusedGlobal$wgMemc"></exclude>
+		<exclude name="MediaWiki.WhiteSpace.SpaceAfterClosure.NoWhitespaceAfterClosure"></exclude>
+		<exclude name="MediaWiki.WhiteSpace.SpaceBeforeControlStructureBrace.BraceOnNewLine"></exclude>
+		<exclude name="MediaWiki.WhiteSpace.SpaceBeforeSingleLineComment.NewLineComment"></exclude>
+		<exclude name="MediaWiki.WhiteSpace.SpaceyParenthesis.SingleSpaceAfterOpenParenthesis"></exclude>
+		<exclude name="MediaWiki.WhiteSpace.SpaceyParenthesis.SingleSpaceBeforeCloseParenthesis"></exclude>
+		<exclude name="PSR2.Files.EndFileNewline.NoneFound"></exclude>
+		<exclude name="Squiz.Classes.SelfMemberReference.NotUsed"></exclude>
+	</rule>
+	<file>.</file>
+	<arg name="bootstrap" value="./vendor/mediawiki/mediawiki-codesniffer/utils/bootstrap-ci.php"/>
+	<arg name="extensions" value="php,php5,inc"/>
+	<arg name="encoding" value="UTF-8"/>
+</ruleset>
