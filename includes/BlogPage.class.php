@@ -554,7 +554,7 @@ class BlogPage extends Article {
 	 * @return string HTML or nothing
 	 */
 	public function recentEditors() {
-		global $wgUploadPath, $wgBlogPageDisplay;
+		global $wgBlogPageDisplay;
 
 		if ( $wgBlogPageDisplay['recent_editors'] == false ) {
 			return '';
@@ -574,8 +574,7 @@ class BlogPage extends Article {
 				$userTitle = Title::makeTitle( NS_USER, $editor['user_name'] );
 
 				$output .= '<a href="' . htmlspecialchars( $userTitle->getFullURL() ) .
-					"\"><img src=\"{$wgUploadPath}/avatars/{$avatar->getAvatarImage()}\" alt=\"" .
-						$userTitle->getText() . '" border="0" /></a>';
+					'">' . $avatar->getAvatarURL( [ 'alt' => $userTitle->getText() ] ) . '</a>';
 			}
 
 			$output .= '</div>';

@@ -139,7 +139,7 @@ class ArticlesHome extends SpecialPage {
 	 * @return string HTML
 	 */
 	public function getPopularPosts() {
-		global $wgMemc, $wgExtensionAssetsPath;
+		global $wgMemc;
 
 		// Try cache first
 		$key = $wgMemc->makeKey( 'blog', 'popular', 'twentyfive' );
@@ -192,8 +192,6 @@ class ArticlesHome extends SpecialPage {
 			$wgMemc->set( $key, $popularBlogPosts, 60 * 15 );
 		}
 
-		$imgPath = $wgExtensionAssetsPath . '/BlogPage/resources/images/';
-
 		$output = '<div class="listpages-container">';
 		if ( empty( $popularBlogPosts ) ) {
 			$output .= $this->msg( 'ah-no-results' )->escaped();
@@ -237,12 +235,12 @@ class ArticlesHome extends SpecialPage {
 						) .
 					'</div><!-- .listpages-blurb -->
 				<div class="listpages-stats">' . "\n";
-				$output .= "<img src=\"{$imgPath}voteIcon.gif\" alt=\"\" border=\"0\" /> " .
+				$output .= $this->getIcon( 'vote' ) .
 					$this->msg(
 						'blog-author-votes',
 						BlogPage::getVotesForPage( $popularBlogPost['id'] )
 					)->escaped();
-				$output .= " <img src=\"{$imgPath}comment.gif\" alt=\"\" border=\"0\" /> " .
+				$output .= $this->getIcon( 'comment' ) .
 					$this->msg(
 						'blog-author-comments',
 						BlogPage::getCommentsForPage( $popularBlogPost['id'] )
@@ -514,7 +512,7 @@ class ArticlesHome extends SpecialPage {
 	 * @return string HTML
 	 */
 	public function getNewestPosts() {
-		global $wgMemc, $wgExtensionAssetsPath;
+		global $wgMemc;
 
 		// Try cache first
 		$key = $wgMemc->makeKey( 'blog', 'newest', 'twentyfive' );
@@ -556,8 +554,6 @@ class ArticlesHome extends SpecialPage {
 			// Cache in memcached for 15 minutes
 			$wgMemc->set( $key, $newestBlogPosts, 60 * 15 );
 		}
-
-		$imgPath = $wgExtensionAssetsPath . '/BlogPage/resources/images/';
 
 		$output = '<div class="listpages-container">';
 		if ( empty( $newestBlogPosts ) ) {
@@ -601,11 +597,11 @@ class ArticlesHome extends SpecialPage {
 						) .
 					'</div><!-- .listpages-blurb -->
 				<div class="listpages-stats">' . "\n";
-				$output .= "<img src=\"{$imgPath}voteIcon.gif\" alt=\"\" border=\"0\" /> " .
+				$output .= $this->getIcon( 'vote' ) .
 					$this->msg( 'blog-author-votes' )
 					->numParams( BlogPage::getVotesForPage( $newestBlogPost['id'] ) )
 					->escaped();
-				$output .= " <img src=\"{$imgPath}comment.gif\" alt=\"\" border=\"0\" /> " .
+				$output .= $this->getIcon( 'comment' ) .
 					$this->msg( 'blog-author-comments' )
 					->numParams( BlogPage::getCommentsForPage( $newestBlogPost['id'] ) )
 					->escaped() . '</div><!-- . listpages-stats -->
@@ -713,5 +709,15 @@ class ArticlesHome extends SpecialPage {
 		$output .= '</div>' . "\n"; // .listpages-container
 
 		return $output;
+	}
+
+	/**
+	 * @param string $icon
+	 * @returns string
+	 */
+	private function getIcon() {
+		$icon = new UserActivityIcon( $icon );
+
+		return $icon->getIconHTML();
 	}
 }

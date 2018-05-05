@@ -20,7 +20,7 @@ class ArticleLists extends IncludableSpecialPage {
 	 * @param int $limit Show this many entries (LIMIT for SQL)
 	 */
 	public function execute( $limit ) {
-		global $wgMemc, $wgExtensionAssetsPath;
+		global $wgMemc;
 
 		$out = $this->getOutput();
 		$out->setPageTitle( $this->msg( 'ah-new-articles' ) );
@@ -36,8 +36,6 @@ class ArticleLists extends IncludableSpecialPage {
 		// too, but if ( $this->including() ) does nothing, prolly because of
 		// the parser cache
 		$out->addModuleStyles( 'ext.blogPage.articlesHome' );
-
-		$imgPath = $wgExtensionAssetsPath . '/BlogPage/resources/images/';
 
 		$output = '<div class="left-articles">';
 		if ( !$this->including() ) {
@@ -115,12 +113,12 @@ class ArticleLists extends IncludableSpecialPage {
 						) .
 					'</div><!-- .listpages-blurb -->
 				<div class="listpages-stats">' . "\n";
-				$output .= "<img src=\"{$imgPath}voteIcon.gif\" alt=\"\" border=\"0\" /> " .
+				$output .= $this->getIcon( 'vote' ) .
 					$this->msg(
 						'blog-author-votes',
 						BlogPage::getVotesForPage( $newBlogPost['id'] )
 					)->escaped();
-				$output .= " <img src=\"{$imgPath}comment.gif\" alt=\"\" border=\"0\" /> " .
+				$output .= $this->getIcon( 'comment' ) .
 					$this->msg(
 						'blog-author-comments',
 						BlogPage::getCommentsForPage( $newBlogPost['id'] )
@@ -135,4 +133,13 @@ class ArticleLists extends IncludableSpecialPage {
 		$out->addHTML( $output );
 	}
 
+	/**
+	 * @param string $icon
+	 * @return string
+	 */
+	private function getIcon() {
+		$icon = new UserActivityIcon( $icon );
+
+		return $icon->getIconHTML();
+	}
 }
