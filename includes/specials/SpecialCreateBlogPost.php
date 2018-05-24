@@ -60,8 +60,7 @@ class SpecialCreateBlogPost extends SpecialPage {
 		if (
 			$request->wasPosted() &&
 			$_SESSION['alreadysubmitted'] == false
-		)
-		{
+		) {
 			$_SESSION['alreadysubmitted'] = true;
 
 			// Protect against cross-site request forgery (CSRF)

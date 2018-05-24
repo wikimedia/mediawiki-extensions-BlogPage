@@ -20,7 +20,7 @@ class BlogPageHooks {
 
 		if ( $title->getNamespace() == NS_BLOG ) {
 			// This will suppress category links in SkinTemplate-based skins
-			$wgHooks['SkinTemplateOutputPageBeforeExec'][] = function( $sk, $tpl ) {
+			$wgHooks['SkinTemplateOutputPageBeforeExec'][] = function ( $sk, $tpl ) {
 				$tpl->set( 'catlinks', '' );
 				return true;
 			};

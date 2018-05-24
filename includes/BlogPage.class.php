@@ -208,7 +208,7 @@ class BlogPage extends Article {
 				__METHOD__,
 				[ 'ORDER BY' => 'rev_timestamp ASC' ]
 			);
-			$wgMemc->set( $key, $createDate, 7 * IExpiringStore::TTL_WEEK  );
+			$wgMemc->set( $key, $createDate, 7 * IExpiringStore::TTL_WEEK );
 		} else {
 			wfDebugLog( 'BlogPage', "Loading create_date for page {$pageId} from cache" );
 			$createDate = $data;
@@ -327,15 +327,13 @@ class BlogPage extends Article {
 		if (
 			isset( $this->authors[$author_index] ) &&
 			isset( $this->authors[$author_index]['user_name'] )
-		)
-		{
+		) {
 			$author_user_name = $this->authors[$author_index]['user_name'];
 		}
 		if (
 			isset( $this->authors[$author_index] ) &&
 			isset( $this->authors[$author_index]['user_id'] )
-		)
-		{
+		) {
 			$author_user_id = $this->authors[$author_index]['user_id'];
 		}
 
@@ -450,8 +448,7 @@ class BlogPage extends Article {
 			if (
 				count( $this->getVotersList() ) == 0 &&
 				count( $this->getEditorsList() ) == 0
-			)
-			{
+			) {
 				$css_fix = ' more-container-fix';
 			}
 
@@ -867,8 +864,7 @@ class BlogPage extends Article {
 		if (
 			$wgBlogPageDisplay['games'] == false ||
 			!ExtensionRegistry::getInstance()->isLoaded( 'RandomGameUnit' )
-		)
-		{
+		) {
 			return '';
 		}
 

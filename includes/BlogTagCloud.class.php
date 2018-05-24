@@ -48,8 +48,7 @@ class BlogTagCloud {
 			if (
 				!in_array( $tag_text, $catsExcluded ) &&
 				strtotime( $tag_text ) == ''
-			)
-			{
+			) {
 				if ( $row->cat_pages > $this->tags_highest_count ) {
 					$this->tags_highest_count = $row->cat_pages;
 				}
