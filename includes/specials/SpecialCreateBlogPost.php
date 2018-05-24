@@ -109,7 +109,7 @@ class SpecialCreateBlogPost extends SpecialPage {
 				// categories, "Articles by User $1" and "(today's date)",
 				// but the user may supply some categories themselves, so
 				// we need to take those into account, too.
-				$categories = array(
+				$categories = [
 					'[[' . $localizedCatNS . ':' .
 						$this->msg(
 							'blog-by-user-category',
@@ -117,7 +117,7 @@ class SpecialCreateBlogPost extends SpecialPage {
 						)->inContentLanguage()->text() .
 					']]' . "\n" .
 					"[[{$localizedCatNS}:{$today}]]"
-				);
+				];
 
 				$userSuppliedCategories = $request->getVal( 'pageCtg' );
 				if ( !empty( $userSuppliedCategories ) ) {
@@ -270,15 +270,15 @@ class SpecialCreateBlogPost extends SpecialPage {
 		global $wgRightsText;
 		if ( $wgRightsText ) {
 			$copywarnMsg = 'copyrightwarning';
-			$copywarnMsgParams = array(
+			$copywarnMsgParams = [
 				'[[' . $this->msg( 'copyrightpage' )->inContentLanguage()->text() . ']]',
 				$wgRightsText
-			);
+			];
 		} else {
 			$copywarnMsg = 'copyrightwarning2';
-			$copywarnMsgParams = array(
+			$copywarnMsgParams = [
 				'[[' . $this->msg( 'copyrightpage' )->inContentLanguage()->text() . ']]'
-			);
+			];
 		}
 		return '<div class="copyright-warning">' .
 			$this->msg( $copywarnMsg, $copywarnMsgParams )->parseAsBlock() .
@@ -327,8 +327,8 @@ class SpecialCreateBlogPost extends SpecialPage {
 		$dbr = wfGetDB( DB_MASTER );
 		$s = $dbr->selectRow(
 			'page',
-			array( 'page_id' ),
-			array( 'page_title' => $dbKey, 'page_namespace' => NS_BLOG ),
+			[ 'page_id' ],
+			[ 'page_title' => $dbKey, 'page_namespace' => NS_BLOG ],
 			__METHOD__
 		);
 

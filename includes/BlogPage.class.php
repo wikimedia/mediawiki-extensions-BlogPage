@@ -9,7 +9,7 @@ use MediaWiki\MediaWikiServices;
 class BlogPage extends Article {
 
 	public $title = null;
-	public $authors = array();
+	public $authors = [];
 
 	public function __construct( Title $title ) {
 		parent::__construct( $title );
@@ -175,10 +175,10 @@ class BlogPage extends Article {
 
 		foreach ( $authors as $author ) {
 			$authorUserId = User::idFromName( $author );
-			$this->authors[] = array(
+			$this->authors[] = [
 				'user_name' => trim( $author ),
 				'user_id' => $authorUserId
-			);
+			];
 		}
 	}
 
@@ -204,9 +204,9 @@ class BlogPage extends Article {
 			$createDate = $dbr->selectField(
 				'revision',
 				'rev_timestamp',// 'UNIX_TIMESTAMP(rev_timestamp) AS create_date',
-				array( 'rev_page' => $pageId ),
+				[ 'rev_page' => $pageId ],
 				__METHOD__,
-				array( 'ORDER BY' => 'rev_timestamp ASC' )
+				[ 'ORDER BY' => 'rev_timestamp ASC' ]
 			);
 			$wgMemc->set( $key, $createDate, 7 * IExpiringStore::TTL_WEEK  );
 		} else {
@@ -394,7 +394,7 @@ class BlogPage extends Article {
 			wfMessage( 'blog-by-user-category', $user_name )->text()
 		);
 
-		$articles = array();
+		$articles = [];
 
 		// Try cache first
 		$key = $wgMemc->makeKey( 'blog', 'author', 'articles', $user_id );
@@ -410,30 +410,30 @@ class BlogPage extends Article {
 				 wfMessage( 'blog-by-user-category', $user_name )->text()
 			);
 			$res = $dbr->select(
-				array( 'page', 'categorylinks' ),
-				array( 'DISTINCT(page_id) AS page_id', 'page_title' ),
-				/* WHERE */array(
-					'cl_to' => array( $categoryTitle->getDBkey() ),
+				[ 'page', 'categorylinks' ],
+				[ 'DISTINCT(page_id) AS page_id', 'page_title' ],
+				/* WHERE */[
+					'cl_to' => [ $categoryTitle->getDBkey() ],
 					'page_namespace' => NS_BLOG
-				),
+				],
 				__METHOD__,
-				array(
+				[
 					'ORDER BY' => 'page_id DESC',
 					'LIMIT' => 4
-				),
-				array(
-					'categorylinks' => array( 'INNER JOIN', 'cl_from = page_id' )
-				)
+				],
+				[
+					'categorylinks' => [ 'INNER JOIN', 'cl_from = page_id' ]
+				]
 			);
 
 			$array_count = 0;
 
 			foreach ( $res as $row ) {
 				if ( $row->page_id != $this->getId() && $array_count < 3 ) {
-					$articles[] = array(
+					$articles[] = [
 						'page_title' => $row->page_title,
 						'page_id' => $row->page_id
-					);
+					];
 
 					$array_count++;
 				}
@@ -505,17 +505,17 @@ class BlogPage extends Article {
 
 		$key = $wgMemc->makeKey( 'recenteditors', 'list', $pageTitleId );
 		$data = $wgMemc->get( $key );
-		$editors = array();
+		$editors = [];
 
 		if ( !$data ) {
 			wfDebugLog( 'BlogPage', "Loading recent editors for page {$pageTitleId} from DB" );
 			$dbr = wfGetDB( DB_REPLICA );
 
-			$where = array(
+			$where = [
 				'rev_page' => $pageTitleId,
 				'rev_user <> 0', // exclude anonymous editors
 				"rev_user_text <> 'MediaWiki default'", // exclude MW default
-			);
+			];
 
 			// Get authors and exclude them
 			foreach ( $this->authors as $author ) {
@@ -524,17 +524,17 @@ class BlogPage extends Article {
 
 			$res = $dbr->select(
 				'revision',
-				array( 'DISTINCT rev_user', 'rev_user_text' ),
+				[ 'DISTINCT rev_user', 'rev_user_text' ],
 				$where,
 				__METHOD__,
-				array( 'ORDER BY' => 'rev_user_text ASC', 'LIMIT' => 8 )
+				[ 'ORDER BY' => 'rev_user_text ASC', 'LIMIT' => 8 ]
 			);
 
 			foreach ( $res as $row ) {
-				$editors[] = array(
+				$editors[] = [
 					'user_id' => $row->rev_user,
 					'user_name' => $row->rev_user_text
-				);
+				];
 			}
 
 			// Store in memcached for five minutes
@@ -598,15 +598,15 @@ class BlogPage extends Article {
 		$key = $wgMemc->makeKey( 'recentvoters', 'list', $pageTitleId );
 		$data = $wgMemc->get( $key );
 
-		$voters = array();
+		$voters = [];
 		if ( !$data ) {
 			wfDebugLog( 'BlogPage', "Loading recent voters for page {$pageTitleId} from DB" );
 			$dbr = wfGetDB( DB_REPLICA );
 
-			$where = array(
+			$where = [
 				'vote_page_id' => $pageTitleId,
 				'vote_user_id <> 0'
-			);
+			];
 
 			// Exclude the authors of the blog post from the list of recent
 			// voters
@@ -616,17 +616,17 @@ class BlogPage extends Article {
 
 			$res = $dbr->select(
 				'Vote',
-				array( 'DISTINCT username', 'vote_user_id', 'vote_page_id' ),
+				[ 'DISTINCT username', 'vote_user_id', 'vote_page_id' ],
 				$where,
 				__METHOD__,
-				array( 'ORDER BY' => 'vote_id DESC', 'LIMIT' => 8 )
+				[ 'ORDER BY' => 'vote_id DESC', 'LIMIT' => 8 ]
 			);
 
 			foreach ( $res as $row ) {
-				$voters[] = array(
+				$voters[] = [
 					'user_id' => $row->vote_user_id,
 					'user_name' => $row->username
-				);
+				];
 			}
 
 			$wgMemc->set( $key, $voters, 60 * 5 );
@@ -731,12 +731,12 @@ class BlogPage extends Article {
 			$commentsTable = $dbr->tableName( 'Comments' );
 			$voteTable = $dbr->tableName( 'Vote' );
 			$res = $dbr->select(
-				array( 'page', /*'categorylinks',*/ 'Comments', 'Vote' ),
-				array(
+				[ 'page', /*'categorylinks',*/ 'Comments', 'Vote' ],
+				[
 					'DISTINCT page_id', 'page_namespace', 'page_is_redirect',
 					'page_title',
-				),
-				array(
+				],
+				[
 					'page_namespace' => NS_BLOG,
 					'page_is_redirect' => 0,
 					'page_id = Comment_Page_ID',
@@ -745,24 +745,24 @@ class BlogPage extends Article {
 					// please let me know. Until that...
 					"((SELECT COUNT(*) FROM $voteTable WHERE vote_page_id = page_id) >= 5 OR
 					(SELECT COUNT(*) FROM $commentsTable WHERE Comment_Page_ID = page_id) >= 5)",
-				),
+				],
 				__METHOD__,
-				array(
+				[
 					'ORDER BY' => 'page_id DESC',
 					'LIMIT' => 10
-				),
-				array(
-					'Comments' => array( 'INNER JOIN', 'page_id = Comment_Page_ID' ),
-					'Vote' => array( 'INNER JOIN', 'page_id = vote_page_id' )
-				)
+				],
+				[
+					'Comments' => [ 'INNER JOIN', 'page_id = Comment_Page_ID' ],
+					'Vote' => [ 'INNER JOIN', 'page_id = vote_page_id' ]
+				]
 			);
 
-			$popularBlogPosts = array();
+			$popularBlogPosts = [];
 			foreach ( $res as $row ) {
-				$popularBlogPosts[] = array(
+				$popularBlogPosts[] = [
 					'title' => $row->page_title,
 					'id' => $row->page_id
-				);
+				];
 			}
 
 			// Cache in memcached for 15 minutes
@@ -818,17 +818,17 @@ class BlogPage extends Article {
 			// Code sporked from Rob Church's NewestPages extension
 			$res = $dbr->select(
 				'page',
-				array( 'page_namespace', 'page_title', 'page_is_redirect' ),
-				array( 'page_namespace' => NS_BLOG, 'page_is_redirect' => 0 ),
+				[ 'page_namespace', 'page_title', 'page_is_redirect' ],
+				[ 'page_namespace' => NS_BLOG, 'page_is_redirect' => 0 ],
 				__METHOD__,
-				array( 'ORDER BY' => 'page_id DESC', 'LIMIT' => 5 )
+				[ 'ORDER BY' => 'page_id DESC', 'LIMIT' => 5 ]
 			);
 
-			$newBlogPosts = array();
+			$newBlogPosts = [];
 			foreach ( $res as $row ) {
-				$newBlogPosts[] = array(
+				$newBlogPosts[] = [
 					'title' => $row->page_title,
-				);
+				];
 			}
 
 			// Cache in memcached for 15 minutes
@@ -893,12 +893,12 @@ class BlogPage extends Article {
 		$comments = CommentsOfTheDay::get(
 			false/* do NOT skip cache! */,
 			60 * 15 /* cache for fifteen minutes */,
-			array(
+			[
 				'comment_page_id = page_id',
 				// different time-related code here than the cache time!
 				'UNIX_TIMESTAMP(comment_date) > ' . ( time() - ( 60 * 60 * 24 ) ),
 				'page_namespace' => NS_BLOG
-			)
+			]
 		);
 
 		$output = '';
@@ -961,7 +961,7 @@ class BlogPage extends Article {
 			$commentCount = (int)$dbr->selectField(
 				'Comments',
 				'COUNT(*) AS count',
-				array( 'Comment_Page_ID' => intval( $id ) ),
+				[ 'Comment_Page_ID' => intval( $id ) ],
 				__METHOD__
 			);
 			// Store in memcached for 15 minutes
@@ -994,7 +994,7 @@ class BlogPage extends Article {
 			$voteCount = (int)$dbr->selectField(
 				'Vote',
 				'COUNT(*) AS count',
-				array( 'vote_page_id' => intval( $id ) ),
+				[ 'vote_page_id' => intval( $id ) ],
 				__METHOD__
 			);
 			// Store in memcached for 15 minutes
@@ -1109,8 +1109,8 @@ class BlogPage extends Article {
 			$dbr = wfGetDB( DB_REPLICA );
 			$il_to = $dbr->selectField(
 				'imagelinks',
-				array( 'il_to' ),
-				array( 'il_from' => intval( $pageId ) ),
+				[ 'il_to' ],
+				[ 'il_from' => intval( $pageId ) ],
 				__METHOD__
 			);
 			// Cache in memcached for a minute

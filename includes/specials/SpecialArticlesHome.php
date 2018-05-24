@@ -155,37 +155,37 @@ class ArticlesHome extends SpecialPage {
 			$commentsTable = $dbr->tableName( 'Comments' );
 			$voteTable = $dbr->tableName( 'Vote' );
 			$res = $dbr->select(
-				array( 'page', 'Comments', 'Vote' ),
-				array(
+				[ 'page', 'Comments', 'Vote' ],
+				[
 					'DISTINCT page_id', 'page_namespace', 'page_title',
 					'page_is_redirect',
-				),
-				array(
+				],
+				[
 					'page_namespace' => NS_BLOG,
 					'page_is_redirect' => 0,
 					// If you can figure out how to do this without a subquery,
 					// please let me know. Until that...
 					"((SELECT COUNT(*) FROM $voteTable WHERE vote_page_id = page_id) >= 5 OR
 					(SELECT COUNT(*) FROM $commentsTable WHERE Comment_Page_ID = page_id) >= 5)",
-				),
+				],
 				__METHOD__,
-				array(
+				[
 					'ORDER BY' => 'page_id DESC',
 					'LIMIT' => 25
-				),
-				array(
-					'Comments' => array( 'INNER JOIN', 'page_id = Comment_Page_ID' ),
-					'Vote' => array( 'INNER JOIN', 'page_id = vote_page_id' )
-				)
+				],
+				[
+					'Comments' => [ 'INNER JOIN', 'page_id = Comment_Page_ID' ],
+					'Vote' => [ 'INNER JOIN', 'page_id = vote_page_id' ]
+				]
 			);
 
-			$popularBlogPosts = array();
+			$popularBlogPosts = [];
 			foreach ( $res as $row ) {
-				$popularBlogPosts[] = array(
+				$popularBlogPosts[] = [
 					'title' => $row->page_title,
 					'ns' => $row->page_namespace,
 					'id' => $row->page_id
-				);
+				];
 			}
 
 			// Cache in memcached for 15 minutes
@@ -205,7 +205,7 @@ class ArticlesHome extends SpecialPage {
 					$img = wfFindFile( $pageImage );
 					$imgTag = '';
 					if ( is_object( $img ) ) {
-						$thumb = $img->transform( array( 'width' => 65, 'height' => 0 ) );
+						$thumb = $img->transform( [ 'width' => 65, 'height' => 0 ] );
 						$imgTag = $thumb->toHtml();
 					}
 
@@ -284,32 +284,32 @@ class ArticlesHome extends SpecialPage {
 			$titleTwo = Title::makeTitle( NS_CATEGORY, $kaboom[1] );
 			$titleThree = Title::makeTitle( NS_CATEGORY, $kaboom[2] );
 			$res = $dbr->select(
-				array( 'page', 'categorylinks', 'Vote' ),
-				array( 'DISTINCT page_id', 'page_title', 'page_namespace' ),
-				array(
-					'cl_to' => array(
+				[ 'page', 'categorylinks', 'Vote' ],
+				[ 'DISTINCT page_id', 'page_title', 'page_namespace' ],
+				[
+					'cl_to' => [
 						$titleOne->getDBkey(), $titleTwo->getDBkey(),
 						$titleThree->getDBkey()
-					),
+					],
 					'page_namespace' => NS_BLOG,
 					'page_id = vote_page_id',
 					'vote_date < "' . date( 'Y-m-d H:i:s' ) . '"'
-				),
+				],
 				__METHOD__,
-				array( 'LIMIT' => 10 ),
-				array(
-					'categorylinks' => array( 'INNER JOIN', 'cl_from = page_id' ),
-					'Vote' => array( 'LEFT JOIN', 'vote_page_id = page_id' ),
-				)
+				[ 'LIMIT' => 10 ],
+				[
+					'categorylinks' => [ 'INNER JOIN', 'cl_from = page_id' ],
+					'Vote' => [ 'LEFT JOIN', 'vote_page_id = page_id' ],
+				]
 			);
 
-			$votedBlogPosts = array();
+			$votedBlogPosts = [];
 			foreach ( $res as $row ) {
-				$votedBlogPosts[] = array(
+				$votedBlogPosts[] = [
 					'title' => $row->page_title,
 					'ns' => $row->page_namespace,
 					'id' => $row->page_id
-				);
+				];
 			}
 
 			// Cache in memcached for 15 minutes
@@ -375,32 +375,32 @@ class ArticlesHome extends SpecialPage {
 			$titleTwo = Title::makeTitle( NS_CATEGORY, $kaboom[1] );
 			$titleThree = Title::makeTitle( NS_CATEGORY, $kaboom[2] );
 			$res = $dbr->select(
-				array( 'page', 'categorylinks', 'Comments' ),
-				array( 'DISTINCT page_id', 'page_title', 'page_namespace' ),
-				array(
-					'cl_to' => array(
+				[ 'page', 'categorylinks', 'Comments' ],
+				[ 'DISTINCT page_id', 'page_title', 'page_namespace' ],
+				[
+					'cl_to' => [
 						$titleOne->getDBkey(), $titleTwo->getDBkey(),
 						$titleThree->getDBkey()
-					),
+					],
 					'page_namespace' => NS_BLOG,
 					'page_id = Comment_Page_ID',
 					'Comment_Date < "' . date( 'Y-m-d H:i:s' ) . '"'
-				),
+				],
 				__METHOD__,
-				array( 'LIMIT' => 10 ),
-				array(
-					'categorylinks' => array( 'INNER JOIN', 'cl_from = page_id' ),
-					'Comments' => array( 'LEFT JOIN', 'Comment_Page_ID = page_id' ),
-				)
+				[ 'LIMIT' => 10 ],
+				[
+					'categorylinks' => [ 'INNER JOIN', 'cl_from = page_id' ],
+					'Comments' => [ 'LEFT JOIN', 'Comment_Page_ID = page_id' ],
+				]
 			);
 
-			$commentedBlogPosts = array();
+			$commentedBlogPosts = [];
 			foreach ( $res as $row ) {
-				$commentedBlogPosts[] = array(
+				$commentedBlogPosts[] = [
 					'title' => $row->page_title,
 					'ns' => $row->page_namespace,
 					'id' => $row->page_id
-				);
+				];
 			}
 
 			// Cache in memcached for 15 minutes
@@ -455,22 +455,22 @@ class ArticlesHome extends SpecialPage {
 			// Code sporked from Rob Church's NewestPages extension
 			$res = $dbr->select(
 				'page',
-				array(
+				[
 					'page_namespace', 'page_title', 'page_is_redirect',
 					'page_id'
-				),
-				array( 'page_namespace' => NS_BLOG, 'page_is_redirect' => 0 ),
+				],
+				[ 'page_namespace' => NS_BLOG, 'page_is_redirect' => 0 ],
 				__METHOD__,
-				array( 'ORDER BY' => 'page_id DESC', 'LIMIT' => 10 )
+				[ 'ORDER BY' => 'page_id DESC', 'LIMIT' => 10 ]
 			);
 
-			$newBlogPosts = array();
+			$newBlogPosts = [];
 			foreach ( $res as $row ) {
-				$newBlogPosts[] = array(
+				$newBlogPosts[] = [
 					'title' => $row->page_title,
 					'ns' => $row->page_namespace,
 					'id' => $row->page_id
-				);
+				];
 			}
 
 			// Cache in memcached for 15 minutes
@@ -526,29 +526,29 @@ class ArticlesHome extends SpecialPage {
 			$dbr = wfGetDB( DB_REPLICA );
 			// Code sporked from Rob Church's NewestPages extension
 			$res = $dbr->select(
-				array( 'page' ),
-				array(
+				[ 'page' ],
+				[
 					'page_namespace', 'page_title', 'page_is_redirect',
 					'page_id',
-				),
-				array(
+				],
+				[
 					'page_namespace' => NS_BLOG,
 					'page_is_redirect' => 0,
-				),
+				],
 				__METHOD__,
-				array(
+				[
 					'ORDER BY' => 'page_id DESC',
 					'LIMIT' => 25
-				)
+				]
 			);
 
-			$newestBlogPosts = array();
+			$newestBlogPosts = [];
 			foreach ( $res as $row ) {
-				$newestBlogPosts[] = array(
+				$newestBlogPosts[] = [
 					'title' => $row->page_title,
 					'ns' => $row->page_namespace,
 					'id' => $row->page_id
-				);
+				];
 			}
 
 			// Cache in memcached for 15 minutes
@@ -568,7 +568,7 @@ class ArticlesHome extends SpecialPage {
 					$img = wfFindFile( $pageImage );
 					$imgTag = '';
 					if ( is_object( $img ) ) {
-						$thumb = $img->transform( array( 'width' => 65, 'height' => 0 ) );
+						$thumb = $img->transform( [ 'width' => 65, 'height' => 0 ] );
 						$imgTag = $thumb->toHtml();
 					}
 
@@ -643,12 +643,12 @@ class ArticlesHome extends SpecialPage {
 			$voteTable = $dbr->tableName( 'Vote' );
 			// Code sporked from Rob Church's NewestPages extension
 			$res = $dbr->select(
-				array( 'page', 'Comments', 'Vote' ),
-				array(
+				[ 'page', 'Comments', 'Vote' ],
+				[
 					'DISTINCT page_id', 'page_namespace', 'page_title',
 					'page_is_redirect',
-				),
-				array(
+				],
+				[
 					'page_namespace' => NS_BLOG,
 					'page_is_redirect' => 0,
 					'page_id = Comment_Page_ID',
@@ -657,25 +657,25 @@ class ArticlesHome extends SpecialPage {
 					// please let me know. Until that...
 					"((SELECT COUNT(*) FROM $voteTable WHERE vote_page_id = page_id) >= 5 OR
 					(SELECT COUNT(*) FROM $commentsTable WHERE Comment_Page_ID = page_id) >= 5)",
-				),
+				],
 				__METHOD__,
-				array(
+				[
 					'ORDER BY' => 'page_id DESC',
 					'LIMIT' => 10
-				),
-				array(
-					'Comments' => array( 'INNER JOIN', 'page_id = Comment_Page_ID' ),
-					'Vote' => array( 'INNER JOIN', 'page_id = vote_page_id' )
-				)
+				],
+				[
+					'Comments' => [ 'INNER JOIN', 'page_id = Comment_Page_ID' ],
+					'Vote' => [ 'INNER JOIN', 'page_id = vote_page_id' ]
+				]
 			);
 
-			$popularBlogPosts = array();
+			$popularBlogPosts = [];
 			foreach ( $res as $row ) {
-				$popularBlogPosts[] = array(
+				$popularBlogPosts[] = [
 					'title' => $row->page_title,
 					'ns' => $row->page_namespace,
 					'id' => $row->page_id
-				);
+				];
 			}
 
 			// Cache in memcached for 15 minutes

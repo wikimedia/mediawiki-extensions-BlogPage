@@ -41,9 +41,9 @@ class ArticleLists extends IncludableSpecialPage {
 		if ( !$this->including() ) {
 			$descMsg = $this->msg( 'ah-new-articles-summary' );
 			if ( !$descMsg->isDisabled() ) {
-				$output .= Xml::tags('div', array(
+				$output .= Xml::tags('div', [
 					'class' => 'mw-specialpage-summary'
-				), $descMsg->parse() );
+				], $descMsg->parse() );
 			}
 		}
 
@@ -61,22 +61,22 @@ class ArticleLists extends IncludableSpecialPage {
 			// You rock, dude!
 			$res = $dbr->select(
 				'page',
-				array(
+				[
 					'page_namespace', 'page_title', 'page_is_redirect',
 					'page_id'
-				),
-				array( 'page_namespace' => NS_BLOG, 'page_is_redirect' => 0 ),
+				],
+				[ 'page_namespace' => NS_BLOG, 'page_is_redirect' => 0 ],
 				__METHOD__,
-				array( 'ORDER BY' => 'page_id DESC', 'LIMIT' => $limit )
+				[ 'ORDER BY' => 'page_id DESC', 'LIMIT' => $limit ]
 			);
 
-			$newBlogPosts = array();
+			$newBlogPosts = [];
 			foreach ( $res as $row ) {
-				$newBlogPosts[] = array(
+				$newBlogPosts[] = [
 					'title' => $row->page_title,
 					'ns' => $row->page_namespace,
 					'id' => $row->page_id
-				);
+				];
 			}
 
 			// Cache in memcached for 15 minutes
@@ -96,7 +96,7 @@ class ArticleLists extends IncludableSpecialPage {
 					$img = wfFindFile( $pageImage );
 					$imgTag = '';
 					if ( is_object( $img ) ) {
-						$thumb = $img->transform( array( 'width' => 65, 'height' => 0 ) );
+						$thumb = $img->transform( [ 'width' => 65, 'height' => 0 ] );
 						$imgTag = $thumb->toHtml();
 					}
 

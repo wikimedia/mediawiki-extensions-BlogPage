@@ -6,18 +6,18 @@
  * @ingroup Extensions
  */
 
-$specialPageAliases = array();
+$specialPageAliases = [];
 
 /** English */
-$specialPageAliases['en'] = array(
-	'ArticlesHome' => array( 'ArticlesHome' ),
-	'ArticleLists' => array( 'ArticleLists' ),
-	'CreateBlogPost' => array( 'CreateBlogPost' ),
-);
+$specialPageAliases['en'] = [
+	'ArticlesHome' => [ 'ArticlesHome' ],
+	'ArticleLists' => [ 'ArticleLists' ],
+	'CreateBlogPost' => [ 'CreateBlogPost' ],
+];
 
 /** Finnish (Suomi) */
-$specialPageAliases['fi'] = array(
-	'ArticlesHome' => array( 'Artikkelien kotisivu' ),
-	'ArticleLists' => array( 'Artikkelilistat' ),
-	'CreateBlogPost' => array( 'Luo blogikirjoitus' ),
-);
+$specialPageAliases['fi'] = [
+	'ArticlesHome' => [ 'Artikkelien kotisivu' ],
+	'ArticleLists' => [ 'Artikkelilistat' ],
+	'CreateBlogPost' => [ 'Luo blogikirjoitus' ],
+];

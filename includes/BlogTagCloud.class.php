@@ -14,7 +14,7 @@ class BlogTagCloud {
 	/** @var string $tags_size_type **/
 	public $tags_size_type = 'pt';
 	/** @var array $tags **/
-	public $tags = array();
+	public $tags = [];
 
 	public function __construct( $limit = 10 ) {
 		$this->limit = $limit;
@@ -25,17 +25,17 @@ class BlogTagCloud {
 		$dbr = wfGetDB( DB_MASTER );
 		$res = $dbr->select(
 			'category',
-			array( 'cat_title', 'cat_pages' ),
-			array(),
+			[ 'cat_title', 'cat_pages' ],
+			[],
 			__METHOD__,
-			array(
+			[
 				'ORDER BY' => 'cat_pages DESC',
 				'LIMIT' => $this->limit
-			)
+			]
 		);
 
 		$message = wfMessage( 'blog-tagcloud-blacklist' );
-		$catsExcluded = array();
+		$catsExcluded = [];
 		if ( !$message->isDisabled() ) {
 			$catsExcluded = explode( "\n* ", $message->inContentLanguage()->text() );
 		}
@@ -53,7 +53,7 @@ class BlogTagCloud {
 				if ( $row->cat_pages > $this->tags_highest_count ) {
 					$this->tags_highest_count = $row->cat_pages;
 				}
-				$this->tags[$tag_text] = array( 'count' => $row->cat_pages );
+				$this->tags[$tag_text] = [ 'count' => $row->cat_pages ];
 			}
 		}
 		Wikimedia\restoreWarnings();

@@ -93,7 +93,7 @@ class BlogPageHooks {
 		$res = $dbr->select(
 			'categorylinks',
 			'cl_to',
-			array( 'cl_from' => $aid ),
+			[ 'cl_from' => $aid ],
 			__METHOD__
 		);
 
@@ -130,20 +130,20 @@ class BlogPageHooks {
 						$dbw = wfGetDB( DB_MASTER );
 
 						$opinions = $dbw->select(
-							array( 'page', 'categorylinks' ),
-							array( 'COUNT(*) AS CreatedOpinions' ),
-							array(
+							[ 'page', 'categorylinks' ],
+							[ 'COUNT(*) AS CreatedOpinions' ],
+							[
 								'cl_to' => $ctgTitle,
 								'page_namespace' => NS_BLOG // paranoia
-							),
+							],
 							__METHOD__,
-							array(),
-							array(
-								'categorylinks' => array(
+							[],
+							[
+								'categorylinks' => [
 									'INNER JOIN',
 									'page_id = cl_from'
-								)
-							)
+								]
+							]
 						);
 
 						// Please die in a fire, PHP.
@@ -159,8 +159,8 @@ class BlogPageHooks {
 
 						$res = $dbw->update(
 							'user_stats',
-							array( 'stats_opinions_created' => $opinionsCreated ),
-							array( 'stats_user_id' => $stats->user_id ),
+							[ 'stats_opinions_created' => $opinionsCreated ],
+							[ 'stats_user_id' => $stats->user_id ],
 							__METHOD__
 						);
 
@@ -192,7 +192,7 @@ class BlogPageHooks {
 		// Try cache first
 		$key = $wgMemc->makeKey( 'user', 'profile', 'articles', $userProfile->user_id );
 		$data = $wgMemc->get( $key );
-		$articles = array();
+		$articles = [];
 
 		if ( $data != '' ) {
 			wfDebugLog(
@@ -222,23 +222,23 @@ class BlogPageHooks {
 			 * the cl_to stuff actually, y'know, works :)
 			 */
 			$res = $dbr->select(
-				array( 'page', 'categorylinks' ),
-				array( 'DISTINCT page_id', 'page_title', 'page_namespace' ),
-				/* WHERE */array(
+				[ 'page', 'categorylinks' ],
+				[ 'DISTINCT page_id', 'page_title', 'page_namespace' ],
+				/* WHERE */[
 					'cl_from = page_id',
-					'cl_to' => array( $categoryTitle->getDBkey() ),
+					'cl_to' => [ $categoryTitle->getDBkey() ],
 					'page_namespace' => NS_BLOG
-				),
+				],
 				__METHOD__,
-				array( 'ORDER BY' => 'page_id DESC', 'LIMIT' => 5 )
+				[ 'ORDER BY' => 'page_id DESC', 'LIMIT' => 5 ]
 			);
 
 			foreach ( $res as $row ) {
-				$articles[] = array(
+				$articles[] = [
 					'page_title' => $row->page_title,
 					'page_namespace' => $row->page_namespace,
 					'page_id' => $row->page_id
-				);
+				];
 			}
 
 			$wgMemc->set( $key, $articles, 60 );

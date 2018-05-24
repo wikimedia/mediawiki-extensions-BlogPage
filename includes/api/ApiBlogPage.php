@@ -24,7 +24,7 @@ class ApiBlogPage extends ApiBase {
 
 		// Top level
 		$this->getResult()->addValue( null, $this->getModuleName(),
-			array( 'result' => $output )
+			[ 'result' => $output ]
 		);
 
 		return true;
@@ -34,20 +34,20 @@ class ApiBlogPage extends ApiBase {
 	 * @return array
 	 */
 	public function getAllowedParams() {
-		return array(
-			'pageName' => array(
+		return [
+			'pageName' => [
 				ApiBase::PARAM_TYPE => 'string',
 				ApiBase::PARAM_REQUIRED => true
-			)
-		);
+			]
+		];
 	}
 
 	/**
 	 * @see ApiBase::getExamplesMessages()
 	 */
 	protected function getExamplesMessages() {
-		return array(
+		return [
 			'action=blogpage&pageName=My%20Cool%20New%20Blog%20Post' => 'apihelp-blogpage-example-1'
-		);
+		];
 	}
 }
