@@ -465,12 +465,12 @@ class BlogPage extends Article {
 					<div class=\"author-item-small\">" .
 						wfMessage(
 							'blog-author-votes',
-							BlogPage::getVotesForPage( $article['page_id'] )
+							self::getVotesForPage( $article['page_id'] )
 						)->escaped() .
 						', ' .
 						wfMessage(
 							'blog-author-comments',
-							BlogPage::getCommentsForPage( $article['page_id'] )
+							self::getCommentsForPage( $article['page_id'] )
 						)->escaped() .
 						'</div>
 				</div>';

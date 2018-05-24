@@ -10,7 +10,6 @@
 		<exclude name="MediaWiki.Files.ClassMatchesFilename.NotMatch" />
 		<exclude name="MediaWiki.VariableAnalysis.UnusedGlobalVariables.UnusedGlobal$wgMemc" />
 		<exclude name="MediaWiki.WhiteSpace.SpaceBeforeSingleLineComment.NewLineComment" />
-		<exclude name="Squiz.Classes.SelfMemberReference.NotUsed" />
 	</rule>
 	<file>.</file>
 	<arg name="extensions" value="php,php5,inc"/>
