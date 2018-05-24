@@ -203,7 +203,7 @@ class BlogPage extends Article {
 			$dbr = wfGetDB( DB_REPLICA );
 			$createDate = $dbr->selectField(
 				'revision',
-				'rev_timestamp',// 'UNIX_TIMESTAMP(rev_timestamp) AS create_date',
+				'rev_timestamp', // 'UNIX_TIMESTAMP(rev_timestamp) AS create_date',
 				[ 'rev_page' => $pageId ],
 				__METHOD__,
 				[ 'ORDER BY' => 'rev_timestamp ASC' ]
