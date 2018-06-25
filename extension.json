@@ -32,7 +32,7 @@
 			"recent_voters": true,
 			"popular_articles": true,
 			"in_the_news": true,
-			"comments_of_day": true,
+			"comments_of_day": false,
 			"games": true,
 			"new_articles": true
 		},
