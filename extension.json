@@ -8,6 +8,9 @@
 	"license-name": "GPL-2.0-or-later",
 	"url": "https://www.mediawiki.org/wiki/Extension:BlogPage",
 	"descriptionmsg": "blogpage-desc",
+	"requires": {
+		"MediaWiki": ">= 1.31.0"
+	},
 	"type": "other",
 	"namespaces": [
 		{
