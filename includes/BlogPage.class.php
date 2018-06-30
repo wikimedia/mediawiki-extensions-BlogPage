@@ -912,9 +912,9 @@ class BlogPage extends Article {
 			}
 
 			$comment['comment_text'] = strip_tags( $comment['comment_text'] );
-			$comment_text = $this->getContext()->getLanguage()->truncate(
+			$comment_text = $this->getContext()->getLanguage()->truncateForVisual(
 				$comment['comment_text'],
-				( 70 - strlen( $commentPosterDisplay ) )
+				( 70 - mb_strlen( $commentPosterDisplay ) )
 			);
 
 			$output .= '<div class="cod-item">';
