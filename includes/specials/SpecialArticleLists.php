@@ -137,7 +137,7 @@ class ArticleLists extends IncludableSpecialPage {
 	 * @param string $icon
 	 * @return string
 	 */
-	private function getIcon() {
+	private function getIcon( $icon ) {
 		$icon = new UserActivityIcon( $icon );
 
 		return $icon->getIconHTML();
