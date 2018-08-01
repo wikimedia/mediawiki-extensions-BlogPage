@@ -715,7 +715,7 @@ class ArticlesHome extends SpecialPage {
 	 * @param string $icon
 	 * @returns string
 	 */
-	private function getIcon() {
+	private function getIcon( $icon ) {
 		$icon = new UserActivityIcon( $icon );
 
 		return $icon->getIconHTML();
