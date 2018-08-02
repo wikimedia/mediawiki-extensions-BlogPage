@@ -309,7 +309,7 @@ class BlogPage extends Article {
 		}
 
 		$output = '<div class="multiple-authors-message">' .
-			wfMessage( 'blog-multiple-authors', $authors )->escaped() .
+			wfMessage( 'blog-multiple-authors' )->rawParams( $authors )->escaped() .
 			'</div>';
 
 		return $output;
