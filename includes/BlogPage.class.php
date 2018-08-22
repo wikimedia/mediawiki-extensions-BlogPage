@@ -361,7 +361,7 @@ class BlogPage extends Article {
 							<div class=\"author-title\">
 								<a href=\"" . htmlspecialchars( $authorTitle->getFullURL() ) .
 									'" rel="nofollow">' .
-									wordwrap( $author_user_name, 12, "<br />\n", true ) .
+									str_replace( "\n", '<br/>', htmlspecialchars( wordwrap( $author_user_name, 12, "\n", true ) ) ) .
 								'</a>
 							</div>';
 		// If the user has supplied some information about themselves on their
@@ -461,8 +461,8 @@ class BlogPage extends Article {
 				$articleTitle = Title::makeTitle( NS_BLOG, $article['page_title'] );
 
 				$output .= '<div class="author-article-item">
-					<a href="' . htmlspecialchars( $articleTitle->getFullURL() ) . "\">{$articleTitle->getText()}</a>
-					<div class=\"author-item-small\">" .
+					<a href="' . htmlspecialchars( $articleTitle->getFullURL() ) . '">' . htmlspecialchars( $articleTitle->getText() ) . '</a>
+					<div class="author-item-small">' .
 						wfMessage(
 							'blog-author-votes',
 							self::getVotesForPage( $article['page_id'] )
@@ -771,7 +771,7 @@ class BlogPage extends Article {
 			$titleObj = Title::makeTitle( NS_BLOG, $popularBlogPost['title'] );
 			$html .= '<div class="listpages-item">
 					<a href="' . htmlspecialchars( $titleObj->getFullURL() ) . '">' .
-						$titleObj->getText() .
+						htmlspecialchars( $titleObj->getText() ) .
 					'</a>
 				</div>
 				<div class="visualClear"></div>';
@@ -800,7 +800,7 @@ class BlogPage extends Article {
 		}
 
 		// Try cache first
-		$key = $wgMemc->makeKey( 'blog', 'new', 'five' );
+		$key = $wgMemc->makeKey( 'blog', 'newest', '5' );
 		$data = $wgMemc->get( $key );
 
 		if ( $data != '' ) {
@@ -815,7 +815,7 @@ class BlogPage extends Article {
 			// Code sporked from Rob Church's NewestPages extension
 			$res = $dbr->select(
 				'page',
-				[ 'page_namespace', 'page_title', 'page_is_redirect' ],
+				[ 'page_namespace', 'page_title', 'page_is_redirect', 'page_id' ],
 				[ 'page_namespace' => NS_BLOG, 'page_is_redirect' => 0 ],
 				__METHOD__,
 				[ 'ORDER BY' => 'page_id DESC', 'LIMIT' => 5 ]
@@ -825,6 +825,8 @@ class BlogPage extends Article {
 			foreach ( $res as $row ) {
 				$newBlogPosts[] = [
 					'title' => $row->page_title,
+					'ns' => $row->page_namespace,
+					'id' => $row->page_id
 				];
 			}
 
@@ -837,7 +839,7 @@ class BlogPage extends Article {
 			$titleObj = Title::makeTitle( NS_BLOG, $newBlogPost['title'] );
 			$html .= '<div class="listpages-item">
 					<a href="' . htmlspecialchars( $titleObj->getFullURL() ) . '">' .
-						$titleObj->getText() .
+						htmlspecialchars( $titleObj->getText() ) .
 					'</a>
 				</div>
 				<div class="visualClear"></div>';
@@ -922,7 +924,7 @@ class BlogPage extends Article {
 			$output .= ' <span class="cod-comment"><a href="' .
 				htmlspecialchars( $page_title->getFullURL() ) .
 				"#comment-{$comment['comment_id']}\" title=\"" .
-				htmlspecialchars( $page_title->getText() ) . "\">{$comment_text}</a></span>";
+				htmlspecialchars( $page_title->getText() ) . '">' . htmlspecialchars( $comment_text ) . '</a></span>';
 			$output .= '</div>';
 		}
 

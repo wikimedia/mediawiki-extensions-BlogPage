@@ -305,8 +305,8 @@ class BlogPageHooks {
 					</div>
 					<div class="article-title">
 						<a href="' . htmlspecialchars( $articleTitle->getFullURL() ) .
-							"\">{$articleTitle->getText()}</a>
-						<span class=\"item-small\">" .
+							'">' . htmlspecialchars( $articleTitle->getText() ) . '</a>
+						<span class="item-small">' .
 							wfMessage( 'blog-user-article-comment' )
 								->numParams( $commentCount )
 								->escaped() . '</span>

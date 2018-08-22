@@ -212,7 +212,7 @@ class ArticlesHome extends SpecialPage {
 					$output .= "<div class=\"listpages-image\">{$imgTag}</div>\n";
 				}
 				$output .= '<a href="' . htmlspecialchars( $titleObj->getFullURL() ) . '">' .
-						$titleObj->getText() .
+						htmlspecialchars( $titleObj->getText() ) .
 						'</a>
 						<div class="listpages-date">';
 				$output .= '(' .
@@ -336,7 +336,7 @@ class ArticlesHome extends SpecialPage {
 				$output .= '</div>' . "\n"; // .listpages-votebox
 				$output .= '</div>' . "\n"; // .listpages-item
 				$output .= '<a href="' . htmlspecialchars( $titleObj->getFullURL() ) . '">' .
-					$titleObj->getText() . '</a>';
+					htmlspecialchars( $titleObj->getText() ) . '</a>';
 				$output .= '<div class="visualClear"></div>';
 			}
 		}
@@ -421,7 +421,7 @@ class ArticlesHome extends SpecialPage {
 					'</div>
 				</div>
 				<a href="' . htmlspecialchars( $titleObj->getFullURL() ) . '">' .
-					$titleObj->getText() .
+					htmlspecialchars( $titleObj->getText() ) .
 					'</a>
 			</div><!-- .listpages-item -->
 			<div class="visualClear"></div>' . "\n";
@@ -443,7 +443,7 @@ class ArticlesHome extends SpecialPage {
 		global $wgMemc;
 
 		// Try cache first
-		$key = $wgMemc->makeKey( 'blog', 'newest', 'ten' );
+		$key = $wgMemc->makeKey( 'blog', 'newest', '10' );
 		$data = $wgMemc->get( $key );
 
 		if ( $data != '' ) {
@@ -495,7 +495,7 @@ class ArticlesHome extends SpecialPage {
 					->escaped() . "</div>\n"; // .listpages-votebox-text
 				$output .= "</div>\n"; // .listpages-votebox
 				$output .= '<a href="' . htmlspecialchars( $titleObj->getFullURL() ) . '">' .
-						$titleObj->getText() .
+						htmlspecialchars( $titleObj->getText() ) .
 					'</a>
 				</div><!-- .listpages-item -->
 				<div class="visualClear"></div>' . "\n";
@@ -515,7 +515,7 @@ class ArticlesHome extends SpecialPage {
 		global $wgMemc;
 
 		// Try cache first
-		$key = $wgMemc->makeKey( 'blog', 'newest', 'twentyfive' );
+		$key = $wgMemc->makeKey( 'blog', 'newest', '25' );
 		$data = $wgMemc->get( $key );
 
 		if ( $data != '' ) {
@@ -575,7 +575,7 @@ class ArticlesHome extends SpecialPage {
 					$output .= "<div class=\"listpages-image\">{$imgTag}</div>\n";
 				}
 				$output .= '<a href="' . htmlspecialchars( $titleObj->getFullURL() ) . '">' .
-						$titleObj->getText() .
+						htmlspecialchars( $titleObj->getText() ) .
 						'</a>
 						<div class="listpages-date">';
 				$output .= '(' .
@@ -699,7 +699,7 @@ class ArticlesHome extends SpecialPage {
 					->escaped() . "</div>\n"; // .listpages-votebox-text
 				$output .= '</div>' . "\n"; // .listpages-votebox
 				$output .= '<a href="' . htmlspecialchars( $titleObj->getFullURL() ) . '">' .
-							$titleObj->getText() .
+							htmlspecialchars( $titleObj->getText() ) .
 						'</a>
 					</div><!-- .listpages-item -->
 				<div class="visualClear"></div>' . "\n";

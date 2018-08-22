@@ -27,7 +27,7 @@ class ArticleLists extends IncludableSpecialPage {
 
 		if ( empty( $limit ) ) {
 			$limit = 25;
-		} elseif ( !empty( $limit ) ) {
+		} else {
 			$limit = intval( $limit );
 		}
 
@@ -48,7 +48,7 @@ class ArticleLists extends IncludableSpecialPage {
 		}
 
 		// Try cache first
-		$key = $wgMemc->makeKey( 'blog', 'new', 'twentyfive' );
+		$key = $wgMemc->makeKey( 'blog', 'newest', (string)$limit );
 		$data = $wgMemc->get( $key );
 
 		if ( $data != '' ) {
@@ -103,7 +103,7 @@ class ArticleLists extends IncludableSpecialPage {
 					$output .= "<div class=\"listpages-image\">{$imgTag}</div>\n";
 				}
 				$output .= '<a href="' . htmlspecialchars( $titleObj->getFullURL() ) . '">' .
-						$titleObj->getText() .
+						htmlspecialchars( $titleObj->getText() ) .
 						"</a>
 						<div class=\"listpages-blurb\">\n" .
 						BlogPage::getBlurb(
