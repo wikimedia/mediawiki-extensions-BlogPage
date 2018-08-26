@@ -155,22 +155,21 @@ class BlogPage extends Article {
 
 		$articleText = $this->pageContent;
 		$categoryName = $wgContLang->getNsText( NS_CATEGORY );
+		$categoryName = preg_quote( $categoryName, '/' );
 
 		// This unbelievably weak and hacky regex is used to find out the
 		// author's name from the category. See also getBlurb(), which uses a
 		// similar regex.
-		$categoryName = preg_quote( $categoryName, '/' );
-		preg_match_all(
-			"/\[\[(?:(?:c|C)ategory|{$categoryName}):\s?" .
-				// This is an absolutely unholy, horribly hacky and otherwise
-				// less-than-ideal solution that likely works for English only
-				// Someone needs to come up with a better solution one of these
-				// days than this regex soup...
-				str_replace( ' $1', '', wfMessage( 'blog-by-user-category' )->inContentLanguage()->escaped() ) .
-			" (.*)\]\]/",
-			$articleText,
-			$matches
-		);
+		$regexp = "/\[\[(?:(?:c|C)ategory|{$categoryName}):\s*" .
+			preg_quote( wfMessage( 'blog-by-user-category' )->inContentLanguage()->plain(), '/' ) .
+			"\s*\]\]/";
+		// $1 will be the author name. Convert it to a capture pattern
+		// It needs to be escaped since the message text was escaped too
+		$regexp = str_replace( preg_quote( '$1', '/' ), '(.*)', $regexp );
+		preg_match_all( $regexp, $articleText, $matches );
+		if ( !isset( $matches[1] ) ) {
+			return;
+		}
 		$authors = $matches[1];
 
 		foreach ( $authors as $author ) {
