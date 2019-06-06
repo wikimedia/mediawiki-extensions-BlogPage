@@ -292,7 +292,7 @@ class SpecialCreateBlogPost extends SpecialPage {
 		$user = $this->getUser();
 		$accessKey = Linker::accessKey( 'save' );
 		$output = '<form id="editform" name="editform" method="post" action="' .
-			htmlspecialchars( $this->getTitle()->getFullURL() ) . '" enctype="multipart/form-data">';
+			htmlspecialchars( $this->getPageTitle()->getFullURL() ) . '" enctype="multipart/form-data">';
 		$output .= "\n" . $this->displayFormPageTitle() . "\n";
 		$output .= "\n" . $this->displayFormPageText() . "\n";
 
