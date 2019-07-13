@@ -54,6 +54,12 @@ class SpecialCreateBlogPost extends SpecialPage {
 		$out->addModuleStyles( 'ext.blogPage.create.css' );
 		$out->addModules( 'ext.blogPage.create.js' );
 
+		// Add WikiEditor extension modules if enabled for the current user
+		if ( ExtensionRegistry::getInstance()->isLoaded( 'WikiEditor' ) && $user->getOption( 'usebetatoolbar' ) ) {
+			$out->addModuleStyles( 'ext.wikiEditor.styles' );
+			$out->addModules( 'ext.wikiEditor' );
+		}
+
 		// If the request was POSTed, we haven't submitted a request yet AND
 		// we have a title, create the page...otherwise just display the
 		// creation form
@@ -85,7 +91,7 @@ class SpecialCreateBlogPost extends SpecialPage {
 			}
 
 			// The user didn't supply the blog post text? Ask them to supply it.
-			if ( !$request->getVal( 'pageBody' ) ) {
+			if ( !$request->getVal( 'wpTextbox1' ) ) {
 				$out->setPageTitle( $this->msg( 'errorpagetitle' ) );
 				$out->addWikiMsg( 'blog-create-error-need-content' );
 				$out->addReturnTo( $this->getPageTitle() );
@@ -140,7 +146,7 @@ class SpecialCreateBlogPost extends SpecialPage {
 					// here and Template:Blog Bottom at the bottom, where we
 					// have the comments tag right now
 					'<vote />' . "\n" . '<!--start text-->' . "\n" .
-						$request->getVal( 'pageBody' ) . "\n\n" .
+						$request->getVal( 'wpTextbox1' ) . "\n\n" .
 						'<comments />' . "\n\n" . $wikitextCategories .
 						"\n__NOEDITSECTION__",
 					$page->getTitle()
@@ -209,11 +215,8 @@ class SpecialCreateBlogPost extends SpecialPage {
 	public function displayFormPageText() {
 		$output = '<span class="create-title">' . $this->msg( 'blog-create-text' )->escaped() .
 			'</span><br />';
-		// The EditPage toolbar wasn't originally present here but I figured
-		// that adding it might be more helpful than anything else.
-		$output .= EditPage::getEditToolbar();
 		$output .= '<textarea class="createbox" tabindex="' .
-			$this->tabCounter . '" accesskey="," name="pageBody" id="pageBody" rows="10" cols="80"></textarea><br /><br />';
+			$this->tabCounter . '" accesskey="," name="wpTextbox1" id="wpTextbox1" rows="10" cols="80"></textarea><br /><br />';
 		$this->tabCounter++;
 		return $output;
 	}

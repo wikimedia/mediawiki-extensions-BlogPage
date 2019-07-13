@@ -31,8 +31,8 @@ var CreateBlogPost = {
 			alert( mw.msg( 'blog-js-create-error-need-title' ) );
 			return '';
 		}
-		var pageBody = document.getElementById( 'pageBody' ).value;
-		if ( !pageBody || pageBody === '' ) {
+		var textarea = document.getElementById( 'wpTextbox1' ).value;
+		if ( !textarea || textarea === '' ) {
 			alert( mw.msg( 'blog-js-create-error-need-content' ) );
 			return '';
 		}
