@@ -121,6 +121,7 @@ class ArticlesHome extends SpecialPage {
 	public function getDatesFromElapsedDays( $numberOfDays ) {
 		global $wgContLang;
 		$today = $wgContLang->date( wfTimestampNow() ); // originally date( 'F j, Y', time() )
+		$dates = [];
 		$dates[$today] = 1; // Gets today's date string
 		for ( $x = 1; $x <= $numberOfDays; $x++ ) {
 			$timeAgo = time() - ( 60 * 60 * 24 * $x );
@@ -713,7 +714,7 @@ class ArticlesHome extends SpecialPage {
 
 	/**
 	 * @param string $icon
-	 * @returns string
+	 * @return string
 	 */
 	private function getIcon( $icon ) {
 		$icon = new UserActivityIcon( $icon );

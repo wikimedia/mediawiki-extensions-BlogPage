@@ -15,6 +15,8 @@ class BlogTagCloud {
 	public $tags_size_type = 'pt';
 	/** @var array $tags **/
 	public $tags = [];
+	/** @var int $limit */
+	public $limit;
 
 	public function __construct( $limit = 10 ) {
 		$this->limit = $limit;

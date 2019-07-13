@@ -27,7 +27,7 @@ class BlogPage extends Article {
 		// we have to load the text for the real page
 		// Note: If $this->getContent() is called anywhere before parent::view,
 		// the real article text won't get loaded on the page
-		if ( $this->isRedirect( $this->pageContent ) ) {
+		if ( $this->isRedirect() ) {
 			wfDebugLog( 'BlogPage', __METHOD__ );
 
 			$target = $this->followRedirect();
@@ -229,12 +229,14 @@ class BlogPage extends Article {
 
 		// Get date of last edit
 		$timestamp = $this->getTimestamp();
+		$edit_time = [];
 		$edit_time['date'] = $lang->date( $timestamp, true );
 		$edit_time['time'] = $lang->time( $timestamp, true );
 		$edit_time['datetime'] = $lang->timeanddate( $timestamp, true );
 
 		// Get date of when article was created
 		$timestamp = self::getCreateDate( $this->getId() );
+		$create_time = [];
 		$create_time['date'] = $lang->date( $timestamp, true );
 		$create_time['time'] = $lang->time( $timestamp, true );
 		$create_time['datetime'] = $lang->timeanddate( $timestamp, true );
@@ -1106,7 +1108,7 @@ class BlogPage extends Article {
 			$dbr = wfGetDB( DB_REPLICA );
 			$il_to = $dbr->selectField(
 				'imagelinks',
-				[ 'il_to' ],
+				'il_to',
 				[ 'il_from' => intval( $pageId ) ],
 				__METHOD__
 			);
@@ -1130,6 +1132,7 @@ class BlogPage extends Article {
 
 		$totalDays = intval( $dtDiff / ( 24 * 60 * 60 ) );
 		$totalSecs = $dtDiff - ( $totalDays * 24 * 60 * 60 );
+		$dif = [];
 		$dif['w'] = intval( $totalDays / 7 );
 		$dif['d'] = $totalDays;
 		$dif['h'] = $h = intval( $totalSecs / ( 60 * 60 ) );
