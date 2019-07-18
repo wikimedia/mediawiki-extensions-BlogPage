@@ -305,7 +305,6 @@ class SpecialCreateBlogPost extends SpecialPage {
 			'" name="wpSave" class="createsubmit site-button" accesskey="' . $accessKey . '" title="' .
 			$this->msg( 'tooltip-save' )->escaped() . '" />
 			<input type="hidden" value="" name="wpSection" />
-			<input type="hidden" value="" name="wpTextbox1" id="wpTextbox1" />
 			<input type="hidden" value="' . htmlspecialchars( $user->getEditToken() ) .
 				'" name="wpEditToken" />';
 		$output .= "\n" . '</form>' . "\n";
