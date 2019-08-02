@@ -20,6 +20,10 @@ class BlogPageHooks {
 
 		if ( $title->getNamespace() == NS_BLOG ) {
 			// This will suppress category links in SkinTemplate-based skins
+			// @todo FIXME: Doesn't seem to be working as intended, but I'm not
+			// sure why we'd want to do that in the first place? From what I can
+			// see not even AGM wasn't doing this, or rather, this code was
+			// broken already a long, long time ago... --ashley, 23 January 2017
 			$wgHooks['SkinTemplateOutputPageBeforeExec'][] = function ( $sk, $tpl ) {
 				$tpl->set( 'catlinks', '' );
 				return true;
@@ -79,16 +83,29 @@ class BlogPageHooks {
 	 *
 	 * @param WikiPage $wikiPage WikiPage object representing the page that was/is
 	 *                         (being) saved
-	 *
+	 * @param User $user The User (object) saving the article
 	 * @return bool
 	 */
 	public static function updateCreatedOpinionsCount( &$wikiPage, &$user ) {
-		$aid = $wikiPage->getTitle()->getArticleID();
+		$at = $wikiPage->getTitle();
+		$aid = $at->getArticleID();
+
 		// Shortcut, in order not to perform stupid queries (cl_from = 0...)
 		if ( $aid == 0 ) {
 			return true;
 		}
 
+		// Not a blog? Shoo, then!
+		if ( !$at->inNamespace( NS_BLOG ) ) {
+			return true;
+		}
+
+		// Sucks to be an anon since social stats aren't stored for anons
+		if ( $user->isAnon() ) {
+			return true;
+		}
+
+		// Get all the categories the page is in
 		$dbr = wfGetDB( DB_REPLICA );
 		$res = $dbr->select(
 			'categorylinks',
@@ -97,75 +114,79 @@ class BlogPageHooks {
 			__METHOD__
 		);
 
+		$user_name = $user->getName();
+
 		foreach ( $res as $row ) {
 			$ctg = Title::makeTitle( NS_CATEGORY, $row->cl_to );
 			$ctgname = $ctg->getText();
 			$userBlogCat = wfMessage( 'blog-by-user-category' )->inContentLanguage()->text();
 
-			// @todo CHECKME/FIXME: This probably no longer works as intended
-			// due to the recent (as of 20 September 2014) i18n message change
-			if ( strpos( $ctgname, $userBlogCat ) !== false ) {
-				$user_name = trim( str_replace( $userBlogCat, '', $ctgname ) );
+			// Need to strip out $1 and leading/trailing space(s) from it from
+			// the i18n msg to check if this is a blog category
+			if ( strpos( $ctgname, str_replace( '$1', '', $userBlogCat ) ) !== false ) {
+				// @todo FIXME: wait what? We're already checking isAnon() earlier on...
+				// Shouldn't that catch this as well? --ashley, 27 July 2019
 				$u = User::idFromName( $user_name );
+				if ( $u === null ) {
+					return true;
+				}
 
-				if ( $u ) {
-					$stats = new UserStatsTrack( $u, $user_name );
-					$userBlogCat = wfMessage( 'blog-by-user-category', $stats->user_name )
-						->inContentLanguage()->text();
-					// Copied from UserStatsTrack::updateCreatedOpinionsCount()
-					// Throughout this code, we could use $u and $user_name
-					// instead of $stats->user_id and $stats->user_name but
-					// there's no point in doing that because we have to call
-					// clearCache() in any case
-					if ( !$user->isAnon() && $stats->user_id ) {
-						$parser = new Parser();
-						$ctgTitle = Title::newFromText(
-							$parser->preprocess(
-								trim( $userBlogCat ),
-								$wikiPage->getContext()->getTitle(),
-								$wikiPage->getContext()->getOutput()->parserOptions()
-							)
-						);
-						$ctgTitle = $ctgTitle->getDBkey();
-						$dbw = wfGetDB( DB_MASTER );
+				$stats = new UserStatsTrack( $u, $user_name );
+				$userBlogCat = wfMessage( 'blog-by-user-category', $stats->user_name )
+					->inContentLanguage()->text();
+				// Copied from UserStatsTrack::updateCreatedOpinionsCount()
+				// Throughout this code, we could use $u and $user_name
+				// instead of $stats->user_id and $stats->user_name but
+				// there's no point in doing that because we have to call
+				// clearCache() in any case
+				if ( $stats->user_id ) {
+					$parser = new Parser();
+					$ctgTitle = Title::newFromText(
+						$parser->preprocess(
+							trim( $userBlogCat ),
+							$wikiPage->getContext()->getTitle(),
+							$wikiPage->getContext()->getOutput()->parserOptions()
+						)
+					);
+					$ctgTitle = $ctgTitle->getDBkey();
+					$dbw = wfGetDB( DB_MASTER );
 
-						$opinions = $dbw->select(
-							[ 'page', 'categorylinks' ],
-							[ 'COUNT(*) AS CreatedOpinions' ],
-							[
-								'cl_to' => $ctgTitle,
-								'page_namespace' => NS_BLOG // paranoia
-							],
-							__METHOD__,
-							[],
-							[
-								'categorylinks' => [
-									'INNER JOIN',
-									'page_id = cl_from'
-								]
+					$opinions = $dbw->select(
+						[ 'page', 'categorylinks' ],
+						[ 'COUNT(*) AS CreatedOpinions' ],
+						[
+							'cl_to' => $ctgTitle,
+							'page_namespace' => NS_BLOG // paranoia
+						],
+						__METHOD__,
+						[],
+						[
+							'categorylinks' => [
+								'INNER JOIN',
+								'page_id = cl_from'
 							]
-						);
+						]
+					);
 
-						// Please die in a fire, PHP.
-						// selectField() would be ideal above but it returns
-						// insane results (over 300 when the real count is
-						// barely 10) so we have to fuck around with a
-						// foreach() loop that we don't even need in theory
-						// just because PHP is...PHP.
-						$opinionsCreated = 0;
-						foreach ( $opinions as $opinion ) {
-							$opinionsCreated = $opinion->CreatedOpinions;
-						}
-
-						$res = $dbw->update(
-							'user_stats',
-							[ 'stats_opinions_created' => $opinionsCreated ],
-							[ 'stats_user_id' => $stats->user_id ],
-							__METHOD__
-						);
-
-						$stats->clearCache();
+					// Please die in a fire, PHP.
+					// selectField() would be ideal above but it returns
+					// insane results (over 300 when the real count is
+					// barely 10) so we have to fuck around with a
+					// foreach() loop that we don't even need in theory
+					// just because PHP is...PHP.
+					$opinionsCreated = 0;
+					foreach ( $opinions as $opinion ) {
+						$opinionsCreated = $opinion->CreatedOpinions;
 					}
+
+					$res = $dbw->update(
+						'user_stats',
+						[ 'stats_opinions_created' => $opinionsCreated ],
+						[ 'stats_user_id' => $stats->user_id ],
+						__METHOD__
+					);
+
+					$stats->clearCache();
 				}
 			}
 		}
