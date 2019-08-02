@@ -368,7 +368,7 @@ class BlogPage extends Article {
 		// If the user has supplied some information about themselves on their
 		// social profile, show that data here.
 		if ( $profileData['about'] ) {
-			$output .= $out->parse( $profileData['about'], false );
+			$output .= $out->parseAsContent( $profileData['about'], false );
 		}
 		$output .= "\n\t\t\t\t\t\t</div><!-- .author-info -->
 						<div class=\"visualClear\"></div>
@@ -692,7 +692,7 @@ class BlogPage extends Article {
 			$newsItem = $newsArray[array_rand( $newsArray )];
 			$output = '<div class="blog-container">
 			<h2>' . wfMessage( 'blog-in-the-news' )->escaped() . '</h2>
-			<div>' . $this->getContext()->getOutput()->parse( $newsItem, false ) . '</div>
+			<div>' . $this->getContext()->getOutput()->parseAsContent( $newsItem, false ) . '</div>
 		</div>';
 		}
 
@@ -1053,7 +1053,7 @@ class BlogPage extends Article {
 		$text = '__NOTOC__ ' . $text;
 
 		// Run text through parser
-		$blurbText = $article->getContext()->getOutput()->parse( $text );
+		$blurbText = $article->getContext()->getOutput()->parseAsContent( $text );
 		$blurbText = strip_tags( $blurbText );
 
 		$blurbText = preg_replace( '/&lt;comments&gt;&lt;\/comments&gt;/i', '', $blurbText );
