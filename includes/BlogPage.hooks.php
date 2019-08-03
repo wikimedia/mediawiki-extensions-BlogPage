@@ -48,13 +48,13 @@ class BlogPageHooks {
 	 * @return bool True if the user should be allowed to continue, else false
 	 */
 	public static function allowShowEditBlogPage( $editPage ) {
-		$context = $editPage->getArticle()->getContext();
+		$context = $editPage->getContext();
 		$output = $context->getOutput();
 		$user = $context->getUser();
 
-		if ( $editPage->mTitle->getNamespace() == NS_BLOG ) {
+		if ( $editPage->getTitle()->getNamespace() == NS_BLOG ) {
 			if ( $user->isAnon() ) { // anons can't edit blog pages
-				if ( !$editPage->mTitle->exists() ) {
+				if ( !$editPage->getTitle()->exists() ) {
 					$output->addWikiMsg( 'blog-login' );
 				} else {
 					$output->addWikiMsg( 'blog-login-edit' );
@@ -115,6 +115,7 @@ class BlogPageHooks {
 		);
 
 		$user_name = $user->getName();
+		$context = RequestContext::getMain();
 
 		foreach ( $res as $row ) {
 			$ctg = Title::makeTitle( NS_CATEGORY, $row->cl_to );
@@ -144,8 +145,8 @@ class BlogPageHooks {
 					$ctgTitle = Title::newFromText(
 						$parser->preprocess(
 							trim( $userBlogCat ),
-							$wikiPage->getContext()->getTitle(),
-							$wikiPage->getContext()->getOutput()->parserOptions()
+							$at,
+							$wikiPage->makeParserOptions( $context )
 						)
 					);
 					$ctgTitle = $ctgTitle->getDBkey();
