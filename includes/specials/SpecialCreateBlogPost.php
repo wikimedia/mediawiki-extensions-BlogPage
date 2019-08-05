@@ -28,8 +28,6 @@ class SpecialCreateBlogPost extends SpecialPage {
 	 * @param mixed|null $par Parameter passed to the special page or null
 	 */
 	public function execute( $par ) {
-		global $wgContLang;
-
 		$out = $this->getOutput();
 		$user = $this->getUser();
 		$request = $this->getRequest();
@@ -99,8 +97,9 @@ class SpecialCreateBlogPost extends SpecialPage {
 			}
 
 			// Localized variables that will be used when creating the page
-			$localizedCatNS = $wgContLang->getNsText( NS_CATEGORY );
-			$today = $wgContLang->date( wfTimestampNow() );
+			$contLang = MediaWiki\MediaWikiServices::getInstance()->getContentLanguage();
+			$localizedCatNS = $contLang->getNsText( NS_CATEGORY );
+			$today = $contLang->date( wfTimestampNow() );
 
 			// Create the blog page if it doesn't already exist
 			$page = WikiPage::factory( $title );

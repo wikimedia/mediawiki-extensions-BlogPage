@@ -25,9 +25,8 @@ class ArticlesHome extends SpecialPage {
 	 * @param string $type What kind of articles to show? Default is 'popular'
 	 */
 	public function execute( $type ) {
-		global $wgContLang;
-
 		$out = $this->getOutput();
+
 		// Add CSS
 		$out->addModuleStyles( 'ext.blogPage.articlesHome' );
 
@@ -56,7 +55,8 @@ class ArticlesHome extends SpecialPage {
 
 		$out->setPageTitle( $name );
 
-		$today = $wgContLang->date( wfTimestampNow() );
+		$contLang = MediaWiki\MediaWikiServices::getInstance()->getContentLanguage();
+		$today = $contLang->date( wfTimestampNow() );
 
 		// Start building the HTML output
 		$output = '<div class="main-page-left">';
@@ -119,14 +119,14 @@ class ArticlesHome extends SpecialPage {
 	 *                the wiki's content language
 	 */
 	public function getDatesFromElapsedDays( $numberOfDays ) {
-		global $wgContLang;
-		$today = $wgContLang->date( wfTimestampNow() ); // originally date( 'F j, Y', time() )
+		$contLang = MediaWiki\MediaWikiServices::getInstance()->getContentLanguage();
+		$today = $contLang->date( wfTimestampNow() ); // originally date( 'F j, Y', time() )
 		$dates = [];
 		$dates[$today] = 1; // Gets today's date string
 		for ( $x = 1; $x <= $numberOfDays; $x++ ) {
 			$timeAgo = time() - ( 60 * 60 * 24 * $x );
 			// originally date( 'F j, Y', $timeAgo );
-			$dateString = $wgContLang->date( wfTimestamp( TS_MW, $timeAgo ) );
+			$dateString = $contLang->date( wfTimestamp( TS_MW, $timeAgo ) );
 			$dates[$dateString] = 1;
 		}
 		return $dates;

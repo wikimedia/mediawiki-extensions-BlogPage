@@ -151,10 +151,10 @@ class BlogPage extends Article {
 	 * variable.
 	 */
 	public function getAuthors() {
-		global $wgContLang;
+		$contLang = MediaWikiServices::getInstance()->getContentLanguage();
 
 		$articleText = $this->pageContent;
-		$categoryName = $wgContLang->getNsText( NS_CATEGORY );
+		$categoryName = $contLang->getNsText( NS_CATEGORY );
 		$categoryName = preg_quote( $categoryName, '/' );
 
 		// This unbelievably weak and hacky regex is used to find out the
@@ -1013,7 +1013,7 @@ class BlogPage extends Article {
 	 * @return string First $maxChars characters from the page
 	 */
 	public static function getBlurb( $pageTitle, $namespace, $maxChars, $fontSize = 'small' ) {
-		global $wgContLang;
+		$contLang = MediaWikiServices::getInstance()->getContentLanguage();
 
 		// Get raw text
 		$title = Title::makeTitle( $namespace, $pageTitle );
@@ -1033,14 +1033,14 @@ class BlogPage extends Article {
 		$text = preg_replace( '@<vote[^>]*?>.*?</vote>@si', '', $text ); // <vote> tags (provided by Vote extension)
 		$text = preg_replace( '@<vote[^>]*?\/>@si', '', $text ); // more of the above -- this catches the self-closing variant, <vote />, although it's unlikely to ever be present in the body of a blog post
 		if ( ExtensionRegistry::getInstance()->isLoaded( 'Video' ) ) {
-			$videoNS = $wgContLang->getNsText( NS_VIDEO );
+			$videoNS = $contLang->getNsText( NS_VIDEO );
 			if ( $videoNS === false ) {
 				$videoNS = 'Video';
 			}
 			// [[Video:]] links (provided by Video extension)
 			$text = preg_replace( "@\[\[{$videoNS}:[^\]]*?].*?\]@si", '', $text );
 		}
-		$localizedCategoryNS = $wgContLang->getNsText( NS_CATEGORY );
+		$localizedCategoryNS = $contLang->getNsText( NS_CATEGORY );
 		$text = preg_replace( "@\[\[(?:(c|C)ategory|{$localizedCategoryNS}):[^\]]*?].*?\]@si", '', $text ); // categories
 		// $text = preg_replace( "@\[\[{$localizedCategoryNS}:[^\]]*?].*?\]@si", '', $text ); // original version of the above line
 
