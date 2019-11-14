@@ -497,7 +497,7 @@ class BlogPage extends Article {
 	 * @return array Array containing each editors' user ID and user name
 	 */
 	public function getEditorsList() {
-		global $wgMemc;
+		global $wgActorTableSchemaMigrationStage, $wgMemc;
 
 		$pageTitleId = $this->getId();
 
@@ -509,30 +509,45 @@ class BlogPage extends Article {
 			wfDebugLog( 'BlogPage', "Loading recent editors for page {$pageTitleId} from DB" );
 			$dbr = wfGetDB( DB_REPLICA );
 
+			$revQuery = MediaWikiServices::getInstance()->getRevisionStore()->getQueryInfo();
+			$pageField = ( $wgActorTableSchemaMigrationStage & SCHEMA_COMPAT_READ_NEW )
+				? 'revactor_page' : 'rev_page';
+			$userNameField = $revQuery['fields']['rev_user_text'];
+
 			$where = [
-				'rev_page' => $pageTitleId,
-				'rev_user <> 0', // exclude anonymous editors
-				"rev_user_text <> 'MediaWiki default'", // exclude MW default
+				$pageField => $pageTitleId,
+				ActorMigration::newMigration()->isNotAnon( $revQuery['fields']['rev_user'] ), // exclude anonymous editors
+				$userNameField . " <> 'MediaWiki default'", // exclude MW default
 			];
 
 			// Get authors and exclude them
 			foreach ( $this->authors as $author ) {
-				$where[] = 'rev_user_text <> ' . $dbr->addQuotes( $author['user_name'] );
+				$where[] = "$userNameField <> " . $dbr->addQuotes( $author['user_name'] );
 			}
 
 			$res = $dbr->select(
-				'revision',
-				[ 'DISTINCT rev_user', 'rev_user_text' ],
+				$revQuery['tables'],
+				[ "DISTINCT {$revQuery['fields']['rev_user']}", $userNameField ],
 				$where,
 				__METHOD__,
-				[ 'ORDER BY' => 'rev_user_text ASC', 'LIMIT' => 8 ]
+				[ 'ORDER BY' => "$userNameField ASC", 'LIMIT' => 8 ],
+				$revQuery['joins']
 			);
 
 			foreach ( $res as $row ) {
-				$editors[] = [
-					'user_id' => $row->rev_user,
-					'user_name' => $row->rev_user_text
-				];
+				if ( isset( $row->actor_user ) && $row->actor_user ) {
+					$editor = User::newFromName( $row->actor_name );
+					$editors[] = [
+						// Not using actor ID here just yet...
+						'user_id' => $editor->getId(),
+						'user_name' => $row->actor_name
+					];
+				} else {
+					$editors[] = [
+						'user_id' => $row->rev_user,
+						'user_name' => $row->rev_user_text
+					];
+				}
 			}
 
 			// Store in memcached for five minutes
