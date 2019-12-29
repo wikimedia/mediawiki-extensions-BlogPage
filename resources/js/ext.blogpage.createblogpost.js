@@ -20,19 +20,25 @@ var CreateBlogPost = {
 	 * Check that the user has given a title for the blog post and has supplied
 	 * some content; then check the existence of the title and notify the user
 	 * if there's already a blog post with the same name as their blog post.
+	 *
+	 * @param {jQuery.Event} e
 	 */
-	performChecks: function() {
+	performChecks: function( e ) {
 		/*global alert */
 		// In PHP, we need to use $wgRequest->getVal( 'title2' ); 'title'
 		// contains the current special page's name instead of the blog post
 		// name
 		var title = document.getElementById( 'title' ).value;
 		if ( !title || title === '' ) {
+			// First prevent the default action (which would be to submit the form)
+			e.preventDefault();
 			alert( mw.msg( 'blog-js-create-error-need-title' ) );
 			return '';
 		}
 		var textarea = document.getElementById( 'wpTextbox1' ).value;
 		if ( !textarea || textarea === '' ) {
+			// First prevent the default action (which would be to submit the form)
+			e.preventDefault();
 			alert( mw.msg( 'blog-js-create-error-need-content' ) );
 			return '';
 		}
@@ -67,8 +73,8 @@ $( function() {
 	} );
 
 	// Save button
-	$( 'input[name="wpSave"]' ).click( function() {
-		CreateBlogPost.performChecks();
+	$( 'input[name="wpSave"]' ).click( function( e ) {
+		CreateBlogPost.performChecks( e );
 	} );
 } );
 }( mediaWiki, jQuery ) );

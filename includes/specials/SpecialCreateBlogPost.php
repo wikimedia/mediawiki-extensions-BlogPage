@@ -63,6 +63,7 @@ class SpecialCreateBlogPost extends SpecialPage {
 		// creation form
 		if (
 			$request->wasPosted() &&
+			!$request->getCheck( 'wpPreview' ) &&
 			$_SESSION['alreadysubmitted'] == false
 		) {
 			$_SESSION['alreadysubmitted'] = true;
@@ -175,23 +176,50 @@ class SpecialCreateBlogPost extends SpecialPage {
 				// Redirect the user to the new blog post they just created
 				$out->redirect( $title->getFullURL() );
 			}
+		} elseif (
+			$request->wasPosted() &&
+			$request->getCheck( 'wpPreview' )
+		) {
+			// Previewing a blog post
+			$out->setPageTitle( $this->msg( 'preview' ) );
+			$out->addHTML(
+				'<div class="previewnote"><p>' .
+				Html::warningBox( $this->msg( 'previewnote' )->text() ) .
+				'</p></div>'
+			);
+			if ( $user->isAnon() ) {
+				$out->wrapWikiMsg(
+					"<div id=\"mw-anon-preview-warning\" class=\"warningbox\">\n$1</div>",
+					'anonpreviewwarning'
+				);
+			}
+
+			// Modeled after CreateAPage's CreatePageCreateplateForm#showPreview
+			$userSuppliedTitle = $request->getVal( 'title2' );
+			$title = Title::makeTitleSafe( NS_BLOG, $userSuppliedTitle );
+
+			if ( is_object( $title ) ) {
+				$parser = MediaWiki\MediaWikiServices::getInstance()->getParser();
+				$parserOptions = ParserOptions::newFromUser( $user );
+				$preparsed = $parser->preSaveTransform(
+					$request->getVal( 'wpTextbox1' ), // We're intentionally ignoring categories (etc.) here
+					$title,
+					$user,
+					$parserOptions,
+					true
+				);
+				// $parserOutput = $parser->parse( $preparsed, $title, $parserOptions );
+
+				$previewableText = $out->parseAsContent( $preparsed ); // $parserOutput->getText( [ 'enableSectionEditLinks' => false ] );
+
+				$out->addHTML( $previewableText );
+			}
+
+			$out->addHTML( $this->getEditFormWithRules() );
 		} else {
 			$_SESSION['alreadysubmitted'] = false;
 
-			// Start building the HTML
-			$output = '';
-
-			// Show the blog rules, if the message containing them ain't empty
-			$message = $this->msg( 'blog-create-rules' );
-			if ( !$message->isDisabled() ) {
-				$output .= $message->escaped() . '<br />';
-			}
-
-			// Main form
-			$output .= $this->displayForm();
-
-			// Show everything to the user
-			$out->addHTML( $output );
+			$out->addHTML( $this->getEditFormWithRules() );
 		}
 	}
 
@@ -201,8 +229,13 @@ class SpecialCreateBlogPost extends SpecialPage {
 	 */
 	public function displayFormPageTitle() {
 		$output = '<span class="create-title">' . $this->msg( 'blog-create-title' )->escaped() .
-			'</span><br /><input class="createbox" type="text" tabindex="' .
-				$this->tabCounter . '" name="title2" id="title"><br /><br />';
+			'</span><br />';
+		$output .= Html::input( 'title2', $this->getRequest()->getVal( 'title2' ), 'text', [
+			'tabindex' => $this->tabCounter,
+			'id' => 'title',
+			'class' => 'createbox'
+		] );
+		$output .= '<br /><br />';
 		$this->tabCounter++;
 		return $output;
 	}
@@ -214,8 +247,16 @@ class SpecialCreateBlogPost extends SpecialPage {
 	public function displayFormPageText() {
 		$output = '<span class="create-title">' . $this->msg( 'blog-create-text' )->escaped() .
 			'</span><br />';
-		$output .= '<textarea class="createbox" tabindex="' .
-			$this->tabCounter . '" accesskey="," name="wpTextbox1" id="wpTextbox1" rows="10" cols="80"></textarea><br /><br />';
+		$output .= Html::element( 'textarea', [
+			'class' => 'createbox',
+			'tabindex' => $this->tabCounter,
+			'accesskey' => ',',
+			'name' => 'wpTextbox1',
+			'id' => 'wpTextbox1',
+			'rows' => 10,
+			'cols' => 80
+		], $this->getRequest()->getVal( 'wpTextbox1' ) );
+		$output .= '<br /><br />';
 		$this->tabCounter++;
 		return $output;
 	}
@@ -292,7 +333,6 @@ class SpecialCreateBlogPost extends SpecialPage {
 	 */
 	public function displayForm() {
 		$user = $this->getUser();
-		$accessKey = Linker::accessKey( 'save' );
 		$output = '<form id="editform" name="editform" method="post" action="' .
 			htmlspecialchars( $this->getPageTitle()->getFullURL() ) . '" enctype="multipart/form-data">';
 		$output .= "\n" . $this->displayFormPageTitle() . "\n";
@@ -300,13 +340,53 @@ class SpecialCreateBlogPost extends SpecialPage {
 
 		$output .= "\n" . $this->displayFormPageCategories() . "\n";
 		$output .= "\n" . $this->displayCopyrightWarning() . "\n";
-		$output .= '<input type="button" value="' . $this->msg( 'blog-create-button' )->escaped() .
-			'" name="wpSave" class="createsubmit site-button" accesskey="' . $accessKey . '" title="' .
-			$this->msg( 'tooltip-save' )->escaped() . '" />
-			<input type="hidden" value="" name="wpSection" />
+		$output .= '<div class="blog-create-buttons">';
+		$output .= Html::input(
+			'wpSave',
+			$this->msg( 'blog-create-button' )->text(),
+			'submit',
+			[
+				'accesskey' => Linker::accesskey( 'save' ),
+				'title' => $this->msg( 'tooltip-save' )->text(),
+				'class' => 'createsubmit site-button'
+			]
+		);
+		$output .= Html::input(
+			'wpPreview',
+			$this->msg( 'showpreview' )->text(),
+			'submit',
+			[
+				'accesskey' => Linker::accesskey( 'preview' ),
+				'title' => $this->msg( 'tooltip-preview' )->text(),
+				'class' => 'site-button'
+			]
+		);
+		$output .= '</div>';
+		$output .= '<input type="hidden" value="" name="wpSection" />
 			<input type="hidden" value="' . htmlspecialchars( $user->getEditToken() ) .
 				'" name="wpEditToken" />';
 		$output .= "\n" . '</form>' . "\n";
+
+		return $output;
+	}
+
+	/**
+	 * Get the blog editor form with the blog creation rules displayed before the
+	 * editor, provided the rule message has some content, obviously.
+	 *
+	 * @return string HTML
+	 */
+	public function getEditFormWithRules() {
+		$output = '';
+
+		// Show the blog rules, if the message containing them ain't empty
+		$message = $this->msg( 'blog-create-rules' );
+		if ( !$message->isDisabled() ) {
+			$output .= $message->escaped() . '<br />';
+		}
+
+		// Main form
+		$output .= $this->displayForm();
 
 		return $output;
 	}

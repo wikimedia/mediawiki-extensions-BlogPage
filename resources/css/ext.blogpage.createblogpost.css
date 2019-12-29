@@ -11,6 +11,11 @@
 	width: 700px;
 }
 
+/* Ensure that there's a bit of spacing between the "Save" and "Preview" buttons */
+.blog-create-buttons input[name="wpPreview"] {
+	margin: 5px;
+}
+
 /* Copyright stuff below the form, right above the submit button */
 .copyright-warning {
 	color: #333;
