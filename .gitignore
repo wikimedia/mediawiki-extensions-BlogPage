@@ -4,3 +4,4 @@
 *~
 *.kate-swp
 .*.swp
+.eslintcache
