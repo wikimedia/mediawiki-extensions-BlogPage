@@ -5,15 +5,15 @@
  * @license GPL-2.0-or-later
  */
 class BlogTagCloud {
-	/** @var integer $tags_min_pts **/
+	/** @var integer $tags_min_pts */
 	public $tags_min_pts = 8;
-	/** @var integer $tags_max_pts **/
+	/** @var integer $tags_max_pts */
 	public $tags_max_pts = 32;
-	/** @var integer $tags_highest_count **/
+	/** @var integer $tags_highest_count */
 	public $tags_highest_count = 0;
-	/** @var string $tags_size_type **/
+	/** @var string $tags_size_type */
 	public $tags_size_type = 'pt';
-	/** @var array $tags **/
+	/** @var array $tags */
 	public $tags = [];
 	/** @var int $limit */
 	public $limit;
