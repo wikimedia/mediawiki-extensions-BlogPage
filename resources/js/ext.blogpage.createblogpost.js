@@ -1,4 +1,4 @@
-( function ( mw, $ ) {
+( function () {
 	var CreateBlogPost = {
 	/**
 	 * Insert a tag (category) from the category cloud into the inputbox below
@@ -77,5 +77,4 @@
 			CreateBlogPost.performChecks( e );
 		} );
 	} );
-	// eslint-disable-next-line no-undef
-}( mediaWiki, jQuery ) );
+}() );
