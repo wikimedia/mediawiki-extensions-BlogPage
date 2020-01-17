@@ -13,7 +13,8 @@ module.exports = function ( grunt ) {
 			},
 			target: [
 				'**/*.{js,json}',
-				'!node_modules/**'
+				'!node_modules/**',
+				'!vendor/**'
 			]
 		},
 		// eslint-disable-next-line no-restricted-properties
