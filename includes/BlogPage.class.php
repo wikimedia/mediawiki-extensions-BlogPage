@@ -9,6 +9,11 @@ use MediaWiki\MediaWikiServices;
 class BlogPage extends Article {
 
 	public $title = null;
+
+	/**
+	 * @var array Array containing blog authors' actor IDs, the format being [ 'actor' => <actor ID> ]
+	 * @see BlogPage::getAuthors()
+	 */
 	public $authors = [];
 
 	public function __construct( Title $title ) {
@@ -173,10 +178,9 @@ class BlogPage extends Article {
 		$authors = $matches[1];
 
 		foreach ( $authors as $author ) {
-			$authorUserId = User::idFromName( $author );
+			$authorObj = User::newFromName( $author );
 			$this->authors[] = [
-				'user_name' => trim( $author ),
-				'user_id' => $authorUserId
+				'actor' => $authorObj->getActorId()
 			];
 		}
 	}
@@ -247,7 +251,7 @@ class BlogPage extends Article {
 		$linkRenderer = MediaWikiServices::getInstance()->getLinkRenderer();
 		foreach ( $this->authors as $author ) {
 			$count++;
-			$userTitle = Title::makeTitle( NS_USER, $author['user_name'] );
+			$user = User::newFromActorId( $author['actor'] );
 			if ( $authors && count( $this->authors ) > 2 ) {
 				$authors .= ', ';
 			}
@@ -257,8 +261,8 @@ class BlogPage extends Article {
 					wfMessage( 'word-separator' )->escaped();
 			}
 			$authors .= $linkRenderer->makeLink(
-				$userTitle,
-				$author['user_name']
+				$user->getUserPage(),
+				$user->getName()
 			);
 		}
 
@@ -294,7 +298,7 @@ class BlogPage extends Article {
 		$linkRenderer = MediaWikiServices::getInstance()->getLinkRenderer();
 		foreach ( $this->authors as $author ) {
 			$count++;
-			$userTitle = Title::makeTitle( NS_USER, $author['user_name'] );
+			$user = User::newFromActorId( $author['actor'] );
 			if ( $authors && count( $this->authors ) > 2 ) {
 				$authors .= ', ';
 			}
@@ -304,8 +308,8 @@ class BlogPage extends Article {
 					wfMessage( 'word-separator' )->escaped();
 			}
 			$authors .= $linkRenderer->makeLink(
-				$userTitle,
-				$author['user_name']
+				$user->getUserPage(),
+				$user->getName()
 			);
 		}
 
@@ -324,24 +328,21 @@ class BlogPage extends Article {
 			return '';
 		}
 
-		$author_user_name = $author_user_id = '';
+		$author_actor_id = '';
 		if (
 			isset( $this->authors[$author_index] ) &&
-			isset( $this->authors[$author_index]['user_name'] )
+			isset( $this->authors[$author_index]['actor'] )
 		) {
-			$author_user_name = $this->authors[$author_index]['user_name'];
-		}
-		if (
-			isset( $this->authors[$author_index] ) &&
-			isset( $this->authors[$author_index]['user_id'] )
-		) {
-			$author_user_id = $this->authors[$author_index]['user_id'];
+			$author_actor_id = $this->authors[$author_index]['actor'];
 		}
 
-		if ( empty( $author_user_id ) ) {
+		if ( empty( $author_actor_id ) ) {
 			return '';
 		}
 
+		$author = User::newFromActorId( $author_actor_id );
+		$author_user_name = $author->getName();
+		$author_user_id = $author->getId();
 		$authorTitle = Title::makeTitle( NS_USER, $author_user_name );
 
 		$profile = new UserProfile( $author_user_name );
@@ -385,8 +386,9 @@ class BlogPage extends Article {
 			return '';
 		}
 
-		$user_name = $this->authors[$author_index]['user_name'];
-		$user_id = $this->authors[$author_index]['user_id'];
+		$user = User::newFromActorId( $this->authors[$author_index]['actor'] );
+		$user_name = $user->getName();
+		$user_id = $user->getId();
 
 		$archiveLink = Title::makeTitle(
 			NS_CATEGORY,
@@ -497,7 +499,7 @@ class BlogPage extends Article {
 	 * @return array Array containing each editors' user ID and user name
 	 */
 	public function getEditorsList() {
-		global $wgActorTableSchemaMigrationStage, $wgMemc;
+		global $wgMemc;
 
 		$pageTitleId = $this->getId();
 
@@ -509,45 +511,33 @@ class BlogPage extends Article {
 			wfDebugLog( 'BlogPage', "Loading recent editors for page {$pageTitleId} from DB" );
 			$dbr = wfGetDB( DB_REPLICA );
 
-			$revQuery = MediaWikiServices::getInstance()->getRevisionStore()->getQueryInfo();
-			$pageField = ( $wgActorTableSchemaMigrationStage & SCHEMA_COMPAT_READ_NEW )
-				? 'revactor_page' : 'rev_page';
-			$userNameField = $revQuery['fields']['rev_user_text'];
-
 			$where = [
-				$pageField => $pageTitleId,
-				ActorMigration::newMigration()->isNotAnon( $revQuery['fields']['rev_user'] ), // exclude anonymous editors
-				$userNameField . " <> 'MediaWiki default'", // exclude MW default
+				'revactor_page' => $pageTitleId,
+				'actor_user IS NOT NULL', // exclude anonymous editors
+				"actor_name <> 'MediaWiki default'", // exclude MW default
 			];
 
 			// Get authors and exclude them
 			foreach ( $this->authors as $author ) {
-				$where[] = "$userNameField <> " . $dbr->addQuotes( $author['user_name'] );
+				$where[] = 'actor_user <> ' . $dbr->addQuotes( $author['actor'] );
 			}
 
 			$res = $dbr->select(
-				$revQuery['tables'],
-				[ "DISTINCT {$revQuery['fields']['rev_user']}", $userNameField ],
+				[ 'revision_actor_temp', 'revision', 'actor' ],
+				[ 'DISTINCT revactor_actor', 'actor_name' ],
 				$where,
 				__METHOD__,
-				[ 'ORDER BY' => "$userNameField ASC", 'LIMIT' => 8 ],
-				$revQuery['joins']
+				[ 'ORDER BY' => 'actor_name ASC', 'LIMIT' => 8 ],
+				[
+					'actor' => [ 'JOIN', 'actor_id = revactor_actor' ],
+					'revision_actor_temp' => [ 'JOIN', 'revactor_rev = rev_id' ]
+				]
 			);
 
 			foreach ( $res as $row ) {
-				if ( isset( $row->actor_user ) && $row->actor_user ) {
-					$editor = User::newFromName( $row->actor_name );
-					$editors[] = [
-						// Not using actor ID here just yet...
-						'user_id' => $editor->getId(),
-						'user_name' => $row->actor_name
-					];
-				} else {
-					$editors[] = [
-						'user_id' => $row->rev_user,
-						'user_name' => $row->rev_user_text
-					];
-				}
+				$editors[] = [
+					'actor' => $row->revactor_actor
+				];
 			}
 
 			// Store in memcached for five minutes
@@ -583,8 +573,9 @@ class BlogPage extends Article {
 			<div>' . wfMessage( 'blog-recent-editors-message' )->escaped() . '</div>';
 
 			foreach ( $editors as $editor ) {
-				$avatar = new wAvatar( $editor['user_id'], 'm' );
-				$userTitle = Title::makeTitle( NS_USER, $editor['user_name'] );
+				$actor = User::newFromActorId( $editor['actor'] );
+				$avatar = new wAvatar( $actor->getId(), 'm' );
+				$userTitle = Title::makeTitle( NS_USER, $actor->getName() );
 
 				$output .= '<a href="' . htmlspecialchars( $userTitle->getFullURL() ) .
 					'">' . $avatar->getAvatarURL( [ 'alt' => $userTitle->getText() ] ) . '</a>';
@@ -599,6 +590,9 @@ class BlogPage extends Article {
 	/**
 	 * Get the eight newest voters for the current blog post from VoteNY's
 	 * Vote table.
+	 *
+	 * @todo FIXME: WHYYYYYYYYYYYYYYYYYYYYY is this here?!
+	 * Make this a Vote class method instead and just call that where appropriate.
 	 *
 	 * @return array Array containing each voters' user ID and user name
 	 */
@@ -618,18 +612,18 @@ class BlogPage extends Article {
 
 			$where = [
 				'vote_page_id' => $pageTitleId,
-				'vote_user_id <> 0'
+				'vote_actor IS NOT NULL',
+				'vote_actor <> 0'
 			];
 
-			// Exclude the authors of the blog post from the list of recent
-			// voters
+			// Exclude the authors of the blog post from the list of recent voters
 			foreach ( $this->authors as $author ) {
-				$where[] = 'username <> ' . $dbr->addQuotes( $author['user_name'] );
+				$where[] = 'vote_actor <> ' . $dbr->addQuotes( $author['actor'] );
 			}
 
 			$res = $dbr->select(
 				'Vote',
-				[ 'DISTINCT username', 'vote_user_id', 'vote_page_id' ],
+				[ 'DISTINCT vote_actor', 'vote_user_id', 'vote_page_id' ],
 				$where,
 				__METHOD__,
 				[ 'ORDER BY' => 'vote_id DESC', 'LIMIT' => 8 ]
@@ -637,8 +631,7 @@ class BlogPage extends Article {
 
 			foreach ( $res as $row ) {
 				$voters[] = [
-					'user_id' => $row->vote_user_id,
-					'user_name' => $row->username
+					'actor' => $row->vote_actor
 				];
 			}
 
@@ -674,8 +667,9 @@ class BlogPage extends Article {
 				<div>' . wfMessage( 'blog-recent-voters-message' )->escaped() . '</div>';
 
 			foreach ( $voters as $voter ) {
-				$userTitle = Title::makeTitle( NS_USER, $voter['user_name'] );
-				$avatar = new wAvatar( $voter['user_id'], 'm' );
+				$actor = User::newFromActorId( $voter['actor'] );
+				$userTitle = Title::makeTitle( NS_USER, $actor->getName() );
+				$avatar = new wAvatar( $actor->getId(), 'm' );
 
 				$output .= '<a href="' . htmlspecialchars( $userTitle->getFullURL() ) .
 					"\">{$avatar->getAvatarURL()}</a>";
