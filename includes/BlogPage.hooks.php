@@ -127,20 +127,16 @@ class BlogPageHooks {
 			if ( strpos( $ctgname, str_replace( '$1', '', $userBlogCat ) ) !== false ) {
 				// @todo FIXME: wait what? We're already checking isAnon() earlier on...
 				// Shouldn't that catch this as well? --ashley, 27 July 2019
-				$u = User::idFromName( $user_name );
+				$u = User::newFromName( $user_name );
 				if ( $u === null ) {
 					return true;
 				}
 
-				$stats = new UserStatsTrack( $u, $user_name );
-				$userBlogCat = wfMessage( 'blog-by-user-category', $stats->user_name )
+				$stats = new UserStatsTrack( $u->getId(), $user_name );
+				$userBlogCat = wfMessage( 'blog-by-user-category', $u->getName() )
 					->inContentLanguage()->text();
 				// Copied from UserStatsTrack::updateCreatedOpinionsCount()
-				// Throughout this code, we could use $u and $user_name
-				// instead of $stats->user_id and $stats->user_name but
-				// there's no point in doing that because we have to call
-				// clearCache() in any case
-				if ( $stats->user_id ) {
+				if ( !$u->isAnon() ) {
 					$parser = new Parser();
 					$ctgTitle = Title::newFromText(
 						$parser->preprocess(
@@ -162,10 +158,7 @@ class BlogPageHooks {
 						__METHOD__,
 						[],
 						[
-							'categorylinks' => [
-								'INNER JOIN',
-								'page_id = cl_from'
-							]
+							'categorylinks' => [ 'INNER JOIN', 'page_id = cl_from' ]
 						]
 					);
 
@@ -183,7 +176,7 @@ class BlogPageHooks {
 					$res = $dbw->update(
 						'user_stats',
 						[ 'stats_opinions_created' => $opinionsCreated ],
-						[ 'stats_user_id' => $stats->user_id ],
+						[ 'stats_actor' => $u->getActorId() ],
 						__METHOD__
 					);
 
