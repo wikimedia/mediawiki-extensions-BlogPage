@@ -13,12 +13,11 @@ class BlogPageHooks {
 	 *
 	 * @param Title $title
 	 * @param Article|BlogPage $article Instance of Article that we convert into a BlogPage
-	 * @return bool
+	 * @param RequestContext $context
 	 */
-	public static function blogFromTitle( &$title, &$article ) {
-		global $wgHooks, $wgOut;
-
+	public static function blogFromTitle( Title &$title, &$article, $context ) {
 		if ( $title->getNamespace() == NS_BLOG ) {
+			global $wgHooks;
 			// This will suppress category links in SkinTemplate-based skins
 			// @todo FIXME: Doesn't seem to be working as intended, but I'm not
 			// sure why we'd want to do that in the first place? From what I can
@@ -29,15 +28,15 @@ class BlogPageHooks {
 				return true;
 			};
 
-			$wgOut->enableClientCache( false );
+			$out = $context->getOutput();
+
+			$out->enableClientCache( false );
 
 			// Add CSS
-			$wgOut->addModuleStyles( 'ext.blogPage' );
+			$out->addModuleStyles( 'ext.blogPage' );
 
 			$article = new BlogPage( $title );
 		}
-
-		return true;
 	}
 
 	/**
@@ -192,20 +191,20 @@ class BlogPageHooks {
 	 * Show a list of this user's blog articles in their user profile page.
 	 *
 	 * @param UserProfilePage $userProfile
-	 * @return bool
 	 */
 	public static function getArticles( $userProfile ) {
-		global $wgUserProfileDisplay, $wgMemc, $wgOut;
+		global $wgUserProfileDisplay, $wgMemc;
 
 		if ( !$wgUserProfileDisplay['articles'] ) {
-			return '';
+			return;
 		}
 
-		$user_name = $userProfile->user_name;
+		$user_name = $userProfile->profileOwner->getName();
 		$output = '';
+		$context = $user_profile->getContext();
 
 		// Try cache first
-		$key = $wgMemc->makeKey( 'user', 'profile', 'articles', $userProfile->user_id );
+		$key = $wgMemc->makeKey( 'user', 'profile', 'articles', $userProfile->profileOwner->getId() );
 		$data = $wgMemc->get( $key );
 		$articles = [];
 
@@ -221,7 +220,7 @@ class BlogPageHooks {
 				"Got UserProfile articles for user {$user_name} from DB\n"
 			);
 			$categoryTitle = Title::newFromText(
-				wfMessage(
+				$context->msg(
 					'blog-by-user-category',
 					$user_name
 				)->inContentLanguage()->text()
@@ -260,13 +259,13 @@ class BlogPageHooks {
 		}
 
 		// Load opinion count via user stats;
-		$stats = new UserStats( $userProfile->user_id, $user_name );
+		$stats = new UserStats( $userProfile->profileOwner->getId(), $user_name );
 		$stats_data = $stats->getUserStats();
 		$articleCount = $stats_data['opinions_created'];
 
 		$articleLink = Title::makeTitle(
 			NS_CATEGORY,
-			wfMessage(
+			$context->msg(
 				'blog-by-user-category',
 				$user_name
 			)->inContentLanguage()->text()
@@ -275,17 +274,17 @@ class BlogPageHooks {
 		if ( count( $articles ) > 0 ) {
 			$output .= '<div class="user-section-heading">
 				<div class="user-section-title">' .
-					wfMessage( 'blog-user-articles-title' )->escaped() .
+					$context->msg( 'blog-user-articles-title' )->escaped() .
 				'</div>
 				<div class="user-section-actions">
 					<div class="action-right">';
 			if ( $articleCount > 5 ) {
 				$output .= '<a href="' . htmlspecialchars( $articleLink->getFullURL() ) .
-					'" rel="nofollow">' . wfMessage( 'user-view-all' )->escaped() . '</a>';
+					'" rel="nofollow">' . $context->msg( 'user-view-all' )->escaped() . '</a>';
 			}
 			$output .= '</div>
 					<div class="action-left">' .
-					wfMessage( 'user-count-separator' )
+					$context->msg( 'user-count-separator' )
 						->numParams( $articleCount, count( $articles ) )
 						->escaped() . '</div>
 					<div class="visualClear"></div>
@@ -313,7 +312,7 @@ class BlogPageHooks {
 					<div class=\"number-of-votes\">
 						<div class=\"vote-number\">{$voteCount}</div>
 						<div class=\"vote-text\">" .
-							wfMessage( 'blog-user-articles-votes' )
+							$context->msg( 'blog-user-articles-votes' )
 								->numParams( $voteCount )
 								->escaped() .
 						'</div>
@@ -322,7 +321,7 @@ class BlogPageHooks {
 						<a href="' . htmlspecialchars( $articleTitle->getFullURL() ) .
 							'">' . htmlspecialchars( $articleTitle->getText() ) . '</a>
 						<span class="item-small">' .
-							wfMessage( 'blog-user-article-comment' )
+							$context->msg( 'blog-user-article-comment' )
 								->numParams( $commentCount )
 								->escaped() . '</span>
 					</div>
@@ -335,9 +334,7 @@ class BlogPageHooks {
 			$output .= '</div>';
 		}
 
-		$wgOut->addHTML( $output );
-
-		return true;
+		$context->getOutput()->addHTML( $output );
 	}
 
 	/**
@@ -345,11 +342,10 @@ class BlogPageHooks {
 	 *
 	 * @param array $list Array of namespace numbers with corresponding
 	 *                     canonical names
-	 * @return bool
 	 */
 	public static function onCanonicalNamespaces( &$list ) {
 		$list[NS_BLOG] = 'Blog';
 		$list[NS_BLOG_TALK] = 'Blog_talk';
-		return true;
 	}
+
 }
