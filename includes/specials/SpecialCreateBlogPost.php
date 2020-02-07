@@ -166,7 +166,7 @@ class SpecialCreateBlogPost extends SpecialPage {
 				// Using OutputPageBeforeHTML hook, which, according to its
 				// manual page, runs on *every* page view was such a stupid
 				// idea IMHO.
-				$vote = new Vote( $pageID );
+				$vote = new Vote( $pageID, $user );
 				$vote->insert( 1 );
 
 				$stats = new UserStatsTrack( $user->getID(), $user->getName() );
