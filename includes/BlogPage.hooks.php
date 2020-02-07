@@ -201,7 +201,7 @@ class BlogPageHooks {
 
 		$user_name = $userProfile->profileOwner->getName();
 		$output = '';
-		$context = $user_profile->getContext();
+		$context = $userProfile->getContext();
 
 		// Try cache first
 		$key = $wgMemc->makeKey( 'user', 'profile', 'articles', $userProfile->profileOwner->getId() );
