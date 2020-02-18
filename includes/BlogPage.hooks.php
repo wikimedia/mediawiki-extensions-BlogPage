@@ -1,4 +1,7 @@
 <?php
+
+use MediaWiki\MediaWikiServices;
+
 /**
  * All BlogPage's hooked functions. These were previously scattered all over
  * the place in various files.
@@ -136,7 +139,7 @@ class BlogPageHooks {
 					->inContentLanguage()->text();
 				// Copied from UserStatsTrack::updateCreatedOpinionsCount()
 				if ( !$u->isAnon() ) {
-					$parser = new Parser();
+					$parser = MediaWikiServices::getInstance()->getParserFactory()->create();
 					$ctgTitle = Title::newFromText(
 						$parser->preprocess(
 							trim( $userBlogCat ),
