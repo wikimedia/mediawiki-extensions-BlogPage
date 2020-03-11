@@ -71,24 +71,12 @@
 		}
 	},
 	"Hooks": {
-		"ArticleFromTitle": [
-			"BlogPageHooks::blogFromTitle"
-		],
-		"PageContentSaveComplete": [
-			"BlogPageHooks::updateCreatedOpinionsCount"
-		],
-		"PageContentSave": [
-			"BlogPageHooks::updateCreatedOpinionsCount"
-		],
-		"AlternateEdit": [
-			"BlogPageHooks::allowShowEditBlogPage"
-		],
-		"CanonicalNamespaces": [
-			"BlogPageHooks::onCanonicalNamespaces"
-		],
-		"UserProfileRightSideAfterActivity": [
-			"BlogPageHooks::getArticles"
-		]
+		"ArticleFromTitle": "BlogPageHooks::blogFromTitle",
+		"PageContentSaveComplete": "BlogPageHooks::updateCreatedOpinionsCount",
+		"PageContentSave": "BlogPageHooks::updateCreatedOpinionsCount",
+		"AlternateEdit": "BlogPageHooks::allowShowEditBlogPage",
+		"CanonicalNamespaces": "BlogPageHooks::onCanonicalNamespaces",
+		"UserProfileRightSideAfterActivity": "BlogPageHooks::getArticles"
 	},
 	"MessagesDirs": {
 		"BlogPage": [
