@@ -5,6 +5,9 @@
  * @file
  * @ingroup Extensions
  */
+
+use MediaWiki\MediaWikiServices;
+
 class ArticleLists extends IncludableSpecialPage {
 
 	/**
@@ -87,13 +90,14 @@ class ArticleLists extends IncludableSpecialPage {
 		if ( empty( $newBlogPosts ) ) {
 			$output .= $this->msg( 'ah-no-results' )->escaped();
 		} else {
+			$repoGroup = MediaWikiServices::getInstance()->getRepoGroup();
 			foreach ( $newBlogPosts as $newBlogPost ) {
 				$titleObj = Title::makeTitle( NS_BLOG, $newBlogPost['title'] );
 				$output .= "\t\t\t\t" . '<div class="listpages-item">';
 				$pageImage = BlogPage::getPageImage( $newBlogPost['id'] );
 				if ( $pageImage ) {
 					// Load MediaWiki image object to get thumbnail tag
-					$img = wfFindFile( $pageImage );
+					$img = $repoGroup->findFile( $pageImage );
 					$imgTag = '';
 					if ( is_object( $img ) ) {
 						$thumb = $img->transform( [ 'width' => 65, 'height' => 0 ] );

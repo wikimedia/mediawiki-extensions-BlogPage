@@ -10,6 +10,9 @@
  * @file
  * @ingroup Extensions
  */
+
+use MediaWiki\MediaWikiServices;
+
 class ArticlesHome extends SpecialPage {
 
 	/**
@@ -197,13 +200,14 @@ class ArticlesHome extends SpecialPage {
 		if ( empty( $popularBlogPosts ) ) {
 			$output .= $this->msg( 'ah-no-results' )->escaped();
 		} else {
+			$repoGroup = MediaWikiServices::getInstance()->getRepoGroup();
 			foreach ( $popularBlogPosts as $popularBlogPost ) {
 				$titleObj = Title::makeTitle( NS_BLOG, $popularBlogPost['title'] );
 				$output .= '<div class="listpages-item">';
 				$pageImage = BlogPage::getPageImage( $popularBlogPost['id'] );
 				if ( $pageImage ) {
 					// Load MediaWiki image object to get thumbnail tag
-					$img = wfFindFile( $pageImage );
+					$img = $repoGroup->findFile( $pageImage );
 					$imgTag = '';
 					if ( is_object( $img ) ) {
 						$thumb = $img->transform( [ 'width' => 65, 'height' => 0 ] );
@@ -560,13 +564,14 @@ class ArticlesHome extends SpecialPage {
 		if ( empty( $newestBlogPosts ) ) {
 			$output .= $this->msg( 'ah-no-results' )->escaped();
 		} else {
+			$repoGroup = MediaWikiServices::getInstance()->getRepoGroup();
 			foreach ( $newestBlogPosts as $newestBlogPost ) {
 				$titleObj = Title::makeTitle( NS_BLOG, $newestBlogPost['title'] );
 				$output .= '<div class="listpages-item">';
 				$pageImage = BlogPage::getPageImage( $newestBlogPost['id'] );
 				if ( $pageImage ) {
 					// Load MediaWiki image object to get thumbnail tag
-					$img = wfFindFile( $pageImage );
+					$img = $repoGroup->findFile( $pageImage );
 					$imgTag = '';
 					if ( is_object( $img ) ) {
 						$thumb = $img->transform( [ 'width' => 65, 'height' => 0 ] );
