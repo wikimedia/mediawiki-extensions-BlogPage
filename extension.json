@@ -1,6 +1,6 @@
 {
 	"name": "BlogPage",
-	"version": "2.8.0",
+	"version": "2.9.0",
 	"author": [
 		"David Pean",
 		"Jack Phoenix"
@@ -47,7 +47,6 @@
 		"blogpage": "ApiBlogPage"
 	},
 	"AutoloadClasses": {
-		"ApiBlogPage": "includes/api/ApiBlogPage.php",
 		"BlogPage": "includes/BlogPage.class.php",
 		"ArticlesHome": "includes/specials/SpecialArticlesHome.php",
 		"ArticleLists": "includes/specials/SpecialArticleLists.php",
@@ -99,6 +98,9 @@
 				"blog-js-create-error-need-content",
 				"blog-js-create-error-need-title",
 				"blog-js-create-error-page-exists"
+			],
+			"dependencies": [
+				"mediawiki.api"
 			]
 		}
 	},

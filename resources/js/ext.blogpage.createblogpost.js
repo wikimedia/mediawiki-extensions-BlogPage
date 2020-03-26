@@ -43,20 +43,20 @@
 				return '';
 			}
 
-			$.post(
-				mw.util.wikiScript( 'api' ), {
-					action: 'blogpage',
-					format: 'json',
-					pageName: title
-				},
-				function ( data ) {
-					if ( data.blogpage.result === 'OK' ) {
-						document.editform.submit();
-					} else {
-						alert( mw.msg( 'blog-js-create-error-page-exists' ) );
-					}
+			( new mw.Api() ).get( {
+				action: 'query',
+				titles: mw.config.get( 'wgFormattedNamespaces' )[ 500 ] + ':' + title,
+				format: 'json',
+				formatversion: 2
+			} ).done( function ( data ) {
+				// Missing page means that we can create it, obviously!
+				if ( data.query.pages[ 0 ] && data.query.pages[ 0 ].missing === true ) {
+					document.editform.submit();
+				} else {
+					// could also show data.query.pages[0].invalidreason to the user here instead
+					alert( mw.msg( 'blog-js-create-error-page-exists' ) );
 				}
-			);
+			} );
 		}
 	};
 

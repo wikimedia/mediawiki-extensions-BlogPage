@@ -3,10 +3,6 @@
 		"authors": []
 	},
 	"blogpage-desc": "{{desc|name=BlogPage|url=https://www.mediawiki.org/wiki/Extension:BlogPage}}",
-	"apihelp-blogpage-description": "{{doc-apihelp-description|blogpage}}",
-	"apihelp-blogpage-summary": "{{doc-apihelp-summary|blogpage}}",
-	"apihelp-blogpage-param-pageName": "{{doc-apihelp-param|blogpage|pageName}}",
-	"apihelp-blogpage-example-1": "{{doc-apihelp-example}}",
 	"blog-and": "A word combination word",
 	"blog-anonymous-name": "A user name",
 	"blog-author-comments": "A list item",

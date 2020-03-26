@@ -5,10 +5,6 @@
 		]
 	},
 	"blogpage-desc": "Sistema de Blog con funcionalidades de comentarios y valoraciones, [[Special:CreateBlogPost|una página especial para publicar entradas de blog]] y [[Special:ArticlesHome|una página especial para listar entradas de blog]]",
-	"apihelp-blogpage-description": "Módulo API de BlogPage",
-	"apihelp-blogpage-summary": "Módulo API de BlogPage",
-	"apihelp-blogpage-param-pageName": "Nombre de la página de blog a consultar",
-	"apihelp-blogpage-example-1": "Comrueba si ya existe una página de blog con el título <kbd>My Cool New Blog Post</kbd>",
 	"blog-and": "y",
 	"blog-anonymous-name": "Un fan anónimo",
 	"blog-author-comments": "$1 {{PLURAL:$1|comentario|comentarios}}",

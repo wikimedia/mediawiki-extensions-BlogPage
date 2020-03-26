@@ -5,7 +5,6 @@
  *
  * @file
  * @ingroup Extensions
- * @date 4 January 2012
  */
 class SpecialCreateBlogPost extends SpecialPage {
 
@@ -391,30 +390,4 @@ class SpecialCreateBlogPost extends SpecialPage {
 		return $output;
 	}
 
-	/**
-	 * Check if there is already a blog post with the given title.
-	 *
-	 * @param string $pageName Page title to check
-	 * @return string 'OK' when there isn't such a page, else 'Page exists'
-	 */
-	public static function checkTitleExistence( $pageName ) {
-		// Construct page title object to convert to database key
-		$pageTitle = Title::makeTitle( NS_MAIN, urldecode( $pageName ) );
-		$dbKey = $pageTitle->getDBkey();
-
-		// Database key would be in page title if the page already exists
-		$dbr = wfGetDB( DB_MASTER );
-		$s = $dbr->selectRow(
-			'page',
-			[ 'page_id' ],
-			[ 'page_title' => $dbKey, 'page_namespace' => NS_BLOG ],
-			__METHOD__
-		);
-
-		if ( $s !== false ) {
-			return 'Page exists';
-		} else {
-			return 'OK';
-		}
-	}
 }
