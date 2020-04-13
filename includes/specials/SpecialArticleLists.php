@@ -23,8 +23,6 @@ class ArticleLists extends IncludableSpecialPage {
 	 * @param int $limit Show this many entries (LIMIT for SQL)
 	 */
 	public function execute( $limit ) {
-		global $wgMemc;
-
 		$out = $this->getOutput();
 		$out->setPageTitle( $this->msg( 'ah-new-articles' ) );
 
@@ -51,8 +49,9 @@ class ArticleLists extends IncludableSpecialPage {
 		}
 
 		// Try cache first
-		$key = $wgMemc->makeKey( 'blog', 'newest', (string)$limit );
-		$data = $wgMemc->get( $key );
+		$cache = MediaWikiServices::getInstance()->getMainWANObjectCache();
+		$key = $cache->makeKey( 'blog', 'newest', (string)$limit );
+		$data = $cache->get( $key );
 
 		if ( $data != '' ) {
 			wfDebugLog( 'BlogPage', 'Got new articles in ArticleLists from cache' );
@@ -82,8 +81,8 @@ class ArticleLists extends IncludableSpecialPage {
 				];
 			}
 
-			// Cache in memcached for 15 minutes
-			$wgMemc->set( $key, $newBlogPosts, 60 * 15 );
+			// Cache for 15 minutes
+			$cache->set( $key, $newBlogPosts, 60 * 15 );
 		}
 
 		$output .= '<div class="listpages-container">' . "\n";

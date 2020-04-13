@@ -195,11 +195,10 @@ class BlogPage extends Article {
 	 * @return int Page creation date
 	 */
 	public static function getCreateDate( $pageId ) {
-		global $wgMemc;
-
 		// Try memcached first
-		$key = $wgMemc->makeKey( 'page', 'create_date', $pageId );
-		$data = $wgMemc->get( $key );
+		$cache = MediaWikiServices::getInstance()->getMainWANObjectCache();
+		$key = $cache->makeKey( 'page', 'create_date', $pageId );
+		$data = $cache->get( $key );
 
 		if ( !$data ) {
 			wfDebugLog( 'BlogPage', "Loading create_date for page {$pageId} from database" );
@@ -211,7 +210,7 @@ class BlogPage extends Article {
 				__METHOD__,
 				[ 'ORDER BY' => 'rev_timestamp ASC' ]
 			);
-			$wgMemc->set( $key, $createDate, 7 * IExpiringStore::TTL_WEEK );
+			$cache->set( $key, $createDate, 7 * IExpiringStore::TTL_WEEK );
 		} else {
 			wfDebugLog( 'BlogPage', "Loading create_date for page {$pageId} from cache" );
 			$createDate = $data;
@@ -380,7 +379,7 @@ class BlogPage extends Article {
 	}
 
 	public function getAuthorArticles( $author_index ) {
-		global $wgBlogPageDisplay, $wgMemc;
+		global $wgBlogPageDisplay;
 
 		if ( $wgBlogPageDisplay['author_articles'] == false ) {
 			return '';
@@ -398,8 +397,9 @@ class BlogPage extends Article {
 		$articles = [];
 
 		// Try cache first
-		$key = $wgMemc->makeKey( 'blog', 'author', 'articles', $user_id );
-		$data = $wgMemc->get( $key );
+		$cache = MediaWikiServices::getInstance()->getMainWANObjectCache();
+		$key = $cache->makeKey( 'blog', 'author', 'articles', $user_id );
+		$data = $cache->get( $key );
 
 		if ( $data != '' ) {
 			wfDebugLog( 'BlogPage', "Got blog author articles for user {$user_name} from cache" );
@@ -441,7 +441,7 @@ class BlogPage extends Article {
 			}
 
 			// Cache for half an hour
-			$wgMemc->set( $key, $articles, 60 * 30 );
+			$cache->set( $key, $articles, 60 * 30 );
 		}
 
 		$output = '';
@@ -499,12 +499,11 @@ class BlogPage extends Article {
 	 * @return array Array containing each editors' user ID and user name
 	 */
 	public function getEditorsList() {
-		global $wgMemc;
-
 		$pageTitleId = $this->getId();
 
-		$key = $wgMemc->makeKey( 'recenteditors', 'list', $pageTitleId );
-		$data = $wgMemc->get( $key );
+		$cache = MediaWikiServices::getInstance()->getMainWANObjectCache();
+		$key = $cache->makeKey( 'recenteditors', 'list', $pageTitleId );
+		$data = $cache->get( $key );
 		$editors = [];
 
 		if ( !$data ) {
@@ -540,8 +539,8 @@ class BlogPage extends Article {
 				];
 			}
 
-			// Store in memcached for five minutes
-			$wgMemc->set( $key, $editors, 60 * 5 );
+			// Cache for five minutes
+			$cache->set( $key, $editors, 60 * 5 );
 		} else {
 			wfDebugLog( 'BlogPage', "Loading recent editors for page {$pageTitleId} from cache" );
 			$editors = $data;
@@ -597,13 +596,12 @@ class BlogPage extends Article {
 	 * @return array Array containing each voters' user ID and user name
 	 */
 	public function getVotersList() {
-		global $wgMemc;
-
 		// Gets the page ID for the query
 		$pageTitleId = $this->getId();
 
-		$key = $wgMemc->makeKey( 'recentvoters', 'list', $pageTitleId );
-		$data = $wgMemc->get( $key );
+		$cache = MediaWikiServices::getInstance()->getMainWANObjectCache();
+		$key = $cache->makeKey( 'recentvoters', 'list', $pageTitleId );
+		$data = $cache->get( $key );
 
 		$voters = [];
 		if ( !$data ) {
@@ -635,7 +633,7 @@ class BlogPage extends Article {
 				];
 			}
 
-			$wgMemc->set( $key, $voters, 60 * 5 );
+			$cache->set( $key, $voters, 60 * 5 );
 		} else {
 			wfDebugLog( 'BlogPage', "Loading recent voters for page {$pageTitleId} from cache" );
 			$voters = $data;
@@ -688,7 +686,7 @@ class BlogPage extends Article {
 	 * @return string HTML or nothing
 	 */
 	public function getInTheNews() {
-		global $wgBlogPageDisplay, $wgMemc;
+		global $wgBlogPageDisplay;
 
 		if ( $wgBlogPageDisplay['in_the_news'] == false ) {
 			return '';
@@ -715,15 +713,16 @@ class BlogPage extends Article {
 	 * @return string HTML or nothing
 	 */
 	public function getPopularArticles() {
-		global $wgMemc, $wgBlogPageDisplay;
+		global $wgBlogPageDisplay;
 
 		if ( $wgBlogPageDisplay['popular_articles'] == false ) {
 			return '';
 		}
 
 		// Try cache first
-		$key = $wgMemc->makeKey( 'blog', 'popular', 'five' );
-		$data = $wgMemc->get( $key );
+		$cache = MediaWikiServices::getInstance()->getMainWANObjectCache();
+		$key = $cache->makeKey( 'blog', 'popular', 'five' );
+		$data = $cache->get( $key );
 
 		if ( $data != '' ) {
 			wfDebugLog( 'BlogPage', 'Got popular articles from cache' );
@@ -772,8 +771,8 @@ class BlogPage extends Article {
 				];
 			}
 
-			// Cache in memcached for 15 minutes
-			$wgMemc->set( $key, $popularBlogPosts, 60 * 15 );
+			// Cache for 15 minutes
+			$cache->set( $key, $popularBlogPosts, 60 * 15 );
 		}
 
 		$html = '<div class="listpages-container">';
@@ -803,15 +802,16 @@ class BlogPage extends Article {
 	 * @return string HTML or nothing
 	 */
 	public function getNewArticles() {
-		global $wgMemc, $wgBlogPageDisplay;
+		global $wgBlogPageDisplay;
 
 		if ( $wgBlogPageDisplay['new_articles'] == false ) {
 			return '';
 		}
 
 		// Try cache first
-		$key = $wgMemc->makeKey( 'blog', 'newest', '5' );
-		$data = $wgMemc->get( $key );
+		$cache = MediaWikiServices::getInstance()->getMainWANObjectCache();
+		$key = $cache->makeKey( 'blog', 'newest', '5' );
+		$data = $cache->get( $key );
 
 		if ( $data != '' ) {
 			wfDebugLog( 'BlogPage', 'Got new articles from cache' );
@@ -840,8 +840,8 @@ class BlogPage extends Article {
 				];
 			}
 
-			// Cache in memcached for 15 minutes
-			$wgMemc->set( $key, $newBlogPosts, 60 * 15 );
+			// Cache for 15 minutes
+			$cache->set( $key, $newBlogPosts, 60 * 15 );
 		}
 
 		$html = '<div class="listpages-container">';
@@ -892,7 +892,7 @@ class BlogPage extends Article {
 	 * @return string HTML or nothing
 	 */
 	public function getCommentsOfTheDay() {
-		global $wgBlogPageDisplay, $wgMemc;
+		global $wgBlogPageDisplay;
 
 		if ( $wgBlogPageDisplay['comments_of_day'] == false ) {
 			return '';
@@ -948,17 +948,16 @@ class BlogPage extends Article {
 
 	/**
 	 * Get the amount (COUNT(*)) of comments for the given page, identified via
-	 * its ID and cache this info in memcached for 15 minutes.
+	 * its ID and cache this info for 15 minutes.
 	 *
 	 * @param int $id Page ID
 	 * @return int Amount of comments
 	 */
 	public static function getCommentsForPage( $id ) {
-		global $wgMemc;
-
 		// Try cache first
-		$key = $wgMemc->makeKey( 'blog', 'comments', 'count', 'pageid-' . $id );
-		$data = $wgMemc->get( $key );
+		$cache = MediaWikiServices::getInstance()->getMainWANObjectCache();
+		$key = $cache->makeKey( 'blog', 'comments', 'count', 'pageid-' . $id );
+		$data = $cache->get( $key );
 
 		if ( $data != '' ) {
 			wfDebugLog( 'BlogPage', "Got comments count for the page with ID {$id} from cache" );
@@ -972,8 +971,8 @@ class BlogPage extends Article {
 				[ 'Comment_Page_ID' => intval( $id ) ],
 				__METHOD__
 			);
-			// Store in memcached for 15 minutes
-			$wgMemc->set( $key, $commentCount, 60 * 15 );
+			// Cache for 15 minutes
+			$cache->set( $key, $commentCount, 60 * 15 );
 		}
 
 		return $commentCount;
@@ -981,17 +980,16 @@ class BlogPage extends Article {
 
 	/**
 	 * Get the amount (COUNT(*)) of votes for the given page, identified via
-	 * its ID and cache this info in memcached for 15 minutes.
+	 * its ID and cache this info for 15 minutes.
 	 *
 	 * @param int $id Page ID
 	 * @return int Amount of votes
 	 */
 	public static function getVotesForPage( $id ) {
-		global $wgMemc;
-
 		// Try cache first
-		$key = $wgMemc->makeKey( 'blog', 'vote', 'count', 'pageid-' . $id );
-		$data = $wgMemc->get( $key );
+		$cache = MediaWikiServices::getInstance()->getMainWANObjectCache();
+		$key = $cache->makeKey( 'blog', 'vote', 'count', 'pageid-' . $id );
+		$data = $cache->get( $key );
 
 		if ( $data != '' ) {
 			wfDebugLog( 'BlogPage', "Got vote count for the page with ID {$id} from cache" );
@@ -1005,8 +1003,8 @@ class BlogPage extends Article {
 				[ 'vote_page_id' => intval( $id ) ],
 				__METHOD__
 			);
-			// Store in memcached for 15 minutes
-			$wgMemc->set( $key, $voteCount, 60 * 15 );
+			// Cache for 15 minutes
+			$cache->set( $key, $voteCount, 60 * 15 );
 		}
 
 		return $voteCount;
@@ -1108,10 +1106,9 @@ class BlogPage extends Article {
 	 * @return string File name or nothing
 	 */
 	public static function getPageImage( $pageId ) {
-		global $wgMemc;
-
-		$key = $wgMemc->makeKey( 'blog', 'page', 'image', $pageId );
-		$data = $wgMemc->get( $key );
+		$cache = MediaWikiServices::getInstance()->getMainWANObjectCache();
+		$key = $cache->makeKey( 'blog', 'page', 'image', $pageId );
+		$data = $cache->get( $key );
 
 		if ( !$data ) {
 			$dbr = wfGetDB( DB_REPLICA );
@@ -1121,8 +1118,8 @@ class BlogPage extends Article {
 				[ 'il_from' => intval( $pageId ) ],
 				__METHOD__
 			);
-			// Cache in memcached for a minute
-			$wgMemc->set( $key, $il_to, 60 );
+			// Cache for a minute
+			$cache->set( $key, $il_to, 60 );
 		} else {
 			wfDebugLog( 'BlogPage', "Loading image for page {$pageId} from cache\n" );
 			$il_to = $data;

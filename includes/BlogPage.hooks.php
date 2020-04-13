@@ -196,7 +196,7 @@ class BlogPageHooks {
 	 * @param UserProfilePage $userProfile
 	 */
 	public static function getArticles( $userProfile ) {
-		global $wgUserProfileDisplay, $wgMemc;
+		global $wgUserProfileDisplay;
 
 		if ( !$wgUserProfileDisplay['articles'] ) {
 			return;
@@ -207,8 +207,9 @@ class BlogPageHooks {
 		$context = $userProfile->getContext();
 
 		// Try cache first
-		$key = $wgMemc->makeKey( 'user', 'profile', 'articles', $userProfile->profileOwner->getId() );
-		$data = $wgMemc->get( $key );
+		$cache = MediaWikiServices::getInstance()->getMainWANObjectCache();
+		$key = $cache->makeKey( 'user', 'profile', 'articles', $userProfile->profileOwner->getId() );
+		$data = $cache->get( $key );
 		$articles = [];
 
 		if ( $data != '' ) {
@@ -258,7 +259,7 @@ class BlogPageHooks {
 				];
 			}
 
-			$wgMemc->set( $key, $articles, 60 );
+			$cache->set( $key, $articles, 60 );
 		}
 
 		// Load opinion count via user stats;

@@ -143,11 +143,11 @@ class ArticlesHome extends SpecialPage {
 	 * @return string HTML
 	 */
 	public function getPopularPosts() {
-		global $wgMemc;
-
 		// Try cache first
-		$key = $wgMemc->makeKey( 'blog', 'popular', 'twentyfive' );
-		$data = $wgMemc->get( $key );
+		$services = MediaWikiServices::getInstance();
+		$cache = $services->getMainWANObjectCache();
+		$key = $cache->makeKey( 'blog', 'popular', 'twentyfive' );
+		$data = $cache->get( $key );
 
 		if ( $data != '' ) {
 			wfDebugLog( 'BlogPage', 'Got popular posts in ArticlesHome from cache' );
@@ -192,15 +192,15 @@ class ArticlesHome extends SpecialPage {
 				];
 			}
 
-			// Cache in memcached for 15 minutes
-			$wgMemc->set( $key, $popularBlogPosts, 60 * 15 );
+			// Cache for 15 minutes
+			$cache->set( $key, $popularBlogPosts, 60 * 15 );
 		}
 
 		$output = '<div class="listpages-container">';
 		if ( empty( $popularBlogPosts ) ) {
 			$output .= $this->msg( 'ah-no-results' )->escaped();
 		} else {
-			$repoGroup = MediaWikiServices::getInstance()->getRepoGroup();
+			$repoGroup = $services->getRepoGroup();
 			foreach ( $popularBlogPosts as $popularBlogPost ) {
 				$titleObj = Title::makeTitle( NS_BLOG, $popularBlogPost['title'] );
 				$output .= '<div class="listpages-item">';
@@ -268,11 +268,10 @@ class ArticlesHome extends SpecialPage {
 	 * @return string HTML
 	 */
 	public function displayMostVotedPages( $dateCategories ) {
-		global $wgMemc;
-
 		// Try cache first
-		$key = $wgMemc->makeKey( 'blog', 'mostvoted', 'ten' );
-		$data = $wgMemc->get( $key );
+		$cache = MediaWikiServices::getInstance()->getMainWANObjectCache();
+		$key = $cache->makeKey( 'blog', 'mostvoted', 'ten' );
+		$data = $cache->get( $key );
 
 		if ( $data != '' ) {
 			wfDebugLog( 'BlogPage', 'Got most voted posts in ArticlesHome from cache' );
@@ -317,8 +316,8 @@ class ArticlesHome extends SpecialPage {
 				];
 			}
 
-			// Cache in memcached for 15 minutes
-			$wgMemc->set( $key, $votedBlogPosts, 60 * 15 );
+			// Cache for 15 minutes
+			$cache->set( $key, $votedBlogPosts, 60 * 15 );
 		}
 
 		// Here we output HTML
@@ -359,11 +358,10 @@ class ArticlesHome extends SpecialPage {
 	 * @return string HTML
 	 */
 	public function displayMostCommentedPages( $dateCategories ) {
-		global $wgMemc;
-
 		// Try cache first
-		$key = $wgMemc->makeKey( 'blog', 'mostcommented', 'ten' );
-		$data = $wgMemc->get( $key );
+		$cache = MediaWikiServices::getInstance()->getMainWANObjectCache();
+		$key = $cache->makeKey( 'blog', 'mostcommented', 'ten' );
+		$data = $cache->get( $key );
 
 		if ( $data != '' ) {
 			wfDebugLog( 'BlogPage', 'Got most commented posts in ArticlesHome from cache' );
@@ -408,8 +406,8 @@ class ArticlesHome extends SpecialPage {
 				];
 			}
 
-			// Cache in memcached for 15 minutes
-			$wgMemc->set( $key, $commentedBlogPosts, 60 * 15 );
+			// Cache for 15 minutes
+			$cahce->set( $key, $commentedBlogPosts, 60 * 15 );
 		}
 
 		$output = '<div class="listpages-container">';
@@ -445,11 +443,10 @@ class ArticlesHome extends SpecialPage {
 	 * @return string HTML
 	 */
 	public function displayNewestPages() {
-		global $wgMemc;
-
 		// Try cache first
-		$key = $wgMemc->makeKey( 'blog', 'newest', '10' );
-		$data = $wgMemc->get( $key );
+		$cache = MediaWikiServices::getInstance()->getMainWANObjectCache();
+		$key = $cache->makeKey( 'blog', 'newest', '10' );
+		$data = $cache->get( $key );
 
 		if ( $data != '' ) {
 			wfDebugLog( 'BlogPage', 'Got new articles in ArticlesHome from cache' );
@@ -478,8 +475,8 @@ class ArticlesHome extends SpecialPage {
 				];
 			}
 
-			// Cache in memcached for 15 minutes
-			$wgMemc->set( $key, $newBlogPosts, 60 * 15 );
+			// Cache for 15 minutes
+			$cache->set( $key, $newBlogPosts, 60 * 15 );
 		}
 
 		$output = '<div class="listpages-container">' . "\n";
@@ -517,11 +514,10 @@ class ArticlesHome extends SpecialPage {
 	 * @return string HTML
 	 */
 	public function getNewestPosts() {
-		global $wgMemc;
-
 		// Try cache first
-		$key = $wgMemc->makeKey( 'blog', 'newest', '25' );
-		$data = $wgMemc->get( $key );
+		$cache = MediaWikiServices::getInstance()->getMainWANObjectCache();
+		$key = $cache->makeKey( 'blog', 'newest', '25' );
+		$data = $cache->get( $key );
 
 		if ( $data != '' ) {
 			wfDebugLog( 'BlogPage', 'Got newest posts in ArticlesHome from cache' );
@@ -556,8 +552,8 @@ class ArticlesHome extends SpecialPage {
 				];
 			}
 
-			// Cache in memcached for 15 minutes
-			$wgMemc->set( $key, $newestBlogPosts, 60 * 15 );
+			// Cache for 15 minutes
+			$cache->set( $key, $newestBlogPosts, 60 * 15 );
 		}
 
 		$output = '<div class="listpages-container">';
@@ -633,11 +629,10 @@ class ArticlesHome extends SpecialPage {
 	 * @return string HTML
 	 */
 	public function getPopularPostsForRightSide() {
-		global $wgMemc;
-
 		// Try cache first
-		$key = $wgMemc->makeKey( 'blog', 'popular', 'ten' );
-		$data = $wgMemc->get( $key );
+		$cache = MediaWikiServices::getInstance()->getMainWANObjectCache();
+		$key = $cache->makeKey( 'blog', 'popular', 'ten' );
+		$data = $cache->get( $key );
 
 		if ( $data != '' ) {
 			wfDebugLog( 'BlogPage', 'Got popular posts in ArticlesHome from cache' );
@@ -684,8 +679,8 @@ class ArticlesHome extends SpecialPage {
 				];
 			}
 
-			// Cache in memcached for 15 minutes
-			$wgMemc->set( $key, $popularBlogPosts, 60 * 15 );
+			// Cache for 15 minutes
+			$cache->set( $key, $popularBlogPosts, 60 * 15 );
 		}
 
 		$output = '<div class="listpages-container">';
