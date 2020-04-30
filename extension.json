@@ -43,9 +43,6 @@
 			"articles": true
 		}
 	},
-	"APIModules": {
-		"blogpage": "ApiBlogPage"
-	},
 	"AutoloadClasses": {
 		"BlogPage": "includes/BlogPage.class.php",
 		"ArticlesHome": "includes/specials/SpecialArticlesHome.php",
