@@ -1,4 +1,3 @@
-/* globals module */
 module.exports = function ( grunt ) {
 	var conf = grunt.file.readJSON( 'extension.json' );
 
