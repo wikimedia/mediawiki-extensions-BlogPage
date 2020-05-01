@@ -14,8 +14,8 @@ class BlogPageHooks {
 	 * Calls BlogPage instead of standard Article for pages in the NS_BLOG
 	 * namespace.
 	 *
-	 * @param Title $title
-	 * @param Article|BlogPage $article Instance of Article that we convert into a BlogPage
+	 * @param Title &$title
+	 * @param Article|BlogPage &$article Instance of Article that we convert into a BlogPage
 	 * @param RequestContext $context
 	 */
 	public static function blogFromTitle( Title &$title, &$article, $context ) {
@@ -83,9 +83,9 @@ class BlogPageHooks {
 	 * and PageContentSaveComplete. Their arguments are mostly the same and both
 	 * have $wikiPage as the first argument.
 	 *
-	 * @param WikiPage $wikiPage WikiPage object representing the page that was/is
+	 * @param WikiPage &$wikiPage WikiPage object representing the page that was/is
 	 *                         (being) saved
-	 * @param User $user The User (object) saving the article
+	 * @param User &$user The User (object) saving the article
 	 * @return bool
 	 */
 	public static function updateCreatedOpinionsCount( &$wikiPage, &$user ) {
@@ -343,7 +343,7 @@ class BlogPageHooks {
 	/**
 	 * Register the canonical names for our namespace and its talkspace.
 	 *
-	 * @param array $list Array of namespace numbers with corresponding
+	 * @param array &$list Array of namespace numbers with corresponding
 	 *                     canonical names
 	 */
 	public static function onCanonicalNamespaces( &$list ) {
