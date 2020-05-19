@@ -20,16 +20,6 @@ class BlogPageHooks {
 	 */
 	public static function blogFromTitle( Title &$title, &$article, $context ) {
 		if ( $title->getNamespace() == NS_BLOG ) {
-			global $wgHooks;
-			// This will suppress category links in SkinTemplate-based skins
-			// @todo FIXME: Doesn't seem to be working as intended, but I'm not
-			// sure why we'd want to do that in the first place? From what I can
-			// see not even AGM wasn't doing this, or rather, this code was
-			// broken already a long, long time ago... --ashley, 23 January 2017
-			$wgHooks['SkinTemplateOutputPageBeforeExec'][] = function ( $sk, $tpl ) {
-				$tpl->set( 'catlinks', '' );
-				return true;
-			};
 
 			$out = $context->getOutput();
 
