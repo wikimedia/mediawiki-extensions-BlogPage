@@ -6,6 +6,9 @@
  * @file
  * @ingroup Extensions
  */
+
+use MediaWiki\MediaWikiServices;
+
 class SpecialCreateBlogPost extends SpecialPage {
 
 	public $tabCounter = 1;
@@ -57,6 +60,8 @@ class SpecialCreateBlogPost extends SpecialPage {
 			$out->addModules( 'ext.wikiEditor' );
 		}
 
+		$services = MediaWikiServices::getInstance();
+
 		// If the request was POSTed, we haven't submitted a request yet AND
 		// we have a title, create the page...otherwise just display the
 		// creation form
@@ -97,7 +102,7 @@ class SpecialCreateBlogPost extends SpecialPage {
 			}
 
 			// Localized variables that will be used when creating the page
-			$contLang = MediaWiki\MediaWikiServices::getInstance()->getContentLanguage();
+			$contLang = $services->getContentLanguage();
 			$localizedCatNS = $contLang->getNsText( NS_CATEGORY );
 			$today = $contLang->date( wfTimestampNow() );
 
@@ -198,7 +203,7 @@ class SpecialCreateBlogPost extends SpecialPage {
 			$title = Title::makeTitleSafe( NS_BLOG, $userSuppliedTitle );
 
 			if ( is_object( $title ) ) {
-				$parser = MediaWiki\MediaWikiServices::getInstance()->getParser();
+				$parser = $services->getParser();
 				$parserOptions = ParserOptions::newFromUser( $user );
 				$preparsed = $parser->preSaveTransform(
 					$request->getVal( 'wpTextbox1' ), // We're intentionally ignoring categories (etc.) here

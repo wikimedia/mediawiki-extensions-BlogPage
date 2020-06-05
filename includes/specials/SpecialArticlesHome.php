@@ -58,7 +58,7 @@ class ArticlesHome extends SpecialPage {
 
 		$out->setPageTitle( $name );
 
-		$contLang = MediaWiki\MediaWikiServices::getInstance()->getContentLanguage();
+		$contLang = MediaWikiServices::getInstance()->getContentLanguage();
 		$today = $contLang->date( wfTimestampNow() );
 
 		// Start building the HTML output
@@ -122,7 +122,7 @@ class ArticlesHome extends SpecialPage {
 	 *                the wiki's content language
 	 */
 	public function getDatesFromElapsedDays( $numberOfDays ) {
-		$contLang = MediaWiki\MediaWikiServices::getInstance()->getContentLanguage();
+		$contLang = MediaWikiServices::getInstance()->getContentLanguage();
 		$today = $contLang->date( wfTimestampNow() ); // originally date( 'F j, Y', time() )
 		$dates = [];
 		$dates[$today] = 1; // Gets today's date string
