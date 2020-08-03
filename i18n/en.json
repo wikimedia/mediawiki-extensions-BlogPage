@@ -9,7 +9,6 @@
 	"blog-anonymous-name": "Anonymous fanatic",
 	"blog-author-comments": "$1 {{PLURAL:$1|comment|comments}}",
 	"blog-author-more-by": "More By $1",
-	"blog-author-points": "$1 pts",
 	"blog-author-title": "About the {{PLURAL:$1|Author|Authors}}",
 	"blog-author-votes": "$1 {{PLURAL:$1|vote|votes}}",
 	"blog-by": "by",

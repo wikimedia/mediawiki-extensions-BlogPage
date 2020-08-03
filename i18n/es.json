@@ -9,7 +9,6 @@
 	"blog-anonymous-name": "Un fan anónimo",
 	"blog-author-comments": "$1 {{PLURAL:$1|comentario|comentarios}}",
 	"blog-author-more-by": "Más de $1",
-	"blog-author-points": "$1 pts",
 	"blog-author-title": "Acerca {{PLURAL:$1|del autor|de los autores}}",
 	"blog-author-votes": "$1 {{PLURAL:$1|valoración|valoraciones}}",
 	"blog-by": "por",
