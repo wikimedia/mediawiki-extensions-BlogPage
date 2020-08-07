@@ -49,11 +49,11 @@ class ArticlesHome extends SpecialPage {
 
 		// Determine the page title and set it
 		if ( $type == 'popular' ) {
-			$name = $this->msg( 'ah-popular-articles' );
-			$name_right = $this->msg( 'ah-new-articles' )->escaped();
+			$name = $this->msg( 'blog-ah-popular-articles' );
+			$name_right = $this->msg( 'blog-ah-new-articles' )->escaped();
 		} else {
-			$name = $this->msg( 'ah-new-articles' );
-			$name_right = $this->msg( 'ah-popular-articles' )->escaped();
+			$name = $this->msg( 'blog-ah-new-articles' );
+			$name_right = $this->msg( 'blog-ah-popular-articles' )->escaped();
 		}
 
 		$out->setPageTitle( $name );
@@ -66,11 +66,11 @@ class ArticlesHome extends SpecialPage {
 		$output .= '<div class="logged-in-articles">';
 		$output .= '<p class="main-page-sub-links"><a href="' .
 			htmlspecialchars( SpecialPage::getTitleFor( 'CreateBlogPost' )->getFullURL() ) . '">' .
-			$this->msg( 'ah-write-article' )->escaped() . '</a> - <a href="' .
+			$this->msg( 'blog-ah-write-article' )->escaped() . '</a> - <a href="' .
 				// original used date( 'F j, Y' ) which returned something like
 				// December 5, 2008
 				htmlspecialchars( Title::makeTitle( NS_CATEGORY, $today )->getFullURL() ) . '">' .
-				$this->msg( 'ah-todays-articles' )->escaped() . '</a> - <a href="' .
+				$this->msg( 'blog-ah-todays-articles' )->escaped() . '</a> - <a href="' .
 				htmlspecialchars( Title::newMainPage()->getFullURL() ) . '">' .
 					$this->msg( 'mainpage' )->escaped() . '</a></p>' . "\n\n";
 
@@ -100,13 +100,13 @@ class ArticlesHome extends SpecialPage {
 
 		// Most Votes
 		$output .= '<div class="side-articles">';
-		$output .= '<h2>' . $this->msg( 'ah-most-votes' )->escaped() . '</h2>';
+		$output .= '<h2>' . $this->msg( 'blog-ah-most-votes' )->escaped() . '</h2>';
 		$output .= $this->displayMostVotedPages( $date_categories );
 		$output .= '</div>';
 
 		// Most Comments
 		$output .= '<div class="side-articles">';
-		$output .= '<h2>' . $this->msg( 'ah-what-talking-about' )->escaped() . '</h2>';
+		$output .= '<h2>' . $this->msg( 'blog-ah-what-talking-about' )->escaped() . '</h2>';
 		$output .= $this->displayMostCommentedPages( $date_categories );
 		$output .= '</div>';
 
@@ -198,7 +198,7 @@ class ArticlesHome extends SpecialPage {
 
 		$output = '<div class="listpages-container">';
 		if ( empty( $popularBlogPosts ) ) {
-			$output .= $this->msg( 'ah-no-results' )->escaped();
+			$output .= $this->msg( 'blog-ah-no-results' )->escaped();
 		} else {
 			$repoGroup = $services->getRepoGroup();
 			foreach ( $popularBlogPosts as $popularBlogPost ) {
@@ -324,7 +324,7 @@ class ArticlesHome extends SpecialPage {
 		$output = '<div class="listpages-container">' . "\n";
 
 		if ( empty( $votedBlogPosts ) ) {
-			$output .= $this->msg( 'ah-no-results' )->escaped();
+			$output .= $this->msg( 'blog-ah-no-results' )->escaped();
 		} else {
 			foreach ( $votedBlogPosts as $votedBlogPost ) {
 				$titleObj = Title::makeTitle( NS_BLOG, $votedBlogPost['title'] );
@@ -413,7 +413,7 @@ class ArticlesHome extends SpecialPage {
 		$output = '<div class="listpages-container">';
 
 		if ( empty( $commentedBlogPosts ) ) {
-			$output .= $this->msg( 'ah-no-results' )->escaped();
+			$output .= $this->msg( 'blog-ah-no-results' )->escaped();
 		} else {
 			foreach ( $commentedBlogPosts as $commentedBlogPost ) {
 				$titleObj = Title::makeTitle( NS_BLOG, $commentedBlogPost['title'] );
@@ -481,7 +481,7 @@ class ArticlesHome extends SpecialPage {
 
 		$output = '<div class="listpages-container">' . "\n";
 		if ( empty( $newBlogPosts ) ) {
-			$output .= $this->msg( 'ah-no-results' )->escaped();
+			$output .= $this->msg( 'blog-ah-no-results' )->escaped();
 		} else {
 			foreach ( $newBlogPosts as $newBlogPost ) {
 				$titleObj = Title::makeTitle( NS_BLOG, $newBlogPost['title'] );
@@ -558,7 +558,7 @@ class ArticlesHome extends SpecialPage {
 
 		$output = '<div class="listpages-container">';
 		if ( empty( $newestBlogPosts ) ) {
-			$output .= $this->msg( 'ah-no-results' )->escaped();
+			$output .= $this->msg( 'blog-ah-no-results' )->escaped();
 		} else {
 			$repoGroup = MediaWikiServices::getInstance()->getRepoGroup();
 			foreach ( $newestBlogPosts as $newestBlogPost ) {
@@ -685,7 +685,7 @@ class ArticlesHome extends SpecialPage {
 
 		$output = '<div class="listpages-container">';
 		if ( empty( $popularBlogPosts ) ) {
-			$output .= $this->msg( 'ah-no-results' )->escaped();
+			$output .= $this->msg( 'blog-ah-no-results' )->escaped();
 		} else {
 			foreach ( $popularBlogPosts as $popularBlogPost ) {
 				$titleObj = Title::makeTitle( NS_BLOG, $popularBlogPost['title'] );
