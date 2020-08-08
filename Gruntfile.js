@@ -10,7 +10,7 @@ module.exports = function ( grunt ) {
 				extensions: [ '.js', '.json' ],
 				cache: true
 			},
-			target: [
+			all: [
 				'**/*.{js,json}',
 				'!node_modules/**',
 				'!vendor/**'
