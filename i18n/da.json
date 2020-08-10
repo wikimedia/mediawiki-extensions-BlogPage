@@ -1,0 +1,15 @@
+{
+	"@metadata": {
+		"authors": [
+			"Saederup92"
+		]
+	},
+	"blog-and": "og",
+	"blog-by": "af",
+	"blog-created-ago": "oprettet for $1 siden",
+	"blog-new-articles": "Nye artikler",
+	"blog-ah-new-articles": "Nye aftikler",
+	"blog-create-title": "Titel",
+	"blog-create-text": "Tekst",
+	"blog-create-categories": "Kategorier"
+}
