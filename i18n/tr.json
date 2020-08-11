@@ -1,0 +1,10 @@
+{
+	"@metadata": {
+		"authors": [
+			"Incelemeelemani"
+		]
+	},
+	"blog-recent-editors": "Diğer son katkıda bulunanlar",
+	"createblogpost": "Blog gönderisi oluştur",
+	"blog-user-article-comment": "{{PLURAL:$1|bir yorum|$1 yorum}}"
+}

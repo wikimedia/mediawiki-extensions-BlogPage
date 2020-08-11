@@ -1,9 +1,11 @@
 {
 	"@metadata": {
 		"authors": [
-			"Shirayuki"
+			"Shirayuki",
+			"たなはしひろし"
 		]
 	},
+	"blogpage-desc": "日本語",
 	"blog-author-comments": "$1 {{PLURAL:$1|件のコメント}}",
 	"blog-author-title": "{{PLURAL:$1|作者|作者たち}}について",
 	"blog-created": "作成: $1",

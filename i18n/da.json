@@ -6,10 +6,17 @@
 	},
 	"blog-and": "og",
 	"blog-by": "af",
+	"blog-comments-of-day": "Dagens kommentar",
 	"blog-created-ago": "oprettet for $1 siden",
+	"blog-in-the-news": "I nyhederne",
 	"blog-new-articles": "Nye artikler",
+	"blog-view-archive-link": "Vis alle",
+	"blog-ah-popular-articles": "Populære artikler",
 	"blog-ah-new-articles": "Nye aftikler",
+	"blog-ah-write-article": "Skriv en artikel",
+	"createblogpost": "Opret blogindlæg",
 	"blog-create-title": "Titel",
 	"blog-create-text": "Tekst",
-	"blog-create-categories": "Kategorier"
+	"blog-create-categories": "Kategorier",
+	"blog-time-minutes": "{{PLURAL:$1|et minut|$1 minutter}}"
 }

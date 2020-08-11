@@ -1,0 +1,29 @@
+{
+	"@metadata": {
+		"authors": [
+			"Mainframe98"
+		]
+	},
+	"blog-and": "en",
+	"blog-anonymous-name": "Anonieme fanaat",
+	"blog-author-comments": "$1 {{PLURAL:$1|reactie|reacties}}",
+	"blog-author-more-by": "Meer door $1",
+	"blog-author-title": "Over de {{PLURAL:$1|auteur|auteurs}}",
+	"blog-by": "door",
+	"blog-by-user-category": "Artikelen van gebruiker $1",
+	"blog-created-ago": "$1 geleden aangemaakt",
+	"blog-in-the-news": "In het nieuws",
+	"blog-view-archive-link": "Alle bekijken",
+	"blog-ah-popular-articles": "Populaire artikelen",
+	"blog-create-title": "Titel",
+	"blog-create-text": "Tekst",
+	"blog-create-categories": "Categorieën",
+	"blog-create-button": "Aanmaken!",
+	"blog-more": "meer",
+	"blog-time-ago": "$1 geleden",
+	"blog-time-days": "{{PLURAL:$1|één dag|$1 dagen}}",
+	"blog-time-hours": "{{PLURAL:$1|één uur|$1 uren}}",
+	"blog-time-minutes": "{{PLURAL:$1|één minuut|$1 minuten}}",
+	"blog-time-seconds": "{{PLURAL:$1|één seconde|$1 seconden}}",
+	"blog-user-article-comment": "{{PLURAL:$1|een reactie|$1 reacties}}"
+}
