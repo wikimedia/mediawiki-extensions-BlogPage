@@ -1,0 +1,38 @@
+{
+	"@metadata": {
+		"authors": [
+			"Ykhwong"
+		]
+	},
+	"blog-author-votes": "$1{{PLURAL:$1|표}}",
+	"blog-by-user-category": "$1님의 글",
+	"blog-in-the-news": "새로 들어온 소식",
+	"blog-login": "문서를 만들려면 [[Special:UserLogin|로그인]]해야 합니다.",
+	"blog-new-articles": "새 글",
+	"blog-permission-required": "글을 만들 권한이 없습니다.",
+	"blog-popular-articles": "놓치지 마세요",
+	"blog-recent-editors": "다른 최근 기여자",
+	"blog-recent-editors-message": "편집을 통해 이 문서를 발전시켜 주세요.",
+	"blog-recent-voters": "다른 최근 투표자",
+	"blog-view-archive-link": "모두 보기",
+	"articlelists": "새 블로그 글",
+	"blog-ah-no-results": "문서가 없습니다.",
+	"blog-ah-new-articles": "새 글",
+	"blog-ah-write-article": "글 쓰기",
+	"blog-ah-todays-articles": "오늘의 글",
+	"articleshome": "블로그 홈페이지",
+	"createblogpost": "블로그 글 만들기",
+	"blog-create-title": "제목",
+	"blog-create-text": "텍스트",
+	"blog-create-categories": "분류",
+	"blog-create-button": "만듭니다!",
+	"blog-create-summary": "새 블로그 글을 만들었습니다.",
+	"blog-create-error-need-content": "'''오류:''' 블로그에 내용이 어느 정도 있어야 합니다!",
+	"blog-js-create-error-need-content": "블로그 글에 내용이 어느 정도 있어야 합니다!",
+	"blog-js-create-error-need-title": "블로그 글에 제목을 지정해야 합니다!",
+	"blog-time-ago": "$1 전",
+	"action-createblogpost": "새 블로그 글을 만들",
+	"right-createblogpost": "[[Special:CreateBlogPost|새 블로그 글 만들기]]",
+	"blog-user-articles-title": "블로그",
+	"blog-user-articles-votes": "{{PLURAL:$1|한 표|$1표}}"
+}
