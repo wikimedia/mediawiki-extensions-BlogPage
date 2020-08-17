@@ -1,0 +1,12 @@
+{
+	"@metadata": {
+		"authors": [
+			"BadDog"
+		]
+	},
+	"blog-author-comments": "$1 {{PLURAL:$1|коментар|коментара}}",
+	"blog-comments-of-day": "Коментари дана",
+	"blog-create-categories": "Категорије",
+	"blog-create-error-need-title": "'''Грешка:''' Морате да дате наслов објави за блог.",
+	"action-createblogpost": "правите нове објаве за блог"
+}
