@@ -66,10 +66,9 @@
 			"createblogpost": true
 		}
 	},
+	"callback": "BlogPageHooks::registerExtension",
 	"Hooks": {
 		"ArticleFromTitle": "BlogPageHooks::blogFromTitle",
-		"PageContentSaveComplete": "BlogPageHooks::updateCreatedOpinionsCount",
-		"PageContentSave": "BlogPageHooks::updateCreatedOpinionsCount",
 		"AlternateEdit": "BlogPageHooks::allowShowEditBlogPage",
 		"CanonicalNamespaces": "BlogPageHooks::onCanonicalNamespaces",
 		"UserProfileRightSideAfterActivity": "BlogPageHooks::getArticles"
