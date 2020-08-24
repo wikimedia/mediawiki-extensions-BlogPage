@@ -1,11 +1,12 @@
 {
 	"@metadata": {
 		"authors": [
+			"Omotecho",
 			"Shirayuki",
 			"たなはしひろし"
 		]
 	},
-	"blogpage-desc": "{{delete}}日本語",
+	"blogpage-desc": "コメントと投票の投稿、[[Special:CreateBlogPost|ブログ投稿の作成専用ページ]]とさらに[[Special:ArticlesHome|ブログ投稿をリスト化する専用ページ]]のあるブログシステム",
 	"blog-author-comments": "$1 {{PLURAL:$1|件のコメント}}",
 	"blog-author-title": "{{PLURAL:$1|作者|作者たち}}について",
 	"blog-created": "作成: $1",

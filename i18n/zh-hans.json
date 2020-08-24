@@ -1,0 +1,17 @@
+{
+	"@metadata": {
+		"authors": [
+			"SolidBlock",
+			"列维劳德"
+		]
+	},
+	"blog-and": "和",
+	"blog-anonymous-name": "匿名狂热者",
+	"blog-author-comments": "$1条留言",
+	"blog-author-more-by": "$1的更多博客",
+	"blog-author-title": "关于{{PLURAL:$1|作者}}",
+	"blog-author-votes": "$1次投票",
+	"blog-by": "由",
+	"blog-by-user-category": "用户$1的文章",
+	"blog-in-the-news": "新闻动态"
+}
