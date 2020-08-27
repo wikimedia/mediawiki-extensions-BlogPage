@@ -19,6 +19,7 @@
 	"blog-create-text": "Tekst",
 	"blog-create-categories": "Kategorier",
 	"blog-more": "mere",
+	"blog-time-ago": "$1 siden",
 	"blog-time-days": "{{PLURAL:$1|en dag|$1 dage}}",
 	"blog-time-minutes": "{{PLURAL:$1|et minut|$1 minutter}}"
 }
