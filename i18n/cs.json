@@ -1,0 +1,15 @@
+{
+	"@metadata": {
+		"authors": [
+			"Robins7"
+		]
+	},
+	"blog-and": "a",
+	"blog-new-articles": "Nové články",
+	"blog-permission-required": "Nemáte povolení vytvářet články.",
+	"blog-view-archive-link": "Zobrazit vše",
+	"blog-create-text": "Text",
+	"blog-create-categories": "Kategorie",
+	"blog-more": "více",
+	"blog-time-ago": "před $1"
+}

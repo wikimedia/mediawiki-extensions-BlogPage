@@ -1,6 +1,7 @@
 {
 	"@metadata": {
 		"authors": [
+			"AYZ04",
 			"SolidBlock",
 			"列维劳德",
 			"沈澄心"
@@ -14,6 +15,7 @@
 	"blog-author-votes": "$1次投票",
 	"blog-by": "由",
 	"blog-by-user-category": "用户$1的文章",
+	"blog-comments-of-day": "今天的评论",
 	"blog-created-ago": "创建于$1前",
 	"blog-in-the-news": "新闻动态",
 	"blog-login": "[[Special:UserLogin|登录]]以创建文章。",
