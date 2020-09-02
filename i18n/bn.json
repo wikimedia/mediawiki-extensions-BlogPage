@@ -1,6 +1,7 @@
 {
 	"@metadata": {
 		"authors": [
+			"Titodutta",
 			"আফতাবুজ্জামান"
 		]
 	},
@@ -12,7 +13,7 @@
 	"blog-comments-of-day": "আজকের নির্বাচিত মন্তব্য",
 	"blog-created-ago": "$1 আগে তৈরি করা",
 	"blog-in-the-news": "সংবাদে",
-	"blog-new-articles": "নতুন নিবন্ধ",
+	"blog-new-articles": "নতুন নিবন্ধসমূহ",
 	"blog-view-archive-link": "সব দেখুন",
 	"articlelists": "নতুন ব্লগ নিবন্ধ",
 	"blog-ah-no-results": "পাতা খুঁজে পাওয়া যায়নি।",
