@@ -16,7 +16,6 @@ module.exports = function ( grunt ) {
 				'!vendor/**'
 			]
 		},
-		// eslint-disable-next-line no-restricted-properties
 		banana: Object.assign(
 			conf.MessagesDirs,
 			{
