@@ -1,0 +1,16 @@
+{
+	"@metadata": {
+		"authors": [
+			"Ferdinand0101"
+		]
+	},
+	"blog-created": "Erstellt: $1",
+	"blog-created-ago": "Vor $1 erstellt",
+	"blog-in-the-news": "In den Nachrichten",
+	"blog-last-edited": "Zuletzt bearbeitet am $1",
+	"blog-ah-new-articles": "Neue Artikel",
+	"blog-create-title": "Titel",
+	"blog-create-text": "Text",
+	"blog-create-categories": "Kategorien",
+	"blog-time-ago": "vor $1"
+}
