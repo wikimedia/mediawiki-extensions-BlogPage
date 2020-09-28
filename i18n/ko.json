@@ -37,6 +37,8 @@
 	"blog-create-error-page-exists": "'''오류:''' 해당 제목의 블로그 글이 이미 존재합니다. 블로그 글에 다른 제목을 지정해 주십시오.",
 	"blog-js-create-error-need-content": "블로그 글에 내용이 어느 정도 있어야 합니다!",
 	"blog-js-create-error-need-title": "블로그 글에 제목을 지정해야 합니다!",
+	"blog-js-create-error-page-exists": "해당 제목의 블로그 글이 이미 존재합니다. 블로그 글에 다른 제목을 지정해 주십시오.",
+	"blog-more": "더 보기",
 	"blog-time-ago": "$1 전",
 	"blog-time-days": "{{PLURAL:$1|1일|$1일}}",
 	"blog-time-hours": "{{PLURAL:$1|1시간|$1시간}}",
