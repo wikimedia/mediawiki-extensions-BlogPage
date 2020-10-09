@@ -1,0 +1,41 @@
+{
+	"@metadata": {
+		"authors": [
+			"YaronSh"
+		]
+	},
+	"blog-and": "וגם",
+	"blog-anonymous-name": "קנאי אנונימי",
+	"blog-author-comments": "{{PLURAL:$1|תגובה אחת|$1 תגובות}}",
+	"blog-author-more-by": "עוד מאת $1",
+	"blog-author-votes": "{{PLURAL:$1|הצבעה אחת|$1 הצבעות}}",
+	"blog-by": "מאת",
+	"blog-by-user-category": "ערכים מאת $1",
+	"blog-comments-of-day": "תגובות היום",
+	"blog-created": "נוצר ב־$1",
+	"blog-created-ago": "נוצר לפני $1",
+	"blog-in-the-news": "בחדשות",
+	"blog-login": "עליך [[Special:UserLogin|להיכנס]] כדי ליצור ערכים.",
+	"blog-new-articles": "ערכים חדשים",
+	"blog-permission-required": "אין לך הרשאה ליצור ערכים.",
+	"blog-ah-no-results": "לא נמצאו עמודים.",
+	"blog-ah-popular-articles": "ערכים נפוצים",
+	"blog-ah-new-articles": "ערכים חדשים",
+	"blog-ah-write-article": "כתיבת ערך",
+	"blog-ah-todays-articles": "הערכים היומיים",
+	"blog-ah-most-votes": "הכי הרבה הצבעות (72 שעות)",
+	"blog-ah-what-talking-about": "הכי הרבה תגובות (72 שעות)",
+	"articleshome": "עמוד הבית של הבלוג",
+	"blog-create-title": "כותרת",
+	"blog-create-text": "טקסט",
+	"blog-create-categories": "קטגוריות",
+	"blog-create-button": "ליצור!",
+	"blog-more": "עוד",
+	"blog-time-ago": "לפני $1",
+	"blog-time-days": "{{PLURAL:$1|יום|two=יומיים|$1 ימים}}",
+	"blog-time-hours": "{{PLURAL:$1|שעה|two=שעתיים|$1 שעות}}",
+	"blog-time-minutes": "{{PLURAL:$1|דקה|$1 דקות}}",
+	"blog-time-seconds": "{{PLURAL:$1|שנייה|$1 שניות}}",
+	"blog-user-articles-title": "בלוגים",
+	"blog-user-article-comment": "{{PLURAL:$1|תגובה אחת|$1 תגובות}}"
+}
