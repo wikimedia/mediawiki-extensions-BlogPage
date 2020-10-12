@@ -2,6 +2,7 @@
 	"@metadata": {
 		"authors": [
 			"AYZ04",
+			"Shuiwater",
 			"SolidBlock",
 			"列维劳德",
 			"沈澄心",
@@ -25,6 +26,7 @@
 	"blog-login-edit": "您必须[[Special:UserLogin|登录]]才能编辑博客文章。",
 	"blog-new-articles": "新条目",
 	"blog-permission-required": "您没有权限创建新文章。",
+	"blog-recent-voters": "最近其他的投票者",
 	"blog-view-archive-link": "查看全部",
 	"articlelists": "新博客文章",
 	"blog-ah-no-results": "找不到页面。",
