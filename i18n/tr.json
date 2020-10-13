@@ -2,7 +2,8 @@
 	"@metadata": {
 		"authors": [
 			"Incelemeelemani",
-			"MuratTheTurkish"
+			"MuratTheTurkish",
+			"Sezgin İbiş"
 		]
 	},
 	"blogpage-desc": "Yorum ve oylama özellikli blog sistemi, [[Special:CreateBlogPost|blog gönderileri oluşturmak için özel bir sayfa]] ve [[Special:ArticlesHome|blog gönderilerini listelemek için özel bir sayfa]]",
