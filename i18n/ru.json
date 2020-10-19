@@ -2,6 +2,7 @@
 	"@metadata": {
 		"authors": [
 			"Facenapalm",
+			"Megakott",
 			"Soul Train"
 		]
 	},
@@ -27,6 +28,7 @@
 	"blog-multiple-authors": "Эта статья была написана совместно участниками $1",
 	"blog-recent-editors": "Другие недавние участники",
 	"blog-view-archive-link": "Посмотреть всё",
+	"articlelists": "Новые статьи в блоге",
 	"blog-ah-no-results": "Страницы не найдены.",
 	"blog-ah-popular-articles": "Популярные статьи",
 	"blog-ah-new-articles": "Новые статьи",

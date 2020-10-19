@@ -1,6 +1,7 @@
 {
 	"@metadata": {
 		"authors": [
+			"A2y4",
 			"Omotecho",
 			"Shirayuki",
 			"たなはしひろし"
@@ -9,6 +10,7 @@
 	"blogpage-desc": "コメントと投票の投稿、[[Special:CreateBlogPost|ブログ投稿の作成専用ページ]]とさらに[[Special:ArticlesHome|ブログ投稿をリスト化する専用ページ]]のあるブログシステム",
 	"blog-author-comments": "$1 {{PLURAL:$1|件のコメント}}",
 	"blog-author-title": "{{PLURAL:$1|作者|作者たち}}について",
+	"blog-author-votes": "$1票",
 	"blog-created": "作成: $1",
 	"blog-created-ago": "$1前に作成",
 	"blog-in-the-news": "新着情報",
@@ -19,6 +21,8 @@
 	"blog-ah-no-results": "ページはありません。",
 	"blog-ah-popular-articles": "人気の記事",
 	"blog-ah-new-articles": "新しい記事",
+	"blog-ah-write-article": "記事を書く",
+	"blog-ah-todays-articles": "今日の記事",
 	"articleshome": "ブログのホームページ",
 	"createblogpost": "ブログ投稿の作成",
 	"blog-create-title": "タイトル",
