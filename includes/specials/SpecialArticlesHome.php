@@ -407,7 +407,7 @@ class ArticlesHome extends SpecialPage {
 			}
 
 			// Cache for 15 minutes
-			$cahce->set( $key, $commentedBlogPosts, 60 * 15 );
+			$cache->set( $key, $commentedBlogPosts, 60 * 15 );
 		}
 
 		$output = '<div class="listpages-container">';
