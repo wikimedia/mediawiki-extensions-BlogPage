@@ -1,7 +1,8 @@
 {
 	"@metadata": {
 		"authors": [
-			"YaronSh"
+			"YaronSh",
+			"ישראל קלר"
 		]
 	},
 	"blog-and": "וגם",
@@ -15,9 +16,13 @@
 	"blog-created": "נוצר ב־$1",
 	"blog-created-ago": "נוצר לפני $1",
 	"blog-in-the-news": "בחדשות",
+	"blog-last-edited": "נערך לאחרונה $1",
 	"blog-login": "עליך [[Special:UserLogin|להיכנס]] כדי ליצור ערכים.",
+	"blog-login-edit": "עליך [[Special:UserLogin|להתחבר]] כדי לערוך מאמרים ערכים בבלוג.",
 	"blog-new-articles": "ערכים חדשים",
 	"blog-permission-required": "אין לך הרשאה ליצור ערכים.",
+	"blog-popular-articles": "אל תפסיד",
+	"blog-view-archive-link": "להציג הכול",
 	"blog-ah-no-results": "לא נמצאו עמודים.",
 	"blog-ah-popular-articles": "ערכים נפוצים",
 	"blog-ah-new-articles": "ערכים חדשים",
