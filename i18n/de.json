@@ -2,7 +2,8 @@
 	"@metadata": {
 		"authors": [
 			"Ameisenigel",
-			"Ferdinand0101"
+			"Ferdinand0101",
+			"Laurinm"
 		]
 	},
 	"blog-and": "und",
@@ -22,12 +23,16 @@
 	"blog-new-articles": "Neue Artikel",
 	"blog-permission-required": "Du hast keine Rechte, um Artikel zu erstellen.",
 	"blog-popular-articles": "Nicht verpassen",
+	"blog-recent-voters-message": "Wenn du den Artikel gut findest, stimme für ihn ab.",
 	"blog-view-archive-link": "Alle anzeigen",
 	"articlelists": "Neue Blog-Artikel",
 	"blog-ah-no-results": "Es wurden keine Seiten gefunden.",
 	"blog-ah-popular-articles": "Beliebte Artikel",
 	"blog-ah-new-articles": "Neue Artikel",
 	"blog-ah-write-article": "Einen Artikel schreiben",
+	"blog-ah-todays-articles": "Heutige Artikel",
+	"blog-ah-most-votes": "Meiste Stimmen (72 Stunden)",
+	"blog-ah-what-talking-about": "Meiste Kommentare (72 Stunden)",
 	"blog-create-title": "Titel",
 	"blog-create-text": "Text",
 	"blog-create-categories": "Kategorien",

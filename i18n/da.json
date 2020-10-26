@@ -5,7 +5,10 @@
 		]
 	},
 	"blog-and": "og",
+	"blog-author-more-by": "Mere af $1",
+	"blog-author-votes": "$1 {{PLURAL:$1|stemme|stemmer}}",
 	"blog-by": "af",
+	"blog-by-user-category": "Artikler af brugeren $1",
 	"blog-comments-of-day": "Dagens kommentar",
 	"blog-created-ago": "oprettet for $1 siden",
 	"blog-in-the-news": "I nyhederne",

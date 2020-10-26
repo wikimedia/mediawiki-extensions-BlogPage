@@ -22,6 +22,11 @@
 	"blog-new-articles": "ערכים חדשים",
 	"blog-permission-required": "אין לך הרשאה ליצור ערכים.",
 	"blog-popular-articles": "אל תפסיד",
+	"blog-multiple-authors": "ערך זה נכתב בשיתוף פעולה של $1",
+	"blog-recent-editors": "תורמים עדכניים נוספים",
+	"blog-recent-editors-message": "עריכת הדף הזה עשויה לשפר אותו.",
+	"blog-recent-voters": "מצביעים עדכניים נוספים",
+	"blog-recent-voters-message": "אם אהבת את הערך, ניתן להצביע לו.",
 	"blog-view-archive-link": "להציג הכול",
 	"blog-ah-no-results": "לא נמצאו עמודים.",
 	"blog-ah-popular-articles": "ערכים נפוצים",
@@ -42,5 +47,6 @@
 	"blog-time-minutes": "{{PLURAL:$1|דקה|$1 דקות}}",
 	"blog-time-seconds": "{{PLURAL:$1|שנייה|$1 שניות}}",
 	"blog-user-articles-title": "בלוגים",
+	"blog-user-articles-votes": "{{PLURAL:$1|הצבעה אחת|$1 הצבעות}}",
 	"blog-user-article-comment": "{{PLURAL:$1|תגובה אחת|$1 תגובות}}"
 }
