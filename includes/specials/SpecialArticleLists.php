@@ -24,7 +24,7 @@ class ArticleLists extends IncludableSpecialPage {
 	 */
 	public function execute( $limit ) {
 		$out = $this->getOutput();
-		$out->setPageTitle( $this->msg( 'ah-new-articles' ) );
+		$out->setPageTitle( $this->msg( 'blog-ah-new-articles' ) );
 
 		if ( empty( $limit ) ) {
 			$limit = 25;
@@ -40,7 +40,7 @@ class ArticleLists extends IncludableSpecialPage {
 
 		$output = '<div class="left-articles">';
 		if ( !$this->including() ) {
-			$descMsg = $this->msg( 'ah-new-articles-summary' );
+			$descMsg = $this->msg( 'blog-ah-new-articles-summary' );
 			if ( !$descMsg->isDisabled() ) {
 				$output .= Xml::tags( 'div', [
 					'class' => 'mw-specialpage-summary'
@@ -87,7 +87,7 @@ class ArticleLists extends IncludableSpecialPage {
 
 		$output .= '<div class="listpages-container">' . "\n";
 		if ( empty( $newBlogPosts ) ) {
-			$output .= $this->msg( 'ah-no-results' )->escaped();
+			$output .= $this->msg( 'blog-ah-no-results' )->escaped();
 		} else {
 			$repoGroup = MediaWikiServices::getInstance()->getRepoGroup();
 			foreach ( $newBlogPosts as $newBlogPost ) {
