@@ -1,13 +1,14 @@
 {
 	"@metadata": {
 		"authors": [
+			"Beta16",
 			"Gianfranco"
 		]
 	},
 	"blog-anonymous-name": "Fanatico anonimo",
 	"blog-author-comments": "$1 {{PLURAL:$1|commento|commenti}}",
 	"blog-author-more-by": "Altro di $1",
-	"blog-author-title": "A proposito {{PLURAL:$1|dell'Autore|degli Autori}}",
+	"blog-author-title": "A proposito {{PLURAL:$1|dell'autore|degli autori}}",
 	"blog-author-votes": "$1 {{PLURAL:$1|voto|voti}}",
 	"blog-by": "di",
 	"blog-by-user-category": "Voci dell'utente $1",
