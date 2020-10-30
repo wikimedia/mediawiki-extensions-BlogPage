@@ -1,6 +1,7 @@
 {
 	"@metadata": {
 		"authors": [
+			"Guycn2",
 			"YaronSh",
 			"ישראל קלר"
 		]
@@ -18,7 +19,7 @@
 	"blog-in-the-news": "בחדשות",
 	"blog-last-edited": "נערך לאחרונה $1",
 	"blog-login": "עליך [[Special:UserLogin|להיכנס]] כדי ליצור ערכים.",
-	"blog-login-edit": "עליך [[Special:UserLogin|להתחבר]] כדי לערוך מאמרים ערכים בבלוג.",
+	"blog-login-edit": "יש [[Special:UserLogin|להיכנס לחשבון]] כדי לערוך מאמרים בבלוג.",
 	"blog-new-articles": "ערכים חדשים",
 	"blog-permission-required": "אין לך הרשאה ליצור ערכים.",
 	"blog-popular-articles": "אל תפסיד",
