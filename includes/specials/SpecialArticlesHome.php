@@ -492,9 +492,19 @@ class ArticlesHome extends SpecialPage {
 					$votes .
 					"</div>\n"; // .listpages-votebox-number
 				$output .= '<div class="listpages-votebox-text">' .
-					$this->msg( 'blog-author-votes' )
-					->numParams( $votes )
-					->escaped() . "</div>\n"; // .listpages-votebox-text
+					// DUMB HACK
+					// The # of votes is displayed above in .listpages-votebox-number already
+					// So here we really just need the correct localized word for "votes"; we
+					// have no need to repeat the number again...so while we _use_ the number
+					// to get the correct i18n string, we strip it out so that it's only displayed
+					// above in .listpages-votebox-number
+					str_replace(
+						$votes,
+						'',
+						$this->msg( 'blog-author-votes' )
+							->numParams( $votes )
+							->escaped()
+					) . "</div>\n"; // .listpages-votebox-text
 				$output .= "</div>\n"; // .listpages-votebox
 				$output .= '<a href="' . htmlspecialchars( $titleObj->getFullURL() ) . '">' .
 						htmlspecialchars( $titleObj->getText() ) .
