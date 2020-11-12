@@ -44,7 +44,13 @@
 	"blog-create-button": "创建！",
 	"blog-create-summary": "已创建新的博客帖子。",
 	"blog-more": "更多",
+	"blog-time-ago": "$1前",
+	"blog-time-days": "{{PLURAL:$1|1天|$1天}}",
+	"blog-time-hours": "{{PLURAL:$1|一小时|$1 小时}}",
 	"blog-time-minutes": "{{PLURAL:$1|$1分钟}}",
 	"blog-time-seconds": "{{PLURAL:$1|$1秒}}",
-	"blog-user-articles-title": "博文"
+	"action-createblogpost": "创建新的博客文章",
+	"blog-user-articles-title": "博文",
+	"blog-user-articles-votes": "{{PLURAL:$1|一张票|$1 张票}}",
+	"blog-user-article-comment": "{{PLURAL:$1|一则评论|$1 则评论}}"
 }
