@@ -5,6 +5,8 @@
  * @file
  */
 use MediaWiki\MediaWikiServices;
+use MediaWiki\Revision\RevisionRecord;
+use MediaWiki\Revision\SlotRecord;
 
 class BlogPage extends Article {
 
@@ -24,18 +26,14 @@ class BlogPage extends Article {
 
 	public function setContent() {
 		// Get the page content for later use
-		$this->pageContent = ContentHandler::getContentText(
-			$this->getContentObject()
-		);
+		$this->pageContent = self::getContentText( $this );
 
 		// If it's a redirect, in order to get the *real* content for later use,
 		// we have to load the text for the real page
-		// Note: If $this->getContent() is called anywhere before parent::view,
-		// the real article text won't get loaded on the page
-		if ( $this->isRedirect() ) {
+		if ( $this->getPage()->isRedirect() ) {
 			wfDebugLog( 'BlogPage', __METHOD__ );
 
-			$target = $this->followRedirect();
+			$target = $this->getPage()->followRedirect();
 			if ( !$target instanceof Title ) {
 				// Correctly handle interwiki redirects and the like
 				// WikiPage::followRedirect() can return either a Title, boolean
@@ -50,14 +48,32 @@ class BlogPage extends Article {
 				$this->getContext()->getOutput()->redirect( $target );
 			} else {
 				$rarticle = new Article( $target );
-				$rcontent = $rarticle->getContentObject();
-				$this->pageContent = ContentHandler::getContentText( $rcontent );
+				$this->pageContent = self::getContentText( $rarticle );
 
 				// If we don't clear, the page content will be [[redirect-blah]],
 				// and not the actual page
 				$this->clear();
 			}
 		}
+	}
+
+	/**
+	 * @param Article $article
+	 * @return string
+	 */
+	private static function getContentText( $article ) {
+		$rev = $article->fetchRevisionRecord();
+		if ( $rev ) {
+			$contentObj = $rev->getContent(
+				SlotRecord::MAIN,
+				RevisionRecord::FOR_THIS_USER,
+				$article->getContext()->getUser()
+			);
+			if ( $contentObj ) {
+				return ContentHandler::getContentText( $contentObj );
+			}
+		}
+		return '';
 	}
 
 	public function view() {
@@ -1025,8 +1041,7 @@ class BlogPage extends Article {
 		// Get raw text
 		$title = Title::makeTitle( $namespace, $pageTitle );
 		$article = new Article( $title );
-		$content = $article->getContentObject();
-		$text = ContentHandler::getContentText( $content );
+		$text = self::getContentText( $article );
 
 		// Remove some problematic characters
 		$text = str_replace( '* ', '', $text );
