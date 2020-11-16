@@ -498,6 +498,7 @@ class ArticlesHome extends SpecialPage {
 					// have no need to repeat the number again...so while we _use_ the number
 					// to get the correct i18n string, we strip it out so that it's only displayed
 					// above in .listpages-votebox-number
+					// @todo FIXME: does not work properly when $voteCount = 1, at least for English
 					str_replace(
 						$votes,
 						'',
