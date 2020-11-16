@@ -126,66 +126,58 @@ class BlogPageHooks {
 		foreach ( $res as $row ) {
 			$ctg = Title::makeTitle( NS_CATEGORY, $row->cl_to );
 			$ctgname = $ctg->getText();
-			$userBlogCat = wfMessage( 'blog-by-user-category' )->inContentLanguage()->text();
+			$userBlogCat = wfMessage( 'blog-by-user-category' )->inContentLanguage()->text(); // e.g. "Articles by User $1"
+			$userBlogCatPrefix = str_replace( '$1', '', $userBlogCat ); // e.g. "Articles by User " [sic!]
 
 			// Need to strip out $1 and leading/trailing space(s) from it from
 			// the i18n msg to check if this is a blog category
-			if ( strpos( $ctgname, str_replace( '$1', '', $userBlogCat ) ) !== false ) {
-				// @todo FIXME: wait what? We're already checking isAnon() earlier on...
-				// Shouldn't that catch this as well? --ashley, 27 July 2019
-				$u = User::newFromName( $user_name );
-				if ( $u === null ) {
-					return true;
+			if ( strpos( $ctgname, $userBlogCatPrefix ) !== false ) {
+				// Copied from UserStatsTrack::updateCreatedOpinionsCount()
+				$dbw = wfGetDB( DB_MASTER );
+
+				$opinions = $dbw->select(
+					[ 'page', 'categorylinks' ],
+					[ 'COUNT(*) AS CreatedOpinions' ],
+					[
+						'cl_to' => $ctg->getDBkey(),
+						'page_namespace' => NS_BLOG // paranoia
+					],
+					__METHOD__,
+					[],
+					[
+						'categorylinks' => [ 'INNER JOIN', 'page_id = cl_from' ]
+					]
+				);
+
+				// Please die in a fire, PHP.
+				// selectField() would be ideal above but it returns
+				// insane results (over 300 when the real count is
+				// barely 10) so we have to fuck around with a
+				// foreach() loop that we don't even need in theory
+				// just because PHP is...PHP.
+				$opinionsCreated = 0;
+				foreach ( $opinions as $opinion ) {
+					$opinionsCreated = $opinion->CreatedOpinions;
 				}
 
-				$stats = new UserStatsTrack( $u->getId(), $user_name );
-				$userBlogCat = wfMessage( 'blog-by-user-category', $u->getName() )
-					->inContentLanguage()->text();
-				// Copied from UserStatsTrack::updateCreatedOpinionsCount()
-				if ( !$u->isAnon() ) {
-					$parser = MediaWikiServices::getInstance()->getParserFactory()->create();
-					$ctgTitle = Title::newFromText(
-						$parser->preprocess(
-							trim( $userBlogCat ),
-							$at,
-							$wikiPage->makeParserOptions( $context )
-						)
-					);
-					$ctgTitle = $ctgTitle->getDBkey();
-					$dbw = wfGetDB( DB_MASTER );
-
-					$opinions = $dbw->select(
-						[ 'page', 'categorylinks' ],
-						[ 'COUNT(*) AS CreatedOpinions' ],
-						[
-							'cl_to' => $ctgTitle,
-							'page_namespace' => NS_BLOG // paranoia
-						],
-						__METHOD__,
-						[],
-						[
-							'categorylinks' => [ 'INNER JOIN', 'page_id = cl_from' ]
-						]
-					);
-
-					// Please die in a fire, PHP.
-					// selectField() would be ideal above but it returns
-					// insane results (over 300 when the real count is
-					// barely 10) so we have to fuck around with a
-					// foreach() loop that we don't even need in theory
-					// just because PHP is...PHP.
-					$opinionsCreated = 0;
-					foreach ( $opinions as $opinion ) {
-						$opinionsCreated = $opinion->CreatedOpinions;
+				if ( $opinionsCreated > 0 ) {
+					// Figure out the name of the user we're dealing with from the category name
+					// (e.g. "Articles by user Foo" --> $userFromCategoryName = 'Foo';) and update
+					// _their_ statistics accordingly + purge caches ($user is the user object for
+					// the person who made the edit; they _can_ be the same but usually aren't!)
+					$userFromCategoryName = User::newFromName( str_replace( $userBlogCatPrefix, '', $ctgname ) );
+					if ( !$userFromCategoryName || !$userFromCategoryName instanceof User ) {
+						continue;
 					}
 
 					$res = $dbw->update(
 						'user_stats',
 						[ 'stats_opinions_created' => $opinionsCreated ],
-						[ 'stats_actor' => $u->getActorId() ],
+						[ 'stats_actor' => $userFromCategoryName->getActorId() ],
 						__METHOD__
 					);
 
+					$stats = new UserStatsTrack( $userFromCategoryName->getId(), $userFromCategoryName->getName() );
 					$stats->clearCache();
 				}
 			}
@@ -293,7 +285,12 @@ class BlogPageHooks {
 			$output .= '</div>
 					<div class="action-left">' .
 					$context->msg( 'user-count-separator' )
-						->numParams( $articleCount, count( $articles ) )
+						// count( $articles ) == amount of entries displayed on the user profile
+						// page, 5 or less; $articleCount == total amount of blogs (co)authored by
+						// the user, can be well over 5 (obviously!) for a profilic author; pulled
+						// from the infamous opinions_created (user_stats.stats_opinions_created
+						// column in the DB) just a bit earlier in this method
+						->numParams( count( $articles ), $articleCount )
 						->escaped() . '</div>
 					<div class="visualClear"></div>
 				</div>
@@ -320,9 +317,20 @@ class BlogPageHooks {
 					<div class=\"number-of-votes\">
 						<div class=\"vote-number\">{$voteCount}</div>
 						<div class=\"vote-text\">" .
-							$context->msg( 'blog-user-articles-votes' )
-								->numParams( $voteCount )
-								->escaped() .
+							// DUMB HACK (copied from /includes/specials/SpecialArticlesHome.php, function displayNewestPages)
+							// The # of votes is displayed above in .vote-number already
+							// So here we really just need the correct localized word for "votes"; we
+							// have no need to repeat the number again...so while we _use_ the number
+							// to get the correct i18n string, we strip it out so that it's only displayed
+							// above in .vote-number
+							// @todo FIXME: does not work properly when $voteCount = 1, at least for English
+							str_replace(
+								$voteCount,
+								'',
+								$context->msg( 'blog-user-articles-votes' )
+									->numParams( $voteCount )
+									->escaped()
+							) .
 						'</div>
 					</div>
 					<div class="article-title">
