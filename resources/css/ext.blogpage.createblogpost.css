@@ -45,6 +45,11 @@ a.tag-cloud-entry {
 	text-decoration: underline;
 }
 
+/* Hide JS version for no-JS users */
+.client-nojs #create-tagcloud {
+	display: none;
+}
+
 input#title {
 	width: 500px;
 }

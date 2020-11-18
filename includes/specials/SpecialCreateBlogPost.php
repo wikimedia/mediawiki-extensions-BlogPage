@@ -141,6 +141,14 @@ class SpecialCreateBlogPost extends SpecialPage {
 					}
 				}
 
+				// Category checkboxes (no-JS only)
+				$userSuppliedCategoriesNoJS = [];
+				foreach ( $request->getValues() as $key => $val ) {
+					if ( preg_match( '/category_/', $key ) ) {
+						$categories[] = "[[{$localizedCatNS}:{$val}]]";
+					}
+				}
+
 				// Convert the array into a string
 				$wikitextCategories = implode( "\n", $categories );
 
@@ -267,9 +275,11 @@ class SpecialCreateBlogPost extends SpecialPage {
 
 	/**
 	 * Show the category cloud.
+	 *
 	 * @return string HTML
 	 */
 	public function displayFormPageCategories() {
+		$request = $this->getRequest();
 		$cloud = new BlogTagCloud( 20 );
 
 		$tagcloud = '<div id="create-tagcloud">';
@@ -292,6 +302,43 @@ class SpecialCreateBlogPost extends SpecialPage {
 		}
 		$tagcloud .= '</div>';
 
+		// No-JS version, "borrowed" from CreateAPage and slightly tweaked (nothing
+		// functional, just regular code cleanup), main container div ID changed, ...
+		$tagcloud .= '<noscript>';
+		if ( isset( $cloud->tags ) ) {
+			$tagcloud .= '<div id="create-tagcloud-nojs">';
+			$xnum = 0;
+			$array_category = [];
+
+			foreach ( $cloud->tags as $xname => $xtag ) {
+				// Latter condition is needed to handle previewing correctly for no-JS users
+				$isChecked = ( array_key_exists( $xname, $array_category ) && ( $array_category[$xname] ) || $request->getCheck( "category_{$xnum}" ) );
+				$array_category[$xname] = 0;
+				$tagcloud .= '<span id="tag_njs_' . (int)$xnum . '" style="font-size:9pt">';
+				$tagcloud .= Html::check( "category_{$xnum}", $isChecked, [
+					'id' => "category_{$xnum}",
+					'value' => $xname
+				] );
+				$tagcloud .= '&nbsp;';
+				$tagcloud .= $xname;
+				$tagcloud .= '</span>';
+				$xnum++;
+			}
+
+			$display_category = [];
+			foreach ( $array_category as $xname => $visible ) {
+				if ( $visible == 1 ) {
+					$display_category[] = $xname;
+				}
+			}
+			$text_category = implode( ',', $display_category );
+
+			$tagcloud .= '</div>';
+		}
+
+		$tagcloud .= '</noscript>';
+		// End no-JS category stuff
+
 		$output = '<div class="create-title">' .
 			$this->msg( 'blog-create-categories' )->escaped() .
 			'</div>
@@ -300,7 +347,10 @@ class SpecialCreateBlogPost extends SpecialPage {
 			'</div>' . "\n";
 		$output .= $tagcloud . "\n";
 		$output .= '<textarea class="createbox" tabindex="' . $this->tabCounter .
-			'" accesskey="," name="pageCtg" id="pageCtg" rows="2" cols="80"></textarea><br /><br />';
+			'" accesskey="," name="pageCtg" id="pageCtg" rows="2" cols="80">';
+		// Handle page previews correctly and don't lose user-supplied data on preview
+		$output .= htmlspecialchars( $request->getVal( 'pageCtg' ), ENT_QUOTES );
+		$output .= '</textarea><br /><br />';
 		$this->tabCounter++;
 
 		return $output;
