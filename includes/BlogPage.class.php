@@ -89,7 +89,14 @@ class BlogPage extends Article {
 
 		// Don't throw a bunch of E_NOTICEs when we're viewing the page of a
 		// nonexistent blog post
-		if ( !$this->getID() ) {
+		if ( !$this->getPage()->getId() ) {
+			parent::view();
+			return '';
+		}
+
+		// Don't display the sidebar etc. when a redirect page in the Blog: NS is
+		// accessed with ?redirect=no in the URL
+		if ( $this->getPage()->isRedirect() ) {
 			parent::view();
 			return '';
 		}
@@ -247,14 +254,14 @@ class BlogPage extends Article {
 		$count = 0;
 
 		// Get date of last edit
-		$timestamp = $this->getTimestamp();
+		$timestamp = $this->getPage()->getTimestamp();
 		$edit_time = [];
 		$edit_time['date'] = $lang->date( $timestamp, true );
 		$edit_time['time'] = $lang->time( $timestamp, true );
 		$edit_time['datetime'] = $lang->timeanddate( $timestamp, true );
 
 		// Get date of when article was created
-		$timestamp = self::getCreateDate( $this->getId() );
+		$timestamp = self::getCreateDate( $this->getPage()->getId() );
 		$create_time = [];
 		$create_time['date'] = $lang->date( $timestamp, true );
 		$create_time['time'] = $lang->time( $timestamp, true );
@@ -446,7 +453,7 @@ class BlogPage extends Article {
 			$array_count = 0;
 
 			foreach ( $res as $row ) {
-				if ( $row->page_id != $this->getId() && $array_count < 3 ) {
+				if ( $row->page_id != $this->getPage()->getId() && $array_count < 3 ) {
 					$articles[] = [
 						'page_title' => $row->page_title,
 						'page_id' => $row->page_id
@@ -515,7 +522,7 @@ class BlogPage extends Article {
 	 * @return array Array containing each editors' user ID and user name
 	 */
 	public function getEditorsList() {
-		$pageTitleId = $this->getId();
+		$pageTitleId = $this->getPage()->getId();
 
 		$cache = MediaWikiServices::getInstance()->getMainWANObjectCache();
 		$key = $cache->makeKey( 'recenteditors', 'list', $pageTitleId );
@@ -613,7 +620,7 @@ class BlogPage extends Article {
 	 */
 	public function getVotersList() {
 		// Gets the page ID for the query
-		$pageTitleId = $this->getId();
+		$pageTitleId = $this->getPage()->getId();
 
 		$cache = MediaWikiServices::getInstance()->getMainWANObjectCache();
 		$key = $cache->makeKey( 'recentvoters', 'list', $pageTitleId );
