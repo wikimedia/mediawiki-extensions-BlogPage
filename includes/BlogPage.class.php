@@ -267,7 +267,7 @@ class BlogPage extends Article {
 		$create_time['time'] = $lang->time( $timestamp, true );
 		$create_time['datetime'] = $lang->timeanddate( $timestamp, true );
 
-		$output = '<div class="blog-byline">' . wfMessage( 'blog-by' )->escaped() . ' ';
+		$output = '';
 
 		$authors = '';
 		$linkRenderer = MediaWikiServices::getInstance()->getLinkRenderer();
@@ -282,15 +282,22 @@ class BlogPage extends Article {
 					wfMessage( 'blog-and' )->escaped() .
 					wfMessage( 'word-separator' )->escaped();
 			}
-			$authors .= $linkRenderer->makeLink(
-				$user->getUserPage(),
-				$user->getName()
-			);
+			// Quick 'n' dirty IP filtering: while anons can have an _actor_ ID, they
+			// always have a *user* ID of 0. If their UID is 0, we don't want to show
+			// their "name" (IP address) as an author.
+			if ( $user->getId() > 0 ) {
+				$authors .= $linkRenderer->makeLink(
+					$user->getUserPage(),
+					$user->getName()
+				);
+			}
 		}
 
-		$output .= $authors;
-
-		$output .= '</div>';
+		if ( $authors !== '' ) {
+			$output .= '<div class="blog-byline">' .
+				wfMessage( 'blog-by' )->escaped() . ' ' . $authors .
+				'</div>';
+		}
 
 		$edit_text = '';
 		if ( $create_time['datetime'] != $edit_time['datetime'] ) {
