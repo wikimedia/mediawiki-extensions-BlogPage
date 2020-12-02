@@ -321,20 +321,11 @@ class BlogPageHooks {
 					<div class=\"number-of-votes\">
 						<div class=\"vote-number\">{$voteCount}</div>
 						<div class=\"vote-text\">" .
-							// DUMB HACK (copied from /includes/specials/SpecialArticlesHome.php, function displayNewestPages)
 							// The # of votes is displayed above in .vote-number already
-							// So here we really just need the correct localized word for "votes"; we
-							// have no need to repeat the number again...so while we _use_ the number
-							// to get the correct i18n string, we strip it out so that it's only displayed
-							// above in .vote-number
-							// @todo FIXME: does not work properly when $voteCount = 1, at least for English
-							str_replace(
-								$voteCount,
-								'',
-								$context->msg( 'blog-user-articles-votes' )
-									->numParams( $voteCount )
-									->escaped()
-							) .
+							// So here we really just need the correct localized word for "votes"
+							$context->msg( 'blog-user-articles-votes' )
+								->numParams( $voteCount )
+								->escaped() .
 						'</div>
 					</div>
 					<div class="article-title">

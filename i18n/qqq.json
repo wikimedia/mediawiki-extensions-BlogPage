@@ -62,6 +62,6 @@
 	"action-createblogpost": "{{doc-action|createblogpost}}",
 	"right-createblogpost": "{{doc-right|createblogpost}}",
 	"blog-user-articles-title": "A header, used on [[mw:Extension:SocialProfile|social profile pages]] when <code>$wgUserProfileDisplay['articles']</code> is <code>true</code>",
-	"blog-user-articles-votes": "A list item, used on [[mw:Extension:SocialProfile|social profile pages]] when <code>$wgUserProfileDisplay['articles']</code> is <code>true</code>.\nParameters:\n* $1 is the amount of votes a blog page has",
+	"blog-user-articles-votes": "A list item, used on [[mw:Extension:SocialProfile|social profile pages]] when <code>$wgUserProfileDisplay['articles']</code> is <code>true</code> and also used on Special:ArticlesHome.\n'''IMPORTANT:''' Because the amount of votes is already shown in a specially styled <code>&lt;div&gt;</code> element, your translation should only include the appropriate words (vote/votes in your local language) but the translation should ''not'' contain the number of votes ($1) because it's already shown on the page where this message is used!\nParameters:\n* $1 is the amount of votes a blog page has",
 	"blog-user-article-comment": "A list item, used on [[mw:Extension:SocialProfile|social profile pages]] when <code>$wgUserProfileDisplay['articles']</code> is <code>true</code>.\nParameters:\n* $1 is the amount of comments a blog page has"
 }
