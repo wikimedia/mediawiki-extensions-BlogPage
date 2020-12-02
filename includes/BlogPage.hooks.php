@@ -60,16 +60,20 @@ class BlogPageHooks {
 
 		if ( $editPage->getTitle()->getNamespace() == NS_BLOG ) {
 			if ( $user->isAnon() ) { // anons can't edit blog pages
+				$output->setPageTitle( $output->msg( 'error' ) );
 				if ( !$editPage->getTitle()->exists() ) {
 					$output->addWikiMsg( 'blog-login' );
 				} else {
 					$output->addWikiMsg( 'blog-login-edit' );
 				}
+				$output->addReturnTo( $editPage->getTitle() );
 				return false;
 			}
 
 			if ( !$user->isAllowed( 'edit' ) || $user->isBlocked() ) {
+				$output->setPageTitle( $output->msg( 'error' ) );
 				$output->addWikiMsg( 'blog-permission-required' );
+				$output->addReturnTo( $editPage->getTitle() );
 				return false;
 			}
 		}
