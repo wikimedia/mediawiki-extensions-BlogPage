@@ -62,6 +62,6 @@
 	"action-createblogpost": "yeni blog gönderilerini oluştur",
 	"right-createblogpost": "[[Special:CreateBlogPost|Yeni blog gönderilerini oluştur]]",
 	"blog-user-articles-title": "Bloglar",
-	"blog-user-articles-votes": "{{PLURAL:$1|bir oy|$1 oy}}",
+	"blog-user-articles-votes": "{{PLURAL:$1|oy}}",
 	"blog-user-article-comment": "{{PLURAL:$1|bir yorum|$1 yorum}}"
 }

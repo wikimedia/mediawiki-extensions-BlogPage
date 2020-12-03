@@ -60,6 +60,6 @@
 	"action-createblogpost": "criar novas postagens de blog",
 	"right-createblogpost": "[[Special:CreateBlogPost|Criar novas postagens de blog]]",
 	"blog-user-articles-title": "Blogs",
-	"blog-user-articles-votes": "{{PLURAL:$1|um voto|$1 votos}}",
+	"blog-user-articles-votes": "{{PLURAL:$1|voto|votos}}",
 	"blog-user-article-comment": "{{PLURAL:$1|um comentário|$1 comentários}}"
 }
