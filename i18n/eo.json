@@ -1,0 +1,8 @@
+{
+	"@metadata": {
+		"authors": [
+			"Javiero"
+		]
+	},
+	"blog-user-articles-votes": "{{PLURAL:$1|vote|votes}}"
+}

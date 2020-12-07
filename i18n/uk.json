@@ -1,6 +1,7 @@
 {
 	"@metadata": {
 		"authors": [
+			"Renamerr",
 			"Ата"
 		]
 	},
@@ -60,6 +61,6 @@
 	"action-createblogpost": "створення нових дописів у блозі",
 	"right-createblogpost": "[[Special:CreateBlogPost|Створення нових дописів у блозі]]",
 	"blog-user-articles-title": "Блоги",
-	"blog-user-articles-votes": "{{PLURAL:$1|один голос|$1 голоси|$1 голосів}}",
+	"blog-user-articles-votes": "{{PLURAL:$1|голос|голоси|голосів}}",
 	"blog-user-article-comment": "$1 {{PLURAL:$1|коментар|коментарі|коментарів}}"
 }
