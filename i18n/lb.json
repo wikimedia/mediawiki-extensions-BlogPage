@@ -26,5 +26,6 @@
 	"blog-more": "méi",
 	"blog-time-ago": "viru(n) $1",
 	"blog-time-days": "{{PLURAL:$1|een Dag|$1 Deeg}}",
-	"blog-time-hours": "{{PLURAL:$1|eng Stonn|$1 Stonnen}}"
+	"blog-time-hours": "{{PLURAL:$1|eng Stonn|$1 Stonnen}}",
+	"blog-user-articles-votes": "({{PLURAL:$1|Stëmm|Stëmmen}})"
 }
