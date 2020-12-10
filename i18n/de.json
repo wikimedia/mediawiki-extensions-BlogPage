@@ -3,7 +3,8 @@
 		"authors": [
 			"Ameisenigel",
 			"Ferdinand0101",
-			"Laurinm"
+			"Laurinm",
+			"Pittigrilli"
 		]
 	},
 	"blogpage-desc": "Blog-System mit Kommentar- und Wählfunktionen, [[Special:CreateBlogPost|einer Spezialseite zur Erstellung von Blog-Beiträgen]] und [[Special:ArticlesHome|einer Spezialseite zur Auflistung von Blog-Beiträgen]]",
@@ -46,10 +47,18 @@
 	"blog-create-categories": "Kategorien",
 	"blog-create-button": "Erstellen!",
 	"blog-create-summary": "Neuen Blog-Beitrag erstellt.",
+	"blog-create-error-need-content": "\"Fehler:\" Dein Blog-Beitrag muss einen Inhalt haben!",
+	"blog-create-error-need-title": "\"Fehler\": Du musst einen Titel für Deinen Blog-Beitrag angeben!",
+	"blog-create-error-page-exists": "\"Fehler:\" Es gibt bereits einen Blog-Beitrag mit diesem Titel. Bitte wähle einen anderen Titel für Deinen Beitrag.",
+	"blog-js-create-error-need-content": "Dein Blog-Beitrag muss einen Inhalt haben!",
+	"blog-js-create-error-need-title": "Du musst Deinem Blog-Beitrag einen Titel geben!",
+	"blog-js-create-error-page-exists": "Es gibt bereits einen Blog-Beitrag mit diesem Titel. Bitte wähle einen anderen Titel für Deinen Beitrag.",
 	"blog-more": "mehr",
 	"blog-time-ago": "vor $1",
 	"blog-time-days": "{{PLURAL:$1|einem Tag|$1 Tagen}}",
 	"blog-time-hours": "{{PLURAL:$1|einer Stunde|$1 Stunden}}",
 	"blog-time-minutes": "{{PLURAL:$1|einer Minute|$1 Minuten}}",
-	"blog-time-seconds": "{{PLURAL:$1|einer Sekunde|$1 Sekunden}}"
+	"blog-time-seconds": "{{PLURAL:$1|einer Sekunde|$1 Sekunden}}",
+	"action-createblogpost": "Erstelle neue Blog-Beiträge",
+	"blog-user-articles-title": "Blogs"
 }
