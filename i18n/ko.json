@@ -47,6 +47,6 @@
 	"action-createblogpost": "새 블로그 글을 만들",
 	"right-createblogpost": "[[Special:CreateBlogPost|새 블로그 글 만들기]]",
 	"blog-user-articles-title": "블로그",
-	"blog-user-articles-votes": "{{PLURAL:$1|한 표|$1표}}",
+	"blog-user-articles-votes": "{{PLURAL:$1|표}}",
 	"blog-user-article-comment": "{{PLURAL:$1|댓글 1개|댓글 $1개}}"
 }
