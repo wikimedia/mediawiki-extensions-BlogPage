@@ -18,5 +18,6 @@
 	"blog-create-button": "تخلیق کرو!",
 	"blog-more": "ہور",
 	"blog-time-days": "{{PLURAL:$1|اک دن|$1 دناں}}",
+	"blog-time-seconds": "$1 {{PLURAL:$1|سکنٹ}}",
 	"blog-user-articles-votes": "{{PLURAL:$1|ووٹ|ووٹاں}}"
 }
