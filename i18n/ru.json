@@ -3,6 +3,7 @@
 		"authors": [
 			"Facenapalm",
 			"Megakott",
+			"Rubin16",
 			"Soul Train"
 		]
 	},
@@ -59,6 +60,6 @@
 	"action-createblogpost": "создавать новые посты в блоге",
 	"right-createblogpost": "[[Special:CreateBlogPost|Создавать новые посты в блоге]]",
 	"blog-user-articles-title": "Блоги",
-	"blog-user-articles-votes": "{{PLURAL:$1|один голос|$1 голоса|$1 голосов}}",
+	"blog-user-articles-votes": "{{PLURAL:$1|голос|голоса|голосов}}",
 	"blog-user-article-comment": "{{PLURAL:$1|один комментарий|$1 комментария|$1 комментариев}}"
 }
