@@ -3,6 +3,7 @@
 		"authors": [
 			"Facenapalm",
 			"Megakott",
+			"Okras",
 			"Rubin16",
 			"Soul Train"
 		]
@@ -28,6 +29,7 @@
 	"blog-popular-articles": "Не пропустите",
 	"blog-multiple-authors": "Эта статья была написана совместно участниками $1",
 	"blog-recent-editors": "Другие недавние участники",
+	"blog-recent-voters": "Другие недавно проголосовавшие",
 	"blog-view-archive-link": "Посмотреть всё",
 	"articlelists": "Новые статьи в блоге",
 	"blog-ah-no-results": "Страницы не найдены.",
