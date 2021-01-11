@@ -2,6 +2,7 @@
 	"@metadata": {
 		"authors": [
 			"AYZ04",
+			"Lakejason0",
 			"Shuiwater",
 			"SolidBlock",
 			"Yfdyh000",
@@ -61,6 +62,6 @@
 	"blog-time-seconds": "{{PLURAL:$1|$1秒}}",
 	"action-createblogpost": "创建新的博客文章",
 	"blog-user-articles-title": "博文",
-	"blog-user-articles-votes": "张票",
+	"blog-user-articles-votes": "{{PLURAL:$1|张票}}",
 	"blog-user-article-comment": "{{PLURAL:$1|一则评论|$1 则评论}}"
 }
