@@ -60,6 +60,6 @@
 	"action-createblogpost": "opprett nye bloggposter",
 	"right-createblogpost": "[[Special:CreateBlogPost|Opprett nye bloggposter]]",
 	"blog-user-articles-title": "Blogger",
-	"blog-user-articles-votes": "{{PLURAL:$1|én stemme|$1 stemmer}}",
+	"blog-user-articles-votes": "{{PLURAL:$1|stemme|stemmer}}",
 	"blog-user-article-comment": "{{PLURAL:$1|én kommentar|$1 kommentarer}}"
 }
