@@ -6,12 +6,14 @@
 			"Shuiwater",
 			"SolidBlock",
 			"Yfdyh000",
+			"Yining Chen",
 			"列维劳德",
 			"机智的小鱼君",
 			"沈澄心",
 			"铁桶"
 		]
 	},
+	"blogpage-desc": "具有评论和投票功能的博客系统, [[Special:CreateBlogPost|创建博客文章的特殊页面]]和[[Special:ArticlesHome|用于列出博客文章的特殊页面]]",
 	"blog-and": "和",
 	"blog-anonymous-name": "匿名狂热者",
 	"blog-author-comments": "$1条留言",
@@ -54,6 +56,10 @@
 	"blog-create-summary": "已创建新的博客帖子。",
 	"blog-create-error-need-content": "'''错误：'''您的博客文章必须有内容！",
 	"blog-create-error-need-title": "“错误：”您需要为网络日志提供标题！",
+	"blog-create-error-page-exists": "'''错误:''' 已经有一个使用该标题的博文. 请为你的博客文章选择一个不同的标题.",
+	"blog-js-create-error-need-content": "你的博文一定要有一些内容!",
+	"blog-js-create-error-need-title": "你需要为博客文章提供一个标题!",
+	"blog-js-create-error-page-exists": "已经有一个使用该标题的博文. 请为你的博客文章选择一个不同的标题.",
 	"blog-more": "更多",
 	"blog-time-ago": "$1前",
 	"blog-time-days": "{{PLURAL:$1|1天|$1天}}",
@@ -61,6 +67,7 @@
 	"blog-time-minutes": "{{PLURAL:$1|$1分钟}}",
 	"blog-time-seconds": "{{PLURAL:$1|$1秒}}",
 	"action-createblogpost": "创建新的博客文章",
+	"right-createblogpost": "[[Special:CreateBlogPost|新建博客文章]]",
 	"blog-user-articles-title": "博文",
 	"blog-user-articles-votes": "{{PLURAL:$1|张票}}",
 	"blog-user-article-comment": "{{PLURAL:$1|一则评论|$1 则评论}}"
