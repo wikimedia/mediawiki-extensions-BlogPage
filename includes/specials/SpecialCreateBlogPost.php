@@ -11,15 +11,14 @@ use MediaWiki\MediaWikiServices;
 
 class SpecialCreateBlogPost extends SpecialPage {
 
+	/** @var int */
 	public $tabCounter = 1;
 
-	/**
-	 * Constructor -- set up the new special page
-	 */
 	public function __construct() {
 		parent::__construct( 'CreateBlogPost', 'createblogpost' );
 	}
 
+	/** @inheritDoc */
 	public function doesWrites() {
 		return true;
 	}

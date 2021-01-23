@@ -10,6 +10,7 @@ use MediaWiki\Revision\SlotRecord;
 
 class BlogPage extends Article {
 
+	/** @var Title|null */
 	public $title = null;
 
 	/**
@@ -18,6 +19,9 @@ class BlogPage extends Article {
 	 */
 	public $authors = [];
 
+	/**
+	 * @param Title $title
+	 */
 	public function __construct( Title $title ) {
 		parent::__construct( $title );
 		$this->setContent();
@@ -349,6 +353,10 @@ class BlogPage extends Article {
 		return $output;
 	}
 
+	/**
+	 * @param string $author_index
+	 * @return string
+	 */
 	public function displayAuthorBox( $author_index ) {
 		global $wgBlogPageDisplay;
 
@@ -408,6 +416,10 @@ class BlogPage extends Article {
 		return $output;
 	}
 
+	/**
+	 * @param string $author_index
+	 * @return string
+	 */
 	public function getAuthorArticles( $author_index ) {
 		global $wgBlogPageDisplay;
 
@@ -1161,6 +1173,9 @@ class BlogPage extends Article {
 	 * Yes, these are those fucking time-related functions once more.
 	 * You probably have seen these in UserBoard, Comments...god knows where.
 	 * Seriously, this stuff is all over the place.
+	 * @param int $date1
+	 * @param int $date2
+	 * @return array
 	 */
 	public static function dateDiff( $date1, $date2 ) {
 		$dtDiff = $date1 - $date2;
@@ -1177,6 +1192,12 @@ class BlogPage extends Article {
 		return $dif;
 	}
 
+	/**
+	 * @param array $time
+	 * @param string $timeabrv
+	 * @param string $timename
+	 * @return string
+	 */
 	public static function getTimeOffset( $time, $timeabrv, $timename ) {
 		$timeStr = '';
 		if ( $time[$timeabrv] > 0 ) {
@@ -1188,6 +1209,10 @@ class BlogPage extends Article {
 		return $timeStr;
 	}
 
+	/**
+	 * @param int $time
+	 * @return string
+	 */
 	public static function getTimeAgo( $time ) {
 		$timeArray = self::dateDiff( time(), $time );
 		$timeStr = '';

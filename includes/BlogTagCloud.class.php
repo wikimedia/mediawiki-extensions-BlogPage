@@ -18,6 +18,9 @@ class BlogTagCloud {
 	/** @var int */
 	public $limit;
 
+	/**
+	 * @param int $limit
+	 */
 	public function __construct( $limit = 10 ) {
 		$this->limit = $limit;
 		$this->initialize();
