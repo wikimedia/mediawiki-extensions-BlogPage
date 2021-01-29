@@ -2,6 +2,7 @@
 	"@metadata": {
 		"authors": [
 			"A2y4",
+			"LaMagiaaa",
 			"Omotecho",
 			"Shirayuki",
 			"たなはしひろし"
@@ -38,6 +39,6 @@
 	"action-createblogpost": "ブログ投稿の新規作成",
 	"right-createblogpost": "[[Special:CreateBlogPost|ブログ投稿を新規作成]]",
 	"blog-user-articles-title": "ブログ",
-	"blog-user-articles-votes": "{{PLURAL:$1|$1 票}}",
+	"blog-user-articles-votes": "{{PLURAL:$1|票}}",
 	"blog-user-article-comment": "{{PLURAL:$1|$1 件のコメント}}"
 }
