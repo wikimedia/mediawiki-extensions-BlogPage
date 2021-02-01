@@ -32,6 +32,7 @@
 	"blog-create-categories": "カテゴリ",
 	"blog-create-button": "作成",
 	"blog-create-summary": "ブログ投稿を新規作成",
+	"blog-time-ago": "$1前",
 	"blog-time-days": "{{PLURAL:$1|$1 日}}",
 	"blog-time-hours": "{{PLURAL:$1|$1 時間}}",
 	"blog-time-minutes": "{{PLURAL:$1|$1 分}}",
