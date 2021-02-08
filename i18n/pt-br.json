@@ -1,7 +1,8 @@
 {
 	"@metadata": {
 		"authors": [
-			"Eduardo Addad de Oliveira"
+			"Eduardo Addad de Oliveira",
+			"Eduardoaddad"
 		]
 	},
 	"blogpage-desc": "Sistema de blog com recursos de comentários e votação, [[Special:CreateBlogPost|uma página especial para criar postagens de blog]] e [[Special:ArticlesHome|uma página especial para listar postagens de blog]]",
