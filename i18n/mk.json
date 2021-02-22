@@ -60,6 +60,6 @@
 	"action-createblogpost": "создавање на нови блоговски објави",
 	"right-createblogpost": "[[Special:CreateBlogPost|Создавање на нови блоговски објави]]",
 	"blog-user-articles-title": "Блогови",
-	"blog-user-articles-votes": "{{PLURAL:$1|еден глас|$1 гласа}}",
+	"blog-user-articles-votes": "{{PLURAL:$1|еден глас|гласа}}",
 	"blog-user-article-comment": "{{PLURAL:$1|еден коментар|$1 коментари}}"
 }
