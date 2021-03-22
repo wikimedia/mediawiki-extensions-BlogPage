@@ -4,6 +4,7 @@
 			"Ameisenigel",
 			"Ferdinand0101",
 			"Laurinm",
+			"Luke081515",
 			"Pittigrilli"
 		]
 	},
@@ -60,5 +61,7 @@
 	"blog-time-minutes": "{{PLURAL:$1|einer Minute|$1 Minuten}}",
 	"blog-time-seconds": "{{PLURAL:$1|einer Sekunde|$1 Sekunden}}",
 	"action-createblogpost": "Erstelle neue Blog-Beiträge",
-	"blog-user-articles-title": "Blogs"
+	"right-createblogpost": "[[Special:CreateBlogPost|Erstelle einen neuen Blogeintrag]]",
+	"blog-user-articles-title": "Blogs",
+	"blog-user-article-comment": "{{PLURAL:$1|Ein Kommentar|$1 Kommentare}}"
 }
