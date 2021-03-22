@@ -70,7 +70,6 @@
 	"Hooks": {
 		"ArticleFromTitle": "BlogPageHooks::blogFromTitle",
 		"AlternateEdit": "BlogPageHooks::allowShowEditBlogPage",
-		"CanonicalNamespaces": "BlogPageHooks::onCanonicalNamespaces",
 		"UserProfileRightSideAfterActivity": "BlogPageHooks::getArticles"
 	},
 	"MessagesDirs": {

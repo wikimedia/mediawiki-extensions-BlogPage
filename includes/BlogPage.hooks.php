@@ -348,15 +348,4 @@ class BlogPageHooks {
 		$context->getOutput()->addHTML( $output );
 	}
 
-	/**
-	 * Register the canonical names for our namespace and its talkspace.
-	 *
-	 * @param array &$list Array of namespace numbers with corresponding
-	 *                     canonical names
-	 */
-	public static function onCanonicalNamespaces( &$list ) {
-		$list[NS_BLOG] = 'Blog';
-		$list[NS_BLOG_TALK] = 'Blog_talk';
-	}
-
 }
