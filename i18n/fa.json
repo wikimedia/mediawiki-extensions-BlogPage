@@ -2,9 +2,11 @@
 	"@metadata": {
 		"authors": [
 			"Jeeputer",
+			"Mohammad ebz",
 			"Sunfyre"
 		]
 	},
+	"blog-and": "و",
 	"blog-author-title": "دربارهٔ {{PLURAL:$1|مؤلف|مؤلفین}}",
 	"blog-author-votes": "$1 {{PLURAL:$1|رأی|رأی}}",
 	"blog-by": "توسط",
