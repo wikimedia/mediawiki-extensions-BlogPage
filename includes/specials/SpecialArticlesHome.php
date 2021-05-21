@@ -81,6 +81,7 @@ class ArticlesHome extends SpecialPage {
 		}
 
 		$output .= '</div>';
+		// @phan-suppress-next-line PhanPluginDuplicateAdjacentStatement
 		$output .= '</div>';
 		$output .= '<div class="main-page-right">';
 
@@ -110,6 +111,7 @@ class ArticlesHome extends SpecialPage {
 		$output .= $this->displayMostCommentedPages( $date_categories );
 		$output .= '</div>';
 
+		// @phan-suppress-next-line PhanPluginDuplicateAdjacentStatement
 		$output .= '</div>';
 		$output .= '<div class="visualClear"></div>';
 
@@ -228,7 +230,7 @@ class ArticlesHome extends SpecialPage {
 							// returns the raw timestamp from the database; in the past
 							// it converted it to UNIX timestamp via the SQL function
 							// UNIX_TIMESTAMP but that was no good for our purposes
-							strtotime( BlogPage::getCreateDate( $popularBlogPost['id'] ) )
+							strtotime( (string)BlogPage::getCreateDate( $popularBlogPost['id'] ) )
 						)
 					)->escaped() . ')';
 				$output .= "</div>
@@ -338,6 +340,7 @@ class ArticlesHome extends SpecialPage {
 					->numParams( $votes )
 					->escaped() . "</div>\n"; // .listpages-votebox-text
 				$output .= '</div>' . "\n"; // .listpages-votebox
+				// @phan-suppress-next-line PhanPluginDuplicateAdjacentStatement
 				$output .= '</div>' . "\n"; // .listpages-item
 				$output .= '<a href="' . htmlspecialchars( $titleObj->getFullURL() ) . '">' .
 					htmlspecialchars( $titleObj->getText() ) . '</a>';
@@ -590,7 +593,7 @@ class ArticlesHome extends SpecialPage {
 							// returns the raw timestamp from the database; in the past
 							// it converted it to UNIX timestamp via the SQL function
 							// UNIX_TIMESTAMP but that was no good for our purposes
-							strtotime( BlogPage::getCreateDate( $newestBlogPost['id'] ) )
+							strtotime( (string)BlogPage::getCreateDate( $newestBlogPost['id'] ) )
 						)
 					)->escaped() . ')';
 				$output .= "</div>

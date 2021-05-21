@@ -20,7 +20,7 @@ class ArticleLists extends IncludableSpecialPage {
 	/**
 	 * Show the new special page
 	 *
-	 * @param int $limit Show this many entries (LIMIT for SQL)
+	 * @param string|null $limit Show this many entries (LIMIT for SQL)
 	 */
 	public function execute( $limit ) {
 		$out = $this->getOutput();
@@ -131,6 +131,7 @@ class ArticleLists extends IncludableSpecialPage {
 			}
 		}
 		$output .= '</div>' . "\n"; // .listpages-container
+		// @phan-suppress-next-line PhanPluginDuplicateAdjacentStatement
 		$output .= '</div>' . "\n"; // .left-articles
 
 		$out->addHTML( $output );

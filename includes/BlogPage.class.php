@@ -265,7 +265,7 @@ class BlogPage extends Article {
 		$edit_time['datetime'] = $lang->timeanddate( $timestamp, true );
 
 		// Get date of when article was created
-		$timestamp = self::getCreateDate( $this->getPage()->getId() );
+		$timestamp = (string)self::getCreateDate( $this->getPage()->getId() );
 		$create_time = [];
 		$create_time['date'] = $lang->date( $timestamp, true );
 		$create_time['time'] = $lang->time( $timestamp, true );
@@ -354,7 +354,7 @@ class BlogPage extends Article {
 	}
 
 	/**
-	 * @param string $author_index
+	 * @param int $author_index
 	 * @return string
 	 */
 	public function displayAuthorBox( $author_index ) {
@@ -417,7 +417,7 @@ class BlogPage extends Article {
 	}
 
 	/**
-	 * @param string $author_index
+	 * @param int $author_index
 	 * @return string
 	 */
 	public function getAuthorArticles( $author_index ) {
@@ -931,6 +931,10 @@ class BlogPage extends Article {
 	 * Get comments of the day, if this feature is enabled in BlogPage config.
 	 * Requires the Comments extension.
 	 *
+	 * @suppress PhanUndeclaredClassMethod phan is not actually wrong here, the CommentsOfTheDay
+	 *   class was removed from the Comments ext. in b27c8bda334e94d0ca32e39c4167172e68d1963c
+	 *   (14 June 2018) but the plan was to bring it back in the future. Of course doing that would
+	 *   more than likely allow simplifying a lot of this code, too.
 	 * @return string HTML or nothing
 	 */
 	public function getCommentsOfTheDay() {
