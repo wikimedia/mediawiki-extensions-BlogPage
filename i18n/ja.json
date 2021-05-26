@@ -2,6 +2,7 @@
 	"@metadata": {
 		"authors": [
 			"A2y4",
+			"Ajeje Brazorf",
 			"LaMagiaaa",
 			"Omotecho",
 			"Shirayuki",
@@ -9,6 +10,7 @@
 		]
 	},
 	"blogpage-desc": "コメントと投票の投稿、[[Special:CreateBlogPost|ブログ投稿の作成専用ページ]]とさらに[[Special:ArticlesHome|ブログ投稿をリスト化する専用ページ]]のあるブログシステム",
+	"blog-and": "と",
 	"blog-author-comments": "$1 {{PLURAL:$1|件のコメント}}",
 	"blog-author-title": "{{PLURAL:$1|作者|作者たち}}について",
 	"blog-author-votes": "$1票",
