@@ -10,6 +10,7 @@
 	"blog-author-comments": "$1 {{PLURAL:$1|reactie|reacties}}",
 	"blog-author-more-by": "Meer Door $1",
 	"blog-author-title": "Over de {{PLURAL:$1|auteur|auteurs}}",
+	"blog-author-votes": "{{PLURAL:$1|stem|stemmen}}",
 	"blog-by": "door",
 	"blog-by-user-category": "Artikelen van gebruiker $1",
 	"blog-comments-of-day": "Reacties van deze dag",
@@ -48,5 +49,6 @@
 	"blog-time-hours": "{{PLURAL:$1|één uur|$1 uren}}",
 	"blog-time-minutes": "{{PLURAL:$1|één minuut|$1 minuten}}",
 	"blog-time-seconds": "{{PLURAL:$1|één seconde|$1 seconden}}",
+	"blog-user-articles-votes": "{{PLURAL:$1|stem|stemmen}}",
 	"blog-user-article-comment": "{{PLURAL:$1|een reactie|$1 reacties}}"
 }
