@@ -2,7 +2,8 @@
 	"@metadata": {
 		"authors": [
 			"Mainframe98",
-			"Nickthijssen1994"
+			"Nickthijssen1994",
+			"Romaine"
 		]
 	},
 	"blog-and": "en",
@@ -49,6 +50,7 @@
 	"blog-time-hours": "{{PLURAL:$1|één uur|$1 uren}}",
 	"blog-time-minutes": "{{PLURAL:$1|één minuut|$1 minuten}}",
 	"blog-time-seconds": "{{PLURAL:$1|één seconde|$1 seconden}}",
+	"blog-user-articles-title": "Blogs",
 	"blog-user-articles-votes": "{{PLURAL:$1|stem|stemmen}}",
 	"blog-user-article-comment": "{{PLURAL:$1|een reactie|$1 reacties}}"
 }
