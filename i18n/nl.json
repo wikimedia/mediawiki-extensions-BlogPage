@@ -44,6 +44,7 @@
 	"blog-create-text": "Tekst",
 	"blog-create-categories": "Categorieën",
 	"blog-create-button": "Aanmaken!",
+	"blog-create-summary": "Nieuwe blogpost gemaakt.",
 	"blog-more": "meer",
 	"blog-time-ago": "$1 geleden",
 	"blog-time-days": "{{PLURAL:$1|één dag|$1 dagen}}",
