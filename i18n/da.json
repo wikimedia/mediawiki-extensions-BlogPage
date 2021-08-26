@@ -34,5 +34,6 @@
 	"blog-time-hours": "{{PLURAL:$1|en time|$1 timer}}",
 	"blog-time-minutes": "{{PLURAL:$1|et minut|$1 minutter}}",
 	"blog-time-seconds": "{{PLURAL:$1|et sekund|$1 sekunder}}",
-	"blog-user-articles-votes": "{{PLURAL:$1|stemme|stemmer}}"
+	"blog-user-articles-votes": "{{PLURAL:$1|stemme|stemmer}}",
+	"blog-user-article-comment": "{{PLURAL:$1|en kommentar|$1 kommentarer}}"
 }
