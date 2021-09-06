@@ -1,18 +1,23 @@
 {
 	"@metadata": {
 		"authors": [
+			"Darafsh",
 			"Jeeputer",
 			"Mohammad ebz",
 			"Sunfyre"
 		]
 	},
 	"blog-and": "و",
+	"blog-author-more-by": "بیش‌تر توسط $1",
 	"blog-author-title": "دربارهٔ {{PLURAL:$1|مؤلف|مؤلفین}}",
 	"blog-author-votes": "$1 {{PLURAL:$1|رأی|رأی}}",
 	"blog-by": "توسط",
 	"blog-by-user-category": "مقاله‌های کاربر $1",
 	"blog-comments-of-day": "نظرهای روز",
+	"blog-created": "ایجادشده $1",
+	"blog-created-ago": "ساخته‌شده در $1 پیش",
 	"blog-in-the-news": "در اخبار",
+	"blog-last-edited": "آخرین بار در $1 ویرایش شده",
 	"blog-new-articles": "مقاله‌های جدید",
 	"blog-permission-required": "شما اجازهٔ ایجاد مقالات را ندارید.",
 	"blog-recent-editors": "سایر مشارکت‌کنندگان اخیر",
