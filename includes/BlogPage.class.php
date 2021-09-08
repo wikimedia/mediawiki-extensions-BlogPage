@@ -980,6 +980,7 @@ class BlogPage extends Article {
 			$output .= ' <span class="cod-comment"><a href="' .
 				htmlspecialchars( $page_title->getFullURL() ) .
 				"#comment-{$comment['comment_id']}\" title=\"" .
+				// @phan-suppress-next-line SecurityCheck-DoubleEscaped Unclear solution, see T290624
 				htmlspecialchars( $page_title->getText() ) . '">' . htmlspecialchars( $comment_text ) . '</a></span>';
 			$output .= '</div>';
 		}
