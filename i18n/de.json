@@ -5,7 +5,8 @@
 			"Ferdinand0101",
 			"Laurinm",
 			"Luke081515",
-			"Pittigrilli"
+			"Pittigrilli",
+			"Reinhard Kraasch"
 		]
 	},
 	"blogpage-desc": "Blog-System mit Kommentar- und Wählfunktionen, [[Special:CreateBlogPost|einer Spezialseite zur Erstellung von Blog-Beiträgen]] und [[Special:ArticlesHome|einer Spezialseite zur Auflistung von Blog-Beiträgen]]",
@@ -43,6 +44,7 @@
 	"blog-ah-what-talking-about": "Meiste Kommentare (72 Stunden)",
 	"articleshome": "Blog-Hauptseite",
 	"createblogpost": "Blog-Beitrag erstellen",
+	"blog-create-category-help": "Kategorien helfen, die Informationen einzuordnen. Um mehrere Kategorien hinzuzufügen, trenne sie mit einem Komma.",
 	"blog-create-title": "Titel",
 	"blog-create-text": "Text",
 	"blog-create-categories": "Kategorien",
@@ -63,5 +65,6 @@
 	"action-createblogpost": "Erstelle neue Blog-Beiträge",
 	"right-createblogpost": "[[Special:CreateBlogPost|Erstelle einen neuen Blogeintrag]]",
 	"blog-user-articles-title": "Blogs",
+	"blog-user-articles-votes": "$1 {{PLURAL:$1|Stimme|Stimmen}}",
 	"blog-user-article-comment": "{{PLURAL:$1|Ein Kommentar|$1 Kommentare}}"
 }
