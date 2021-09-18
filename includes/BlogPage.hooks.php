@@ -11,20 +11,6 @@ use MediaWiki\MediaWikiServices;
 class BlogPageHooks {
 
 	/**
-	 * Register hooks depending on version
-	 */
-	public static function registerExtension() {
-		global $wgHooks;
-		if ( class_exists( MediaWiki\HookContainer\HookContainer::class ) ) {
-			// MW 1.35+
-			$wgHooks['PageSaveComplete'][] = 'BlogPageHooks::updateCreatedOpinionsCount';
-		} else {
-			$wgHooks['PageContentSaveComplete'][] = 'BlogPageHooks::updateCreatedOpinionsCount';
-			$wgHooks['PageContentSave'][] = 'BlogPageHooks::updateCreatedOpinionsCount';
-		}
-	}
-
-	/**
 	 * Calls BlogPage instead of standard Article for pages in the NS_BLOG
 	 * namespace.
 	 *
@@ -137,7 +123,7 @@ class BlogPageHooks {
 			// the i18n msg to check if this is a blog category
 			if ( strpos( $ctgname, $userBlogCatPrefix ) !== false ) {
 				// Copied from UserStatsTrack::updateCreatedOpinionsCount()
-				$dbw = wfGetDB( DB_MASTER );
+				$dbw = wfGetDB( DB_PRIMARY );
 
 				$opinions = $dbw->select(
 					[ 'page', 'categorylinks' ],
