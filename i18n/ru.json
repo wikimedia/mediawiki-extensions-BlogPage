@@ -1,6 +1,7 @@
 {
 	"@metadata": {
 		"authors": [
+			"DDPAT",
 			"Facenapalm",
 			"Megakott",
 			"Okras",
@@ -29,6 +30,7 @@
 	"blog-popular-articles": "Не пропустите",
 	"blog-multiple-authors": "Эта статья была написана совместно участниками $1",
 	"blog-recent-editors": "Другие недавние участники",
+	"blog-recent-editors-message": "Сделайте эту страницу лучше, отредактировав её.",
 	"blog-recent-voters": "Другие недавно проголосовавшие",
 	"blog-recent-voters-message": "Если вам понравилась эта статья, проголосуйте за неё.",
 	"blog-view-archive-link": "Посмотреть всё",
