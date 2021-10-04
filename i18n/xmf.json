@@ -1,0 +1,18 @@
+{
+	"@metadata": {
+		"authors": [
+			"Narazeni"
+		]
+	},
+	"blog-and": "დო",
+	"blog-anonymous-name": "ანონიმური ფანატიკოსი",
+	"blog-author-comments": "$1 {{PLURAL:$1|კომენტარი}}",
+	"blog-author-more-by": "უმოდი $1-შე",
+	"blog-author-title": "{{PLURAL:$1|ავტორიშ}} გეშა",
+	"blog-author-votes": "$1 {{PLURAL:$1|ხონარი}}",
+	"blog-by-user-category": "მახვარებუ $1-შ სტატიეფი",
+	"blog-comments-of-day": "დღაშ კომენტარეფი",
+	"blog-created": "გიჭყჷ: $1",
+	"blog-created-ago": "გიჭყჷ $1 კინოხი",
+	"blog-in-the-news": "ახალ ამბეეფს"
+}
