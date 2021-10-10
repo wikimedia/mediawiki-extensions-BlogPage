@@ -10,7 +10,7 @@
 		"test": [
 			"parallel-lint . --exclude vendor --exclude node_modules",
 			"minus-x check .",
-			"phpcs -ps"
+			"@phpcs"
 		],
 		"fix": [
 			"minus-x fix .",
@@ -18,6 +18,7 @@
 		],
 		"phan": "phan -d . --long-progress-bar",
 		"seccheck": "seccheck-mwext",
-		"seccheck-fast": "seccheck-fast-mwext"
+		"seccheck-fast": "seccheck-fast-mwext",
+		"phpcs": "phpcs -sp --cache"
 	}
 }
