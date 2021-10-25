@@ -56,7 +56,7 @@ class BlogPageHooks {
 				return false;
 			}
 
-			if ( !$user->isAllowed( 'edit' ) || $user->isBlocked() ) {
+			if ( !$user->isAllowed( 'edit' ) || $user->getBlock() ) {
 				$output->setPageTitle( $output->msg( 'error' ) );
 				$output->addWikiMsg( 'blog-permission-required' );
 				$output->addReturnTo( $editPage->getTitle() );
