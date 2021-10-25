@@ -1,6 +1,7 @@
 {
 	"@metadata": {
 		"authors": [
+			"Ajeje Brazorf",
 			"Beta16",
 			"Gianfranco",
 			"Stefano",
@@ -21,7 +22,7 @@
 	"blog-in-the-news": "Nelle notizie",
 	"blog-last-edited": "ultima modifica $1",
 	"blog-login": "Devi [[Special:UserLogin|effettuare l'accesso]] per poter creare voci.",
-	"blog-login-edit": "E' necessario effettuare l'[[Special:UserLogin|accesso]] per modificare gli articoli del blog.",
+	"blog-login-edit": "È necessario effettuare l'[[Special:UserLogin|accesso]] per modificare gli articoli del blog.",
 	"blog-new-articles": "Nuove voci",
 	"blog-permission-required": "Non si dispone dei permessi necessari per creare nuovi articoli.",
 	"blog-popular-articles": "Da non perdere",
