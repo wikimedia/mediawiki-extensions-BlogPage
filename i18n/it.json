@@ -41,7 +41,7 @@
 	"blog-create-text": "Testo",
 	"blog-create-categories": "Categorie",
 	"blog-create-button": "Crea!",
-	"blog-create-error-need-content": "'''Error:''' Il post deve avere qualche contenuto!",
+	"blog-create-error-need-content": "'''Errore:''' Il post deve avere qualche contenuto!",
 	"blog-more": "altri",
 	"blog-time-ago": "$1 fa",
 	"blog-time-days": "{{PLURAL:$1|un giorno|$1 giorni}}",
