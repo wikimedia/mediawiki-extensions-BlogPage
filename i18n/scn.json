@@ -1,0 +1,20 @@
+{
+	"@metadata": {
+		"authors": [
+			"Ajeje Brazorf"
+		]
+	},
+	"blog-and": "e",
+	"blog-view-archive-link": "Talìa tuttu",
+	"blog-ah-new-articles": "Vuci novi",
+	"blog-create-title": "Tìtulu",
+	"blog-create-text": "Testu",
+	"blog-create-categories": "Catigurìi",
+	"blog-more": "àutri cosi",
+	"blog-time-ago": "$1 fa",
+	"blog-time-days": "{{PLURAL:$1|nu jornu|$1 jorna}}",
+	"blog-time-hours": "{{PLURAL:$1|na ura|$1 uri}}",
+	"blog-time-minutes": "{{PLURAL:$1|nu minutu|$1 minuti}}",
+	"blog-time-seconds": "{{PLURAL:$1|nu sicunnu|$1 sicunni}}",
+	"blog-user-article-comment": "{{PLURAL:$1|nu cummentu|$1 cummenti}}"
+}
