@@ -5,6 +5,7 @@
 			"Ajeje Brazorf",
 			"LaMagiaaa",
 			"Omotecho",
+			"RYOUMA1117",
 			"Shirayuki",
 			"たなはしひろし"
 		]
@@ -20,6 +21,8 @@
 	"blog-in-the-news": "新着情報",
 	"blog-last-edited": "最終更新: $1",
 	"blog-new-articles": "新しい記事",
+	"blog-permission-required": "新しいページを作成する権限がありません。",
+	"blog-recent-voters-message": "記事が気に入ったら、投票をしましょう。",
 	"blog-view-archive-link": "すべて表示",
 	"articlelists": "新しいブログ記事",
 	"blog-ah-no-results": "ページはありません。",
@@ -34,6 +37,8 @@
 	"blog-create-categories": "カテゴリ",
 	"blog-create-button": "作成",
 	"blog-create-summary": "ブログ投稿を新規作成",
+	"blog-js-create-error-need-title": "タイトルを指定する必要があります。",
+	"blog-more": "もっと見る",
 	"blog-time-ago": "$1前",
 	"blog-time-days": "{{PLURAL:$1|$1 日}}",
 	"blog-time-hours": "{{PLURAL:$1|$1 時間}}",
