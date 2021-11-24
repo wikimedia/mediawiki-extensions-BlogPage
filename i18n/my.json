@@ -1,0 +1,33 @@
+{
+	"@metadata": {
+		"authors": [
+			"Dr Lotus Black"
+		]
+	},
+	"blog-author-votes": "$1 {{PLURAL:$1|မဲ|မဲများ}}",
+	"blog-in-the-news": "သတင်းထဲတွင်",
+	"blog-last-edited": "နောက်ဆုံးပြင်ဆင်ခဲ့သည် $1",
+	"blog-new-articles": "ဆောင်းပါးသစ်များ",
+	"blog-permission-required": "သင်သည် စာမျက်နှာအသစ်များ ဖန်တီးခွင့်မရှိပါ။",
+	"blog-popular-articles": "မလွဲပါနှင့်",
+	"blog-view-archive-link": "အကုန် ကြည့်ရန်",
+	"articlelists": "ဘဘောဆောင်းပါးသစ်များ",
+	"blog-ah-no-results": "စာမျက်နှာများ မတွေ့ပါ။",
+	"blog-ah-popular-articles": "လူကြိုက်များသော ဆောင်းပါးများ",
+	"blog-ah-new-articles": "ဆောင်းပါးသစ်များ",
+	"blog-ah-write-article": "ဆောင်းပါးတစ်ခု ရေးသားရန်",
+	"blog-ah-todays-articles": "ယနေ့အတွက် ဆောင်းပါးများ",
+	"blog-create-title": "ခေါင်းစဉ်",
+	"blog-create-text": "စာသား",
+	"blog-create-categories": "ကဏ္ဍများ",
+	"blog-create-button": "ဖန်တီးရန်",
+	"blog-more": "ပို၍",
+	"blog-time-ago": "$1 အကြာက",
+	"blog-time-days": "{{PLURAL:$1|၁ ရက်|$1 ရက်}}",
+	"blog-time-hours": "{{PLURAL:$1|တစ်နာရီ|$1 နာရီ}}",
+	"blog-time-minutes": "{{PLURAL:$1|တစ်မိနစ်|$1 မိနစ်}}",
+	"blog-time-seconds": "{{PLURAL:$1|တစ်စက္ကန့်|$1 စက္ကန့်}}",
+	"blog-user-articles-title": "ဘလော့များ",
+	"blog-user-articles-votes": "{{PLURAL:$1|မဲ|မဲများ}}",
+	"blog-user-article-comment": "{{PLURAL:$1|၁ မှတ်ချက်|$1 မှတ်ချက်များ}}"
+}
