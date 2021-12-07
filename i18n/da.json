@@ -31,6 +31,10 @@
 	"blog-more": "mere",
 	"blog-time-ago": "$1 siden",
 	"blog-time-days": "{{PLURAL:$1|en dag|$1 dage}}",
+	"blog-time-hours": "{{PLURAL:$1|en time|$1 timer}}",
 	"blog-time-minutes": "{{PLURAL:$1|et minut|$1 minutter}}",
-	"blog-user-articles-votes": "{{PLURAL:$1|stemme|stemmer}}"
+	"blog-time-seconds": "{{PLURAL:$1|et sekund|$1 sekunder}}",
+	"right-createblogpost": "[[Special:CreateBlogPost|Opret nye blogindlæg]]",
+	"blog-user-articles-votes": "{{PLURAL:$1|stemme|stemmer}}",
+	"blog-user-article-comment": "{{PLURAL:$1|en kommentar|$1 kommentarer}}"
 }

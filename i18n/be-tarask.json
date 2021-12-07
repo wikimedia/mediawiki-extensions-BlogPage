@@ -1,7 +1,8 @@
 {
 	"@metadata": {
 		"authors": [
-			"W"
+			"W",
+			"Renessaince"
 		]
 	},
 	"blog-and": "і",
@@ -9,6 +10,7 @@
 	"blog-new-articles": "Новы артыкулы",
 	"blog-permission-required": "Вы ня маеце дазволу ствараць артыкулы.",
 	"blog-popular-articles": "Не прапусьціце",
+	"blog-view-archive-link": "Праглядзець усё",
 	"blog-ah-popular-articles": "Папулярныя артыкулы",
 	"blog-ah-new-articles": "Новыя артыкулы",
 	"blog-ah-write-article": "Напісаць артыкул",

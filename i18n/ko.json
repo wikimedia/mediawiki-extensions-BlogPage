@@ -1,16 +1,20 @@
 {
 	"@metadata": {
 		"authors": [
-			"Ykhwong"
+			"Ykhwong",
+			"Underbaaar"
 		]
 	},
+	"blog-and": "그리고",
 	"blog-author-comments": "{{PLURAL:$1|댓글}} $1개",
 	"blog-author-title": "{{PLURAL:$1|저자}} 정보",
 	"blog-author-votes": "$1{{PLURAL:$1|표}}",
 	"blog-by-user-category": "$1님의 글",
 	"blog-comments-of-day": "오늘의 댓글",
+	"blog-created": "생성: $1",
 	"blog-created-ago": "$1 전에 만듦",
 	"blog-in-the-news": "새로 들어온 소식",
+	"blog-last-edited": "마지막 변경: $1",
 	"blog-login": "문서를 만들려면 [[Special:UserLogin|로그인]]해야 합니다.",
 	"blog-login-edit": "블로그 글을 편집하려면 [[Special:UserLogin|로그인]]해야 합니다.",
 	"blog-new-articles": "새 글",
