@@ -7,7 +7,8 @@
 			"Omotecho",
 			"Shirayuki",
 			"たなはしひろし",
-			"RYOUMA1117"
+			"RYOUMA1117",
+			"カッパ鳥"
 		]
 	},
 	"blogpage-desc": "コメントと投票の投稿、[[Special:CreateBlogPost|ブログ投稿の作成専用ページ]]とさらに[[Special:ArticlesHome|ブログ投稿をリスト化する専用ページ]]のあるブログシステム",
@@ -15,13 +16,17 @@
 	"blog-author-comments": "$1 {{PLURAL:$1|件のコメント}}",
 	"blog-author-title": "{{PLURAL:$1|作者|作者たち}}について",
 	"blog-author-votes": "$1票",
+	"blog-by": "寄稿者:",
+	"blog-by-user-category": "$1によって執筆された記事",
 	"blog-comments-of-day": "今日のコメント",
 	"blog-created": "作成: $1",
 	"blog-created-ago": "$1前に作成",
 	"blog-in-the-news": "新着情報",
 	"blog-last-edited": "最終更新: $1",
+	"blog-login": "記事を執筆するには [[Special:UserLogin|ログイン]]する必要があります。",
 	"blog-new-articles": "新しい記事",
 	"blog-permission-required": "新しいページを作成する権限がありません。",
+	"blog-popular-articles": "人気の高い記事",
 	"blog-recent-voters-message": "記事が気に入ったら、投票をしましょう。",
 	"blog-view-archive-link": "すべて表示",
 	"articlelists": "新しいブログ記事",
