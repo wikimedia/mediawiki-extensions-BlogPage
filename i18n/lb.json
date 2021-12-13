@@ -1,0 +1,24 @@
+{
+	"@metadata": {
+		"authors": [
+			"Robby"
+		]
+	},
+	"blog-and": "a(n)",
+	"blog-author-more-by": "Méi vum $1",
+	"blog-by": "vum",
+	"blog-by-user-category": "Artikele vum Benotzer $1",
+	"blog-in-the-news": "An den Neiegkeeten",
+	"blog-last-edited": "lescht Ännerung de(n) $1",
+	"blog-new-articles": "Nei Artikelen",
+	"blog-popular-articles": "Net verpassen",
+	"blog-view-archive-link": "All weisen",
+	"blog-create-title": "Titel",
+	"blog-create-text": "Text",
+	"blog-create-categories": "Kategorien",
+	"blog-create-button": "Uleeën!",
+	"blog-more": "méi",
+	"blog-time-ago": "viru(n) $1",
+	"blog-time-days": "{{PLURAL:$1|een Dag|$1 Deeg}}",
+	"blog-time-hours": "{{PLURAL:$1|eng Stonn|$1 Stonnen}}"
+}

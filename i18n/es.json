@@ -1,7 +1,8 @@
 {
 	"@metadata": {
 		"authors": [
-			"Ciencia Al Poder"
+			"Ciencia Al Poder",
+			"Fitoschido"
 		]
 	},
 	"blogpage-desc": "Sistema de Blog con funcionalidades de comentarios y valoraciones, [[Special:CreateBlogPost|una página especial para publicar entradas de blog]] y [[Special:ArticlesHome|una página especial para listar entradas de blog]]",
@@ -21,7 +22,7 @@
 	"blog-last-edited": "editado $1",
 	"blog-login": "Debes [[Special:UserLogin|iniciar sesión]] para crear artículos de blog.",
 	"blog-login-edit": "Debes [[Special:UserLogin|iniciar sesión]] para editar artículos de blog.",
-	"blog-new-articles": "Artículos de blog recientes",
+	"blog-new-articles": "Artículos más recientes",
 	"blog-permission-required": "No tienes permiso para crear artículos de blog.",
 	"blog-popular-articles": "No te pierdas",
 	"blog-multiple-authors": "Los siguientes autores han colaborado escribiendo este artículo: $1",

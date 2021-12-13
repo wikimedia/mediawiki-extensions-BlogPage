@@ -1,0 +1,24 @@
+{
+	"@metadata": {
+		"authors": []
+	},
+	"blog-and": "i",
+	"blog-author-comments": "$1 {{PLURAL:$1|komentar|komentara}}",
+	"blog-by": "od",
+	"blog-by-user-category": "Članci korisnika/ce $1",
+	"blog-comments-of-day": "Komentari dana",
+	"blog-created": "napravljeno $1",
+	"blog-created-ago": "napravljeno pre $1",
+	"blog-in-the-news": "U vestima",
+	"blog-new-articles": "Novi članci",
+	"blog-permission-required": "Nemate dozvolu da pravite stranice.",
+	"blog-view-archive-link": "Vidi sve",
+	"blog-create-title": "Naslov",
+	"blog-create-text": "Tekst",
+	"blog-create-categories": "Kategorije",
+	"blog-create-error-need-title": "'''Greška:''' Morate da date naslov objavi za blog.",
+	"blog-more": "više",
+	"blog-time-ago": "pre $1",
+	"action-createblogpost": "pravite nove objave za blog",
+	"blog-user-articles-title": "Blogovi"
+}
