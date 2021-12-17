@@ -1,6 +1,7 @@
 {
 	"@metadata": {
 		"authors": [
+			"Ajeje Brazorf",
 			"Robby"
 		]
 	},
@@ -45,7 +46,7 @@
 	"blog-create-title": "Label shown on Special:CreateBlogPost\n{{identical|Title}}",
 	"blog-create-text": "Label shown on Special:CreateBlogPost",
 	"blog-create-categories": "Label shown on Special:CreateBlogPost. See also {{msg-mw|blog-create-category-help}}.",
-	"blog-create-button": "Submit button text, used on Special:CreateBlogPost",
+	"blog-create-button": "Submit button text, used on Special:CreateBlogPost\n\n{{Identical|Create}}",
 	"blog-create-summary": "Default edit summary for blog pages",
 	"blog-create-error-need-content": "An error message shown on Special:CreateBlogPost when the user tries to submit an empty blog post",
 	"blog-create-error-need-title": "An error message shown on Special:CreateBlogPost when the user tries to submit a blog post without a title",
