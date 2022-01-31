@@ -1,0 +1,29 @@
+{
+	"@metadata": {
+		"authors": [
+			"Khun Kt"
+		]
+	},
+	"blog-and": "တောမ်ႏ",
+	"blog-by-user-category": "ကေားသုင်ꩻသား $1 ရောမ်ဖြုဲင်ꩻဖိုင်ႏ",
+	"blog-comments-of-day": "တောင်ꩻသေꩻချက်ဟန်ႏနီꩻ",
+	"blog-created": "ဖန်ဆင်ꩻလဲဉ်း $1",
+	"blog-in-the-news": "သꩻတင်ꩻကိုနဝ်ꩻ",
+	"blog-last-edited": "အဆုဲင်ꩻသွတ်ꩻ မွဉ်းဖျင်ခါꩻလဲဉ်း $1",
+	"blog-login": "အီႏဖန်ဆင်ꩻရောမ်ဖြုဲင်ꩻတာႏ အဝ်ႏလိုႏ [[Special:UserLogin|နွို့အကောက်]]သွူ။",
+	"blog-new-articles": "ရောမ်ဖြုဲင်ꩻတသာဖိုင်ႏ",
+	"blog-permission-required": "နာꩻနဝ်ꩻ ဖန်ဆင်ꩻလိတ်မဲ့ငါတသာ အခွင်ꩻအဝ်ႏတဝ်း။",
+	"blog-popular-articles": "တောမ်ႏတရွို့ꩻထိုꩻမွော့",
+	"blog-recent-voters-message": "နာꩻမိဉ်ႏစွယ်ꩻ ရောမ်ဖြုဲင်ꩻယိုနဝ်ꩻ ဖေႏသွော့မဲးသြ။",
+	"blog-view-archive-link": "ထွားလို့",
+	"blog-create-title": "ကꩻတူႏရဲန်ႏ",
+	"blog-create-text": "လိတ်ယာႏ",
+	"blog-create-categories": "ကဏ္ဍဖိုင်ႏ",
+	"blog-create-button": "ဖန်ဆင်ꩻ",
+	"blog-more": "ထဲင်းယင်း",
+	"blog-time-ago": "$1 ကာႏ",
+	"blog-time-days": "{{PLURAL:$1|တနီꩻ|$1 နီꩻ}}",
+	"blog-time-hours": "{{PLURAL:$1|တနားရီႏ|$1 နားရီႏ}}",
+	"blog-time-minutes": "{{PLURAL:$1|တမိနိစ်|$1 နားရီႏ}}",
+	"blog-time-seconds": "{{PLURAL:$1|တစက္ကန်း|$1 စက္ကန်း}}"
+}
