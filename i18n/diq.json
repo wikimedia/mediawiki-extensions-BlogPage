@@ -9,6 +9,8 @@
 	"blog-anonymous-name": "Fanatiko anonim",
 	"blog-by": "ra",
 	"blog-create-title": "Sername",
+	"blog-create-categories": "Kategoriyi",
+	"blog-create-button": "Vıraze!",
 	"blog-more": "zêde",
 	"blog-time-ago": "$1 raver",
 	"blog-time-days": "{{PLURAL:$1|yew roce|$1 roci}}",
