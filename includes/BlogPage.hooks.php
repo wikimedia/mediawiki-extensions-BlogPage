@@ -23,7 +23,7 @@ class BlogPageHooks {
 
 			$out = $context->getOutput();
 
-			$out->disableClientCache();
+			$out->enableClientCache( false );
 
 			// Add CSS
 			$out->addModuleStyles( 'ext.blogPage' );
