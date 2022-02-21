@@ -20,10 +20,15 @@ class BlogPageHooks {
 	 */
 	public static function blogFromTitle( Title &$title, &$article, $context ) {
 		if ( $title->getNamespace() == NS_BLOG ) {
-
 			$out = $context->getOutput();
 
-			$out->enableClientCache( false );
+			if ( method_exists( $out, 'disableClientCache' ) ) {
+				// MW 1.38+
+				$out->disableClientCache();
+			} else {
+				// Older MWs (1.35-1.37)
+				$out->enableClientCache( false );
+			}
 
 			// Add CSS
 			$out->addModuleStyles( 'ext.blogPage' );
