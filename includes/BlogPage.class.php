@@ -206,6 +206,11 @@ class BlogPage extends Article {
 
 		foreach ( $authors as $author ) {
 			$authorObj = User::newFromName( $author );
+			// T299626
+			if ( !$authorObj ) {
+				continue;
+			}
+
 			$this->authors[] = [
 				'actor' => $authorObj->getActorId()
 			];
@@ -289,7 +294,8 @@ class BlogPage extends Article {
 			// Quick 'n' dirty IP filtering: while anons can have an _actor_ ID, they
 			// always have a *user* ID of 0. If their UID is 0, we don't want to show
 			// their "name" (IP address) as an author.
-			if ( $user->getId() > 0 ) {
+			// (Added first condition due to T299626.)
+			if ( $user && $user->getId() > 0 ) {
 				$authors .= $linkRenderer->makeLink(
 					$user->getUserPage(),
 					$user->getName()
@@ -340,10 +346,13 @@ class BlogPage extends Article {
 					wfMessage( 'blog-and' )->escaped() .
 					wfMessage( 'word-separator' )->escaped();
 			}
-			$authors .= $linkRenderer->makeLink(
-				$user->getUserPage(),
-				$user->getName()
-			);
+			// T299626
+			if ( $user ) {
+				$authors .= $linkRenderer->makeLink(
+					$user->getUserPage(),
+					$user->getName()
+				);
+			}
 		}
 
 		$output = '<div class="multiple-authors-message">' .
@@ -378,6 +387,10 @@ class BlogPage extends Article {
 		}
 
 		$author = User::newFromActorId( $author_actor_id );
+		if ( !$author ) {
+			// T299626
+			return '';
+		}
 		$author_user_name = $author->getName();
 		$author_user_id = $author->getId();
 		$authorTitle = Title::makeTitle( NS_USER, $author_user_name );
@@ -428,6 +441,10 @@ class BlogPage extends Article {
 		}
 
 		$user = User::newFromActorId( $this->authors[$author_index]['actor'] );
+		if ( !$user ) {
+			// T299626
+			return '';
+		}
 		$user_name = $user->getName();
 		$user_id = $user->getId();
 
@@ -615,6 +632,11 @@ class BlogPage extends Article {
 
 			foreach ( $editors as $editor ) {
 				$actor = User::newFromActorId( $editor['actor'] );
+				if ( !$actor ) {
+					// T299626
+					continue;
+				}
+
 				$avatar = new wAvatar( $actor->getId(), 'm' );
 				$userTitle = Title::makeTitle( NS_USER, $actor->getName() );
 
@@ -708,6 +730,11 @@ class BlogPage extends Article {
 
 			foreach ( $voters as $voter ) {
 				$actor = User::newFromActorId( $voter['actor'] );
+				if ( !$actor ) {
+					// T299626
+					continue;
+				}
+
 				$userTitle = Title::makeTitle( NS_USER, $actor->getName() );
 				$avatar = new wAvatar( $actor->getId(), 'm' );
 
