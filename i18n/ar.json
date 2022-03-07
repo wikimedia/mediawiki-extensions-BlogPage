@@ -1,14 +1,17 @@
 {
 	"@metadata": {
 		"authors": [
+			"FiberAhmed",
 			"Michel Bakni",
 			"محمد أحمد عبد الفتاح"
 		]
 	},
+	"blog-and": "و",
 	"blog-by": "بواسطة",
 	"blog-by-user-category": "المقالات بواسطة المستخدم $1",
 	"blog-comments-of-day": "تعليقات اليوم",
 	"blog-created": "أُنشئت في $1",
+	"blog-created-ago": "أُنشِئَ قبلَ $1",
 	"blog-in-the-news": "في الأخبار",
 	"blog-last-edited": "عُدِّلت للمرة الأخيرة في $1",
 	"blog-new-articles": "مقالات جديدة",
