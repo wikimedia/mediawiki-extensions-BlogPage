@@ -5,11 +5,14 @@
 			"Chaduvari"
 		]
 	},
+	"blogpage-desc": "బ్లాగు వ్యవస్థ. వ్యాఖ్యలు, వోటింగూ చెయ్యదగ్గ ఈ బ్లాగు వ్యవస్థలో [[Special:CreateBlogPost|బ్లాగు పోస్టులు రాసేందుకు ఒక ప్రత్యేక పేజీ]], [[Special:ArticlesHome|బ్లాగు పోస్టుల జాబితాను చూపించేందుకు ఒక ప్రత్యేక పేజీ]] ఉంటాయి",
 	"blog-and": ",",
+	"blog-anonymous-name": "అజ్ఞాత ఉన్మాది",
 	"blog-author-comments": "$1 {{PLURAL:$1|వ్యాఖ్య|వ్యాఖ్యలు}}",
 	"blog-author-more-by": "$1 నుండి మరిన్ని",
 	"blog-author-title": "{{PLURAL:$1|రచయిత|రచయితల}} గురించి",
 	"blog-author-votes": "$1 {{PLURAL:$1|వోటు|వోట్లు}}",
+	"blog-by": "రాసినది",
 	"blog-by-user-category": "వాడుకరి $1 గారి పోస్టులు",
 	"blog-comments-of-day": "నేటి వ్యాఖ్యలు",
 	"blog-created": "సృష్టించిన తేదీ: $1",
@@ -30,6 +33,7 @@
 	"articlelists": "కొత్త బ్లాగు వ్యాసాలు",
 	"articleshome": "బ్లాగు ముంగిలి",
 	"createblogpost": "బ్లాగు పోస్టును సృష్టించండి",
+	"blog-create-category-help": "సైటు లోని సమాచారాన్ని ఒక క్రమపద్ధతిలో అమర్చేందుకు వర్గాలు పనికొస్తాయి. ఒకటి కంటే ఎక్కువ వర్గాలను చేర్చేందుకు వాటిని కామాలతో వేరు చెయ్యండి.",
 	"blog-create-title": "శీర్షిక",
 	"blog-create-text": "పాఠ్యం",
 	"blog-create-categories": "వర్గాలు",
