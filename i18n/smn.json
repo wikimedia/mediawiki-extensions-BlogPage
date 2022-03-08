@@ -7,6 +7,10 @@
 	},
 	"blog-in-the-news": "Uđđâsijn",
 	"blog-last-edited": "majemustáá nubástittum $1",
+	"blog-new-articles": "Uđđâ artikkâleh",
+	"blog-view-archive-link": "Keejâ puoh",
+	"blog-ah-new-articles": "Uđđâ artikkâleh",
+	"blog-ah-todays-articles": "Onnáš artikkâleh",
 	"blog-create-button": "Räähti!",
 	"blog-time-days": "{{PLURAL:$1|peivi|$1 peivid}}"
 }
