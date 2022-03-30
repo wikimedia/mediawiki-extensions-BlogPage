@@ -1,0 +1,11 @@
+{
+	"@metadata": {
+		"authors": [
+			"LoveIceLang"
+		]
+	},
+	"blog-new-articles": "Nýjar greinar",
+	"blog-permission-required": "Þú hefur ekki leyfi til að búa til nýjar síður.",
+	"blog-create-title": "Titill",
+	"blog-create-text": "Texti"
+}
