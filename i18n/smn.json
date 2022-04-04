@@ -2,7 +2,8 @@
 	"@metadata": {
 		"authors": [
 			"Yupik",
-			"Seipinne"
+			"Seipinne",
+			"Muotâ"
 		]
 	},
 	"blog-in-the-news": "Uđđâsijn",
@@ -10,5 +11,5 @@
 	"blog-new-articles": "Uđđâ artikkâleh",
 	"blog-view-archive-link": "Keejâ puoh",
 	"blog-create-button": "Räähti!",
-	"blog-time-days": "{{PLURAL:$1|peivi|$1 peivid}}"
+	"blog-time-days": "{{PLURAL:$1|peivi|$1 peeivi|$1 peeivi|$1 peivid}}"
 }
