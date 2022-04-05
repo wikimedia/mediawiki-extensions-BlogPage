@@ -13,5 +13,5 @@
 	"blog-ah-new-articles": "Uđđâ artikkâleh",
 	"blog-ah-todays-articles": "Onnááh artikkâleh",
 	"blog-create-button": "Räähti!",
-	"blog-time-days": "{{PLURAL:$1|peivi|$1 peivid}}"
+	"blog-time-days": "{{PLURAL:$1|peivi|$1 peeivi|$1 peeivi|$1 peivid}}"
 }
