@@ -1,4 +1,7 @@
 <?php
+
+use Wikimedia\AtEase\AtEase;
+
 /**
  * @file
  * @copyright Copyright © 2007, Wikia Inc.
@@ -45,7 +48,7 @@ class BlogTagCloud {
 			$catsExcluded = explode( "\n* ", $message->inContentLanguage()->text() );
 		}
 
-		Wikimedia\suppressWarnings(); // prevent PHP from bitching about strtotime()
+		AtEase::suppressWarnings(); // prevent PHP from bitching about strtotime()
 		foreach ( $res as $row ) {
 			$tag_name = Title::makeTitle( NS_CATEGORY, $row->cat_title );
 			$tag_text = $tag_name->getText();
@@ -60,7 +63,7 @@ class BlogTagCloud {
 				$this->tags[$tag_text] = [ 'count' => $row->cat_pages ];
 			}
 		}
-		Wikimedia\restoreWarnings();
+		AtEase::restoreWarnings();
 
 		// sort tag array by key (tag name)
 		if ( $this->tags_highest_count == 0 ) {
