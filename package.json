@@ -1,4 +1,5 @@
 {
+	"name": "BlogPage",
 	"private": true,
 	"scripts": {
 		"test": "grunt test"
