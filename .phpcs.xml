@@ -5,7 +5,11 @@
 		<exclude name="MediaWiki.Commenting.FunctionComment.MissingDocumentationPublic" />
 		<exclude name="MediaWiki.Commenting.FunctionComment.MissingParamTag" />
 		<exclude name="MediaWiki.Commenting.FunctionComment.MissingReturn" />
+		<exclude name="MediaWiki.Commenting.PropertyDocumentation.MissingDocumentationPublic" />
+		<exclude name="MediaWiki.Commenting.PropertyDocumentation.NotShortIntVar" />
+		<exclude name="MediaWiki.Commenting.RedundantVarName.Found" />
 		<exclude name="MediaWiki.Files.ClassMatchesFilename.NotMatch" />
+		<exclude name="MediaWiki.Usage.ExtendClassUsage.FunctionConfigUsage" />
 		<exclude name="MediaWiki.WhiteSpace.SpaceBeforeSingleLineComment.NewLineComment" />
 	</rule>
 	<file>.</file>
