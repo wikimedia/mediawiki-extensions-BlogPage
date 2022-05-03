@@ -3,7 +3,8 @@
 		"authors": [
 			"محمد أحمد عبد الفتاح",
 			"Michel Bakni",
-			"FiberAhmed"
+			"FiberAhmed",
+			"أَحمد"
 		]
 	},
 	"blog-and": "و",
@@ -15,6 +16,7 @@
 	"blog-in-the-news": "في الأخبار",
 	"blog-last-edited": "عُدِّلت للمرة الأخيرة في $1",
 	"blog-new-articles": "مقالات جديدة",
+	"blog-permission-required": "ليس لديك الإذن لإنشاء مقالات.",
 	"blog-recent-editors": "مساهمات حديثة أخرى",
 	"blog-view-archive-link": "عرض الكل",
 	"articlelists": "تدوينات جديدة",
