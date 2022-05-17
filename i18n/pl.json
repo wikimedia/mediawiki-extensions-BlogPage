@@ -1,7 +1,8 @@
 {
 	"@metadata": {
 		"authors": [
-			"Rail"
+			"Rail",
+			"Msz2001"
 		]
 	},
 	"blogpage-desc": "System blogowania z funkcją komentowania i głosowania wraz ze [[Special:CreateBlogPost|stroną specjalną do tworzenia wpisów]] oraz [[Special:ArticlesHome|listą istniejących blogów]]",
@@ -60,6 +61,6 @@
 	"action-createblogpost": "tworzenia nowych wpisów na blogu",
 	"right-createblogpost": "[[Special:CreateBlogPost|Tworzenie wpisów na blogu]]",
 	"blog-user-articles-title": "Blogi",
-	"blog-user-articles-votes": "{{PLURAL:$1|jeden głos|$1 głosy|$1 głosów}}",
+	"blog-user-articles-votes": "{{PLURAL:$1|głos|głosy|głosów}}",
 	"blog-user-article-comment": "{{PLURAL:$1|jeden komentarz|$1 komentarze|$1 komentarzy}}"
 }
