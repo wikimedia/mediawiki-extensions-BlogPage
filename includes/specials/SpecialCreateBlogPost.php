@@ -163,10 +163,19 @@ class SpecialCreateBlogPost extends SpecialPage {
 						"\n__NOEDITSECTION__",
 					$page->getTitle()
 				);
-				$page->doEditContent(
-					$pageContent,
-					$this->msg( 'blog-create-summary' )->inContentLanguage()->text()
-				);
+				if ( method_exists( $page, 'doUserEditContent' ) ) {
+					// MW 1.36+
+					$page->doUserEditContent(
+						$pageContent,
+						$this->getUser(),
+						$this->msg( 'blog-create-summary' )->inContentLanguage()->text()
+					);
+				} else {
+					$page->doEditContent(
+						$pageContent,
+						$this->msg( 'blog-create-summary' )->inContentLanguage()->text()
+					);
+				}
 
 				$pageID = $page->getID();
 				// Add a vote for the page
