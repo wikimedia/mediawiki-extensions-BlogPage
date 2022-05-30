@@ -29,6 +29,7 @@
 	"articlelists": "새 블로그 글",
 	"articleshome": "블로그 홈페이지",
 	"createblogpost": "블로그 글 만들기",
+	"blog-create-category-help": "분류는 사이트의 정보를 정리하는데 도움을 줍니다. 여러 분류를 추가하려면 분류를 쉼표로 구분하십시오.",
 	"blog-create-title": "제목",
 	"blog-create-text": "텍스트",
 	"blog-create-categories": "분류",
