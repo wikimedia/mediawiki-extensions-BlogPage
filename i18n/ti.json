@@ -1,0 +1,12 @@
+{
+	"@metadata": {
+		"authors": [
+			"Joanmp17"
+		]
+	},
+	"blog-time-ago": "ቅድሚ $1",
+	"blog-time-days": "{{PLURAL:$1|ሓደ መዓልቲ|$1 መዓልታት}}",
+	"blog-time-hours": "{{PLURAL:$1|ሓደ ሰዓት|$1 ሰዓታት}}",
+	"blog-time-minutes": "{{PLURAL:$1|ሓንቲ ደቒቕ|$1 ደቓይቕ}}",
+	"blog-time-seconds": "{{PLURAL:$1|ሓደ ካልኢት|$1 ካልኢታት}}"
+}
