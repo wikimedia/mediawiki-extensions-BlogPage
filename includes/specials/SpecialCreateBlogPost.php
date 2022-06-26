@@ -107,7 +107,12 @@ class SpecialCreateBlogPost extends SpecialPage {
 			$today = $contLang->date( wfTimestampNow() );
 
 			// Create the blog page if it doesn't already exist
-			$page = WikiPage::factory( $title );
+			if ( method_exists( MediaWikiServices::class, 'getWikiPageFactory' ) ) {
+				// MW 1.36+
+				$page = MediaWikiServices::getInstance()->getWikiPageFactory()->newFromTitle( $title );
+			} else {
+				$page = WikiPage::factory( $title );
+			}
 			if ( $page->exists() ) {
 				$out->setPageTitle( $this->msg( 'errorpagetitle' ) );
 				$out->addWikiMsg( 'blog-create-error-page-exists' );
@@ -171,6 +176,7 @@ class SpecialCreateBlogPost extends SpecialPage {
 						$this->msg( 'blog-create-summary' )->inContentLanguage()->text()
 					);
 				} else {
+					// @phan-suppress-next-line PhanUndeclaredMethod
 					$page->doEditContent(
 						$pageContent,
 						$this->msg( 'blog-create-summary' )->inContentLanguage()->text()
