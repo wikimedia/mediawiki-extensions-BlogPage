@@ -1,11 +1,37 @@
 {
 	"@metadata": {
 		"authors": [
-			"Hidayatsrf"
+			"Hidayatsrf",
+			"Robfirstname"
 		]
 	},
 	"blog-and": "dan",
+	"blog-author-votes": "$1 {{PLURAL:$1|suara}}",
 	"blog-by": "oleh",
 	"blog-created": "membuat $1",
-	"blog-created-ago": "dibuat $1 lalu"
+	"blog-created-ago": "dibuat $1 lalu",
+	"blog-login": "Anda harus [[Special:UserLogin|masuk]] untuk membuat artikel.",
+	"blog-login-edit": "Anda harus [[Special:UserLogin|masuk]] untuk menyunting artikel blog.",
+	"blog-new-articles": "Artikel baru",
+	"blog-view-archive-link": "Tampilkan Semua",
+	"articlelists": "Artikel blog baru",
+	"blog-ah-no-results": "Halaman tidak ditemukan.",
+	"blog-ah-popular-articles": "Artikel populer",
+	"blog-ah-new-articles": "Artikel baru",
+	"blog-ah-todays-articles": "Artikel hari ini",
+	"blog-ah-most-votes": "Suara terbanyak (72 jam)",
+	"blog-ah-what-talking-about": "Komentar terbanyak (72 jam)",
+	"blog-create-title": "Judul",
+	"blog-create-text": "Teks",
+	"blog-create-categories": "Kategori",
+	"blog-create-button": "Buat!",
+	"blog-more": "lainnya",
+	"blog-time-ago": "$1 yang lalu",
+	"blog-time-days": "{{PLURAL:$1|satu hari|$1 hari}}",
+	"blog-time-hours": "{{PLURAL:$1|satu jam|$1 jam}}",
+	"blog-time-minutes": "{{PLURAL:$1|satu menit|$1 menit}}",
+	"blog-time-seconds": "{{PLURAL:$1|satu detik|$1 detik}}",
+	"blog-user-articles-title": "Blog",
+	"blog-user-articles-votes": "{{PLURAL:$1|suara}}",
+	"blog-user-article-comment": "{{PLURAL:$1|satu komentar|$1 komentar}}"
 }
