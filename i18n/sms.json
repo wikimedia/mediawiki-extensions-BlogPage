@@ -9,7 +9,11 @@
 	"blog-permission-required": "Tuʹst ij leäkku vuõiggâdvuõtt artikeeʹlid raajjâd.",
 	"articlelists": "Ođđ bloggartikkeeʹl",
 	"createblogpost": "Ǩeeʹrjteškuäʹđ bloggpoʹsttjõõzz",
+	"blog-create-text": "Teʹkstt",
 	"blog-create-categories": "Kategoria",
+	"blog-time-hours": "{{PLURAL:$1|õhtt čiâss|$1 čiâss|$1 čiâssâd}}",
+	"blog-time-minutes": "{{PLURAL:$1|õhtt minutt|$1 minuutt|$1 minuttâd}}",
+	"blog-time-seconds": "{{PLURAL:$1|õhtt sekuntt|$1 sekuunt|$1 sekunttâd}}",
 	"action-createblogpost": "raajjâd ođđ bloggpoʹsttjõõzzid",
 	"right-createblogpost": "[[Special:CreateBlogPost|Raajjâd ođđ bloggpoʹsttjõõzzid]]"
 }
