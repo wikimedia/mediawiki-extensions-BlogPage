@@ -54,13 +54,16 @@ class SpecialCreateBlogPost extends SpecialPage {
 		$out->addModuleStyles( 'ext.blogPage.create.css' );
 		$out->addModules( 'ext.blogPage.create.js' );
 
+		$services = MediaWikiServices::getInstance();
+		$userOptionsLookup = $services->getUserOptionsLookup();
+
 		// Add WikiEditor extension modules if enabled for the current user
-		if ( ExtensionRegistry::getInstance()->isLoaded( 'WikiEditor' ) && $user->getOption( 'usebetatoolbar' ) ) {
+		if ( ExtensionRegistry::getInstance()->isLoaded( 'WikiEditor' ) &&
+			$userOptionsLookup->getOption( $user, 'usebetatoolbar' )
+		) {
 			$out->addModuleStyles( 'ext.wikiEditor.styles' );
 			$out->addModules( 'ext.wikiEditor' );
 		}
-
-		$services = MediaWikiServices::getInstance();
 
 		// If the request was POSTed, we haven't submitted a request yet AND
 		// we have a title, create the page...otherwise just display the
