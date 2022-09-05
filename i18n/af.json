@@ -1,0 +1,9 @@
+{
+	"@metadata": {
+		"authors": [
+			"Rooiratel"
+		]
+	},
+	"blog-author-comments": "{{PLURAL:$1|opmerking|opmerkings}}",
+	"blog-comments-of-day": "Opmerke van die dag"
+}

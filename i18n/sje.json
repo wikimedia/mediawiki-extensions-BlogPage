@@ -1,0 +1,8 @@
+{
+	"@metadata": {
+		"authors": [
+			"Olve Utne"
+		]
+	},
+	"blog-user-article-comment": "{{PLURAL:$1|akkta målgedibme|$1 målgedime}}"
+}
