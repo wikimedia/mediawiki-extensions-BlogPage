@@ -37,7 +37,7 @@
 	"blog-create-text": "Текст",
 	"blog-create-categories": "Категории",
 	"blog-create-button": "Создај!",
-	"blog-create-summary": "Создадена нов блоговска објава.",
+	"blog-create-summary": "Создадена нова блоговска објава.",
 	"blog-create-error-need-content": "'''Грешка:''' Блоговската објава мора да има некаква содржина!",
 	"blog-create-error-need-title": "'''Грешка:''' Ќе треба да ѝ дадете наслов на блоговската објава!",
 	"blog-create-error-page-exists": "'''Грешка:''' Веќе постои блоговска објава со тој наслов. Одберете друг.",

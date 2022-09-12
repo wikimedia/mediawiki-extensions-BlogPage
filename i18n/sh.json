@@ -1,0 +1,9 @@
+{
+	"@metadata": {
+		"authors": [
+			"Vlad5250"
+		]
+	},
+	"blog-and": "i",
+	"blog-author-comments": "$1 {{PLURAL:$1|komentar|komentara}}"
+}
