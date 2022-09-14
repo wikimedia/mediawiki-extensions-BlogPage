@@ -5,11 +5,17 @@
 			"Michel Bakni",
 			"محمد أحمد عبد الفتاح",
 			"أَحمد",
-			"NEHAOUA"
+			"NEHAOUA",
+			"Dr-Taher"
 		]
 	},
+	"blogpage-desc": "نظام التدوين مع ميزات التعليق والتصويت، [[Special: CreateBlogPost|صفحة خاصة لإنشاء منشورات المدونة]] و [[Special: ArticlesHome|صفحة خاصة لإدراج منشورات المدونة]]",
 	"blog-and": "و",
+	"blog-anonymous-name": "معجب مجهول",
+	"blog-author-comments": "$1 {{PLURAL:$1|تعليق واحد|تعليقات}}",
 	"blog-author-more-by": "المزيد من $1",
+	"blog-author-title": "حول {{PLURAL:$1|المؤلف |المؤلفون}}",
+	"blog-author-votes": "$1 {{PLURAL:$1|صوت |أصوات}}",
 	"blog-by": "بواسطة",
 	"blog-by-user-category": "المقالات بواسطة المستخدم $1",
 	"blog-comments-of-day": "تعليقات اليوم",
@@ -17,6 +23,8 @@
 	"blog-created-ago": "أُنشِئَ قبلَ $1",
 	"blog-in-the-news": "في الأخبار",
 	"blog-last-edited": "عُدِّلت للمرة الأخيرة في $1",
+	"blog-login": "يجب عليك [[Special: UserLogin|تسجيل الدخول]] لإنشاء المقالات.",
+	"blog-login-edit": "يجب عليك [[Special: UserLogin|تسجيل الدخول]] لتحرير مقالات المدونة.",
 	"blog-new-articles": "مقالات جديدة",
 	"blog-permission-required": "ليس لديك الإذن لإنشاء مقالات.",
 	"blog-popular-articles": "لا تفوت",
