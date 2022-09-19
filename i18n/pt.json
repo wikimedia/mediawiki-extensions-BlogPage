@@ -17,7 +17,7 @@
 	"blog-created": "criado a $1",
 	"blog-created-ago": "criado há $1",
 	"blog-in-the-news": "Atualidades",
-	"blog-last-edited": "ultima edição $1",
+	"blog-last-edited": "última edição a $1",
 	"blog-login": "Tem de [[Special:UserLogin|entrar]] para criar artigos.",
 	"blog-login-edit": "Tem de [[Special:UserLogin|entrar]] para editar artigos do blogue.",
 	"blog-new-articles": "Artigos novos",
