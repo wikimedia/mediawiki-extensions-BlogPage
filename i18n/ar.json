@@ -6,10 +6,11 @@
 			"NEHAOUA",
 			"أَحمد",
 			"محمد أحمد عبد الفتاح",
-			"Dr-Taher"
+			"Dr-Taher",
+			"Meno25"
 		]
 	},
-	"blogpage-desc": "نظام التدوين مع ميزات التعليق والتصويت، [[Special: CreateBlogPost|صفحة خاصة لإنشاء منشورات المدونة]] و [[Special: ArticlesHome|صفحة خاصة لإدراج منشورات المدونة]]",
+	"blogpage-desc": "نظام التدوين مع ميزات التعليق والتصويت ، [[Special:CreateBlogPost|صفحة خاصة لإنشاء منشورات المدونة]] و [[Special:ArticlesHome|صفحة خاصة لإدراج منشورات المدونة]]",
 	"blog-and": "و",
 	"blog-anonymous-name": "معجب مجهول",
 	"blog-author-comments": "$1 {{PLURAL:$1|تعليق واحد|تعليقات}}",
@@ -23,8 +24,8 @@
 	"blog-created-ago": "أُنشِئَ قبلَ $1",
 	"blog-in-the-news": "في الأخبار",
 	"blog-last-edited": "عُدِّلت للمرة الأخيرة في $1",
-	"blog-login": "يجب عليك [[Special: UserLogin|تسجيل الدخول]] لإنشاء المقالات.",
-	"blog-login-edit": "يجب عليك [[Special: UserLogin|تسجيل الدخول]] لتحرير مقالات المدونة.",
+	"blog-login": "يجب عليك [[Special:UserLogin|تسجيل الدخول]] لإنشاء المقالات.",
+	"blog-login-edit": "يجب عليك [[Special:UserLogin|تسجيل الدخول]] لتحرير مقالات المدونة.",
 	"blog-new-articles": "مقالات جديدة",
 	"blog-permission-required": "ليس لديك الإذن لإنشاء مقالات.",
 	"blog-popular-articles": "لا تفوت",
@@ -65,5 +66,6 @@
 	"action-createblogpost": "إنشاء تدوينات جديدة",
 	"right-createblogpost": "[[Special:CreateBlogPost|أنشئ مشاركة مدونة جديدة]]",
 	"blog-user-articles-title": "مدونات",
-	"blog-user-articles-votes": "{{PLURAL:$1|صوت واحد|صوتين|$1 أصوات|$1 صوتًا|$1 صوت}}"
+	"blog-user-articles-votes": "{{PLURAL:$1|صوت واحد|صوتين|$1 أصوات|$1 صوتًا|$1 صوت}}",
+	"blog-user-article-comment": "{{PLURAL:$1|تعليق واحد|$1 تعليق}}"
 }
