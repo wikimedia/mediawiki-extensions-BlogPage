@@ -27,6 +27,7 @@ class BlogPageHooks {
 				$out->disableClientCache();
 			} else {
 				// Older MWs (1.35-1.37)
+				// @phan-suppress-next-line PhanParamTooMany
 				$out->enableClientCache( false );
 			}
 
