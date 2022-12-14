@@ -1,7 +1,8 @@
 {
 	"@metadata": {
 		"authors": [
-			"Kly"
+			"Kly",
+			"捍粵者"
 		]
 	},
 	"blogpage-desc": "具有發表意見與投票的 Blogging 系統，[[Special:CreateBlogPost|用來建立部落格貼文]]與[[Special:ArticlesHome|用來列出部落格貼文的特殊頁面]]",
@@ -25,7 +26,7 @@
 	"blog-popular-articles": "不要錯過",
 	"blog-multiple-authors": "此文章是由以下人員協作建立：$1",
 	"blog-recent-editors": "其他近期貢獻者",
-	"blog-recent-editors-message": "透過進行編輯來讓此頁面的內容更好。",
+	"blog-recent-editors-message": "編輯頁面以改善之",
 	"blog-recent-voters": "其他近期投票者",
 	"blog-recent-voters-message": "若您喜歡這份文章，請投票。",
 	"blog-view-archive-link": "查看全部",
