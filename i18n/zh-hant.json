@@ -2,6 +2,7 @@
 	"@metadata": {
 		"authors": [
 			"Kly",
+			"列维劳德",
 			"捍粵者"
 		]
 	},
@@ -62,5 +63,5 @@
 	"right-createblogpost": "[[Special:CreateBlogPost|建立新的部落格貼文]]",
 	"blog-user-articles-title": "部落格",
 	"blog-user-articles-votes": "{{PLURAL:$1|票}}",
-	"blog-user-article-comment": "{{PLURAL:$1|1 個意見|$1 個意見}}"
+	"blog-user-article-comment": "{{PLURAL:$1|一則留言|$1 則留言}}"
 }
