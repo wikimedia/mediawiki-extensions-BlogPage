@@ -2,7 +2,8 @@
 	"@metadata": {
 		"authors": [
 			"BadDog",
-			"Kizule"
+			"Kizule",
+			"Milicevic01"
 		]
 	},
 	"blog-and": "и",
@@ -28,5 +29,6 @@
 	"blog-more": "више",
 	"blog-time-ago": "пре $1",
 	"action-createblogpost": "правите нове објаве за блог",
-	"blog-user-articles-title": "Блогови"
+	"blog-user-articles-title": "Блогови",
+	"blog-user-articles-votes": "{{PLURAL:$1|глас|гласови}}"
 }
