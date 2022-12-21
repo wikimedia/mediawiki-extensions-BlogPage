@@ -1,0 +1,13 @@
+{
+	"@metadata": {
+		"authors": [
+			"Afalau"
+		]
+	},
+	"blog-login": "Rhaid i chi [[Special:UserLogin|fewngofnodi]] i greu erthyglau.",
+	"blog-ah-popular-articles": "Erthyglau poblogaidd",
+	"blog-ah-new-articles": "Erthyglau newydd",
+	"blog-ah-write-article": "Ysgrifennu erthygl",
+	"blog-ah-todays-articles": "Erthyglau heddiw",
+	"blog-time-ago": "$1 yn ôl"
+}
