@@ -9,5 +9,6 @@
 	"blog-new-articles": "Novi članki",
 	"blog-create-title": "Naslov",
 	"blog-create-text": "Besedilo",
-	"blog-create-button": "Ustvari!"
+	"blog-create-button": "Ustvari!",
+	"blog-time-seconds": "{{PLURAL:$1|eno sekundo|$1 sekundama|$1 sekundami}}"
 }
