@@ -7,10 +7,12 @@
 	"blog-and": "in",
 	"blog-in-the-news": "V novicah",
 	"blog-new-articles": "Novi članki",
+	"blog-view-archive-link": "Prikaži vse",
 	"blog-ah-popular-articles": "Priljubljeni članki",
 	"blog-ah-new-articles": "Novi članki",
 	"blog-create-title": "Naslov",
 	"blog-create-text": "Besedilo",
 	"blog-create-button": "Ustvari!",
-	"blog-time-seconds": "{{PLURAL:$1|eno sekundo|$1 sekundama|$1 sekundami}}"
+	"blog-time-seconds": "{{PLURAL:$1|eno sekundo|$1 sekundama|$1 sekundami}}",
+	"blog-user-articles-title": "Blogi"
 }
