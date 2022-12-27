@@ -25,5 +25,6 @@
 	"blog-more": "više",
 	"blog-time-ago": "pre $1",
 	"action-createblogpost": "pravite nove objave za blog",
-	"blog-user-articles-title": "Blogovi"
+	"blog-user-articles-title": "Blogovi",
+	"blog-user-articles-votes": "{{PLURAL:$1|glas|glasovi}}"
 }
