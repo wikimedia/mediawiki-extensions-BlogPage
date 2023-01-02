@@ -569,8 +569,10 @@ class BlogPage extends Article {
 			wfDebugLog( 'BlogPage', "Loading recent editors for page {$pageTitleId} from DB" );
 			$dbr = wfGetDB( DB_REPLICA );
 
+			$MW139orEarlier = version_compare( MW_VERSION, '1.39', '<' );
+			$pageColumn = ( $MW139orEarlier ? 'revactor_page' : 'rev_page' );
 			$where = [
-				'revactor_page' => $pageTitleId,
+				$pageColumn => $pageTitleId,
 				'actor_user IS NOT NULL', // exclude anonymous editors
 				"actor_name <> 'MediaWiki default'", // exclude MW default
 			];
@@ -580,21 +582,35 @@ class BlogPage extends Article {
 				$where[] = 'actor_user <> ' . $dbr->addQuotes( $author['actor'] );
 			}
 
-			$res = $dbr->select(
-				[ 'revision_actor_temp', 'revision', 'actor' ],
-				[ 'DISTINCT revactor_actor', 'actor_name' ],
-				$where,
-				__METHOD__,
-				[ 'ORDER BY' => 'actor_name ASC', 'LIMIT' => 8 ],
-				[
-					'actor' => [ 'JOIN', 'actor_id = revactor_actor' ],
-					'revision_actor_temp' => [ 'JOIN', 'revactor_rev = rev_id' ]
-				]
-			);
+			if ( $MW139orEarlier ) {
+				$res = $dbr->select(
+					[ 'revision_actor_temp', 'revision', 'actor' ],
+					[ 'DISTINCT revactor_actor', 'actor_name' ],
+					$where,
+					__METHOD__,
+					[ 'ORDER BY' => 'actor_name ASC', 'LIMIT' => 8 ],
+					[
+						'actor' => [ 'JOIN', 'actor_id = revactor_actor' ],
+						'revision_actor_temp' => [ 'JOIN', 'revactor_rev = rev_id' ]
+					]
+				);
+			} else {
+				$res = $dbr->select(
+					[ 'revision', 'actor' ],
+					[ 'DISTINCT rev_actor', 'actor_name' ],
+					$where,
+					__METHOD__,
+					[ 'ORDER BY' => 'actor_name ASC', 'LIMIT' => 8 ],
+					[
+						'actor' => [ 'JOIN', 'actor_id = rev_actor' ]
+					]
+				);
+			}
 
 			foreach ( $res as $row ) {
+				$columnName = ( $MW139orEarlier ? 'revactor_actor' : 'rev_actor' );
 				$editors[] = [
-					'actor' => $row->revactor_actor
+					'actor' => $row->$columnName
 				];
 			}
 
