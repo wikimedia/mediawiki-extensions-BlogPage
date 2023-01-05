@@ -367,7 +367,7 @@ class SpecialCreateBlogPost extends SpecialPage {
 		$output .= '<textarea class="createbox" tabindex="' . $this->tabCounter .
 			'" accesskey="," name="pageCtg" id="pageCtg" rows="2" cols="80">';
 		// Handle page previews correctly and don't lose user-supplied data on preview
-		$output .= htmlspecialchars( $request->getVal( 'pageCtg' ), ENT_QUOTES );
+		$output .= htmlspecialchars( $request->getVal( 'pageCtg', '' ), ENT_QUOTES );
 		$output .= '</textarea><br /><br />';
 		$this->tabCounter++;
 
