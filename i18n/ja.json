@@ -3,6 +3,7 @@
 		"authors": [
 			"A2y4",
 			"Ajeje Brazorf",
+			"Buehl",
 			"LaMagiaaa",
 			"Mugenpman",
 			"Omotecho",
@@ -31,6 +32,7 @@
 	"blog-popular-articles": "人気の高い記事",
 	"blog-recent-editors": "その他の最近の貢献者",
 	"blog-recent-editors-message": "このページを編集して、より良いものにしてください。",
+	"blog-recent-voters": "他の最近の投票者",
 	"blog-recent-voters-message": "記事が気に入ったら、投票をしましょう。",
 	"blog-view-archive-link": "すべて表示",
 	"articlelists": "新しいブログ記事",
@@ -48,6 +50,7 @@
 	"blog-create-summary": "ブログ投稿を新規作成",
 	"blog-create-error-need-content": "'''エラー：'''ブログを投稿するには、内容が含まれている必要があります！",
 	"blog-create-error-need-title": "'''エラー：'''タイトルを指定する必要があります。",
+	"blog-js-create-error-need-content": "ブログ投稿には内容がないといけません!",
 	"blog-js-create-error-need-title": "タイトルを指定する必要があります。",
 	"blog-more": "もっと見る",
 	"blog-time-ago": "$1前",
