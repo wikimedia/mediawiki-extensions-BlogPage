@@ -20,6 +20,12 @@ class BlogPage extends Article {
 	public $authors = [];
 
 	/**
+	 * @var string Page content text
+	 * @see BlogPage::setContent() and BlogPage::getContentText()
+	 */
+	public $pageContent;
+
+	/**
 	 * @param Title $title
 	 */
 	public function __construct( Title $title ) {
