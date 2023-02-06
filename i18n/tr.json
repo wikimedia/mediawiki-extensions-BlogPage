@@ -3,6 +3,7 @@
 		"authors": [
 			"Incelemeelemani",
 			"MuratTheTurkish",
+			"Rapsar",
 			"Sezgin İbiş"
 		]
 	},
@@ -19,7 +20,7 @@
 	"blog-created": "$1 tarihinde oluşturuldu",
 	"blog-created-ago": "$1 önce oluşturuldu",
 	"blog-in-the-news": "Haberlerde",
-	"blog-last-edited": "son düzenleme: $1",
+	"blog-last-edited": "son değişiklik: $1",
 	"blog-login": "Maddeleri oluşturmak için [[Special:UserLogin|oturum açmalısınız]].",
 	"blog-login-edit": "Maddeleri düzenlemek için [[Special:UserLogin|oturum açmalısınız]].",
 	"blog-new-articles": "Yeni maddeler",
