@@ -5,5 +5,9 @@
 		]
 	},
 	"blog-author-comments": "{{PLURAL:$1|opmerking|opmerkings}}",
-	"blog-comments-of-day": "Opmerke van die dag"
+	"blog-comments-of-day": "Opmerke van die dag",
+	"blog-in-the-news": "In die nuus",
+	"blog-last-edited": "laas geredigeer $1",
+	"blog-new-articles": "Nuwe artikels",
+	"articlelists": "Nuwe blog artikels"
 }
