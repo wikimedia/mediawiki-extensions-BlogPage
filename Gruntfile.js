@@ -15,14 +15,7 @@ module.exports = function ( grunt ) {
 				'!vendor/**'
 			]
 		},
-		banana: Object.assign(
-			conf.MessagesDirs,
-			{
-				options: {
-					requireLowerCase: 'initial'
-				}
-			}
-		)
+		banana: conf.MessagesDirs
 	} );
 
 	grunt.registerTask( 'test', [ 'eslint', 'banana' ] );

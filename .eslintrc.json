@@ -7,8 +7,6 @@
 	],
 	"rules": {
 		"no-alert": "off",
-		"no-jquery/no-global-selector": "off",
-		"es/no-object-assign": "warn",
-		"compat/compat": "warn"
+		"no-jquery/no-global-selector": "off"
 	}
 }
