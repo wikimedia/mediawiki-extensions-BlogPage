@@ -15,5 +15,12 @@
 	"blog-created": "გიჭყჷ: $1",
 	"blog-created-ago": "გიჭყჷ $1 კინოხი",
 	"blog-in-the-news": "ახალ ამბეეფს",
-	"blog-create-summary": "ახალ ბლოგ პოსტიქ გიჭყჷ."
+	"blog-recent-editors-message": "გაუჯგუში ათე ხასჷლა თიშ რედაქტირაფათ.",
+	"blog-recent-voters-message": "სტატია ქუმორწონა-და, ხონარ ქემეჩით.",
+	"blog-create-summary": "ახალ ბლოგ პოსტიქ გიჭყჷ.",
+	"blog-time-ago": "$1 კინოხ",
+	"blog-time-days": "{{PLURAL:$1|ართ დღაშ|$1 დღაშ}}",
+	"blog-time-hours": "{{PLURAL:$1|ართ სათიშ|$1 სათიშ}}",
+	"blog-time-minutes": "{{PLURAL:$1|ართ წუთიშ|$1 წუთიშ}}",
+	"blog-time-seconds": "{{PLURAL:$1|ართ წამიშ|$1 წამიშ}}"
 }
