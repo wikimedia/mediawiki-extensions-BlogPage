@@ -4,12 +4,14 @@
 			"Nokeoo"
 		]
 	},
+	"blogpage-desc": "Tinklaraščio sistema su komentavimo ir balsavimo funkcijomis, [[Special:CreateBlogPost|specialus puslapis tinklaraščio įrašams kurti]] ir [[Special:ArticlesHome|specialus puslapis tinklaraščio įrašų sąrašui]]",
 	"blog-and": "ir",
 	"blog-anonymous-name": "Anonimas fanatikas",
 	"blog-author-comments": "$1 {{PLURAL:$1|komentaras|komentarai}}",
 	"blog-author-more-by": "Daugiau iš $1",
 	"blog-author-title": "Apie {{PLURAL:$1|Autorių|Autorius}}",
 	"blog-author-votes": "$1 {{PLURAL:$1|balsas|balsai}}",
+	"blog-by": "autorius",
 	"blog-by-user-category": "Naudotojo $1 straipsniai",
 	"blog-comments-of-day": "Dienos komentarai",
 	"blog-created": "sukūrė $1",
