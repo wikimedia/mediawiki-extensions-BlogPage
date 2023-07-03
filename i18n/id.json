@@ -2,19 +2,25 @@
 	"@metadata": {
 		"authors": [
 			"Hidayatsrf",
-			"Robfirstname"
+			"Robfirstname",
+			"Veracious"
 		]
 	},
 	"blog-and": "dan",
 	"blog-author-votes": "$1 {{PLURAL:$1|suara}}",
 	"blog-by": "oleh",
+	"blog-by-user-category": "Artikel buatan pengguna $1",
+	"blog-comments-of-day": "Komentar hari ini",
 	"blog-created": "membuat $1",
 	"blog-created-ago": "dibuat $1 lalu",
+	"blog-in-the-news": "Dalam berita",
 	"blog-login": "Anda harus [[Special:UserLogin|masuk]] untuk membuat artikel.",
 	"blog-login-edit": "Anda harus [[Special:UserLogin|masuk]] untuk menyunting artikel blog.",
 	"blog-new-articles": "Artikel baru",
 	"blog-view-archive-link": "Tampilkan Semua",
 	"articlelists": "Artikel blog baru",
+	"articleshome": "Beranda blog",
+	"createblogpost": "Buat pos blog",
 	"blog-create-title": "Judul",
 	"blog-create-text": "Teks",
 	"blog-create-categories": "Kategori",
@@ -25,6 +31,8 @@
 	"blog-time-hours": "{{PLURAL:$1|satu jam|$1 jam}}",
 	"blog-time-minutes": "{{PLURAL:$1|satu menit|$1 menit}}",
 	"blog-time-seconds": "{{PLURAL:$1|satu detik|$1 detik}}",
+	"action-createblogpost": "buat pos blog baru",
+	"right-createblogpost": "[[Special:CreateBlogPost|Membuat pos blog baru]]",
 	"blog-user-articles-title": "Blog",
 	"blog-user-article-comment": "{{PLURAL:$1|satu komentar|$1 komentar}}"
 }
