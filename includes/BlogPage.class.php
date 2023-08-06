@@ -7,6 +7,7 @@
 use MediaWiki\MediaWikiServices;
 use MediaWiki\Revision\RevisionRecord;
 use MediaWiki\Revision\SlotRecord;
+use Wikimedia\LightweightObjectStore\ExpirationAwareness;
 
 class BlogPage extends Article {
 
@@ -248,7 +249,7 @@ class BlogPage extends Article {
 				__METHOD__,
 				[ 'ORDER BY' => 'rev_timestamp ASC' ]
 			);
-			$cache->set( $key, $createDate, 7 * IExpiringStore::TTL_WEEK );
+			$cache->set( $key, $createDate, 7 * ExpirationAwareness::TTL_WEEK );
 		} else {
 			wfDebugLog( 'BlogPage', "Loading create_date for page {$pageId} from cache" );
 			$createDate = $data;
