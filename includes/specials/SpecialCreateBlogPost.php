@@ -114,6 +114,7 @@ class SpecialCreateBlogPost extends SpecialPage {
 				// MW 1.36+
 				$page = MediaWikiServices::getInstance()->getWikiPageFactory()->newFromTitle( $title );
 			} else {
+				// @phan-suppress-next-line PhanUndeclaredStaticMethod
 				$page = WikiPage::factory( $title );
 			}
 			if ( $page->exists() ) {
