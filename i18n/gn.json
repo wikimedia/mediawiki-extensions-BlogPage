@@ -1,0 +1,8 @@
+{
+	"@metadata": {
+		"authors": [
+			"P. S. F. Freitas"
+		]
+	},
+	"blog-time-days": "{{PLURAL:$1|peteĩ ára|$1 ára}}"
+}
