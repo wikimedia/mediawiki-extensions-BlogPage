@@ -1,0 +1,39 @@
+{
+	"@metadata": {
+		"authors": [
+			"Умар"
+		]
+	},
+	"blog-and": ",",
+	"blog-anonymous-name": "Аноним фанатик",
+	"blog-author-comments": "$1 {{PLURAL:$1|коммент}}",
+	"blog-author-title": "{{PLURAL:$1|авторах}} лаьцна",
+	"blog-author-votes": "$1 {{PLURAL:$1|кхаж}}",
+	"blog-view-archive-link": "Йерриге хьажа",
+	"articlelists": "Блогехь керла йаззамаш",
+	"blog-ah-no-results": "АгӀонаш цакарий.",
+	"blog-ah-popular-articles": "ГӀарабаьлла йаззамаш",
+	"blog-ah-new-articles": "Керла йаззамаш",
+	"blog-ah-write-article": "Йазбе йаззам",
+	"blog-ah-todays-articles": "Таханлера йаззамаш",
+	"articleshome": "Блоган цӀера агӀо",
+	"createblogpost": "Блогехь пост кхолла",
+	"blog-create-title": "Корта",
+	"blog-create-text": "Йоза",
+	"blog-create-categories": "Категореш",
+	"blog-create-button": "Кхолла!",
+	"blog-create-summary": "Блогехь керла пост кхоьллина.",
+	"blog-create-error-need-content": "'''ГӀалат:''' Хьан пост тӀехь цхьа чулацам хила беза!",
+	"blog-create-error-need-title": "'''ГӀалат:''' Хьан постан цӀе хила йеза!",
+	"blog-more": "кхин дӀа",
+	"blog-time-ago": "$1 йуха",
+	"blog-time-days": "{{PLURAL:$1|цхьа де|$1 де}}",
+	"blog-time-hours": "{{PLURAL:$1|цхьа сахьт|$1 сахьт}}",
+	"blog-time-minutes": "{{PLURAL:$1|цхьа минот|$1 минот}}",
+	"blog-time-seconds": "{{PLURAL:$1|цхьа секунд|$1 секунд}}",
+	"action-createblogpost": "блогехь керла посташ кхолла",
+	"right-createblogpost": "[[Special:CreateBlogPost|Блогехь керла посташ кхолла]]",
+	"blog-user-articles-title": "Блогаш",
+	"blog-user-articles-votes": "{{PLURAL:$1|кхаж}}",
+	"blog-user-article-comment": "{{PLURAL:$1|цхьа коммент|$1 коммент}}"
+}
