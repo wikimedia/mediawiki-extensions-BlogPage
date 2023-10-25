@@ -1,0 +1,25 @@
+{
+	"@metadata": {
+		"authors": [
+			"Nicolas Eynaud"
+		]
+	},
+	"blog-and": "e",
+	"blog-anonymous-name": "Fanatic anonim",
+	"blog-by": "per",
+	"blog-created": "creat $1",
+	"blog-created-ago": "creat fa $1",
+	"blog-in-the-news": "Dins l'actualitat",
+	"blog-last-edited": "darriera modificacion $1",
+	"blog-ah-popular-articles": "Articles populars",
+	"blog-ah-new-articles": "Articles novèus",
+	"blog-ah-write-article": "Escriure un article",
+	"blog-ah-todays-articles": "Articles dau jorn",
+	"blog-create-title": "Títol",
+	"blog-create-text": "Tèxte",
+	"blog-create-categories": "Categorias",
+	"blog-create-button": "Crear !",
+	"blog-more": "mai",
+	"blog-time-ago": "fa $1",
+	"blog-user-articles-title": "Blògs"
+}
