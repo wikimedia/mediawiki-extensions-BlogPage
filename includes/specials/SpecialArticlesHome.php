@@ -199,7 +199,7 @@ class ArticlesHome extends SpecialPage {
 		}
 
 		$output = '<div class="listpages-container">';
-		if ( empty( $popularBlogPosts ) ) {
+		if ( !$popularBlogPosts ) {
 			$output .= $this->msg( 'blog-ah-no-results' )->escaped();
 		} else {
 			$repoGroup = $services->getRepoGroup();
@@ -325,7 +325,7 @@ class ArticlesHome extends SpecialPage {
 		// Here we output HTML
 		$output = '<div class="listpages-container">' . "\n";
 
-		if ( empty( $votedBlogPosts ) ) {
+		if ( !$votedBlogPosts ) {
 			$output .= $this->msg( 'blog-ah-no-results' )->escaped();
 		} else {
 			foreach ( $votedBlogPosts as $votedBlogPost ) {
@@ -415,7 +415,7 @@ class ArticlesHome extends SpecialPage {
 
 		$output = '<div class="listpages-container">';
 
-		if ( empty( $commentedBlogPosts ) ) {
+		if ( !$commentedBlogPosts ) {
 			$output .= $this->msg( 'blog-ah-no-results' )->escaped();
 		} else {
 			foreach ( $commentedBlogPosts as $commentedBlogPost ) {
@@ -483,7 +483,7 @@ class ArticlesHome extends SpecialPage {
 		}
 
 		$output = '<div class="listpages-container">' . "\n";
-		if ( empty( $newBlogPosts ) ) {
+		if ( !$newBlogPosts ) {
 			$output .= $this->msg( 'blog-ah-no-results' )->escaped();
 		} else {
 			foreach ( $newBlogPosts as $newBlogPost ) {
@@ -563,7 +563,7 @@ class ArticlesHome extends SpecialPage {
 		}
 
 		$output = '<div class="listpages-container">';
-		if ( empty( $newestBlogPosts ) ) {
+		if ( !$newestBlogPosts ) {
 			$output .= $this->msg( 'blog-ah-no-results' )->escaped();
 		} else {
 			$repoGroup = MediaWikiServices::getInstance()->getRepoGroup();
@@ -690,7 +690,7 @@ class ArticlesHome extends SpecialPage {
 		}
 
 		$output = '<div class="listpages-container">';
-		if ( empty( $popularBlogPosts ) ) {
+		if ( !$popularBlogPosts ) {
 			$output .= $this->msg( 'blog-ah-no-results' )->escaped();
 		} else {
 			foreach ( $popularBlogPosts as $popularBlogPost ) {

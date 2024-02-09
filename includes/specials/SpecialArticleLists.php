@@ -26,7 +26,7 @@ class ArticleLists extends IncludableSpecialPage {
 		$out = $this->getOutput();
 		$out->setPageTitle( $this->msg( 'blog-ah-new-articles' ) );
 
-		if ( empty( $limit ) ) {
+		if ( !$limit ) {
 			$limit = 25;
 		} else {
 			$limit = intval( $limit );
@@ -86,7 +86,7 @@ class ArticleLists extends IncludableSpecialPage {
 		}
 
 		$output .= '<div class="listpages-container">' . "\n";
-		if ( empty( $newBlogPosts ) ) {
+		if ( !$newBlogPosts ) {
 			$output .= $this->msg( 'blog-ah-no-results' )->escaped();
 		} else {
 			$repoGroup = MediaWikiServices::getInstance()->getRepoGroup();

@@ -389,7 +389,7 @@ class BlogPage extends Article {
 			$author_actor_id = $this->authors[$author_index]['actor'];
 		}
 
-		if ( empty( $author_actor_id ) ) {
+		if ( !$author_actor_id ) {
 			return '';
 		}
 

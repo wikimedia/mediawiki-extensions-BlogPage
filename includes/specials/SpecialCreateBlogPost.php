@@ -138,13 +138,13 @@ class SpecialCreateBlogPost extends SpecialPage {
 				];
 
 				$userSuppliedCategories = $request->getVal( 'pageCtg' );
-				if ( !empty( $userSuppliedCategories ) ) {
+				if ( $userSuppliedCategories ) {
 					// Explode along commas so that we will have an array that
 					// we can loop over
 					$userSuppliedCategories = explode( ',', $userSuppliedCategories );
 					foreach ( $userSuppliedCategories as $cat ) {
 						$cat = trim( $cat ); // GTFO@excess whitespace
-						if ( !empty( $cat ) ) {
+						if ( $cat ) {
 							$categories[] = "[[{$localizedCatNS}:{$cat}]]";
 						}
 					}
