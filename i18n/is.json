@@ -1,11 +1,14 @@
 {
 	"@metadata": {
 		"authors": [
-			"LoveIceLang"
+			"LoveIceLang",
+			"Stefán Örvar Sigmundsson"
 		]
 	},
+	"blog-created": "búið til $1",
 	"blog-new-articles": "Nýjar greinar",
-	"blog-permission-required": "Þú hefur ekki leyfi til að búa til nýjar síður.",
+	"blog-permission-required": "Þú hefur ekki leyfi til að búa til greinar.",
 	"blog-create-title": "Titill",
-	"blog-create-text": "Texti"
+	"blog-create-text": "Texti",
+	"blog-create-button": "Búa til!"
 }
