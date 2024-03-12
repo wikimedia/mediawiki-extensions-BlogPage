@@ -1,7 +1,8 @@
 {
 	"@metadata": {
 		"authors": [
-			"Robby"
+			"Robby",
+			"Volvox"
 		]
 	},
 	"blog-and": "a(n)",
@@ -27,5 +28,6 @@
 	"blog-time-ago": "viru(n) $1",
 	"blog-time-days": "{{PLURAL:$1|een Dag|$1 Deeg}}",
 	"blog-time-hours": "{{PLURAL:$1|eng Stonn|$1 Stonnen}}",
+	"blog-time-minutes": "{{PLURAL:$1|eng Minutt|$1 Minutten}}",
 	"blog-user-articles-votes": "({{PLURAL:$1|Stëmm|Stëmmen}})"
 }
