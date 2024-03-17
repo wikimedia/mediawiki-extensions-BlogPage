@@ -995,8 +995,8 @@ class BlogPage extends Article {
 		}
 
 		$comments = CommentsOfTheDay::get(
-			false/* do NOT skip cache! */,
-			60 * 15 /* cache for fifteen minutes */,
+			false, /* do NOT skip cache! */
+			60 * 15, /* cache for fifteen minutes */
 			[
 				'comment_page_id = page_id',
 				// different time-related code here than the cache time!
