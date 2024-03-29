@@ -96,6 +96,14 @@ class SpecialCreateBlogPost extends SpecialPage {
 				return;
 			}
 
+			// We need the title to be *valid* (i.e. creatable)...
+			if ( !$title ) {
+				$out->setPageTitle( $this->msg( 'errorpagetitle' ) );
+				$out->addWikiMsg( 'htmlform-title-not-creatable', $userSuppliedTitle );
+				$out->addReturnTo( $this->getPageTitle() );
+				return;
+			}
+
 			// The user didn't supply the blog post text? Ask them to supply it.
 			if ( !$request->getVal( 'wpTextbox1' ) ) {
 				$out->setPageTitle( $this->msg( 'errorpagetitle' ) );
@@ -244,6 +252,14 @@ class SpecialCreateBlogPost extends SpecialPage {
 				$previewableText = $out->parseAsContent( $preparsed ); // $parserOutput->getText( [ 'enableSectionEditLinks' => false ] );
 
 				$out->addHTML( $previewableText );
+			} else {
+				// If the user is trying to preview their changes *and* the page title they've
+				// supplied is NOT creatable, let them know about this (since we're not gonna be
+				// able to render a preview of the page _contents_ anyway, but at least this way
+				// we'll let the user know that something's up BEFORE they hit the "save" button)
+				$out->addHTML(
+					Html::warningBox( $this->msg( 'htmlform-title-not-creatable', $userSuppliedTitle )->parse() )
+				);
 			}
 
 			$out->addHTML( $this->getEditFormWithRules() );
