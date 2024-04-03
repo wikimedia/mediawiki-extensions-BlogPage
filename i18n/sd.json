@@ -4,8 +4,11 @@
 			"Mehtab ahmed"
 		]
 	},
+	"blog-created-ago": "$1 اڳ سرجيو ويو",
 	"blog-create-title": "عنوان",
 	"blog-create-text": "متن",
 	"blog-create-categories": "زمرا",
-	"blog-more": "وڌيڪ"
+	"blog-more": "وڌيڪ",
+	"blog-time-ago": "$1 اڳ",
+	"blog-time-minutes": "{{PLURAL:$1|ھڪ منٽ|$1 منٽ}}"
 }
