@@ -4,7 +4,7 @@
 			"Yupik"
 		]
 	},
-	"blog-author-comments": "$1 {{PLURAL:$1|kommeʹntt|kommeeʹnt|kommeʹntted}}",
+	"blog-author-comments": "{{PLURAL:$1|$1 kommeʹntted|1=Õhtt kommeʹntt|2=2 kommeeʹnt|3=3 kommeeʹnt|4=4 kommeeʹnt|5=5 kommeeʹnt|6=6 kommeeʹnt}}",
 	"blog-author-votes": "$1 {{PLURAL:$1|jiõnn|jiõn|jiõnnâd}}",
 	"blog-in-the-news": "Ođđsin",
 	"blog-last-edited": "mââimõssân muttum $1",
