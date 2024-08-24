@@ -223,7 +223,7 @@ class SpecialCreateBlogPost extends SpecialPage {
 			$out->setPageTitle( $this->msg( 'preview' ) );
 			$out->addHTML(
 				'<div class="previewnote"><p>' .
-				Html::warningBox( $this->msg( 'previewnote' )->text() ) .
+				Html::warningBox( $this->msg( 'previewnote' )->parse() ) .
 				'</p></div>'
 			);
 			if ( $user->isAnon() ) {
