@@ -347,7 +347,7 @@ class SpecialCreateBlogPost extends SpecialPage {
 
 			foreach ( $cloud->tags as $xname => $xtag ) {
 				// Latter condition is needed to handle previewing correctly for no-JS users
-				$isChecked = ( array_key_exists( $xname, $array_category ) && ( $array_category[$xname] ) || $request->getCheck( "category_{$xnum}" ) );
+				$isChecked = ( ( array_key_exists( $xname, $array_category ) && ( $array_category[$xname] ) ) || $request->getCheck( "category_{$xnum}" ) );
 				$array_category[$xname] = 0;
 				$tagcloud .= '<span id="tag_njs_' . $xnum . '" style="font-size:9pt">';
 				$tagcloud .= Html::check( "category_{$xnum}", $isChecked, [
