@@ -156,7 +156,7 @@ class ArticlesHome extends SpecialPage {
 			$popularBlogPosts = $data;
 		} else {
 			wfDebugLog( 'BlogPage', 'Got popular posts in ArticlesHome from DB' );
-			$dbr = MediaWikiServices::getInstance()->getDBLoadBalancer()->getConnection( DB_REPLICA );
+			$dbr = $services->getDBLoadBalancer()->getConnection( DB_REPLICA );
 			// Code sporked from Rob Church's NewestPages extension
 			$commentsTable = $dbr->tableName( 'Comments' );
 			$voteTable = $dbr->tableName( 'Vote' );
@@ -271,7 +271,8 @@ class ArticlesHome extends SpecialPage {
 	 */
 	public function displayMostVotedPages( $dateCategories ) {
 		// Try cache first
-		$cache = MediaWikiServices::getInstance()->getMainWANObjectCache();
+		$services = MediaWikiServices::getInstance();
+		$cache = $services->getMainWANObjectCache();
 		$key = $cache->makeKey( 'blog', 'mostvoted', 'ten' );
 		$data = $cache->get( $key );
 
@@ -280,7 +281,7 @@ class ArticlesHome extends SpecialPage {
 			$votedBlogPosts = $data;
 		} else {
 			wfDebugLog( 'BlogPage', 'Got most voted posts in ArticlesHome from DB' );
-			$dbr = MediaWikiServices::getInstance()->getDBLoadBalancer()->getConnection( DB_REPLICA );
+			$dbr = $services->getDBLoadBalancer()->getConnection( DB_REPLICA );
 			$kaboom = explode( ',', $dateCategories );
 			// Without constructing Titles for all the categories, they won't
 			// have the underscores and thus the query will never match
@@ -362,7 +363,8 @@ class ArticlesHome extends SpecialPage {
 	 */
 	public function displayMostCommentedPages( $dateCategories ) {
 		// Try cache first
-		$cache = MediaWikiServices::getInstance()->getMainWANObjectCache();
+		$services = MediaWikiServices::getInstance();
+		$cache = $services->getMainWANObjectCache();
 		$key = $cache->makeKey( 'blog', 'mostcommented', 'ten' );
 		$data = $cache->get( $key );
 
@@ -371,7 +373,7 @@ class ArticlesHome extends SpecialPage {
 			$commentedBlogPosts = $data;
 		} else {
 			wfDebugLog( 'BlogPage', 'Got most commented posts in ArticlesHome from DB' );
-			$dbr = MediaWikiServices::getInstance()->getDBLoadBalancer()->getConnection( DB_REPLICA );
+			$dbr = $services->getDBLoadBalancer()->getConnection( DB_REPLICA );
 			$kaboom = explode( ',', $dateCategories );
 			// Without constructing Titles for all the categories, they won't
 			// have the underscores and thus the query will never match
@@ -447,7 +449,8 @@ class ArticlesHome extends SpecialPage {
 	 */
 	public function displayNewestPages() {
 		// Try cache first
-		$cache = MediaWikiServices::getInstance()->getMainWANObjectCache();
+		$services = MediaWikiServices::getInstance();
+		$cache = $services->getMainWANObjectCache();
 		$key = $cache->makeKey( 'blog', 'newest', '10' );
 		$data = $cache->get( $key );
 
@@ -456,7 +459,7 @@ class ArticlesHome extends SpecialPage {
 			$newBlogPosts = $data;
 		} else {
 			wfDebugLog( 'BlogPage', 'Got new articles in ArticlesHome from DB' );
-			$dbr = MediaWikiServices::getInstance()->getDBLoadBalancer()->getConnection( DB_REPLICA );
+			$dbr = $services->getDBLoadBalancer()->getConnection( DB_REPLICA );
 			// Code sporked from Rob Church's NewestPages extension
 			$res = $dbr->select(
 				'page',
@@ -521,7 +524,8 @@ class ArticlesHome extends SpecialPage {
 	 */
 	public function getNewestPosts() {
 		// Try cache first
-		$cache = MediaWikiServices::getInstance()->getMainWANObjectCache();
+		$services = MediaWikiServices::getInstance();
+		$cache = $services->getMainWANObjectCache();
 		$key = $cache->makeKey( 'blog', 'newest', '25' );
 		$data = $cache->get( $key );
 
@@ -530,7 +534,7 @@ class ArticlesHome extends SpecialPage {
 			$newestBlogPosts = $data;
 		} else {
 			wfDebugLog( 'BlogPage', 'Got newest posts in ArticlesHome from DB' );
-			$dbr = MediaWikiServices::getInstance()->getDBLoadBalancer()->getConnection( DB_REPLICA );
+			$dbr = $services->getDBLoadBalancer()->getConnection( DB_REPLICA );
 			// Code sporked from Rob Church's NewestPages extension
 			$res = $dbr->select(
 				[ 'page' ],
@@ -566,7 +570,7 @@ class ArticlesHome extends SpecialPage {
 		if ( !$newestBlogPosts ) {
 			$output .= $this->msg( 'blog-ah-no-results' )->escaped();
 		} else {
-			$repoGroup = MediaWikiServices::getInstance()->getRepoGroup();
+			$repoGroup = $services->getRepoGroup();
 			foreach ( $newestBlogPosts as $newestBlogPost ) {
 				$titleObj = Title::makeTitle( NS_BLOG, $newestBlogPost['title'] );
 				$output .= '<div class="listpages-item">';
@@ -636,7 +640,8 @@ class ArticlesHome extends SpecialPage {
 	 */
 	public function getPopularPostsForRightSide() {
 		// Try cache first
-		$cache = MediaWikiServices::getInstance()->getMainWANObjectCache();
+		$services = MediaWikiServices::getInstance();
+		$cache = $services->getMainWANObjectCache();
 		$key = $cache->makeKey( 'blog', 'popular', 'ten' );
 		$data = $cache->get( $key );
 
@@ -645,7 +650,7 @@ class ArticlesHome extends SpecialPage {
 			$popularBlogPosts = $data;
 		} else {
 			wfDebugLog( 'BlogPage', 'Got popular posts in ArticlesHome from DB' );
-			$dbr = MediaWikiServices::getInstance()->getDBLoadBalancer()->getConnection( DB_REPLICA );
+			$dbr = $services->getDBLoadBalancer()->getConnection( DB_REPLICA );
 			$commentsTable = $dbr->tableName( 'Comments' );
 			$voteTable = $dbr->tableName( 'Vote' );
 			// Code sporked from Rob Church's NewestPages extension

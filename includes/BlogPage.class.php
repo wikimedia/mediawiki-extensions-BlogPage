@@ -235,13 +235,14 @@ class BlogPage extends Article {
 	 */
 	public static function getCreateDate( $pageId ) {
 		// Try memcached first
-		$cache = MediaWikiServices::getInstance()->getMainWANObjectCache();
+		$services = MediaWikiServices::getInstance();
+		$cache = $services->getMainWANObjectCache();
 		$key = $cache->makeKey( 'page', 'create_date', $pageId );
 		$data = $cache->get( $key );
 
 		if ( !$data ) {
 			wfDebugLog( 'BlogPage', "Loading create_date for page {$pageId} from database" );
-			$dbr = MediaWikiServices::getInstance()->getDBLoadBalancer()->getConnection( DB_REPLICA );
+			$dbr = $services->getDBLoadBalancer()->getConnection( DB_REPLICA );
 			$createDate = $dbr->selectField(
 				'revision',
 				'rev_timestamp', // 'UNIX_TIMESTAMP(rev_timestamp) AS create_date',
@@ -463,7 +464,8 @@ class BlogPage extends Article {
 		$articles = [];
 
 		// Try cache first
-		$cache = MediaWikiServices::getInstance()->getMainWANObjectCache();
+		$services = MediaWikiServices::getInstance();
+		$cache = $services->getMainWANObjectCache();
 		$key = $cache->makeKey( 'blog', 'author', 'articles', $user_id );
 		$data = $cache->get( $key );
 
@@ -472,7 +474,7 @@ class BlogPage extends Article {
 			$articles = $data;
 		} else {
 			wfDebugLog( 'BlogPage', "Got blog author articles for user {$user_name} from DB" );
-			$dbr = MediaWikiServices::getInstance()->getDBLoadBalancer()->getConnection( DB_REPLICA );
+			$dbr = $services->getDBLoadBalancer()->getConnection( DB_REPLICA );
 			$categoryTitle = Title::newFromText(
 				 wfMessage( 'blog-by-user-category', $user_name )->text()
 			);
@@ -567,14 +569,20 @@ class BlogPage extends Article {
 	public function getEditorsList() {
 		$pageTitleId = $this->getPage()->getId();
 
-		$cache = MediaWikiServices::getInstance()->getMainWANObjectCache();
+		$services = MediaWikiServices::getInstance();
+		$cache = $services->getMainWANObjectCache();
+		// @todo FIXME: this exact (!) cache key is also used by /skins/Games/Games.php BUT
+		// the output format is DIFFERENT, which causes collisions when using Games skin
+		// on a NS_BLOG page -- here the only array entry is 'actor' (actor ID)
+		// whereas Games' getRecentEditors() method has 'user_name' and 'user_id' and it
+		// also expects such entries to be present in the array!
 		$key = $cache->makeKey( 'recenteditors', 'list', $pageTitleId );
 		$data = $cache->get( $key );
 		$editors = [];
 
 		if ( !$data ) {
 			wfDebugLog( 'BlogPage', "Loading recent editors for page {$pageTitleId} from DB" );
-			$dbr = MediaWikiServices::getInstance()->getDBLoadBalancer()->getConnection( DB_REPLICA );
+			$dbr = $services->getDBLoadBalancer()->getConnection( DB_REPLICA );
 
 			$MW139orEarlier = version_compare( MW_VERSION, '1.39', '<' );
 			$pageColumn = ( $MW139orEarlier ? 'revactor_page' : 'rev_page' );
@@ -686,14 +694,15 @@ class BlogPage extends Article {
 		// Gets the page ID for the query
 		$pageTitleId = $this->getPage()->getId();
 
-		$cache = MediaWikiServices::getInstance()->getMainWANObjectCache();
+		$services = MediaWikiServices::getInstance();
+		$cache = $services->getMainWANObjectCache();
 		$key = $cache->makeKey( 'recentvoters', 'list', $pageTitleId );
 		$data = $cache->get( $key );
 
 		$voters = [];
 		if ( !$data ) {
 			wfDebugLog( 'BlogPage', "Loading recent voters for page {$pageTitleId} from DB" );
-			$dbr = MediaWikiServices::getInstance()->getDBLoadBalancer()->getConnection( DB_REPLICA );
+			$dbr = $services->getDBLoadBalancer()->getConnection( DB_REPLICA );
 
 			$where = [
 				'vote_page_id' => $pageTitleId,
@@ -812,7 +821,8 @@ class BlogPage extends Article {
 		}
 
 		// Try cache first
-		$cache = MediaWikiServices::getInstance()->getMainWANObjectCache();
+		$services = MediaWikiServices::getInstance();
+		$cache = $services->getMainWANObjectCache();
 		$key = $cache->makeKey( 'blog', 'popular', 'five' );
 		$data = $cache->get( $key );
 
@@ -821,7 +831,7 @@ class BlogPage extends Article {
 			$popularBlogPosts = $data;
 		} else {
 			wfDebugLog( 'BlogPage', 'Got popular articles from DB' );
-			$dbr = MediaWikiServices::getInstance()->getDBLoadBalancer()->getConnection( DB_REPLICA );
+			$dbr = $services->getDBLoadBalancer()->getConnection( DB_REPLICA );
 			// Code sporked from Rob Church's NewestPages extension
 			// @todo FIXME: adding categorylinks table and that one where
 			// clause causes an error about "unknown column 'page_id' on ON
@@ -901,7 +911,8 @@ class BlogPage extends Article {
 		}
 
 		// Try cache first
-		$cache = MediaWikiServices::getInstance()->getMainWANObjectCache();
+		$services = MediaWikiServices::getInstance();
+		$cache = $services->getMainWANObjectCache();
 		$key = $cache->makeKey( 'blog', 'newest', '5' );
 		$data = $cache->get( $key );
 
@@ -913,7 +924,7 @@ class BlogPage extends Article {
 			// We could do complicated LIKE stuff with the categorylinks table,
 			// but I think we can safely assume that stuff in the NS_BLOG NS
 			// is blog-related :)
-			$dbr = MediaWikiServices::getInstance()->getDBLoadBalancer()->getConnection( DB_REPLICA );
+			$dbr = $services->getDBLoadBalancer()->getConnection( DB_REPLICA );
 			// Code sporked from Rob Church's NewestPages extension
 			$res = $dbr->select(
 				'page',
@@ -1051,7 +1062,8 @@ class BlogPage extends Article {
 	 */
 	public static function getCommentsForPage( $id ) {
 		// Try cache first
-		$cache = MediaWikiServices::getInstance()->getMainWANObjectCache();
+		$services = MediaWikiServices::getInstance();
+		$cache = $services->getMainWANObjectCache();
 		$key = $cache->makeKey( 'blog', 'comments', 'count', 'pageid-' . $id );
 		$data = $cache->get( $key );
 
@@ -1060,7 +1072,7 @@ class BlogPage extends Article {
 			$commentCount = $data;
 		} else {
 			wfDebugLog( 'BlogPage', "Got comments count for the page with ID {$id} from DB" );
-			$dbr = MediaWikiServices::getInstance()->getDBLoadBalancer()->getConnection( DB_REPLICA );
+			$dbr = $services->getDBLoadBalancer()->getConnection( DB_REPLICA );
 			$commentCount = (int)$dbr->selectField(
 				'Comments',
 				'COUNT(*) AS count',
@@ -1083,7 +1095,8 @@ class BlogPage extends Article {
 	 */
 	public static function getVotesForPage( $id ) {
 		// Try cache first
-		$cache = MediaWikiServices::getInstance()->getMainWANObjectCache();
+		$services = MediaWikiServices::getInstance();
+		$cache = $services->getMainWANObjectCache();
 		$key = $cache->makeKey( 'blog', 'vote', 'count', 'pageid-' . $id );
 		$data = $cache->get( $key );
 
@@ -1092,7 +1105,7 @@ class BlogPage extends Article {
 			$voteCount = $data;
 		} else {
 			wfDebugLog( 'BlogPage', "Got vote count for the page with ID {$id} from DB" );
-			$dbr = MediaWikiServices::getInstance()->getDBLoadBalancer()->getConnection( DB_REPLICA );
+			$dbr = $services->getDBLoadBalancer()->getConnection( DB_REPLICA );
 			$voteCount = (int)$dbr->selectField(
 				'Vote',
 				'COUNT(*) AS count',
@@ -1201,12 +1214,13 @@ class BlogPage extends Article {
 	 * @return string File name or nothing
 	 */
 	public static function getPageImage( $pageId ) {
-		$cache = MediaWikiServices::getInstance()->getMainWANObjectCache();
+		$services = MediaWikiServices::getInstance();
+		$cache = $services->getMainWANObjectCache();
 		$key = $cache->makeKey( 'blog', 'page', 'image', $pageId );
 		$data = $cache->get( $key );
 
 		if ( !$data ) {
-			$dbr = MediaWikiServices::getInstance()->getDBLoadBalancer()->getConnection( DB_REPLICA );
+			$dbr = $services->getDBLoadBalancer()->getConnection( DB_REPLICA );
 			$il_to = $dbr->selectField(
 				'imagelinks',
 				'il_to',

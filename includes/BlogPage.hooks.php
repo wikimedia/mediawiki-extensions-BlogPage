@@ -108,7 +108,8 @@ class BlogPageHooks {
 		}
 
 		// Get all the categories the page is in
-		$dbr = MediaWikiServices::getInstance()->getDBLoadBalancer()->getConnection( DB_REPLICA );
+		$services = MediaWikiServices::getInstance();
+		$dbr = $services->getDBLoadBalancer()->getConnection( DB_REPLICA );
 		$res = $dbr->select(
 			'categorylinks',
 			'cl_to',
@@ -129,7 +130,7 @@ class BlogPageHooks {
 			// the i18n msg to check if this is a blog category
 			if ( strpos( $ctgname, $userBlogCatPrefix ) !== false ) {
 				// Copied from UserStatsTrack::updateCreatedOpinionsCount()
-				$dbw = MediaWikiServices::getInstance()->getDBLoadBalancer()->getConnection( DB_PRIMARY );
+				$dbw = $services->getDBLoadBalancer()->getConnection( DB_PRIMARY );
 
 				$opinions = $dbw->select(
 					[ 'page', 'categorylinks' ],
@@ -199,7 +200,8 @@ class BlogPageHooks {
 		$context = $userProfile->getContext();
 
 		// Try cache first
-		$cache = MediaWikiServices::getInstance()->getMainWANObjectCache();
+		$services = MediaWikiServices::getInstance();
+		$cache = $services->getMainWANObjectCache();
 		$key = $cache->makeKey( 'user', 'profile', 'articles', $userProfile->profileOwner->getId() );
 		$data = $cache->get( $key );
 		$articles = [];
@@ -222,7 +224,7 @@ class BlogPageHooks {
 				)->inContentLanguage()->text()
 			);
 
-			$dbr = MediaWikiServices::getInstance()->getDBLoadBalancer()->getConnection( DB_REPLICA );
+			$dbr = $services->getDBLoadBalancer()->getConnection( DB_REPLICA );
 			/**
 			 * I changed the original query a bit, since it wasn't returning
 			 * what it should've.
