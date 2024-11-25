@@ -1,7 +1,8 @@
 {
 	"@metadata": {
 		"authors": [
-			"Ajeje Brazorf"
+			"Ajeje Brazorf",
+			"GianAntonucci"
 		]
 	},
 	"blog-and": "e",
@@ -23,7 +24,7 @@
 	"blog-ah-new-articles": "Vuci novi",
 	"blog-ah-write-article": "Scrivi na vuci",
 	"blog-ah-todays-articles": "Vuci d'oi",
-	"articleshome": "Pàggina principali dû blog",
+	"articleshome": "Pàggina mastra dû blog",
 	"createblogpost": "Crea nu post di blog",
 	"blog-create-title": "Tìtulu",
 	"blog-create-text": "Testu",
