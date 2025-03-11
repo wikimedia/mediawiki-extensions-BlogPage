@@ -59,6 +59,6 @@
 	"action-createblogpost": "luoda uusia blogikirjoituksia",
 	"right-createblogpost": "[[Special:CreateBlogPost|Luoda uusia blogikirjoituksia]]",
 	"blog-user-articles-title": "Blogit",
-	"blog-user-articles-votes": "{{PLURAL:$1|ääni|ääntä}}",
+	"blog-user-articles-votes": "{{PLURAL:$1|yksi ääni|$1 ääntä}}",
 	"blog-user-article-comment": "{{PLURAL:$1|yksi kommentti|$1 kommenttia}}"
 }
