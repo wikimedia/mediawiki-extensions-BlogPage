@@ -21,7 +21,7 @@
 	"blog-last-edited": "editado $1",
 	"blog-login": "Debes [[Special:UserLogin|iniciar sesión]] para crear artículos de blog.",
 	"blog-login-edit": "Debes [[Special:UserLogin|iniciar sesión]] para editar artículos de blog.",
-	"blog-new-articles": "Artículos más recientes",
+	"blog-new-articles": "Artículos de blog recientes",
 	"blog-permission-required": "No tienes permiso para crear artículos de blog.",
 	"blog-popular-articles": "No te pierdas",
 	"blog-multiple-authors": "Los siguientes autores han colaborado escribiendo este artículo: $1",
@@ -40,7 +40,7 @@
 	"blog-ah-what-talking-about": "Más comentados (72 horas)",
 	"articleshome": "Página de inicio de blog",
 	"createblogpost": "Crear una entrada de blog",
-	"blog-create-category-help": "Las categorías ayudan a organizar la información en el sitio. Para agregar múltiples categorías, separa cada una con una coma.",
+	"blog-create-category-help": "Las categorías ayudan a organizar la información en el sitio.",
 	"blog-create-title": "Título",
 	"blog-create-text": "Texto",
 	"blog-create-categories": "Categorías",
@@ -61,6 +61,6 @@
 	"action-createblogpost": "crear una nueva entrada de blog",
 	"right-createblogpost": "[[Special:CreateBlogPost|Crear una nueva entrada de blog]]",
 	"blog-user-articles-title": "Blogs",
-	"blog-user-articles-votes": "{{PLURAL:$1|voto|votos}}",
+	"blog-user-articles-votes": "{{PLURAL:$1|una valoración|$1 valoraciones}}",
 	"blog-user-article-comment": "{{PLURAL:$1|un comentario|$1 comentarios}}"
 }
