@@ -4,7 +4,8 @@
 			"Gomoko",
 			"Thibaut120094",
 			"Verdy p",
-			"Wladek92"
+			"Wladek92",
+			"JLTRY"
 		]
 	},
 	"blogpage-desc": "Système de blogue avec des fonctionnalités de commentaire et de vote, [[Special:CreateBlogPost|une page spéciale pour créer des notes de blogue]] et [[Special:ArticlesHome|une page spéciale pour lister les notes de blogue]]",
@@ -27,7 +28,7 @@
 	"blog-permission-required": "Vous n’avez pas l’autorisation de créer des articles.",
 	"blog-popular-articles": "À ne pas manquer",
 	"blog-multiple-authors": "Cet article a été écrit collaborativement par $1",
-	"blog-recent-editors": "Autres personnes qui ont modifié cette page",
+	"blog-recent-editors": "Autres contributeurs récents",
 	"blog-recent-editors-message": "Améliorer cette page en la modifiant.",
 	"blog-recent-voters": "Autres votants récents",
 	"blog-recent-voters-message": "Si vous aimez l’article, votez pour lui.",
@@ -40,9 +41,9 @@
 	"blog-ah-todays-articles": "Articles du jour",
 	"blog-ah-most-votes": "Les plus votés (72 heures)",
 	"blog-ah-what-talking-about": "Les plus commentés (72 heures)",
-	"articleshome": "Tous les billets de blogue",
+	"articleshome": "Page d'accueil du blog",
 	"createblogpost": "Créer un billet de blogue",
-	"blog-create-category-help": "Les catégories aident à organiser les informations sur le site.",
+	"blog-create-category-help": "Les catégories aident à organiser l’information sur le site. Pour ajouter plusieurs catégories, séparez-les par des virgules.",
 	"blog-create-title": "Titre",
 	"blog-create-text": "Texte",
 	"blog-create-categories": "Catégories",
@@ -63,6 +64,6 @@
 	"action-createblogpost": "créer de nouveaux billets de blogue",
 	"right-createblogpost": "[[Special:CreateBlogPost|Créer de nouveaux billets de blogue]]",
 	"blog-user-articles-title": "Blogues",
-	"blog-user-articles-votes": "{{PLURAL:$1|un vote|$1 votes}}",
+	"blog-user-articles-votes": "{{PLURAL:$1|vote|votes}}",
 	"blog-user-article-comment": "{{PLURAL:$1|un commentaire|$1 commentaires}}"
 }
