@@ -7,6 +7,7 @@
  */
 
 use MediaWiki\MediaWikiServices;
+use MediaWiki\Title\Title;
 
 class ArticleLists extends IncludableSpecialPage {
 
@@ -24,7 +25,7 @@ class ArticleLists extends IncludableSpecialPage {
 	 */
 	public function execute( $limit ) {
 		$out = $this->getOutput();
-		$out->setPageTitle( $this->msg( 'blog-ah-new-articles' ) );
+		$out->setPageTitleMsg( $this->msg( 'blog-ah-new-articles' ) );
 
 		if ( !$limit ) {
 			$limit = 25;

@@ -1,6 +1,7 @@
 <?php
 
 use MediaWiki\MediaWikiServices;
+use MediaWiki\Title\Title;
 
 /**
  * All BlogPage's hooked functions. These were previously scattered all over
@@ -14,22 +15,15 @@ class BlogPageHooks {
 	 * Calls BlogPage instead of standard Article for pages in the NS_BLOG
 	 * namespace.
 	 *
-	 * @param Title &$title
+	 * @param MediaWiki\Title\Title &$title
 	 * @param Article|BlogPage &$article Instance of Article that we convert into a BlogPage
 	 * @param RequestContext $context
 	 */
-	public static function blogFromTitle( Title &$title, &$article, $context ) {
+	public static function blogFromTitle( MediaWiki\Title\Title &$title, &$article, $context ) {
 		if ( $title->getNamespace() == NS_BLOG ) {
 			$out = $context->getOutput();
 
-			if ( method_exists( $out, 'disableClientCache' ) ) {
-				// MW 1.38+
-				$out->disableClientCache();
-			} else {
-				// Older MWs (1.35-1.37)
-				// @phan-suppress-next-line PhanParamTooMany
-				$out->enableClientCache( false );
-			}
+			$out->disableClientCache();
 
 			// Add CSS
 			$out->addModuleStyles( 'ext.blogPage' );
@@ -42,7 +36,7 @@ class BlogPageHooks {
 	 * Checks that the user is logged is, is not blocked via Special:Block and has
 	 * the 'edit' user right when they're trying to edit a page in the NS_BLOG NS.
 	 *
-	 * @param EditPage $editPage
+	 * @param MediaWiki\EditPage\EditPage $editPage
 	 * @return bool True if the user should be allowed to continue, else false
 	 */
 	public static function allowShowEditBlogPage( $editPage ) {
@@ -85,7 +79,7 @@ class BlogPageHooks {
 	 *
 	 * @param WikiPage &$wikiPage WikiPage object representing the page that was/is
 	 *                         (being) saved
-	 * @param User &$user The User (object) saving the article
+	 * @param MediaWiki\User\User &$user The User (object) saving the article
 	 * @return bool
 	 */
 	public static function updateCreatedOpinionsCount( &$wikiPage, &$user ) {

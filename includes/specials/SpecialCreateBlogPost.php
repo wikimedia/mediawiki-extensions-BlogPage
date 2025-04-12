@@ -7,7 +7,10 @@
  * @ingroup Extensions
  */
 
+use MediaWiki\Html\Html;
+use MediaWiki\Linker\Linker;
 use MediaWiki\MediaWikiServices;
+use MediaWiki\Title\Title;
 
 class SpecialCreateBlogPost extends SpecialPage {
 
@@ -90,7 +93,7 @@ class SpecialCreateBlogPost extends SpecialPage {
 
 			// The user didn't supply a title? Ask them to supply one.
 			if ( !$userSuppliedTitle ) {
-				$out->setPageTitle( $this->msg( 'errorpagetitle' ) );
+				$out->setPageTitleMsg( $this->msg( 'errorpagetitle' ) );
 				$out->addWikiMsg( 'blog-create-error-need-title' );
 				$out->addReturnTo( $this->getPageTitle() );
 				return;
@@ -98,7 +101,7 @@ class SpecialCreateBlogPost extends SpecialPage {
 
 			// We need the title to be *valid* (i.e. creatable)...
 			if ( !$title ) {
-				$out->setPageTitle( $this->msg( 'errorpagetitle' ) );
+				$out->setPageTitleMsg( $this->msg( 'errorpagetitle' ) );
 				$out->addWikiMsg( 'htmlform-title-not-creatable', $userSuppliedTitle );
 				$out->addReturnTo( $this->getPageTitle() );
 				return;
@@ -106,7 +109,7 @@ class SpecialCreateBlogPost extends SpecialPage {
 
 			// The user didn't supply the blog post text? Ask them to supply it.
 			if ( !$request->getVal( 'wpTextbox1' ) ) {
-				$out->setPageTitle( $this->msg( 'errorpagetitle' ) );
+				$out->setPageTitleMsg( $this->msg( 'errorpagetitle' ) );
 				$out->addWikiMsg( 'blog-create-error-need-content' );
 				$out->addReturnTo( $this->getPageTitle() );
 				return;
@@ -118,15 +121,10 @@ class SpecialCreateBlogPost extends SpecialPage {
 			$today = $contLang->date( wfTimestampNow() );
 
 			// Create the blog page if it doesn't already exist
-			if ( method_exists( MediaWikiServices::class, 'getWikiPageFactory' ) ) {
-				// MW 1.36+
-				$page = MediaWikiServices::getInstance()->getWikiPageFactory()->newFromTitle( $title );
-			} else {
-				// @phan-suppress-next-line PhanUndeclaredStaticMethod
-				$page = WikiPage::factory( $title );
-			}
+			$page = MediaWikiServices::getInstance()->getWikiPageFactory()->newFromTitle( $title );
+
 			if ( $page->exists() ) {
-				$out->setPageTitle( $this->msg( 'errorpagetitle' ) );
+				$out->setPageTitleMsg( $this->msg( 'errorpagetitle' ) );
 				$out->addWikiMsg( 'blog-create-error-page-exists' );
 				$out->addReturnTo( $this->getPageTitle() );
 				return;
@@ -180,20 +178,11 @@ class SpecialCreateBlogPost extends SpecialPage {
 						"\n__NOEDITSECTION__",
 					$page->getTitle()
 				);
-				if ( method_exists( $page, 'doUserEditContent' ) ) {
-					// MW 1.36+
-					$page->doUserEditContent(
-						$pageContent,
-						$this->getUser(),
-						$this->msg( 'blog-create-summary' )->inContentLanguage()->text()
-					);
-				} else {
-					// @phan-suppress-next-line PhanUndeclaredMethod
-					$page->doEditContent(
-						$pageContent,
-						$this->msg( 'blog-create-summary' )->inContentLanguage()->text()
-					);
-				}
+				$page->doUserEditContent(
+					$pageContent,
+					$this->getUser(),
+					$this->msg( 'blog-create-summary' )->inContentLanguage()->text()
+				);
 
 				$pageID = $page->getID();
 				// Add a vote for the page
@@ -220,7 +209,7 @@ class SpecialCreateBlogPost extends SpecialPage {
 			$request->getCheck( 'wpPreview' )
 		) {
 			// Previewing a blog post
-			$out->setPageTitle( $this->msg( 'preview' ) );
+			$out->setPageTitleMsg( $this->msg( 'preview' ) );
 			$out->addHTML(
 				'<div class="previewnote"><p>' .
 				Html::warningBox( $this->msg( 'previewnote' )->parse() ) .

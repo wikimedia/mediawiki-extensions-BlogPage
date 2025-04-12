@@ -4,14 +4,16 @@
  *
  * @file
  */
+use MediaWiki\Content\TextContent;
 use MediaWiki\MediaWikiServices;
 use MediaWiki\Revision\RevisionRecord;
 use MediaWiki\Revision\SlotRecord;
+use MediaWiki\Title\Title;
 use Wikimedia\LightweightObjectStore\ExpirationAwareness;
 
 class BlogPage extends Article {
 
-	/** @var Title|null */
+	/** @var MediaWiki\Title\Title|null */
 	public $title = null;
 
 	/**
@@ -27,9 +29,9 @@ class BlogPage extends Article {
 	public $pageContent;
 
 	/**
-	 * @param Title $title
+	 * @param MediaWiki\Title\Title $title
 	 */
-	public function __construct( Title $title ) {
+	public function __construct( MediaWiki\Title\Title $title ) {
 		parent::__construct( $title );
 		$this->setContent();
 		$this->getAuthors();
@@ -80,8 +82,8 @@ class BlogPage extends Article {
 				RevisionRecord::FOR_THIS_USER,
 				$article->getContext()->getUser()
 			);
-			if ( $contentObj ) {
-				return ContentHandler::getContentText( $contentObj );
+			if ( $contentObj && $contentObj instanceof TextContent ) {
+				return $contentObj->getText();
 			}
 		}
 		return '';
@@ -584,10 +586,8 @@ class BlogPage extends Article {
 			wfDebugLog( 'BlogPage', "Loading recent editors for page {$pageTitleId} from DB" );
 			$dbr = $services->getDBLoadBalancer()->getConnection( DB_REPLICA );
 
-			$MW139orEarlier = version_compare( MW_VERSION, '1.39', '<' );
-			$pageColumn = ( $MW139orEarlier ? 'revactor_page' : 'rev_page' );
 			$where = [
-				$pageColumn => $pageTitleId,
+				'rev_page' => $pageTitleId,
 				'actor_user IS NOT NULL', // exclude anonymous editors
 				"actor_name <> 'MediaWiki default'", // exclude MW default
 			];
@@ -597,35 +597,20 @@ class BlogPage extends Article {
 				$where[] = 'actor_user <> ' . $dbr->addQuotes( $author['actor'] );
 			}
 
-			if ( $MW139orEarlier ) {
-				$res = $dbr->select(
-					[ 'revision_actor_temp', 'revision', 'actor' ],
-					[ 'DISTINCT revactor_actor', 'actor_name' ],
-					$where,
-					__METHOD__,
-					[ 'ORDER BY' => 'actor_name ASC', 'LIMIT' => 8 ],
-					[
-						'actor' => [ 'JOIN', 'actor_id = revactor_actor' ],
-						'revision_actor_temp' => [ 'JOIN', 'revactor_rev = rev_id' ]
-					]
-				);
-			} else {
-				$res = $dbr->select(
-					[ 'revision', 'actor' ],
-					[ 'DISTINCT rev_actor', 'actor_name' ],
-					$where,
-					__METHOD__,
-					[ 'ORDER BY' => 'actor_name ASC', 'LIMIT' => 8 ],
-					[
-						'actor' => [ 'JOIN', 'actor_id = rev_actor' ]
-					]
-				);
-			}
+			$res = $dbr->select(
+				[ 'revision', 'actor' ],
+				[ 'DISTINCT rev_actor', 'actor_name' ],
+				$where,
+				__METHOD__,
+				[ 'ORDER BY' => 'actor_name ASC', 'LIMIT' => 8 ],
+				[
+					'actor' => [ 'JOIN', 'actor_id = rev_actor' ]
+				]
+			);
 
 			foreach ( $res as $row ) {
-				$columnName = ( $MW139orEarlier ? 'revactor_actor' : 'rev_actor' );
 				$editors[] = [
-					'actor' => $row->$columnName
+					'actor' => $row->rev_actor
 				];
 			}
 

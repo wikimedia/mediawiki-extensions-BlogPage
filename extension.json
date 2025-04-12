@@ -1,6 +1,6 @@
 {
 	"name": "BlogPage",
-	"version": "2.9.0",
+	"version": "3.0",
 	"author": [
 		"David Pean",
 		"Jack Phoenix"
@@ -9,7 +9,7 @@
 	"url": "https://www.mediawiki.org/wiki/Extension:BlogPage",
 	"descriptionmsg": "blogpage-desc",
 	"requires": {
-		"MediaWiki": ">= 1.35.3"
+		"MediaWiki": ">= 1.43.0"
 	},
 	"type": "other",
 	"namespaces": [

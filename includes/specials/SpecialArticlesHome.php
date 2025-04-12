@@ -12,6 +12,8 @@
  */
 
 use MediaWiki\MediaWikiServices;
+use MediaWiki\SpecialPage\SpecialPage;
+use MediaWiki\Title\Title;
 
 class ArticlesHome extends SpecialPage {
 
@@ -56,7 +58,7 @@ class ArticlesHome extends SpecialPage {
 			$name_right = $this->msg( 'blog-ah-popular-articles' )->escaped();
 		}
 
-		$out->setPageTitle( $name );
+		$out->setPageTitleMsg( $name );
 
 		$contLang = MediaWikiServices::getInstance()->getContentLanguage();
 		$today = $contLang->date( wfTimestampNow() );
