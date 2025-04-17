@@ -162,10 +162,12 @@ class BlogPage extends Article {
 		$output->setPageTitle( $this->getTitle()->getText() );
 
 		// Get categories
+		/* Actually, don't; they're already there so doing this would result in #catlinks being output _twice_
 		$cat = $sk->getCategoryLinks();
 		if ( $cat ) {
 			$output->addHTML( "\n<div id=\"catlinks\" class=\"catlinks\">{$cat}</div>\n" );
 		}
+		*/
 
 		$output->addHTML( "\n<!--end Article::view-->\n" );
 
