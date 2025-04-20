@@ -46,7 +46,7 @@ class BlogPageHooks {
 
 		if ( $editPage->getTitle()->getNamespace() == NS_BLOG ) {
 			if ( $user->isAnon() ) { // anons can't edit blog pages
-				$output->setPageTitle( $output->msg( 'error' ) );
+				$output->setPageTitleMsg( $output->msg( 'error' ) );
 				if ( !$editPage->getTitle()->exists() ) {
 					$output->addWikiMsg( 'blog-login' );
 				} else {
@@ -57,7 +57,7 @@ class BlogPageHooks {
 			}
 
 			if ( !$user->isAllowed( 'edit' ) || $user->getBlock() ) {
-				$output->setPageTitle( $output->msg( 'error' ) );
+				$output->setPageTitleMsg( $output->msg( 'error' ) );
 				$output->addWikiMsg( 'blog-permission-required' );
 				$output->addReturnTo( $editPage->getTitle() );
 				return false;
