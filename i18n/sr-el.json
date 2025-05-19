@@ -14,6 +14,7 @@
 	"blog-last-edited": "poslednja izmena: $1",
 	"blog-new-articles": "Novi članci",
 	"blog-permission-required": "Nemate dozvolu da pravite stranice.",
+	"blog-recent-editors": "Ostali skorašnji doprinosioci",
 	"blog-view-archive-link": "Vidi sve",
 	"blog-ah-no-results": "Nema pronađenih stranica.",
 	"blog-ah-popular-articles": "Popularni članci",
@@ -26,7 +27,12 @@
 	"blog-create-error-need-title": "'''Greška:''' Morate da date naslov objavi za blog.",
 	"blog-more": "više",
 	"blog-time-ago": "pre $1",
+	"blog-time-days": "{{PLURAL:$1|jedan dan|$1 dana}}",
+	"blog-time-hours": "{{PLURAL:$1|jedan sat|$1 sata|$1 sati}}",
+	"blog-time-minutes": "{{PLURAL:$1|jednog minuta|$1 minuta}}",
+	"blog-time-seconds": "{{PLURAL:$1|1 sekund|$1 sekunda|$1 sekundi}}",
 	"action-createblogpost": "pravite nove objave za blog",
 	"blog-user-articles-title": "Blogovi",
-	"blog-user-articles-votes": "{{PLURAL:$1|glas|glasovi}}"
+	"blog-user-articles-votes": "{{PLURAL:$1|glas|glasovi}}",
+	"blog-user-article-comment": "{{PLURAL:$1|jedan komentar|$1 komentara}}"
 }
