@@ -1,5 +1,5 @@
 ( function () {
-	var CreateBlogPost = {
+	const CreateBlogPost = {
 		/**
 		 * Insert a tag (category) from the category cloud into the inputbox below
 		 * it on Special:CreateBlogPost
@@ -28,7 +28,7 @@
 			// In PHP, we need to use $wgRequest->getVal( 'title2' ); 'title'
 			// contains the current special page's name instead of the blog post
 			// name
-			var title = document.getElementById( 'title' ).value,
+			const title = document.getElementById( 'title' ).value,
 				textarea = document.getElementById( 'wpTextbox1' ).value;
 			if ( !title || title === '' ) {
 				// First prevent the default action (which would be to submit the form)
@@ -48,7 +48,7 @@
 				titles: mw.config.get( 'wgFormattedNamespaces' )[ 500 ] + ':' + title,
 				format: 'json',
 				formatversion: 2
-			} ).done( function ( data ) {
+			} ).done( ( data ) => {
 				// Missing page means that we can create it, obviously!
 				if ( data.query.pages[ 0 ] && data.query.pages[ 0 ].missing === true ) {
 					document.editform.submit();
@@ -60,11 +60,11 @@
 		}
 	};
 
-	$( function () {
+	$( () => {
 		// Tag cloud
 		$( 'a.tag-cloud-entry' ).each( function () {
-			var $that = $( this );
-			$that.on( 'click', function () {
+			const $that = $( this );
+			$that.on( 'click', () => {
 				CreateBlogPost.insertTag(
 					$that.data( 'blog-slashed-tag' ),
 					$that.data( 'blog-tag-number' )
@@ -73,7 +73,7 @@
 		} );
 
 		// Save button
-		$( 'input[name="wpSave"]' ).on( 'click', function ( e ) {
+		$( 'input[name="wpSave"]' ).on( 'click', ( e ) => {
 			CreateBlogPost.performChecks( e );
 		} );
 	} );
