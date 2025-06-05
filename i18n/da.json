@@ -1,7 +1,8 @@
 {
 	"@metadata": {
 		"authors": [
-			"Saederup92"
+			"Saederup92",
+			"Steenth"
 		]
 	},
 	"blog-and": "og",
@@ -18,7 +19,7 @@
 	"articlelists": "Nye blogartikler",
 	"blog-ah-no-results": "Ingen sider fundet.",
 	"blog-ah-popular-articles": "Populære artikler",
-	"blog-ah-new-articles": "Nye aftikler",
+	"blog-ah-new-articles": "Nye artikler",
 	"blog-ah-write-article": "Skriv en artikel",
 	"blog-ah-todays-articles": "Dagens artikler",
 	"blog-ah-most-votes": "Flest stemmer (72 timer)",
