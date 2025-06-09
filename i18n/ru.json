@@ -4,6 +4,7 @@
 			"DDPAT",
 			"Facenapalm",
 			"Ice bulldog",
+			"McDutchie",
 			"Megakott",
 			"Okras",
 			"Rubin16",
@@ -45,7 +46,7 @@
 	"blog-ah-what-talking-about": "Больше всего комментариев (за 72 часа)",
 	"articleshome": "Все сообщения в блоге",
 	"createblogpost": "Создать сообщение в блоге",
-	"blog-create-category-help": "Категории помогают систематизировать информацию на сайте.",
+	"blog-create-category-help": "Категории помогают организовывать информацию на сайте. Для добавления нескольких категорий, разделите их запятыми.",
 	"blog-create-title": "Заголовок",
 	"blog-create-text": "Текст",
 	"blog-create-categories": "Категории",
@@ -66,6 +67,6 @@
 	"action-createblogpost": "создавать новые посты в блоге",
 	"right-createblogpost": "[[Special:CreateBlogPost|Создавать новые посты в блоге]]",
 	"blog-user-articles-title": "Блоги",
-	"blog-user-articles-votes": "{{PLURAL:$1|$1 голос|$1 голоса|$1 голосов|1=один голос}}",
+	"blog-user-articles-votes": "{{PLURAL:$1|голос|голоса|голосов}}",
 	"blog-user-article-comment": "$1 {{PLURAL:$1|комментарий|комментария|комментариев}}"
 }

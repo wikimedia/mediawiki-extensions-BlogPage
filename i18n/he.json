@@ -3,6 +3,7 @@
 		"authors": [
 			"Amire80",
 			"Guycn2",
+			"McDutchie",
 			"YaronSh",
 			"דוגקן",
 			"ישראל קלר",
@@ -65,6 +66,6 @@
 	"action-createblogpost": "ליצור רשומות חדשות בבלוג",
 	"right-createblogpost": "[[Special:CreateBlogPost|יצירת רשומות חדשות בבלוג]]",
 	"blog-user-articles-title": "בלוגים",
-	"blog-user-articles-votes": "{{PLURAL:$1|הצבעה אחת|$1 הצבעות}}",
+	"blog-user-articles-votes": "{{PLURAL:$1|הצבעה|הצבעות}}",
 	"blog-user-article-comment": "{{PLURAL:$1|הערה אחת|$1 הערות}}"
 }

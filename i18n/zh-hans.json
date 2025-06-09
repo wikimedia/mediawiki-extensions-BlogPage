@@ -4,6 +4,7 @@
 			"AYZ04",
 			"Lakejason0",
 			"LittlePaw365",
+			"McDutchie",
 			"Shuiwater",
 			"SolidBlock",
 			"Yfdyh000",
@@ -49,7 +50,7 @@
 	"blog-ah-what-talking-about": "最多评论（72小时）",
 	"articleshome": "所有博客文章",
 	"createblogpost": "创建博客文章",
-	"blog-create-category-help": "分类有助于整理网站上的信息。",
+	"blog-create-category-help": "分类有助于整理网站上的信息。添加多个分类请使用半角逗号（,）分隔。",
 	"blog-create-title": "标题",
 	"blog-create-text": "正文",
 	"blog-create-categories": "分类",
@@ -70,6 +71,6 @@
 	"action-createblogpost": "创建新博客文章",
 	"right-createblogpost": "[[Special:CreateBlogPost|创建新博客文章]]",
 	"blog-user-articles-title": "博客",
-	"blog-user-articles-votes": "{{PLURAL:$1|$1得票}}",
+	"blog-user-articles-votes": "{{PLURAL:$1|得票}}",
 	"blog-user-article-comment": "{{PLURAL:$1|$1条评论}}"
 }

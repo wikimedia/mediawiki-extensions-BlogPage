@@ -1,6 +1,7 @@
 {
 	"@metadata": {
 		"authors": [
+			"McDutchie",
 			"Robby",
 			"Volvox"
 		]
@@ -52,7 +53,7 @@
 	"blog-js-create-error-need-content": "Äre Blogbäitrag muss Contenu hunn!",
 	"blog-js-create-error-need-title": "Dir musst en Titel fir de Blogbäitrag uginn!",
 	"blog-js-create-error-page-exists": "Et gëtt schonn e Blogbäitrag mat dësem Titel. Sicht Iech wgl. en aneren Titel fir Äre Blogbäitrag eraus.",
-	"blog-more": "Liest méi",
+	"blog-more": "méi",
 	"blog-time-ago": "viru(n) $1",
 	"blog-time-days": "{{PLURAL:$1|een Dag|$1 Deeg}}",
 	"blog-time-hours": "{{PLURAL:$1|eng Stonn|$1 Stonnen}}",

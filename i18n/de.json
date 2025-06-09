@@ -5,6 +5,7 @@
 			"Ferdinand0101",
 			"Laurinm",
 			"Luke081515",
+			"McDutchie",
 			"Pittigrilli",
 			"Reinhard Kraasch"
 		]
@@ -65,6 +66,6 @@
 	"action-createblogpost": "Erstelle neue Blog-Beiträge",
 	"right-createblogpost": "[[Special:CreateBlogPost|Erstelle einen neuen Blogeintrag]]",
 	"blog-user-articles-title": "Blogs",
-	"blog-user-articles-votes": "$1 {{PLURAL:$1|Stimme|Stimmen}}",
+	"blog-user-articles-votes": "{{PLURAL:$1|Stimme|Stimmen}}",
 	"blog-user-article-comment": "{{PLURAL:$1|Ein Kommentar|$1 Kommentare}}"
 }
