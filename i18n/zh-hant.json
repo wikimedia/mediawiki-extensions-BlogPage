@@ -3,7 +3,8 @@
 		"authors": [
 			"Kly",
 			"列维劳德",
-			"捍粵者"
+			"捍粵者",
+			"McDutchie"
 		]
 	},
 	"blogpage-desc": "具有發表意見與投票的 Blogging 系統，[[Special:CreateBlogPost|用來建立部落格貼文]]與[[Special:ArticlesHome|用來列出部落格貼文的特殊頁面]]",
@@ -62,6 +63,6 @@
 	"action-createblogpost": "建立新的部落格貼文",
 	"right-createblogpost": "[[Special:CreateBlogPost|建立新的部落格貼文]]",
 	"blog-user-articles-title": "部落格文章",
-	"blog-user-articles-votes": "$1{{PLURAL:$1|張票}}",
+	"blog-user-articles-votes": "{{PLURAL:$1|票}}",
 	"blog-user-article-comment": "$1{{PLURAL:$1|則評論}}"
 }

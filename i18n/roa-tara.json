@@ -1,7 +1,8 @@
 {
 	"@metadata": {
 		"authors": [
-			"Joetaras"
+			"Joetaras",
+			"McDutchie"
 		]
 	},
 	"blog-and": "e",
@@ -34,6 +35,6 @@
 	"blog-time-minutes": "{{PLURAL:$1|'nu menute|$1 menute}}",
 	"blog-time-seconds": "{{PLURAL:$1|'nu seconde|$1 seconde}}",
 	"blog-user-articles-title": "Blog",
-	"blog-user-articles-votes": "$1 {{PLURAL:$1|vote}}",
+	"blog-user-articles-votes": "{{PLURAL:$1|vote}}",
 	"blog-user-article-comment": "{{PLURAL:$1|nu commende|$1 commende}}"
 }

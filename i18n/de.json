@@ -6,7 +6,8 @@
 			"Laurinm",
 			"Luke081515",
 			"Pittigrilli",
-			"Reinhard Kraasch"
+			"Reinhard Kraasch",
+			"McDutchie"
 		]
 	},
 	"blogpage-desc": "Blog-System mit Kommentar- und Wählfunktionen, [[Special:CreateBlogPost|einer Spezialseite zur Erstellung von Blog-Beiträgen]] und [[Special:ArticlesHome|einer Spezialseite zur Auflistung von Blog-Beiträgen]]",
@@ -65,6 +66,6 @@
 	"action-createblogpost": "Erstelle neue Blog-Beiträge",
 	"right-createblogpost": "[[Special:CreateBlogPost|Erstelle einen neuen Blogeintrag]]",
 	"blog-user-articles-title": "Blogs",
-	"blog-user-articles-votes": "$1 {{PLURAL:$1|Stimme|Stimmen}}",
+	"blog-user-articles-votes": "{{PLURAL:$1|Stimme|Stimmen}}",
 	"blog-user-article-comment": "{{PLURAL:$1|Ein Kommentar|$1 Kommentare}}"
 }
