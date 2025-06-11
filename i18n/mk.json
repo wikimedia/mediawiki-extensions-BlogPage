@@ -1,7 +1,8 @@
 {
 	"@metadata": {
 		"authors": [
-			"Bjankuloski06"
+			"Bjankuloski06",
+			"McDutchie"
 		]
 	},
 	"blogpage-desc": "Систем за блогирање со можности за коментирање и  гласање, [[Special:CreateBlogPost|службена страница за создавање на блоговски објави]] и [[Special:ArticlesHome|службена страница за нивно наведување во список]]",
@@ -51,7 +52,7 @@
 	"blog-js-create-error-need-content": "Вашата блоговска објава мора да има некаква содржина!",
 	"blog-js-create-error-need-title": "Ќе треба да ѝ дадете наслов на блоговската објава!",
 	"blog-js-create-error-page-exists": "Веќе постои блоговска објава со тој наслов. Одберете друг.",
-	"blog-more": "прочитајте повеќе",
+	"blog-more": "повеќе",
 	"blog-time-ago": "пред $1",
 	"blog-time-days": "{{PLURAL:$1|еден ден|$1 дена}}",
 	"blog-time-hours": "{{PLURAL:$1|еден час|$1 часа}}",
@@ -60,6 +61,6 @@
 	"action-createblogpost": "создавање на нови блоговски објави",
 	"right-createblogpost": "[[Special:CreateBlogPost|Создавање на нови блоговски објави]]",
 	"blog-user-articles-title": "Блогови",
-	"blog-user-articles-votes": "{{PLURAL:$1|еден глас|$1 гласа}}",
+	"blog-user-articles-votes": "{{PLURAL:$1|глас|гласа}}",
 	"blog-user-article-comment": "{{PLURAL:$1|еден коментар|$1 коментари}}"
 }

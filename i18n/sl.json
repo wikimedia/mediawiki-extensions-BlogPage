@@ -1,7 +1,8 @@
 {
 	"@metadata": {
 		"authors": [
-			"Eleassar"
+			"Eleassar",
+			"McDutchie"
 		]
 	},
 	"blogpage-desc": "Sistem za bloganje z možnostjo komentiranja in glasovanja, [[Special:CreateBlogPost|posebna stran za ustvarjanje objav bloga]] in [[Special:ArticlesHome|posebna stran za seznam objav bloga]]",
@@ -39,7 +40,7 @@
 	"blog-ah-what-talking-about": "Največ komentarjev (72 ur)",
 	"articleshome": "Vse blogovske objave",
 	"createblogpost": "Ustvari blogovsko objavo",
-	"blog-create-category-help": "Kategorije pomagajo organizirati informacije v projektu.",
+	"blog-create-category-help": "Kategorije pomagajo organizirati informacije nv projektu. Če želite dodati več kategorij, jih ločite z vejicami.",
 	"blog-create-title": "Naslov",
 	"blog-create-text": "Besedilo",
 	"blog-create-categories": "Kategorije",
@@ -51,7 +52,7 @@
 	"blog-js-create-error-need-content": "Vaša blogovska objava mora imeti nekaj vsebine!",
 	"blog-js-create-error-need-title": "Za blogovsko objavo morate vnesti naslov!",
 	"blog-js-create-error-page-exists": "V blogu že obstaja objava s tem naslovom. Izberite za objavo v blogu drug naslov.",
-	"blog-more": "preberi še kaj",
+	"blog-more": "več",
 	"blog-time-ago": "pred $1",
 	"blog-time-days": "{{PLURAL:$1|enim dnevom|$1 dnevoma|$1 dnevi}}",
 	"blog-time-hours": "{{PLURAL:$1|eno uro|$1 urama|$1 urami}}",
@@ -60,6 +61,6 @@
 	"action-createblogpost": "ustvarjanje novih blogovskih objav",
 	"right-createblogpost": "[[Special:CreateBlogPost|Ustvarjanje novih blogovskih objav]]",
 	"blog-user-articles-title": "Blogi",
-	"blog-user-articles-votes": "{{PLURAL:$1|en glas|$1 glasova|$1 glasovi|$1 glasov}}",
+	"blog-user-articles-votes": "{{PLURAL:$1|glas|glasova|glasovi}}",
 	"blog-user-article-comment": "{{PLURAL:$1|en komentar|$1 komentarja|$1 komentarji|$1 komentarjev}}"
 }
