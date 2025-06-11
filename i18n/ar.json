@@ -6,6 +6,7 @@
 			"McDutchie",
 			"Meno25",
 			"Michel Bakni",
+			"Mohammed Qays",
 			"NEHAOUA",
 			"أَحمد",
 			"محمد أحمد عبد الفتاح"
@@ -67,6 +68,6 @@
 	"action-createblogpost": "إنشاء تدوينات جديدة",
 	"right-createblogpost": "[[Special:CreateBlogPost|أنشئ مشاركة مدونة جديدة]]",
 	"blog-user-articles-title": "مدونات",
-	"blog-user-articles-votes": "{{PLURAL:$1| تصويت | أصوات}}",
+	"blog-user-articles-votes": "{{PLURAL:$1|صوت|أصوات}}",
 	"blog-user-article-comment": "{{PLURAL:$1|تعليق واحد|$1 تعليق}}"
 }
