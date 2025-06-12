@@ -2,7 +2,8 @@
 	"@metadata": {
 		"authors": [
 			"Titodutta",
-			"আফতাবুজ্জামান"
+			"আফতাবুজ্জামান",
+			"McDutchie"
 		]
 	},
 	"blog-and": "এবং",
@@ -36,6 +37,6 @@
 	"blog-time-minutes": "{{PLURAL:$1|এক মিনিট|$1 মিনিট}}",
 	"blog-time-seconds": "{{PLURAL:$1|এক সেকেন্ড|$1 সেকেন্ড}}",
 	"blog-user-articles-title": "ব্লগসমূহ",
-	"blog-user-articles-votes": "{{PLURAL:$1|একটি ভোট|$1টি ভোট}}",
+	"blog-user-articles-votes": "{{PLURAL:$1|ভোট}}",
 	"blog-user-article-comment": "{{PLURAL:$1|একটি মন্তব্য|$1টি মন্তব্য}}"
 }
