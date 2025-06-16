@@ -2,7 +2,8 @@
 	"@metadata": {
 		"authors": [
 			"Eduardo Addad de Oliveira",
-			"Eduardoaddad"
+			"Eduardoaddad",
+			"McDutchie"
 		]
 	},
 	"blogpage-desc": "Sistema de blog com recursos de comentários e votação, [[Special:CreateBlogPost|uma página especial para criar postagens de blog]] e [[Special:ArticlesHome|uma página especial para listar postagens de blog]]",
@@ -61,6 +62,6 @@
 	"action-createblogpost": "criar novas postagens de blog",
 	"right-createblogpost": "[[Special:CreateBlogPost|Criar novas postagens de blog]]",
 	"blog-user-articles-title": "Blogs",
-	"blog-user-articles-votes": "{{PLURAL:$1|um voto|$1 votos}}",
+	"blog-user-articles-votes": "{{PLURAL:$1|voto|votos}}",
 	"blog-user-article-comment": "{{PLURAL:$1|um comentário|$1 comentários}}"
 }
