@@ -8,7 +8,8 @@
 			"NEHAOUA",
 			"أَحمد",
 			"محمد أحمد عبد الفتاح",
-			"McDutchie"
+			"McDutchie",
+			"Mohammed Qays"
 		]
 	},
 	"blogpage-desc": "نظام التدوين مع ميزات التعليق والتصويت ، [[Special:CreateBlogPost|صفحة خاصة لإنشاء منشورات المدونة]] و [[Special:ArticlesHome|صفحة خاصة لإدراج منشورات المدونة]]",
@@ -67,6 +68,6 @@
 	"action-createblogpost": "إنشاء تدوينات جديدة",
 	"right-createblogpost": "[[Special:CreateBlogPost|أنشئ مشاركة مدونة جديدة]]",
 	"blog-user-articles-title": "مدونات",
-	"blog-user-articles-votes": "{{PLURAL:$1| تصويت | أصوات}}",
+	"blog-user-articles-votes": "{{PLURAL:$1|صوت|أصوات}}",
 	"blog-user-article-comment": "{{PLURAL:$1|تعليق واحد|$1 تعليق}}"
 }
