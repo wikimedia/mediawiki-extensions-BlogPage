@@ -15,7 +15,7 @@
 	"blogpage-desc": "نظام التدوين مع ميزات التعليق والتصويت ، [[Special:CreateBlogPost|صفحة خاصة لإنشاء منشورات المدونة]] و [[Special:ArticlesHome|صفحة خاصة لإدراج منشورات المدونة]]",
 	"blog-and": "و",
 	"blog-anonymous-name": "معجب مجهول",
-	"blog-author-comments": "$1 {{PLURAL:$1|تعليق واحد|تعليقات}}",
+	"blog-author-comments": "$1 {{PLURAL:$1|تعليق|تعليقان|تعليقات|تعليقًا|تعليق}}",
 	"blog-author-more-by": "المزيد من $1",
 	"blog-author-title": "حول {{PLURAL:$1|المؤلف |المؤلفون}}",
 	"blog-author-votes": "$1 {{PLURAL:$1|صوت |أصوات}}",
