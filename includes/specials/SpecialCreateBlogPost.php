@@ -329,7 +329,7 @@ class SpecialCreateBlogPost extends SpecialPage {
 		// No-JS version, "borrowed" from CreateAPage and slightly tweaked (nothing
 		// functional, just regular code cleanup), main container div ID changed, ...
 		$tagcloud .= '<noscript>';
-		if ( isset( $cloud->tags ) ) {
+		if ( $cloud->tags ) {
 			$tagcloud .= '<div id="create-tagcloud-nojs">';
 			$xnum = 0;
 			$array_category = [];
