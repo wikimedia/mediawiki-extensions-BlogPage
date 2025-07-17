@@ -1,6 +1,7 @@
 {
 	"@metadata": {
 		"authors": [
+			"Aca",
 			"Winston Sung"
 		]
 	},
@@ -11,7 +12,7 @@
 	"blog-created-ago": "napravljeno prije $1",
 	"blog-in-the-news": "U vijestima",
 	"blog-last-edited": "posljednja izmjena: $1",
-	"blog-permission-required": "Nemate dopuštenje da pravite članke.",
+	"blog-permission-required": "Nemate ovlaštenje da pravite članke.",
 	"blog-recent-editors": "Ostali ljudi koji su uređivali ovu stranicu",
 	"blog-recent-editors-message": "Učini ovu stranicu boljom putem uređivanja.",
 	"articleshome": "Sve objave bloga",
