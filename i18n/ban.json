@@ -5,5 +5,6 @@
 		]
 	},
 	"blog-view-archive-link": "Cingak Makasami",
+	"blog-create-categories": "Kategori",
 	"blog-user-article-comment": "{{PLURAL:$1|asiki panampen|$1 panampen}}"
 }
