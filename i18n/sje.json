@@ -1,8 +1,10 @@
 {
 	"@metadata": {
 		"authors": [
-			"Olve Utne"
+			"Olve Utne",
+			"Yupik"
 		]
 	},
+	"blog-create-text": "Täkksta",
 	"blog-user-article-comment": "{{PLURAL:$1|akkta målgedibme|$1 målgedime}}"
 }
