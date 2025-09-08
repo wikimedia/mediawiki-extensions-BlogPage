@@ -6,8 +6,6 @@ use MediaWiki\Title\Title;
 /**
  * All BlogPage's hooked functions. These were previously scattered all over
  * the place in various files.
- *
- * @file
  */
 class BlogPageHooks {
 

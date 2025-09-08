@@ -1,9 +1,5 @@
 <?php
-/**
- * Class for handling the viewing of pages in the NS_BLOG namespace.
- *
- * @file
- */
+
 use MediaWiki\Content\TextContent;
 use MediaWiki\MediaWikiServices;
 use MediaWiki\Revision\RevisionRecord;
@@ -11,6 +7,9 @@ use MediaWiki\Revision\SlotRecord;
 use MediaWiki\Title\Title;
 use Wikimedia\LightweightObjectStore\ExpirationAwareness;
 
+/**
+ * Class for handling the viewing of pages in the NS_BLOG namespace.
+ */
 class BlogPage extends Article {
 
 	/** @var MediaWiki\Title\Title|null */
@@ -89,6 +88,7 @@ class BlogPage extends Article {
 		return '';
 	}
 
+	/** @inheritDoc */
 	public function view() {
 		global $wgBlogPageDisplay;
 
@@ -342,7 +342,7 @@ class BlogPage extends Article {
 		return $output;
 	}
 
-	public function displayMultipleAuthorsMessage() {
+	public function displayMultipleAuthorsMessage(): string {
 		$count = 0;
 
 		$authors = '';

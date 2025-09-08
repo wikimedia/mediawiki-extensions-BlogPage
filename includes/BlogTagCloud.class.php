@@ -1,14 +1,14 @@
 <?php
-
-use MediaWiki\MediaWikiServices;
-use MediaWiki\Title\Title;
-use Wikimedia\AtEase\AtEase;
-
 /**
  * @file
  * @copyright Copyright © 2007, Wikia Inc.
  * @license GPL-2.0-or-later
  */
+
+use MediaWiki\MediaWikiServices;
+use MediaWiki\Title\Title;
+use Wikimedia\AtEase\AtEase;
+
 class BlogTagCloud {
 	/** @var int */
 	public $tags_min_pts = 8;
