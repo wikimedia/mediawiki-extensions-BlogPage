@@ -1,0 +1,18 @@
+{
+	"@metadata": {
+		"authors": []
+	},
+	"blog-and": "و",
+	"blog-author-more-by": "المزيد بواسطة $1",
+	"blog-by-user-category": "مقالات بواسطة المستخدم $1",
+	"blog-created": "تم إنشائه على $1",
+	"blog-in-the-news": "في الأخبار",
+	"blog-login-edit": "يجب عليك [[Special:UserLogin|log in]] لتحرير مقالات المدونة.",
+	"blog-new-articles": "مقالة جديدة",
+	"blog-permission-required": "ماعدك صلاحية حتى تسوي مقالة",
+	"blog-recent-editors": "الأشخاص الآخرين الي قاموا بتحرير هذه الصفحة",
+	"blog-recent-voters-message": "إذا أعجبك المقال ، صوّت له.",
+	"blog-create-title": "عنوان",
+	"blog-create-categories": "مواضيع",
+	"blog-time-minutes": "{{PLURAL:$1|دقيقة واحدة|$1 دقائق}}"
+}
