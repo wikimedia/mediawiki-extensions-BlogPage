@@ -74,9 +74,9 @@ class SpecialCreateBlogPost extends SpecialPage {
 		if (
 			$request->wasPosted() &&
 			!$request->getCheck( 'wpPreview' ) &&
-			$_SESSION['alreadysubmitted'] == false
+			$request->getSession()->get( 'alreadysubmitted' ) == false
 		) {
-			$_SESSION['alreadysubmitted'] = true;
+			$request->getSession()->set( 'alreadysubmitted', true );
 
 			// Protect against cross-site request forgery (CSRF)
 			if ( !$user->matchEditToken( $request->getVal( 'wpEditToken' ) ) ) {
@@ -253,7 +253,7 @@ class SpecialCreateBlogPost extends SpecialPage {
 
 			$out->addHTML( $this->getEditFormWithRules() );
 		} else {
-			$_SESSION['alreadysubmitted'] = false;
+			$request->getSession()->set( 'alreadysubmitted', false );
 
 			$out->addHTML( $this->getEditFormWithRules() );
 		}
