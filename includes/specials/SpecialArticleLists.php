@@ -6,6 +6,7 @@
  * @ingroup Extensions
  */
 
+use MediaWiki\Html\Html;
 use MediaWiki\MediaWikiServices;
 use MediaWiki\Title\Title;
 
@@ -43,7 +44,7 @@ class ArticleLists extends IncludableSpecialPage {
 		if ( !$this->including() ) {
 			$descMsg = $this->msg( 'blog-ah-new-articles-summary' );
 			if ( !$descMsg->isDisabled() ) {
-				$output .= Xml::tags( 'div', [
+				$output .= Html::rawElement( 'div', [
 					'class' => 'mw-specialpage-summary'
 				], $descMsg->parse() );
 			}
