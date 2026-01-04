@@ -292,25 +292,50 @@ class ArticlesHome extends SpecialPage {
 			$titleOne = Title::makeTitle( NS_CATEGORY, $kaboom[0] );
 			$titleTwo = Title::makeTitle( NS_CATEGORY, $kaboom[1] );
 			$titleThree = Title::makeTitle( NS_CATEGORY, $kaboom[2] );
-			$res = $dbr->select(
-				[ 'page', 'categorylinks', 'Vote' ],
-				[ 'DISTINCT page_id', 'page_title', 'page_namespace' ],
-				[
-					'cl_to' => [
-						$titleOne->getDBkey(), $titleTwo->getDBkey(),
-						$titleThree->getDBkey()
+			// VERSIONSHIM: 1.44+
+			if ( version_compare( MW_VERSION, '1.44', '>=' ) ) {
+				$res = $dbr->select(
+					[ 'page', 'categorylinks', 'linktarget', 'Vote' ],
+					[ 'DISTINCT page_id', 'page_title', 'page_namespace' ],
+					[
+						'lt_title' => [
+							$titleOne->getDBkey(),
+							$titleTwo->getDBkey(),
+							$titleThree->getDBkey()
+						],
+						'page_namespace' => NS_BLOG,
+						'page_id = vote_page_id',
+						'vote_date < "' . date( 'Y-m-d H:i:s' ) . '"'
 					],
-					'page_namespace' => NS_BLOG,
-					'page_id = vote_page_id',
-					'vote_date < "' . date( 'Y-m-d H:i:s' ) . '"'
-				],
-				__METHOD__,
-				[ 'LIMIT' => 10 ],
-				[
-					'categorylinks' => [ 'INNER JOIN', 'cl_from = page_id' ],
-					'Vote' => [ 'LEFT JOIN', 'vote_page_id = page_id' ],
-				]
-			);
+					__METHOD__,
+					[ 'LIMIT' => 10 ],
+					[
+						'categorylinks' => [ 'INNER JOIN', 'cl_from = page_id' ],
+						'linktarget' => [ 'INNER JOIN', 'cl_target_id = lt_id' ],
+						'Vote' => [ 'LEFT JOIN', 'vote_page_id = page_id' ],
+					]
+				);
+			} else {
+				$res = $dbr->select(
+					[ 'page', 'categorylinks', 'Vote' ],
+					[ 'DISTINCT page_id', 'page_title', 'page_namespace' ],
+					[
+						'cl_to' => [
+							$titleOne->getDBkey(), $titleTwo->getDBkey(),
+							$titleThree->getDBkey()
+						],
+						'page_namespace' => NS_BLOG,
+						'page_id = vote_page_id',
+						'vote_date < "' . date( 'Y-m-d H:i:s' ) . '"'
+					],
+					__METHOD__,
+					[ 'LIMIT' => 10 ],
+					[
+						'categorylinks' => [ 'INNER JOIN', 'cl_from = page_id' ],
+						'Vote' => [ 'LEFT JOIN', 'vote_page_id = page_id' ],
+					]
+				);
+			}
 
 			$votedBlogPosts = [];
 			foreach ( $res as $row ) {
@@ -384,25 +409,50 @@ class ArticlesHome extends SpecialPage {
 			$titleOne = Title::makeTitle( NS_CATEGORY, $kaboom[0] );
 			$titleTwo = Title::makeTitle( NS_CATEGORY, $kaboom[1] );
 			$titleThree = Title::makeTitle( NS_CATEGORY, $kaboom[2] );
-			$res = $dbr->select(
-				[ 'page', 'categorylinks', 'Comments' ],
-				[ 'DISTINCT page_id', 'page_title', 'page_namespace' ],
-				[
-					'cl_to' => [
-						$titleOne->getDBkey(), $titleTwo->getDBkey(),
-						$titleThree->getDBkey()
+			// VERSIONSHIM: 1.44+
+			if ( version_compare( MW_VERSION, '1.44', '>=' ) ) {
+				$res = $dbr->select(
+					[ 'page', 'categorylinks', 'linktarget', 'Comments' ],
+					[ 'DISTINCT page_id', 'page_title', 'page_namespace' ],
+					[
+						'lt_title' => [
+							$titleOne->getDBkey(),
+							$titleTwo->getDBkey(),
+							$titleThree->getDBkey()
+						],
+						'page_namespace' => NS_BLOG,
+						'page_id = Comment_Page_ID',
+						'Comment_Date < "' . date( 'Y-m-d H:i:s' ) . '"'
 					],
-					'page_namespace' => NS_BLOG,
-					'page_id = Comment_Page_ID',
-					'Comment_Date < "' . date( 'Y-m-d H:i:s' ) . '"'
-				],
-				__METHOD__,
-				[ 'LIMIT' => 10 ],
-				[
-					'categorylinks' => [ 'INNER JOIN', 'cl_from = page_id' ],
-					'Comments' => [ 'LEFT JOIN', 'Comment_Page_ID = page_id' ],
-				]
-			);
+					__METHOD__,
+					[ 'LIMIT' => 10 ],
+					[
+						'categorylinks' => [ 'INNER JOIN', 'cl_from = page_id' ],
+						'linktarget' => [ 'INNER JOIN', 'cl_target_id = lt_id' ],
+						'Comments' => [ 'LEFT JOIN', 'Comment_Page_ID = page_id' ],
+					]
+				);
+			} else {
+				$res = $dbr->select(
+					[ 'page', 'categorylinks', 'Comments' ],
+					[ 'DISTINCT page_id', 'page_title', 'page_namespace' ],
+					[
+						'cl_to' => [
+							$titleOne->getDBkey(), $titleTwo->getDBkey(),
+							$titleThree->getDBkey()
+						],
+						'page_namespace' => NS_BLOG,
+						'page_id = Comment_Page_ID',
+						'Comment_Date < "' . date( 'Y-m-d H:i:s' ) . '"'
+					],
+					__METHOD__,
+					[ 'LIMIT' => 10 ],
+					[
+						'categorylinks' => [ 'INNER JOIN', 'cl_from = page_id' ],
+						'Comments' => [ 'LEFT JOIN', 'Comment_Page_ID = page_id' ],
+					]
+				);
+			}
 
 			$commentedBlogPosts = [];
 			foreach ( $res as $row ) {
