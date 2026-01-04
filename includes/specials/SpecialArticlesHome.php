@@ -293,10 +293,10 @@ class ArticlesHome extends SpecialPage {
 			$titleTwo = Title::makeTitle( NS_CATEGORY, $kaboom[1] );
 			$titleThree = Title::makeTitle( NS_CATEGORY, $kaboom[2] );
 			$res = $dbr->select(
-				[ 'page', 'categorylinks', 'Vote' ],
+				[ 'page', 'categorylinks', 'linktarget', 'Vote' ],
 				[ 'DISTINCT page_id', 'page_title', 'page_namespace' ],
 				[
-					'cl_to' => [
+					'lt_title' => [
 						$titleOne->getDBkey(), $titleTwo->getDBkey(),
 						$titleThree->getDBkey()
 					],
@@ -308,6 +308,7 @@ class ArticlesHome extends SpecialPage {
 				[ 'LIMIT' => 10 ],
 				[
 					'categorylinks' => [ 'INNER JOIN', 'cl_from = page_id' ],
+					'linktarget' => [ 'INNER JOIN', 'cl_target_id = lt_id' ],
 					'Vote' => [ 'LEFT JOIN', 'vote_page_id = page_id' ],
 				]
 			);
@@ -385,10 +386,10 @@ class ArticlesHome extends SpecialPage {
 			$titleTwo = Title::makeTitle( NS_CATEGORY, $kaboom[1] );
 			$titleThree = Title::makeTitle( NS_CATEGORY, $kaboom[2] );
 			$res = $dbr->select(
-				[ 'page', 'categorylinks', 'Comments' ],
+				[ 'page', 'categorylinks', 'linktarget', 'Comments' ],
 				[ 'DISTINCT page_id', 'page_title', 'page_namespace' ],
 				[
-					'cl_to' => [
+					'lt_title' => [
 						$titleOne->getDBkey(), $titleTwo->getDBkey(),
 						$titleThree->getDBkey()
 					],
@@ -400,6 +401,7 @@ class ArticlesHome extends SpecialPage {
 				[ 'LIMIT' => 10 ],
 				[
 					'categorylinks' => [ 'INNER JOIN', 'cl_from = page_id' ],
+					'linktarget' => [ 'INNER JOIN', 'cl_target_id = lt_id' ],
 					'Comments' => [ 'LEFT JOIN', 'Comment_Page_ID = page_id' ],
 				]
 			);
