@@ -75,6 +75,8 @@ class BlogPageHooks {
 	 * and PageContentSaveComplete. Their arguments are mostly the same and both
 	 * have $wikiPage as the first argument.
 	 *
+	 * ToDo: T154151 - work out a better/more sane way of implementing this.
+	 *
 	 * @param WikiPage &$wikiPage WikiPage object representing the page that was/is
 	 *                         (being) saved
 	 * @param MediaWiki\User\User &$user The User (object) saving the article
@@ -103,17 +105,19 @@ class BlogPageHooks {
 		$services = MediaWikiServices::getInstance();
 		$dbr = $services->getDBLoadBalancer()->getConnection( DB_REPLICA );
 		$res = $dbr->select(
-			'categorylinks',
-			'cl_to',
+			[ 'categorylinks', 'linktarget' ],
+			[ 'cl_target_id', 'lt_id', 'lt_title' ],
 			[ 'cl_from' => $aid ],
-			__METHOD__
+			__METHOD__,
+			[],
+			[ 'linktarget' => [ 'INNER JOIN', 'cl_target_id = lt_id' ] ]
 		);
 
 		$user_name = $user->getName();
 		$context = RequestContext::getMain();
 
 		foreach ( $res as $row ) {
-			$ctg = Title::makeTitle( NS_CATEGORY, $row->cl_to );
+			$ctg = Title::makeTitle( NS_CATEGORY, $row->lt_title );
 			$ctgname = $ctg->getText();
 			$userBlogCat = wfMessage( 'blog-by-user-category' )->inContentLanguage()->text(); // e.g. "Articles by User $1"
 			$userBlogCatPrefix = str_replace( '$1', '', $userBlogCat ); // e.g. "Articles by User " [sic!]
@@ -125,16 +129,17 @@ class BlogPageHooks {
 				$dbw = $services->getDBLoadBalancer()->getConnection( DB_PRIMARY );
 
 				$opinions = $dbw->select(
-					[ 'page', 'categorylinks' ],
+					[ 'page', 'categorylinks', 'linktarget' ],
 					[ 'COUNT(*) AS CreatedOpinions' ],
 					[
-						'cl_to' => $ctg->getDBkey(),
+						'lt_target' => $ctg->getDBkey(),
 						'page_namespace' => NS_BLOG // paranoia
 					],
 					__METHOD__,
 					[],
 					[
-						'categorylinks' => [ 'INNER JOIN', 'page_id = cl_from' ]
+						'categorylinks' => [ 'INNER JOIN', 'page_id = cl_from' ],
+						'linktarget' => [ 'INNER JOIN', 'cl_target_id = lt_id' ]
 					]
 				);
 
@@ -226,15 +231,16 @@ class BlogPageHooks {
 			 * the cl_to stuff actually, y'know, works :)
 			 */
 			$res = $dbr->select(
-				[ 'page', 'categorylinks' ],
+				[ 'page', 'categorylinks', 'linktarget' ],
 				[ 'DISTINCT page_id', 'page_title', 'page_namespace' ],
 				/* WHERE */[
 					'cl_from = page_id',
-					'cl_to' => [ $categoryTitle->getDBkey() ],
+					'lt_title' => [ $categoryTitle->getDBkey() ],
 					'page_namespace' => NS_BLOG
 				],
 				__METHOD__,
-				[ 'ORDER BY' => 'page_id DESC', 'LIMIT' => 5 ]
+				[ 'ORDER BY' => 'page_id DESC', 'LIMIT' => 5 ],
+				[ 'linktarget' => [ 'INNER JOIN', 'cl_target_id = lt_id' ] ]
 			);
 
 			foreach ( $res as $row ) {

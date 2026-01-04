@@ -482,11 +482,12 @@ class BlogPage extends Article {
 			$categoryTitle = Title::newFromText(
 				 wfMessage( 'blog-by-user-category', $user_name )->text()
 			);
+			// Get the name of the newest 4 blogs written by the user.
 			$res = $dbr->select(
-				[ 'page', 'categorylinks' ],
+				[ 'page', 'categorylinks', 'linktarget' ],
 				[ 'DISTINCT(page_id) AS page_id', 'page_title' ],
 				/* WHERE */[
-					'cl_to' => [ $categoryTitle->getDBkey() ],
+					'lt_title' => [ $categoryTitle->getDBkey() ],
 					'page_namespace' => NS_BLOG
 				],
 				__METHOD__,
@@ -495,7 +496,8 @@ class BlogPage extends Article {
 					'LIMIT' => 4
 				],
 				[
-					'categorylinks' => [ 'INNER JOIN', 'cl_from = page_id' ]
+					'categorylinks' => [ 'INNER JOIN', 'cl_from = page_id' ],
+					'linktarget' => [ 'INNER JOIN', 'cl_target_id = lt_id' ]
 				]
 			);
 
