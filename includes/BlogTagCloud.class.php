@@ -7,7 +7,6 @@
 
 use MediaWiki\MediaWikiServices;
 use MediaWiki\Title\Title;
-use Wikimedia\AtEase\AtEase;
 
 class BlogTagCloud {
 	/** @var int */
@@ -50,14 +49,14 @@ class BlogTagCloud {
 			$catsExcluded = explode( "\n* ", $message->inContentLanguage()->text() );
 		}
 
-		AtEase::suppressWarnings(); // prevent PHP from bitching about strtotime()
 		foreach ( $res as $row ) {
 			$tag_name = Title::makeTitle( NS_CATEGORY, $row->cat_title );
 			$tag_text = $tag_name->getText();
 			// Exclude dates and blacklisted categories
 			if (
 				!in_array( $tag_text, $catsExcluded ) &&
-				strtotime( $tag_text ) == ''
+				// phpcs:ignore Generic.PHP.NoSilencedErrors.Discouraged
+				@strtotime( $tag_text ) == ''
 			) {
 				if ( $row->cat_pages > $this->tags_highest_count ) {
 					$this->tags_highest_count = $row->cat_pages;
@@ -65,7 +64,6 @@ class BlogTagCloud {
 				$this->tags[$tag_text] = [ 'count' => $row->cat_pages ];
 			}
 		}
-		AtEase::restoreWarnings();
 
 		// sort tag array by key (tag name)
 		if ( $this->tags_highest_count == 0 ) {
