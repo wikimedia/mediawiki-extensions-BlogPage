@@ -2,7 +2,8 @@
 	"@metadata": {
 		"authors": [
 			"Renessaince",
-			"W"
+			"W",
+			"Ucukor"
 		]
 	},
 	"blog-and": "і",
@@ -13,8 +14,8 @@
 	"blog-created-ago": "створана $1 таму",
 	"blog-in-the-news": "У навінах",
 	"blog-last-edited": "апошняе рэдагаваньне $1",
-	"blog-login": "Каб ствараць артыкулы, неабходна [[Special:UserLogin|ўвайсьці]].",
-	"blog-login-edit": "Каб рэдагаваць запісы ў блогу, неабходна [[Special:UserLogin|ўвайсьці]].",
+	"blog-login": "Каб ствараць артыкулы, патрэбна [[Special:UserLogin|ўвайсьці]].",
+	"blog-login-edit": "Каб рэдагаваць запісы ў блогу, патрэбна [[Special:UserLogin|ўвайсьці]].",
 	"blog-new-articles": "Новы артыкулы",
 	"blog-permission-required": "Вы ня маеце дазволу ствараць артыкулы.",
 	"blog-popular-articles": "Не прапусьціце",
