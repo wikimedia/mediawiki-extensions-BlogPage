@@ -4,7 +4,8 @@
 			"Mainframe98",
 			"McDutchie",
 			"Nickthijssen1994",
-			"Romaine"
+			"Romaine",
+			"Siebrand"
 		]
 	},
 	"blogpage-desc": "Blogsysteem met functies voor reacties en peilingen, [[Special:CreateBlogPost|een speciale pagina om blogartikelen aan te maken]] en [[Special:ArticlesHome|een speciale pagina met een lijst van blogartikelen]].",
@@ -41,7 +42,7 @@
 	"blog-ah-most-votes": "Meeste stemmen (laatste 72 uur)",
 	"blog-ah-what-talking-about": "Meeste reacties (laatste 72 uur)",
 	"articleshome": "Startpagina blog",
-	"createblogpost": "Blogpost aanmaken",
+	"createblogpost": "Blogbericht maken",
 	"blog-create-category-help": "Categorieën helpen bij het organiseren van informatie op de site. Scheid meerdere categorieën met komma's.",
 	"blog-create-title": "Titel",
 	"blog-create-text": "Tekst",
