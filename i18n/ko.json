@@ -2,13 +2,18 @@
 	"@metadata": {
 		"authors": [
 			"Underbaaar",
-			"Ykhwong"
+			"Ykhwong",
+			"Tensama0415"
 		]
 	},
+	"blogpage-desc": "댓글 및 투표 기능을 갖춘 블로그 시스템, [[Special:CreateBlogPost|블로그 게시물을 작성하는 특별 문서]] 및 [[Special:ArticlesHome|블로그 게시물 목록을 표시하는 특별 문서]]",
 	"blog-and": "그리고",
+	"blog-anonymous-name": "익명 광신자",
 	"blog-author-comments": "{{PLURAL:$1|댓글}} $1개",
+	"blog-author-more-by": "$1 작성",
 	"blog-author-title": "{{PLURAL:$1|저자}} 정보",
 	"blog-author-votes": "$1{{PLURAL:$1|표}}",
+	"blog-by": "by",
 	"blog-by-user-category": "$1님의 글",
 	"blog-comments-of-day": "오늘의 댓글",
 	"blog-created": "생성: $1",
