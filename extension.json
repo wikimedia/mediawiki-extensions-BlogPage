@@ -9,7 +9,11 @@
 	"url": "https://www.mediawiki.org/wiki/Extension:BlogPage",
 	"descriptionmsg": "blogpage-desc",
 	"requires": {
-		"MediaWiki": ">= 1.43.0"
+		"MediaWiki": ">= 1.43.0",
+		"extensions": {
+			"Comments": "*",
+			"VoteNY": "*"
+		}
 	},
 	"type": "other",
 	"namespaces": [
