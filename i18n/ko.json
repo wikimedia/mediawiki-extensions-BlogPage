@@ -3,7 +3,8 @@
 		"authors": [
 			"Underbaaar",
 			"Ykhwong",
-			"Tensama0415"
+			"Tensama0415",
+			"Bisang"
 		]
 	},
 	"blogpage-desc": "댓글 및 투표 기능을 갖춘 블로그 시스템, [[Special:CreateBlogPost|블로그 게시물을 작성하는 특별 문서]] 및 [[Special:ArticlesHome|블로그 게시물 목록을 표시하는 특별 문서]]",
@@ -59,8 +60,8 @@
 	"blog-time-hours": "{{PLURAL:$1|1시간|$1시간}}",
 	"blog-time-minutes": "{{PLURAL:$1|1분|$1분}}",
 	"blog-time-seconds": "{{PLURAL:$1|1초|$1초}}",
-	"action-createblogpost": "새 블로그 글을 만들",
-	"right-createblogpost": "[[Special:CreateBlogPost|새 블로그 글 만들기]]",
+	"action-createblogpost": "새 블로그 게시글 만들기",
+	"right-createblogpost": "[[Special:CreateBlogPost|새 블로그 게시글 만들기]]",
 	"blog-user-articles-title": "블로그",
 	"blog-user-articles-votes": "{{PLURAL:$1|표}}",
 	"blog-user-article-comment": "{{PLURAL:$1|댓글 1개|댓글 $1개}}"
