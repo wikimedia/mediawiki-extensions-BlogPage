@@ -3,7 +3,8 @@
 		"authors": [
 			"Hidayatsrf",
 			"Robfirstname",
-			"Veracious"
+			"Veracious",
+			"Bayahiu"
 		]
 	},
 	"blog-and": "dan",
@@ -33,7 +34,7 @@
 	"blog-create-categories": "Kategori",
 	"blog-create-button": "Buat!",
 	"blog-more": "lainnya",
-	"blog-time-ago": "$1 yang lalu",
+	"blog-time-ago": "$1 lalu",
 	"blog-time-days": "{{PLURAL:$1|satu hari|$1 hari}}",
 	"blog-time-hours": "{{PLURAL:$1|satu jam|$1 jam}}",
 	"blog-time-minutes": "{{PLURAL:$1|satu menit|$1 menit}}",
