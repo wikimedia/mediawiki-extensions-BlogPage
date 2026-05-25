@@ -17,8 +17,18 @@ class SpecialCreateBlogPost extends SpecialPage {
 	/** @var int */
 	public $tabCounter = 1;
 
+	// MW <1.46 has restriction in constructor; >=1.46 via override
 	public function __construct() {
-		parent::__construct( 'CreateBlogPost', 'createblogpost' );
+		if ( version_compare( MW_VERSION, '1.46', '>=' ) ) {
+			parent::__construct( 'CreateBlogPost' );
+		} else {
+			parent::__construct( 'CreateBlogPost', 'createblogpost' );
+		}
+	}
+
+	/** @inheritDoc */
+	public function getRestriction(): string {
+		return 'createblogpost';
 	}
 
 	/** @inheritDoc */
