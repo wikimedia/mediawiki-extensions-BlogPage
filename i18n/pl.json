@@ -2,6 +2,7 @@
 	"@metadata": {
 		"authors": [
 			"Msz2001",
+			"PanWor",
 			"Rail"
 		]
 	},
@@ -28,7 +29,7 @@
 	"blog-recent-editors": "Inni ostatni edytorzy",
 	"blog-recent-editors-message": "Ulepsz tę stronę edytując ją.",
 	"blog-recent-voters": "Ostatni głosujący",
-	"blog-recent-voters-message": "Jeśli spodobał ci się artykuł, zagłosuj na niego.",
+	"blog-recent-voters-message": "Jeśli spodobał Ci się artykuł, zagłosuj na niego.",
 	"blog-view-archive-link": "Zobacz wszystkie",
 	"articlelists": "Nowe wpisy na blogach",
 	"blog-ah-no-results": "Nie znaleziono stron.",
