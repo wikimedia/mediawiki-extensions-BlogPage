@@ -2,7 +2,8 @@
 	"@metadata": {
 		"authors": [
 			"Msz2001",
-			"Rail"
+			"Rail",
+			"PanWor"
 		]
 	},
 	"blogpage-desc": "System blogowania z funkcją komentowania i głosowania wraz ze [[Special:CreateBlogPost|stroną specjalną do tworzenia wpisów]] oraz [[Special:ArticlesHome|listą istniejących blogów]]",
@@ -28,7 +29,7 @@
 	"blog-recent-editors": "Inni ostatni edytorzy",
 	"blog-recent-editors-message": "Ulepsz tę stronę edytując ją.",
 	"blog-recent-voters": "Ostatni głosujący",
-	"blog-recent-voters-message": "Jeśli spodobał ci się artykuł, zagłosuj na niego.",
+	"blog-recent-voters-message": "Jeśli spodobał Ci się artykuł, zagłosuj na niego.",
 	"blog-view-archive-link": "Zobacz wszystkie",
 	"articlelists": "Nowe wpisy na blogach",
 	"blog-ah-no-results": "Nie znaleziono stron.",
