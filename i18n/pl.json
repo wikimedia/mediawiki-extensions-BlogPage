@@ -50,7 +50,7 @@
 	"blog-create-error-need-content": "'''Błąd:''' Wpis na blogu musi zawierać jakąkolwiek zawartość!",
 	"blog-create-error-need-title": "'''Błąd:''' Musisz podać tytuł wpisu na blogu!",
 	"blog-create-error-page-exists": "'''Błąd:''' Istnieje już wpis na blogu o takim tytule. Wybierz inny tytuł dla swojego bloga.",
-	"blog-js-create-error-need-content": "Twój wpis na blogu musi posiadać zawartość!",
+	"blog-js-create-error-need-content": "Twój wpis na blogu musi zawierać jakąś treść!",
 	"blog-js-create-error-need-title": "Musisz podać tytuł wpisu na blogu!",
 	"blog-js-create-error-page-exists": "Istnieje już wpis na blogu o takim tytule. Wybierz inny tytuł dla swojego bloga.",
 	"blog-more": "więcej",
