@@ -22,6 +22,7 @@ class SpecialCreateBlogPost extends SpecialPage {
 		if ( version_compare( MW_VERSION, '1.46', '>=' ) ) {
 			parent::__construct( 'CreateBlogPost' );
 		} else {
+			// @phan-suppress-next-line PhanParamTooMany
 			parent::__construct( 'CreateBlogPost', 'createblogpost' );
 		}
 	}
