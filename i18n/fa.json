@@ -5,7 +5,8 @@
 			"Ebraminio",
 			"Jeeputer",
 			"Mohammad ebz",
-			"Sunfyre"
+			"Sunfyre",
+			"LProfo"
 		]
 	},
 	"blog-and": "و",
@@ -21,9 +22,9 @@
 	"blog-in-the-news": "در اخبار",
 	"blog-last-edited": "آخرین بار در $1 ویرایش شده",
 	"blog-login": "برای ایجاد مقاله باید [[Special:UserLogin|وارد سامانه شوید]].",
-	"blog-login-edit": "برای ویرایش مقالات بلاگ باید [[Special:UserLogin|وارد سامانه شوید]].",
+	"blog-login-edit": "برای ویرایش مقاله‌های بلاگ باید [[Special:UserLogin|وارد سامانه شوید]].",
 	"blog-new-articles": "مقاله‌های جدید",
-	"blog-permission-required": "شما اجازهٔ ایجاد مقالات را ندارید.",
+	"blog-permission-required": "شما اجازهٔ ایجاد مقاله‌ها را ندارید.",
 	"blog-popular-articles": "از دست ندهید",
 	"blog-recent-editors": "سایر مشارکت‌کنندگان اخیر",
 	"blog-recent-editors-message": "با ویرایش این صفحه، آن را بهبود دهید.",
